@@ -413,6 +413,36 @@ async def get_status_checks():
 # Include the router in the main app
 app.include_router(api_router)
 
+# CORS Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_origins=["*"],  # Em produção, especificar domínios exatos
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+@app.on_event("startup")
+async def startup_db_client():
+    logger.info("Iniciando conexão com MongoDB...")
+    try:
+        await db.command("ping")
+        logger.info("Conexão com MongoDB estabelecida com sucesso!")
+    except Exception as e:
+        logger.error(f"Erro ao conectar com MongoDB: {e}")
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    logger.info("Fechando conexão com MongoDB...")
+    client.close()
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
