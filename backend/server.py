@@ -154,7 +154,7 @@ class ContactSubmission(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     email: EmailStr
     company: Optional[str] = Field(None, max_length=100)
-    phone: Optional[str] = Field(None, regex=r'^[\+]?[1-9][\d]{0,15}$')
+    phone: Optional[str] = Field(None, pattern=r'^[\+]?[1-9][\d]{0,15}$')
     message: str = Field(..., min_length=10, max_length=2000)
     service_interest: List[str] = Field(default=[], description="Serviços de interesse")
 
