@@ -2,7 +2,7 @@
  * Admin Dashboard - Painel administrativo principal
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -17,6 +17,28 @@ const AdminDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Get fetchProjects and fetchTestimonials functions from stores
+  const fetchProjects = usePortfolioStore((state) => state.fetchProjects);
+  const fetchTestimonials = useTestimonialsStore((state) => state.fetchTestimonials);
+
+  // Load data when component mounts
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        if (fetchProjects) await fetchProjects();
+        if (fetchTestimonials) await fetchTestimonials();
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadData();
+  }, [fetchProjects, fetchTestimonials]);
 
   // Stores para estatísticas
   const portfolioStats = usePortfolioStore((state) => {
