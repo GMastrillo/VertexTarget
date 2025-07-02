@@ -19,8 +19,47 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
 
   // Stores para estatísticas
-  const portfolioStats = usePortfolioStore((state) => state.getStats());
-  const testimonialsStats = useTestimonialsStore((state) => state.getStats());
+  const portfolioStats = usePortfolioStore((state) => {
+    try {
+      return state.getStats ? state.getStats() : {
+        totalProjects: 0,
+        categories: [],
+        lastFetch: 'Nunca',
+        cacheValid: false,
+        cacheExpiry: 'N/A'
+      };
+    } catch (error) {
+      console.error('Error getting portfolio stats:', error);
+      return {
+        totalProjects: 0,
+        categories: [],
+        lastFetch: 'Nunca',
+        cacheValid: false,
+        cacheExpiry: 'N/A'
+      };
+    }
+  });
+  
+  const testimonialsStats = useTestimonialsStore((state) => {
+    try {
+      return state.getStats ? state.getStats() : {
+        totalTestimonials: 0,
+        averageRating: 0,
+        lastFetch: 'Nunca',
+        cacheValid: false,
+        cacheExpiry: 'N/A'
+      };
+    } catch (error) {
+      console.error('Error getting testimonials stats:', error);
+      return {
+        totalTestimonials: 0,
+        averageRating: 0,
+        lastFetch: 'Nunca',
+        cacheValid: false,
+        cacheExpiry: 'N/A'
+      };
+    }
+  });
 
   const handleLogout = async () => {
     await logout();
