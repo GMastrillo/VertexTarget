@@ -156,6 +156,14 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
+        {isLoading ? (
+          <div className="flex items-center justify-center h-64">
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mb-4"></div>
+              <p className="text-gray-300">Carregando dados...</p>
+            </div>
+          </div>
+        ) : (>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {/* Navigation Tabs */}
           <TabsList className="grid w-full grid-cols-3 bg-gray-800 border border-gray-700">
