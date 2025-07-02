@@ -163,7 +163,7 @@ const AdminDashboard = () => {
               <p className="text-gray-300">Carregando dados...</p>
             </div>
           </div>
-        ) : (>
+        ) : (
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {/* Navigation Tabs */}
           <TabsList className="grid w-full grid-cols-3 bg-gray-800 border border-gray-700">
