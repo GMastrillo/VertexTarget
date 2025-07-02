@@ -28,10 +28,10 @@ const Hero = () => {
       {/* Mountain SVG Animation */}
       <div className="absolute inset-0 flex items-center justify-center">
         <svg 
-          width="400" 
-          height="300" 
+          width="300" 
+          height="250" 
           viewBox="0 0 400 300" 
-          className="opacity-30"
+          className="opacity-30 w-64 h-48 sm:w-80 sm:h-60 md:w-96 md:h-72 lg:w-full lg:h-full max-w-md"
         >
           {/* Mountain Path */}
           <path 
@@ -61,27 +61,27 @@ const Hero = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+      <div className="relative z-10 text-center max-w-6xl mx-auto px-4 sm:px-6">
         <div className={`transition-all duration-1000 delay-1000 ${isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Logo/Brand */}
-          <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl font-black text-white mb-4 tracking-tight">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 tracking-tight">
               VERTEX
-              <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent ml-4">
+              <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent ml-2 md:ml-4">
                 TARGET
               </span>
             </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 mx-auto rounded-full"></div>
+            <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 mx-auto rounded-full"></div>
           </div>
 
           {/* Main Slogan */}
-          <h2 className="text-2xl md:text-4xl text-gray-300 mb-8 font-light max-w-4xl mx-auto leading-relaxed">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl text-gray-300 mb-6 sm:mb-8 font-light max-w-4xl mx-auto leading-relaxed">
             Atingindo o <span className="text-purple-400 font-semibold">Pico</span> do seu 
             <span className="text-indigo-400 font-semibold"> Potencial Digital</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
             Criação de sites/aplicações, automações com IA e marketing digital de precisão. 
             Sua agência tecnológica para conquista do mercado digital.
           </p>
@@ -89,11 +89,12 @@ const Hero = () => {
           {/* CTA Button */}
           <Button 
             size="lg" 
-            className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-12 py-6 text-lg font-semibold rounded-lg shadow-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-purple-500/25"
+            className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-lg shadow-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-purple-500/25"
             onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}
           >
             <span className="mr-2">🎯</span>
-            Nossas Estratégias
+            <span className="hidden sm:inline">Nossas Estratégias</span>
+            <span className="sm:hidden">Estratégias</span>
           </Button>
         </div>
       </div>

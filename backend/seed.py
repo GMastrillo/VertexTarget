@@ -23,7 +23,7 @@ load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
-db_name = os.environ['DB_NAME']
+db_name = os.environ.get('DB_NAME', 'vertextarget_db')
 
 
 class SeedData:
@@ -74,7 +74,7 @@ class SeedData:
                 "id": str(uuid.uuid4()),
                 "title": "HealthTech Platform",
                 "category": "HealthTech",
-                "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop",
+                "image": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop&crop=center",
                 "metric": "Eficiência +380%",
                 "description": "Sistema hospitalar com IA preditiva para diagnósticos",
                 "technologies": ["Vue.js", "AI Diagnostics", "IoT", "Cloud Computing"],

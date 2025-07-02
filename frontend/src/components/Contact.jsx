@@ -3,10 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { useToast } from '../hooks/use-toast';
+import { sendContactMessage, validateContactData } from '../services/contactService';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    client_name: '', // Mudamos para client_name para alinhar com backend
     email: '',
     company: '',
     phone: '',
@@ -16,6 +17,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTargetHit, setIsTargetHit] = useState(false);
+  const [validationErrors, setValidationErrors] = useState([]);
   const { toast } = useToast();
   const targetRef = useRef(null);
 
@@ -25,45 +27,79 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
+    
+    // Clear validation errors when user starts typing
+    if (validationErrors.length > 0) {
+      setValidationErrors([]);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setValidationErrors([]);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsTargetHit(true);
-      
-      // Target hit animation
-      if (targetRef.current) {
-        targetRef.current.classList.add('animate-ping');
+    try {
+      // Validar dados localmente primeiro
+      const validation = validateContactData(formData);
+      if (!validation.isValid) {
+        setValidationErrors(validation.errors);
+        toast({
+          title: "❌ Erro de Validação",
+          description: validation.errors[0],
+          duration: 5000,
+        });
+        return;
       }
 
+      console.log('📤 Enviando formulário de contato...');
+      
+      // Enviar dados para o backend
+      const response = await sendContactMessage(formData);
+      
+      if (response.success) {
+        setIsTargetHit(true);
+        
+        // Target hit animation
+        if (targetRef.current) {
+          targetRef.current.classList.add('animate-ping');
+        }
+
+        toast({
+          title: "🎯 Alvo Atingido!",
+          description: response.message || "Sua mensagem foi enviada com sucesso. Nossa equipe entrará em contato em até 24 horas.",
+          duration: 5000,
+        });
+
+        // Reset form after success
+        setTimeout(() => {
+          setFormData({
+            client_name: '',
+            email: '',
+            company: '',
+            phone: '',
+            message: '',
+            budget: '',
+            timeline: ''
+          });
+          setIsTargetHit(false);
+          if (targetRef.current) {
+            targetRef.current.classList.remove('animate-ping');
+          }
+        }, 3000);
+      }
+
+    } catch (error) {
+      console.error('❌ Erro ao enviar formulário:', error);
+      
       toast({
-        title: "🎯 Alvo Atingido!",
-        description: "Sua mensagem foi enviada com sucesso. Nossa equipe entrará em contato em até 24 horas.",
+        title: "❌ Erro no Envio",
+        description: error.message || "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",
         duration: 5000,
       });
-
-      // Reset form after success
-      setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          phone: '',
-          message: '',
-          budget: '',
-          timeline: ''
-        });
-        setIsSubmitting(false);
-        setIsTargetHit(false);
-        if (targetRef.current) {
-          targetRef.current.classList.remove('animate-ping');
-        }
-      }, 2000);
-    }, 1500);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const budgetOptions = [
@@ -81,7 +117,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-t from-black via-gray-900 to-black relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-gradient-to-t from-black via-gray-900 to-black relative overflow-hidden">
       {/* Topographic Background */}
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" viewBox="0 0 1000 800">
@@ -97,21 +133,21 @@ const Contact = () => {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6">
             Fale com um <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">Estrategista</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
+          <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4">
             Pronto para alcançar seu próximo pico? Nossa equipe de especialistas está preparada para transformar sua visão em realidade digital.
           </p>
           
           {/* Target Animation */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6 sm:mb-8">
             <div 
               ref={targetRef}
-              className="relative w-24 h-24 mx-auto"
+              className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mx-auto"
             >
               <svg viewBox="0 0 100 100" className="w-full h-full">
                 <circle cx="50" cy="50" r="40" fill="none" stroke="#8B5CF6" strokeWidth="2" opacity="0.3" />
@@ -127,10 +163,10 @@ const Contact = () => {
             </div>
           </div>
           
-          <div className="w-32 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 mx-auto rounded-full"></div>
+          <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Contact Form */}
           <Card className="bg-gray-900/50 border-gray-800 shadow-2xl backdrop-blur-sm">
             <CardHeader>
@@ -144,26 +180,41 @@ const Contact = () => {
             </CardHeader>
             
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                {/* Validation Errors */}
+                {validationErrors.length > 0 && (
+                  <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-4">
+                    <div className="flex items-center space-x-2 text-red-400 mb-2">
+                      <span>⚠️</span>
+                      <span className="font-semibold text-sm sm:text-base">Erros de Validação:</span>
+                    </div>
+                    <ul className="text-red-300 text-sm space-y-1">
+                      {validationErrors.map((error, index) => (
+                        <li key={index}>• {error}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {/* Basic Info */}
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-purple-400 font-semibold mb-2">
+                    <label className="block text-purple-400 font-semibold mb-2 text-sm sm:text-base">
                       Nome Completo *
                     </label>
                     <input
                       type="text"
-                      name="name"
-                      value={formData.name}
+                      name="client_name"
+                      value={formData.client_name}
                       onChange={handleInputChange}
                       required
-                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors text-sm sm:text-base"
                       placeholder="Seu nome"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-purple-400 font-semibold mb-2">
+                    <label className="block text-purple-400 font-semibold mb-2 text-sm sm:text-base">
                       Email *
                     </label>
                     <input
@@ -172,15 +223,15 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors text-sm sm:text-base"
                       placeholder="seu@email.com"
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-purple-400 font-semibold mb-2">
+                    <label className="block text-purple-400 font-semibold mb-2 text-sm sm:text-base">
                       Empresa
                     </label>
                     <input
@@ -188,13 +239,13 @@ const Contact = () => {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors text-sm sm:text-base"
                       placeholder="Nome da empresa"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-purple-400 font-semibold mb-2">
+                    <label className="block text-purple-400 font-semibold mb-2 text-sm sm:text-base">
                       Telefone
                     </label>
                     <input
@@ -202,7 +253,7 @@ const Contact = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors text-sm sm:text-base"
                       placeholder="(11) 99999-9999"
                     />
                   </div>
@@ -210,10 +261,10 @@ const Contact = () => {
 
                 {/* Budget Selection */}
                 <div>
-                  <label className="block text-purple-400 font-semibold mb-3">
+                  <label className="block text-purple-400 font-semibold mb-3 text-sm sm:text-base">
                     Orçamento Estimado
                   </label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     {budgetOptions.map((option) => (
                       <button
                         key={option.value}
@@ -226,7 +277,7 @@ const Contact = () => {
                         }`}
                       >
                         <span className="mr-2">{option.icon}</span>
-                        <span className="text-sm">{option.label}</span>
+                        <span className="text-xs sm:text-sm">{option.label}</span>
                       </button>
                     ))}
                   </div>
@@ -234,10 +285,10 @@ const Contact = () => {
 
                 {/* Timeline Selection */}
                 <div>
-                  <label className="block text-purple-400 font-semibold mb-3">
+                  <label className="block text-purple-400 font-semibold mb-3 text-sm sm:text-base">
                     Prazo Desejado
                   </label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     {timelineOptions.map((option) => (
                       <button
                         key={option.value}
@@ -250,7 +301,7 @@ const Contact = () => {
                         }`}
                       >
                         <span className="mr-2">{option.icon}</span>
-                        <span className="text-sm">{option.label}</span>
+                        <span className="text-xs sm:text-sm">{option.label}</span>
                       </button>
                     ))}
                   </div>
@@ -258,7 +309,7 @@ const Contact = () => {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-purple-400 font-semibold mb-2">
+                  <label className="block text-purple-400 font-semibold mb-2 text-sm sm:text-base">
                     Descreva seu projeto *
                   </label>
                   <textarea
@@ -267,7 +318,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     rows="4"
-                    className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors resize-none"
+                    className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors resize-none text-sm sm:text-base"
                     placeholder="Conte-nos sobre seus objetivos, desafios e como podemos ajudar a atingir seu próximo pico..."
                   />
                 </div>
@@ -276,7 +327,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full py-4 text-lg font-semibold rounded-lg transition-all duration-300 ${
+                  className={`w-full py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg transition-all duration-300 ${
                     isSubmitting
                       ? 'bg-gray-700 cursor-not-allowed'
                       : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 hover:scale-105 shadow-xl'
@@ -284,13 +335,14 @@ const Contact = () => {
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center space-x-2">
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                       <span>Enviando...</span>
                     </div>
                   ) : (
                     <>
                       <span className="mr-2">🎯</span>
-                      Atingir o Alvo
+                      <span className="hidden sm:inline">Atingir o Alvo</span>
+                      <span className="sm:hidden">Enviar</span>
                     </>
                   )}
                 </Button>
@@ -365,11 +417,11 @@ const Contact = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16 pt-16 border-t border-gray-800">
-          <h3 className="text-3xl font-bold text-white mb-4">
+        <div className="text-center mt-12 sm:mt-16 pt-12 sm:pt-16 border-t border-gray-800">
+          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Não perca tempo. Seu próximo pico está esperando.
           </h3>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base px-4">
             Cada dia que passa é uma oportunidade perdida. Comece sua jornada ao topo hoje mesmo.
           </p>
         </div>

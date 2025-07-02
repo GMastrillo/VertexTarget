@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { aiDemoData } from '../mockData';
+import { generateStrategy } from '../services/aiService';
 
 const AIDemo = () => {
   const [selectedIndustry, setSelectedIndustry] = useState(null);
@@ -10,6 +11,7 @@ const AIDemo = () => {
   const [showStrategy, setShowStrategy] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [currentStrategy, setCurrentStrategy] = useState(null);
+  const [error, setError] = useState(null);
 
   // Icons mapping
   const iconMap = {
@@ -27,35 +29,50 @@ const AIDemo = () => {
     'message-circle': '💬'
   };
 
-  const generateStrategy = () => {
-    if (!selectedIndustry || !selectedObjective) return;
+  const generateAIStrategy = async () => {
+    if (!selectedIndustry || !selectedObjective) {
+      console.warn('Missing industry or objective:', { selectedIndustry, selectedObjective });
+      return;
+    }
+    
+    console.log('Generating AI strategy for:', { 
+      industry: selectedIndustry.label, 
+      objective: selectedObjective.label 
+    });
     
     setIsAnalyzing(true);
     setShowStrategy(false);
+    setError(null);
     
-    // Simulate AI processing
-    setTimeout(() => {
-      const strategyKey = `${selectedIndustry.value}-${selectedObjective.value}`;
-      const strategy = aiDemoData.strategies[strategyKey] || {
-        title: `Estratégia para ${selectedIndustry.label} - ${selectedObjective.label}`,
-        description: `Estratégia personalizada usando IA para otimizar ${selectedObjective.label.toLowerCase()} no setor ${selectedIndustry.label.toLowerCase()}`,
+    try {
+      // Chamar a API real de IA
+      console.log('Calling generateStrategy API...');
+      const response = await generateStrategy(selectedIndustry.label, selectedObjective.label);
+      console.log('Received AI response:', response);
+      
+      // Processar a resposta da IA
+      const aiStrategy = {
+        title: `Estratégia IA para ${selectedIndustry.label} - ${selectedObjective.label}`,
+        description: response.strategy,
+        // Manter métricas de impacto para apresentação visual
         impact: {
-          efficiency: `+${Math.floor(Math.random() * 200 + 150)}%`,
-          growth: `+${Math.floor(Math.random() * 150 + 100)}%`,
+          eficiência: `+${Math.floor(Math.random() * 200 + 150)}%`,
+          crescimento: `+${Math.floor(Math.random() * 150 + 100)}%`,
           roi: `+${Math.floor(Math.random() * 250 + 200)}%`
         },
-        tactics: [
-          `IA personalizada para ${selectedIndustry.label.toLowerCase()}`,
-          `Automação de ${selectedObjective.label.toLowerCase()}`,
-          `Analytics preditivos em tempo real`,
-          `Dashboard inteligente customizado`
-        ]
+        tactics: [] // A IA já inclui táticas na descrição
       };
       
-      setCurrentStrategy(strategy);
-      setIsAnalyzing(false);
+      console.log('Setting current strategy:', aiStrategy);
+      setCurrentStrategy(aiStrategy);
       setShowStrategy(true);
-    }, 2000);
+      
+    } catch (error) {
+      console.error('Erro ao gerar estratégia:', error);
+      setError(error.message);
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   const resetDemo = () => {
@@ -63,6 +80,7 @@ const AIDemo = () => {
     setSelectedObjective(null);
     setShowStrategy(false);
     setCurrentStrategy(null);
+    setError(null);
   };
 
   return (
@@ -188,9 +206,21 @@ const AIDemo = () => {
               </CardHeader>
 
               <CardContent className="space-y-8">
-                {/* Impact Metrics */}
+                {/* Estratégia Principal */}
                 <div>
                   <h4 className="text-purple-400 font-semibold mb-4 text-center text-lg">
+                    Estratégia Gerada pela IA:
+                  </h4>
+                  <div className="bg-gray-800/30 p-6 rounded-lg">
+                    <div className="text-gray-300 leading-relaxed whitespace-pre-line">
+                      {currentStrategy?.description}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Impact Metrics */}
+                <div>
+                  <h4 className="text-indigo-400 font-semibold mb-4 text-center text-lg">
                     Impacto Projetado:
                   </h4>
                   <div className="grid grid-cols-3 gap-6">
@@ -205,20 +235,22 @@ const AIDemo = () => {
                   </div>
                 </div>
 
-                {/* Tactics */}
-                <div>
-                  <h4 className="text-indigo-400 font-semibold mb-4 text-center text-lg">
-                    Táticas Recomendadas:
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {currentStrategy?.tactics.map((tactic, index) => (
-                      <div key={index} className="flex items-center space-x-3 bg-gray-800/30 p-4 rounded-lg">
-                        <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex-shrink-0"></div>
-                        <span className="text-gray-300">{tactic}</span>
-                      </div>
-                    ))}
+                {/* Tactics (if available) */}
+                {currentStrategy?.tactics && currentStrategy.tactics.length > 0 && (
+                  <div>
+                    <h4 className="text-green-400 font-semibold mb-4 text-center text-lg">
+                      Táticas Recomendadas:
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {currentStrategy.tactics.map((tactic, index) => (
+                        <div key={index} className="flex items-center space-x-3 bg-gray-800/30 p-4 rounded-lg">
+                          <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex-shrink-0"></div>
+                          <span className="text-gray-300">{tactic}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Action Buttons */}
                 <div className="flex justify-center space-x-4">
@@ -244,6 +276,16 @@ const AIDemo = () => {
         {/* Generate Strategy Button */}
         {!showStrategy && (
           <div className="text-center mt-12">
+            {/* Error Display */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-900/20 border border-red-500/50 rounded-lg">
+                <div className="flex items-center justify-center space-x-2 text-red-400">
+                  <span>⚠️</span>
+                  <span>{error}</span>
+                </div>
+              </div>
+            )}
+            
             <Button 
               size="lg"
               disabled={!selectedIndustry || !selectedObjective || isAnalyzing}
@@ -252,17 +294,17 @@ const AIDemo = () => {
                   ? 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-xl transform hover:scale-105'
                   : 'bg-gray-700 text-gray-400 cursor-not-allowed'
               }`}
-              onClick={generateStrategy}
+              onClick={generateAIStrategy}
             >
               {isAnalyzing ? (
                 <div className="flex items-center space-x-2">
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  <span>Analisando com IA...</span>
+                  <span>Analisando com IA Gemini...</span>
                 </div>
               ) : (
                 <>
-                  <span className="mr-2">🧠</span>
-                  Gerar Estratégia IA
+                  <span className="mr-2">🤖</span>
+                  Gerar Estratégia com IA
                 </>
               )}
             </Button>
@@ -279,7 +321,7 @@ const AIDemo = () => {
         <div className="text-center mt-16">
           <Badge variant="outline" className="border-purple-500/50 text-purple-300 px-4 py-2">
             <span className="mr-2">🤖</span>
-            Demonstração com IA - Resultados baseados em análise real de dados
+            Powered by Gemini AI - Estratégias geradas em tempo real
           </Badge>
         </div>
       </div>
