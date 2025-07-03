@@ -236,34 +236,35 @@ const UserDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {testimonials.slice(0, 2).map((testimonial, index) => (
-                  <div key={index} className="p-3 bg-gray-800/50 rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <div>
-                        <p className="text-white font-medium text-sm">{testimonial.name}</p>
-                        <p className="text-gray-400 text-xs">{testimonial.position}</p>
+                {Array.isArray(testimonials) && testimonials.length > 0 ? (
+                  testimonials.slice(0, 2).map((testimonial, index) => (
+                    <div key={index} className="p-3 bg-gray-800/50 rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <p className="text-white font-medium text-sm">{testimonial?.name || 'Cliente'}</p>
+                          <p className="text-gray-400 text-xs">{testimonial?.position || 'Posição não informada'}</p>
+                        </div>
+                        <div className="flex">
+                          {[...Array(5)].map((_, i) => (
+                            <span
+                              key={i}
+                              className={`text-xs ${
+                                i < (testimonial?.rating || 0) ? 'text-yellow-400' : 'text-gray-600'
+                              }`}
+                            >
+                              ⭐
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <span
-                            key={i}
-                            className={`text-xs ${
-                              i < testimonial.rating ? 'text-yellow-400' : 'text-gray-600'
-                            }`}
-                          >
-                            ⭐
-                          </span>
-                        ))}
-                      </div>
+                      <p className="text-gray-300 text-xs leading-relaxed">
+                        "{testimonial?.message && testimonial.message.length > 100 
+                          ? testimonial.message.substring(0, 100) + '...' 
+                          : testimonial?.message || 'Mensagem não disponível'}"
+                      </p>
                     </div>
-                    <p className="text-gray-300 text-xs leading-relaxed">
-                      "{testimonial.message.length > 100 
-                        ? testimonial.message.substring(0, 100) + '...' 
-                        : testimonial.message}"
-                    </p>
-                  </div>
-                ))}
-                {testimonials.length === 0 && (
+                  ))
+                ) : (
                   <div className="text-center py-4">
                     <p className="text-gray-400 text-sm">Nenhum depoimento disponível</p>
                   </div>
