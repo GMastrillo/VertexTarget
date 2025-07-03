@@ -43,6 +43,9 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     
     try {
+      console.log('🔐 Tentando login para:', email);
+      console.log('🌐 URL do login:', `${BACKEND_URL}/api/auth/login`);
+      
       const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
@@ -50,6 +53,8 @@ export const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify({ email, password }),
       });
+
+      console.log('📡 Resposta do servidor:', response.status, response.statusText);
 
       const data = await response.json();
 
