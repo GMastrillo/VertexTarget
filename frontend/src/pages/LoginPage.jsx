@@ -134,6 +134,19 @@ const LoginPage = () => {
           </div>
         </form>
 
+        {/* Link para Registro */}
+        <div className="text-center mt-6">
+          <p className="text-gray-400 text-sm">
+            Não tem uma conta?{' '}
+            <button
+              onClick={() => navigate('/register')}
+              className="text-purple-400 hover:text-purple-300 transition-colors"
+            >
+              Criar conta
+            </button>
+          </p>
+        </div>
+
         {/* Back to Home */}
         <div className="text-center">
           <button
