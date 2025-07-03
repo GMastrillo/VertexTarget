@@ -164,8 +164,8 @@ const AdminDashboard = () => {
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {statsCards.map((stat, index) => (
-                <Card key={index} className="bg-gray-900/50 border-gray-700 hover:border-purple-500/50 transition-all">
+              {statsCards.map((stat) => (
+                <Card key={stat.title} className="bg-gray-900/50 border-gray-700 hover:border-purple-500/50 transition-all">
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-white text-sm font-medium">
