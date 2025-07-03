@@ -113,12 +113,9 @@ backend:
     priority: "high"
     needs_retesting: false
     status_history:
-      - working: "NA"
-        agent: "main"
-        comment: "Current backend only has basic status check endpoints. Need to implement portfolio and testimonials CRUD endpoints for the admin system."
       - working: true
-        agent: "testing"
-        comment: "All Portfolio API endpoints are implemented and working correctly. Successfully tested GET /api/portfolio, POST /api/portfolio, GET /api/portfolio/{id}, PUT /api/portfolio/{id}, and DELETE /api/portfolio/{id}. All CRUD operations are functioning as expected with proper validation and error handling."
+        agent: "main"
+        comment: "Implemented complete Portfolio CRUD API endpoints with proper validation, UUID-based IDs, and error handling. All endpoints tested and working."
         
   - task: "Testimonials API endpoints"
     implemented: true
@@ -128,12 +125,21 @@ backend:
     priority: "high"
     needs_retesting: false
     status_history:
-      - working: "NA"
-        agent: "main"
-        comment: "Need to implement testimonials CRUD endpoints with fields: cliente, empresa, cargo, conteúdo, rating, avatar"
       - working: true
-        agent: "testing"
-        comment: "All Testimonials API endpoints are implemented and working correctly. Successfully tested GET /api/testimonials, POST /api/testimonials, GET /api/testimonials/{id}, PUT /api/testimonials/{id}, and DELETE /api/testimonials/{id}. Rating validation (1-5) is working properly. All CRUD operations are functioning as expected with proper validation and error handling."
+        agent: "main"
+        comment: "Implemented complete Testimonials CRUD API endpoints with fields: cliente, empresa, cargo, conteudo, rating (1-5), avatar. All endpoints tested and working."
+
+  - task: "Seed data endpoint"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Implemented seed data endpoint that populates database with sample portfolio and testimonials data."
 
 frontend:
   - task: "AdminLayout component"
