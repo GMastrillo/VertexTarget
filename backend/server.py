@@ -850,7 +850,8 @@ app.include_router(api_router)
 
 origins = [
     "https://vertex-target.vercel.app",
-    "https://*.vercel.app",  # <--- ADICIONE ESTA LINHA PARA PERMITIR SUBDOMÍNIOS DO VERCEL
+    "https://*.vercel.app", # Manter para subdomínios gerais do Vercel
+    "https://vertex-target-*.vercel.app", # <--- ADICIONE ESTA LINHA para cobrir subdomínios específicos do seu projeto
     "http://localhost:3000",
     "http://localhost:5173",
 ]
