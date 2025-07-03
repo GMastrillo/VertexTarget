@@ -134,6 +134,24 @@ const AdminDashboard = () => {
 
           {/* Dashboard Tab */}
           <TabsContent value="dashboard" className="space-y-8">
+            {/* Loading State */}
+            {isLoading && (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mb-4"></div>
+                <p className="text-gray-400">Carregando informações administrativas...</p>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+              <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+                <p className="text-red-400 text-center">{error}</p>
+              </div>
+            )}
+
+            {/* Content - Only show when not loading */}
+            {!isLoading && (
+              <>
             {/* Welcome */}
             <div className="text-center">
               <h2 className="text-3xl font-black text-white mb-4">
