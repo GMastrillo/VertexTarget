@@ -475,55 +475,6 @@ async def health_check():
 # Authentication Routes
 @api_router.post("/auth/register", response_model=Token)
 async def register_user(user_data: UserCreate):
-    # Check if user already exists
-    existing_user = await db.users.find_one({"email": user_data.email})
-    if existing_user:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Email já cadastrado"
-        )
-    
-    # Create new user
-    hashed_password = hash_password(user_data.password)
-    user = User(
-        email=user_data.email,
-        full_name=user_data.full_name
-    )
-    
-    user_dict = user.dict()
-    user_dict["hashed_password"] = hashed_password
-    
-    await db.users.insert_one(user_dict)
-    
-    # Create access token
-    access_token = create_access_token(data={"sub": user.id})
-    return {"access_token": access_token, "token_type": "bearer"}
-
-@api_router.post("/auth/login", response_model=Token)
-async def login_user(user_credentials: UserLogin):
-    user_data = await db.users.find_one({"email": user_credentials.email})
-    if not user_data or not verify_password(user_credentials.password, user_data["hashed_password"]):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Email ou senha incorretos",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    
-    # Criar objeto User com os dados do banco
-    user = User(
-        id=user_data["id"],
-        email=user_data["email"],
-        full_name=user_data["full_name"],
-        role=user_data.get("role", "user"),  # Default para 'user' se não existir
-        is_active=user_data.get("is_active", True),
-        created_at=user_data.get("created_at", datetime.utcnow())
-    )
-    
-    access_token = create_access_token(data={"sub": user_data["id"]})
-    return {"access_token": access_token, "token_type": "bearer", "user": user}
-
-@api_router.post("/auth/register", response_model=Token)
-async def register_user(user_data: UserCreate):
     # Verificar se o email já está em uso
     existing_user = await db.users.find_one({"email": user_data.email})
     if existing_user:
@@ -559,6 +510,29 @@ async def register_user(user_data: UserCreate):
         token_type="bearer",
         user=new_user
     )
+
+@api_router.post("/auth/login", response_model=Token)
+async def login_user(user_credentials: UserLogin):
+    user_data = await db.users.find_one({"email": user_credentials.email})
+    if not user_data or not verify_password(user_credentials.password, user_data["hashed_password"]):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Email ou senha incorretos",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    # Criar objeto User com os dados do banco
+    user = User(
+        id=user_data["id"],
+        email=user_data["email"],
+        full_name=user_data["full_name"],
+        role=user_data.get("role", "user"),  # Default para 'user' se não existir
+        is_active=user_data.get("is_active", True),
+        created_at=user_data.get("created_at", datetime.utcnow())
+    )
+    
+    access_token = create_access_token(data={"sub": user_data["id"]})
+    return {"access_token": access_token, "token_type": "bearer", "user": user}
 
 # Admin Users Management Routes
 @api_router.get("/admin/users", response_model=List[User])
