@@ -257,9 +257,9 @@ const UserDashboard = () => {
                         </div>
                       </div>
                       <p className="text-gray-300 text-xs leading-relaxed">
-                        "{testimonial?.message && testimonial.message.length > 100 
-                          ? testimonial.message.substring(0, 100) + '...' 
-                          : testimonial?.message || 'Mensagem não disponível'}"
+                        "{testimonial?.quote && testimonial.quote.length > 100 
+                          ? testimonial.quote.substring(0, 100) + '...' 
+                          : testimonial?.quote || 'Mensagem não disponível'}"
                       </p>
                     </div>
                   ))
