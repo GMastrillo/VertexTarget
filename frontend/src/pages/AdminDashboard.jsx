@@ -12,6 +12,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { usePortfolioStore, useTestimonialsStore } from '../stores';
 import PortfolioManager from '../components/admin/PortfolioManager';
 import TestimonialsManager from '../components/admin/TestimonialsManager';
+import UsersManager from '../components/admin/UsersManager';
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
