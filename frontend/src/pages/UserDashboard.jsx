@@ -197,8 +197,8 @@ const UserDashboard = () => {
             <CardContent>
               <div className="space-y-4">
                 {recentProjects.length > 0 ? (
-                  recentProjects.map((project, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-3 bg-gray-800/50 rounded-lg">
+                  recentProjects.map((project) => (
+                    <div key={project?.id || Math.random()} className="flex items-center space-x-3 p-3 bg-gray-800/50 rounded-lg">
                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex-shrink-0 flex items-center justify-center">
                         <span className="text-white text-xs font-bold">
                           {project?.category?.substring(0, 2).toUpperCase() || 'PR'}
