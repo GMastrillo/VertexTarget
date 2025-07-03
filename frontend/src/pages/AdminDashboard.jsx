@@ -263,17 +263,19 @@ const AdminDashboard = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                   <div>
                     <h4 className="text-purple-400 font-semibold mb-2">Cache Portfolio</h4>
-                    <p className="text-gray-400 mb-1">Status: {portfolioStats.cacheValid ? '✅ Ativo' : '❌ Expirado'}</p>
-                    <p className="text-gray-400 mb-1">Última atualização: {portfolioStats.lastFetch}</p>
-                    <p className="text-gray-400">Expira em: {portfolioStats.cacheExpiry}</p>
+                    <p className="text-gray-400 mb-1">Status: {portfolioStats?.cacheValid ? '✅ Ativo' : '❌ Expirado'}</p>
+                    <p className="text-gray-400 mb-1">Última atualização: {portfolioStats?.lastFetch || 'Nunca carregado'}</p>
+                    <p className="text-gray-400">Expira em: {portfolioStats?.cacheExpiry || 'N/A'}</p>
                   </div>
                   <div>
                     <h4 className="text-indigo-400 font-semibold mb-2">Cache Depoimentos</h4>
-                    <p className="text-gray-400 mb-1">Status: {testimonialsStats.cacheValid ? '✅ Ativo' : '❌ Expirado'}</p>
-                    <p className="text-gray-400 mb-1">Última atualização: {testimonialsStats.lastFetch}</p>
-                    <p className="text-gray-400">Expira em: {testimonialsStats.cacheExpiry}</p>
+                    <p className="text-gray-400 mb-1">Status: {testimonialsStats?.cacheValid ? '✅ Ativo' : '❌ Expirado'}</p>
+                    <p className="text-gray-400 mb-1">Última atualização: {testimonialsStats?.lastFetch || 'Nunca carregado'}</p>
+                    <p className="text-gray-400">Expira em: {testimonialsStats?.cacheExpiry || 'N/A'}</p>
                   </div>
                 </div>
+              </>
+              )}
               </CardContent>
             </Card>
           </TabsContent>
