@@ -121,7 +121,7 @@ const AdminDashboard = () => {
       <div className="max-w-7xl mx-auto px-6 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {/* Navigation Tabs */}
-          <TabsList className="grid w-full grid-cols-3 bg-gray-800 border border-gray-700">
+          <TabsList className="grid w-full grid-cols-4 bg-gray-800 border border-gray-700">
             <TabsTrigger value="dashboard" className="data-[state=active]:bg-purple-600">
               📊 Dashboard
             </TabsTrigger>
@@ -130,6 +130,9 @@ const AdminDashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="testimonials" className="data-[state=active]:bg-purple-600">
               💬 Depoimentos
+            </TabsTrigger>
+            <TabsTrigger value="users" className="data-[state=active]:bg-purple-600">
+              👥 Usuários
             </TabsTrigger>
           </TabsList>
 
