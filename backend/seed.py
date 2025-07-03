@@ -152,20 +152,47 @@ class SeedData:
         ]
     
     @staticmethod
-    def get_admin_user():
-        """Cria um usuário administrador padrão"""
+    def get_users():
+        """Cria usuários padrão - admin e usuário comum"""
         from passlib.context import CryptContext
         
         pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
         
-        return {
-            "id": str(uuid.uuid4()),
-            "email": "admin@vertextarget.com",
-            "full_name": "Administrador VERTEX TARGET",
-            "hashed_password": pwd_context.hash("VT@admin2025!"),  # Senha: VT@admin2025!
-            "is_active": True,
-            "created_at": datetime.utcnow()
-        }
+        return [
+            {
+                "id": str(uuid.uuid4()),
+                "email": "admin@vertextarget.com",
+                "full_name": "Administrador VERTEX TARGET",
+                "role": "admin",
+                "hashed_password": pwd_context.hash("VT@admin2025!"),  # Senha: VT@admin2025!
+                "is_active": True,
+                "created_at": datetime.utcnow()
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "email": "user@vertextarget.com", 
+                "full_name": "Usuário Teste",
+                "role": "user",
+                "hashed_password": pwd_context.hash("User@2025!"),  # Senha: User@2025!
+                "is_active": True,
+                "created_at": datetime.utcnow()
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "email": "joao@empresa.com",
+                "full_name": "João Silva",
+                "role": "user", 
+                "hashed_password": pwd_context.hash("Joao@123!"),  # Senha: Joao@123!
+                "is_active": True,
+                "created_at": datetime.utcnow()
+            }
+        ]
+    
+    @staticmethod
+    def get_admin_user():
+        """Método mantido para compatibilidade"""
+        users = SeedData.get_users()
+        return users[0]  # Retorna o primeiro usuário (admin)
 
 
 class DatabaseSeeder:
