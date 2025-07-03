@@ -17,6 +17,9 @@ export const AuthProvider = ({ children }) => {
 
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
+  // Debug: Log da URL do backend
+  console.log('🔗 BACKEND_URL configurado:', BACKEND_URL);
+
   // Check if user is already logged in on app load
   useEffect(() => {
     const token = localStorage.getItem('token');
