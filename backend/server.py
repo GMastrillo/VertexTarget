@@ -522,6 +522,39 @@ async def login_user(user_credentials: UserLogin):
     access_token = create_access_token(data={"sub": user_data["id"]})
     return {"access_token": access_token, "token_type": "bearer", "user": user}
 
+@api_router.post("/auth/register", response_model=Token)
+async def register_user(user_data: UserCreate):
+    # Verificar se o email já está em uso
+    existing_user = await db.users.find_one({"email": user_data.email})
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Este email já está cadastrado"
+        )
+    
+    # Criar hash da senha
+    hashed_password = hash_password(user_data.password)
+    
+    # Criar novo usuário
+    new_user = User(
+        email=user_data.email,
+        full_name=user_data.full_name,
+        role=user_data.role,
+        is_active=True
+    )
+    
+    # Preparar dados para inserção no banco
+    user_dict = new_user.dict()
+    user_dict["hashed_password"] = hashed_password
+    
+    # Inserir no banco de dados
+    await db.users.insert_one(user_dict)
+    
+    # Criar token de acesso
+    access_token = create_access_token(data={"sub": new_user.id})
+    
+    return {"access_token": access_token, "token_type": "bearer", "user": new_user}
+
 # Portfolio Routes
 @api_router.get("/portfolio", response_model=List[PortfolioItem])
 async def get_portfolio_items():
