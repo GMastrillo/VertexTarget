@@ -26,7 +26,7 @@ requests-oauthlib>=2.0.0
 # Google Generative AI (Simplified and compatible versions)
 google-generativeai==0.7.2
 google-api-core==2.19.1
-protobuf==4.25.4
+protobuf==5.27.2
 
 # Utility Libraries
 tqdm>=4.67.0
