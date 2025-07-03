@@ -1046,6 +1046,8 @@ def run_all_tests():
     # Authentication tests
     print_test_header("Authentication Tests")
     login_status = test_login_with_admin()
+    user_login_status = test_login_with_user()
+    joao_login_status = test_login_with_joao()
     register_status = test_register_new_user()
     password_validation_status = test_password_validation()
     protected_without_token_status = test_protected_endpoint_without_token()
@@ -1084,6 +1086,13 @@ def run_all_tests():
     ai_different_inputs_status = test_ai_strategy_with_different_inputs()
     ai_invalid_inputs_status = test_ai_strategy_invalid_inputs()
     
+    # AI Cache tests
+    print_test_header("AI Cache System Tests")
+    ai_cache_health_status = test_ai_cache_health()
+    ai_cache_stats_status = test_ai_cache_stats()
+    ai_cache_clear_status = test_ai_cache_clear()
+    ai_cache_working_status = test_ai_strategy_caching()
+    
     # Summary
     print("\n" + "="*50)
     print("📊 TEST SUMMARY:")
@@ -1097,6 +1106,8 @@ def run_all_tests():
     # Authentication tests
     print("\nAuthentication Tests:")
     print(f"  Admin Login: {'✅ PASS' if login_status else '❌ FAIL'}")
+    print(f"  User Login: {'✅ PASS' if user_login_status else '❌ FAIL'}")
+    print(f"  Joao Login: {'✅ PASS' if joao_login_status else '❌ FAIL'}")
     print(f"  User Registration: {'✅ PASS' if register_status else '❌ FAIL'}")
     print(f"  Password Validation: {'✅ PASS' if password_validation_status else '❌ FAIL'}")
     print(f"  Protected Endpoint Without Token: {'✅ PASS' if protected_without_token_status else '❌ FAIL'}")
@@ -1135,13 +1146,21 @@ def run_all_tests():
     print(f"  AI Strategy Different Inputs: {'✅ PASS' if ai_different_inputs_status else '❌ FAIL'}")
     print(f"  AI Strategy Invalid Inputs: {'✅ PASS' if ai_invalid_inputs_status else '❌ FAIL'}")
     
+    # AI Cache tests
+    print("\nAI Cache System Tests:")
+    print(f"  AI Cache Health: {'✅ PASS' if ai_cache_health_status else '❌ FAIL'}")
+    print(f"  AI Cache Stats: {'✅ PASS' if ai_cache_stats_status else '❌ FAIL'}")
+    print(f"  AI Cache Clear: {'✅ PASS' if ai_cache_clear_status else '❌ FAIL'}")
+    print(f"  AI Strategy Caching: {'✅ PASS' if ai_cache_working_status else '❌ FAIL'}")
+    
     # Overall status
-    auth_tests = login_status and register_status and password_validation_status and protected_without_token_status and protected_with_token_status
+    auth_tests = login_status and user_login_status and joao_login_status and register_status and password_validation_status and protected_without_token_status and protected_with_token_status
     portfolio_tests = get_portfolio_status and update_portfolio_status and delete_portfolio_status
     testimonial_tests = get_testimonials_status and create_testimonial_status and update_testimonial_status and delete_testimonial_status
     contact_tests = contact_submission_status and contact_validation_status
     validation_tests = pydantic_validation_status
     ai_tests = ai_without_auth_status and ai_with_auth_status and ai_different_inputs_status and ai_invalid_inputs_status
+    ai_cache_tests = ai_cache_health_status and ai_cache_stats_status and ai_cache_clear_status and ai_cache_working_status
     
     print("\n" + "="*50)
     print("🎯 FEATURE TEST RESULTS:")
@@ -1151,8 +1170,9 @@ def run_all_tests():
     print(f"  Contact Endpoints: {'✅ PASS' if contact_tests else '❌ FAIL'}")
     print(f"  Pydantic Validation: {'✅ PASS' if validation_tests else '❌ FAIL'}")
     print(f"  Gemini AI Integration: {'✅ PASS' if ai_tests else '❌ FAIL'}")
+    print(f"  AI Cache System: {'✅ PASS' if ai_cache_tests else '❌ FAIL'}")
     
-    overall_status = server_status and health_status and cors_status and auth_tests and portfolio_tests and testimonial_tests and contact_tests and validation_tests and mongodb_status and ai_tests
+    overall_status = server_status and health_status and cors_status and auth_tests and portfolio_tests and testimonial_tests and contact_tests and validation_tests and mongodb_status and ai_tests and ai_cache_tests
     
     print(f"\n🏁 Overall Backend Status: {'✅ PASS' if overall_status else '❌ FAIL'}")
     print("\n" + "="*50)
