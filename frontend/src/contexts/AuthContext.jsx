@@ -89,6 +89,28 @@ export const AuthProvider = ({ children }) => {
     return localStorage.getItem('token');
   };
 
+  // Função para determinar a rota correta baseada no role do usuário
+  const getDashboardRoute = (userRole) => {
+    switch (userRole) {
+      case 'admin':
+        return '/admin';
+      case 'user':
+        return '/dashboard';
+      default:
+        return '/dashboard';
+    }
+  };
+
+  // Verifica se o usuário é admin
+  const isAdmin = () => {
+    return user?.role === 'admin';
+  };
+
+  // Verifica se o usuário é comum
+  const isUser = () => {
+    return user?.role === 'user';
+  };
+
   const value = {
     user,
     token: getToken(),
@@ -97,6 +119,9 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated,
     getAuthHeader,
     getToken,
+    getDashboardRoute,
+    isAdmin,
+    isUser,
     loading,
     error,
     setError
