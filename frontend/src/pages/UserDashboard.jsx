@@ -132,12 +132,31 @@ const UserDashboard = () => {
         {/* Welcome */}
         <div className="text-center mb-8">
           <h2 className="text-3xl font-black text-white mb-4">
-            Bem-vindo, <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">{user?.full_name}!</span>
+            Bem-vindo, <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">{user?.full_name || 'Usuário'}!</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Explore nosso portfólio de projetos e descubra como podemos ajudar sua empresa a alcançar novos patamares.
           </p>
         </div>
+
+        {/* Loading State */}
+        {isLoading && (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mb-4"></div>
+            <p className="text-gray-400">Carregando informações...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+            <p className="text-red-400 text-center">{error}</p>
+          </div>
+        )}
+
+        {/* Content - Only show when not loading */}
+        {!isLoading && (
+          <>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
