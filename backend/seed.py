@@ -241,19 +241,31 @@ class DatabaseSeeder:
         else:
             print("⚠️  Nenhum depoimento para inserir")
     
+    async def seed_users(self):
+        """Cria usuários padrão (admin e usuários comuns)"""
+        users = self.seed_data.get_users()
+        
+        users_created = 0
+        for user in users:
+            # Verifica se já existe um usuário com este email
+            existing_user = await self.db.users.find_one({"email": user["email"]})
+            
+            if existing_user:
+                print(f"👤 Usuário já existe: {user['email']} ({user['role']})")
+            else:
+                await self.db.users.insert_one(user)
+                users_created += 1
+                print(f"👤 Usuário criado: {user['email']} ({user['role']})")
+        
+        if users_created > 0:
+            print(f"🔑 Credenciais de acesso:")
+            print(f"   • Admin: admin@vertextarget.com / VT@admin2025!")
+            print(f"   • User: user@vertextarget.com / User@2025!")
+            print(f"   • User: joao@empresa.com / Joao@123!")
+    
     async def seed_admin_user(self):
-        """Cria usuário administrador padrão"""
-        admin_user = self.seed_data.get_admin_user()
-        
-        # Verifica se já existe um usuário com este email
-        existing_user = await self.db.users.find_one({"email": admin_user["email"]})
-        
-        if existing_user:
-            print(f"👤 Usuário administrador já existe: {admin_user['email']}")
-        else:
-            await self.db.users.insert_one(admin_user)
-            print(f"👤 Usuário administrador criado: {admin_user['email']}")
-            print(f"🔑 Senha padrão: VT@admin2025!")
+        """Método mantido para compatibilidade - agora chama seed_users"""
+        await self.seed_users()
     
     async def create_indexes(self):
         """Cria índices para otimizar as consultas"""
