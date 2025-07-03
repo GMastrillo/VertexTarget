@@ -236,8 +236,8 @@ const UserDashboard = () => {
             <CardContent>
               <div className="space-y-4">
                 {Array.isArray(testimonials) && testimonials.length > 0 ? (
-                  testimonials.slice(0, 2).map((testimonial, index) => (
-                    <div key={index} className="p-3 bg-gray-800/50 rounded-lg">
+                  testimonials.slice(0, 2).map((testimonial) => (
+                    <div key={testimonial?.id || Math.random()} className="p-3 bg-gray-800/50 rounded-lg">
                       <div className="flex items-center justify-between mb-2">
                         <div>
                           <p className="text-white font-medium text-sm">{testimonial?.name || 'Cliente'}</p>
