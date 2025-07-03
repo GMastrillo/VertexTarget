@@ -2,8 +2,8 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth();
+const ProtectedRoute = ({ children, requiredRole = null }) => {
+  const { isAuthenticated, loading, user } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -22,7 +22,17 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
+  // Se um role específico é requerido, verifica se o usuário tem esse role
+  if (requiredRole && user?.role !== requiredRole) {
+    // Se o usuário está autenticado mas não tem o role correto, 
+    // redireciona para sua dashboard apropriada
+    const userDashboard = user?.role === 'admin' ? '/admin' : '/dashboard';
+    return <Navigate to={userDashboard} replace />;
+  }
+
   return children;
 };
+
+export default ProtectedRoute;
 
 export default ProtectedRoute;
