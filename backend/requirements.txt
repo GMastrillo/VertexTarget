@@ -23,10 +23,8 @@ cryptography>=42.0.8
 requests>=2.31.0
 requests-oauthlib>=2.0.0
 
-# Google Generative AI (Simplified and compatible versions)
-google-generativeai==0.7.2
-google-api-core==2.19.1
-protobuf==5.27.2
+# Google Generative AI (Minimal set with compatible versions)
+google-generativeai==0.5.4
 
 # Utility Libraries
 tqdm>=4.67.0
