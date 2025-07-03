@@ -17,10 +17,32 @@ const AdminDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Stores para estatísticas
   const portfolioStats = usePortfolioStore((state) => state.getStats());
   const testimonialsStats = useTestimonialsStore((state) => state.getStats());
+
+  // Carrega dados quando o componente monta
+  React.useEffect(() => {
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        // Força o carregamento dos dados para garantir que as estatísticas estejam atualizadas
+        await usePortfolioStore.getState().fetchProjects();
+        await useTestimonialsStore.getState().fetchTestimonials();
+      } catch (error) {
+        console.error('Erro ao carregar dados do admin:', error);
+        setError('Erro ao carregar dados. Tente novamente mais tarde.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
 
   const handleLogout = async () => {
     await logout();
