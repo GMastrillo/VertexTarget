@@ -340,20 +340,20 @@ Evoluir o projeto VERTEX TARGET de um protótipo funcional para uma aplicação 
   test_all: false
   test_priority: "high_first"
 
-  - task: "Correção Bug Backend - Dependências Google AI"
+  - task: "Sistema de Login Universal com Roles"
     implemented: true
     working: true
-    file: "/app/backend/requirements.txt"
+    file: "/app/backend/server.py, /app/frontend/src/contexts/AuthContext.jsx, /app/frontend/src/pages/UserDashboard.jsx, /app/frontend/src/pages/LoginPage.jsx, /app/frontend/src/components/ProtectedRoute.jsx, /app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
-        - working: false
-          agent: "user"
-          comment: "Backend não estava iniciando devido a dependências faltando do Google AI. Erro 'Failed to fetch' no login do frontend."
+        - working: "NA"
+          agent: "main"
+          comment: "🎯 SISTEMA DE LOGIN UNIVERSAL IMPLEMENTADO! Sistema completo de autenticação com roles e redirecionamento inteligente: 1) Backend - Modelos User atualizados com campo 'role' (admin/user), endpoint de login retorna dados do usuário incluindo role, script de seed cria 3 usuários de teste (1 admin + 2 users), 2) Frontend - AuthContext expandido com funções getDashboardRoute(), isAdmin(), isUser(), ProtectedRoute atualizado com verificação de roles específicos, LoginPage com redirecionamento automático baseado no role, 3) Dashboards Diferenciados - AdminDashboard para usuários admin (CRUD completo), UserDashboard para usuários comuns (visualização de dados), rotas protegidas por role (/admin para admin, /dashboard para user), 4) UX Melhorada - Login page mostra credenciais de teste para todos os tipos de usuário, redirecionamento automático após login baseado no role, proteção de rotas impede acesso não autorizado. Sistema 100% funcional com 3 credenciais de teste disponíveis!"
         - working: true
           agent: "main"
-          comment: "🎯 DEPENDÊNCIAS GOOGLE AI CORRIGIDAS! Backend estava falhando ao iniciar devido a dependências faltando: google-api-core, grpcio, httplib2, google-api-python-client, tqdm. Todas as dependências foram instaladas e adicionadas ao requirements.txt. Backend agora inicia corretamente, endpoint de login funciona (retorna JWT válido), endpoint de health responde corretamente. Sistema completamente funcional!"
+          comment: "✅ SISTEMA TESTADO E FUNCIONANDO! Todos os endpoints de login testados com sucesso: admin@vertextarget.com (role: admin), user@vertextarget.com (role: user), joao@empresa.com (role: user). Backend retorna tokens JWT válidos com dados do usuário incluindo role correto. Frontend compila sem erros e está pronto para uso. Sistema de redirecionamento inteligente implementado: admins vão para /admin, usuários comuns vão para /dashboard."
 
   - task: "Backend CRUD Testing - Portfolio Operations"
     implemented: true
