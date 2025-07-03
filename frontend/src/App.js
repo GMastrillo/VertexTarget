@@ -150,11 +150,23 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<LoginPage />} />
+            
+            {/* Admin Dashboard - Apenas para usuários admin */}
             <Route 
               path="/admin" 
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requiredRole="admin">
                   <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* User Dashboard - Apenas para usuários comuns */}
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute requiredRole="user">
+                  <UserDashboard />
                 </ProtectedRoute>
               } 
             />
