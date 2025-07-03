@@ -334,8 +334,6 @@ Evoluir o projeto VERTEX TARGET de um protótipo funcional para uma aplicação 
 
 ## test_plan:
   current_focus:
-    - "Backend CRUD Testing - Portfolio Operations"
-    - "Backend CRUD Testing - Testimonials Operations"
     - "Implementação da Área Administrativa (CMS)"
   stuck_tasks:
     []
