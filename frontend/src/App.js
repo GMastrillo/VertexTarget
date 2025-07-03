@@ -151,6 +151,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             
             {/* Admin Dashboard - Apenas para usuários admin */}
             <Route 
