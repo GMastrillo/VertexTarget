@@ -293,6 +293,11 @@ const AdminDashboard = () => {
           <TabsContent value="testimonials">
             <TestimonialsManager />
           </TabsContent>
+
+          {/* Users Management Tab */}
+          <TabsContent value="users">
+            <UsersManager />
+          </TabsContent>
         </Tabs>
       </div>
     </div>
