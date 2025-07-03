@@ -82,8 +82,9 @@ def test_health_endpoint():
 def test_cors():
     """Test if CORS is properly configured"""
     try:
+        # Test with one of the allowed origins
         headers = {
-            'Origin': 'http://example.com',  # A different origin than the server
+            'Origin': 'http://localhost:3000',  # One of the allowed origins
         }
         response = requests.get(f"{API_URL}/", headers=headers)
         
