@@ -555,6 +555,28 @@ async def register_user(user_data: UserCreate):
     
     return {"access_token": access_token, "token_type": "bearer", "user": new_user}
 
+# Admin Users Management Routes
+@api_router.get("/admin/users", response_model=List[User])
+async def get_all_users(current_user: User = Depends(get_current_user)):
+    # Verificar se o usuário é admin
+    if current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Acesso negado. Apenas administradores podem ver usuários."
+        )
+    
+    # Buscar todos os usuários (excluindo a senha)
+    users_data = await db.users.find({}, {"hashed_password": 0}).to_list(1000)
+    
+    return [User(
+        id=user["id"],
+        email=user["email"],
+        full_name=user["full_name"],
+        role=user.get("role", "user"),
+        is_active=user.get("is_active", True),
+        created_at=user.get("created_at", datetime.utcnow())
+    ) for user in users_data]
+
 # Portfolio Routes
 @api_router.get("/portfolio", response_model=List[PortfolioItem])
 async def get_portfolio_items():
