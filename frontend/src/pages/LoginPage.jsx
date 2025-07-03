@@ -114,12 +114,22 @@ const LoginPage = () => {
             </button>
 
             {/* Credentials Help */}
-            <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-              <p className="text-blue-400 text-sm">
-                <strong>Credenciais padrão:</strong><br />
-                Email: admin@vertextarget.com<br />
-                Senha: VT@admin2025!
-              </p>
+            <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+              <p className="text-blue-400 text-sm font-semibold mb-2">🔐 Credenciais de Teste:</p>
+              <div className="space-y-2 text-xs">
+                <div className="p-2 bg-blue-500/20 rounded">
+                  <strong className="text-blue-300">Admin:</strong><br />
+                  <span className="text-gray-300">admin@vertextarget.com / VT@admin2025!</span>
+                </div>
+                <div className="p-2 bg-green-500/20 rounded">
+                  <strong className="text-green-300">Usuário:</strong><br />
+                  <span className="text-gray-300">user@vertextarget.com / User@2025!</span>
+                </div>
+                <div className="p-2 bg-purple-500/20 rounded">
+                  <strong className="text-purple-300">Usuário:</strong><br />
+                  <span className="text-gray-300">joao@empresa.com / Joao@123!</span>
+                </div>
+              </div>
             </div>
           </div>
         </form>
