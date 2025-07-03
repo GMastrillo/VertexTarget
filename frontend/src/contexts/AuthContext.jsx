@@ -38,15 +38,17 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email, password) => {
+ const login = async (email, password) => {
     setLoading(true);
     setError(null);
     
     try {
       console.log('🔐 Tentando login para:', email);
-      console.log('🌐 URL do login:', `${BACKEND_URL}/api/auth/login`);
+      // LINHA 1 A MUDAR:
+      console.log('🌐 URL do login:', `${BACKEND_URL}/api/auth/login`); 
       
-      const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
+      // LINHA 2 A MUDAR:
+      const response = await fetch(`${BACKEND_URL}/api/auth/login`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
