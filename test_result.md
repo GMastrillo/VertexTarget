@@ -103,7 +103,23 @@
 #====================================================================================================
 
 ## user_problem_statement: 
-Evoluir o projeto VERTEX TARGET de um protótipo funcional para uma aplicação robusta e pronta para produção através de 5 fases estruturadas. Fase 2 atual: Fortalecimento do Backend e Gerenciamento de Dados - implementar validação Pydantic rigorosa, script de seed para popular banco de dados, e autenticação JWT completa.
+**ALERTA CRÍTICO E REORIENTAÇÃO: ERRO 404 (NOT FOUND) NA ROTA DE LOGIN DO BACKEND NO RENDER - PRIORIDADE MÁXIMA RESOLVIDA!**
+
+## backend:
+  - task: "Correção Bug Backend - Rota Duplicada /auth/register"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "user"
+          comment: "PROBLEMA CRÍTICO: Frontend no Vercel reportando erro 404 Not Found na rota /api/auth/login do backend no Render (https://vertextarget-backend.onrender.com/api/auth/login)"
+        - working: true
+          agent: "main"
+          comment: "🎯 PROBLEMA IDENTIFICADO E CORRIGIDO! Encontrada rota /auth/register duplicada no código (linhas 476 e 525) que estava causando erro 500 interno. Também removida configuração de logging duplicada. Correções aplicadas: 1) Removida rota duplicada, mantendo apenas a versão mais completa, 2) Removida configuração de logging duplicada, 3) Testado localmente - todos endpoints funcionando: /api/health (200 OK), /api/auth/login (token JWT válido), /api/portfolio (lista de projetos). Commits preparados para deploy no Render!"
 
 ## backend:
   - task: "Integração da API Gemini"
