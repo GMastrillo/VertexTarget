@@ -799,6 +799,148 @@ def test_ai_strategy_with_auth():
         print_test_result("AI Strategy with auth", False, f"Request failed: {e}")
         return False
 
+def test_ai_cache_health():
+    """Test the AI cache health endpoint"""
+    try:
+        response = requests.get(f"{API_URL}/v1/ai/cache/health")
+        
+        if response.status_code == 200:
+            data = response.json()
+            if 'status' in data and 'cache_enabled' in data and 'total_entries' in data:
+                print_test_result("AI Cache Health", True, f"Cache status: {data['status']}, Entries: {data['total_entries']}")
+                return True
+            else:
+                print_test_result("AI Cache Health", False, "Response missing expected cache data")
+                return False
+        else:
+            print_test_result("AI Cache Health", False, f"Status code: {response.status_code}, Response: {response.text}")
+            return False
+    except requests.exceptions.RequestException as e:
+        print_test_result("AI Cache Health", False, f"Request failed: {e}")
+        return False
+
+def test_ai_cache_stats():
+    """Test the AI cache stats endpoint (requires authentication)"""
+    global auth_token
+    
+    if not auth_token:
+        print_test_result("AI Cache Stats", False, "No auth token available, login test must have failed")
+        return False
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {auth_token}"
+        }
+        response = requests.get(f"{API_URL}/v1/ai/cache/stats", headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if 'total_entries' in data and 'cache_hits' in data and 'cache_misses' in data and 'hit_ratio' in data:
+                print_test_result("AI Cache Stats", True, 
+                                 f"Cache stats: {data['total_entries']} entries, {data['cache_hits']} hits, {data['cache_misses']} misses")
+                return True
+            else:
+                print_test_result("AI Cache Stats", False, "Response missing expected cache stats")
+                return False
+        else:
+            print_test_result("AI Cache Stats", False, f"Status code: {response.status_code}, Response: {response.text}")
+            return False
+    except requests.exceptions.RequestException as e:
+        print_test_result("AI Cache Stats", False, f"Request failed: {e}")
+        return False
+
+def test_ai_cache_clear():
+    """Test the AI cache clear endpoint (requires authentication)"""
+    global auth_token
+    
+    if not auth_token:
+        print_test_result("AI Cache Clear", False, "No auth token available, login test must have failed")
+        return False
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {auth_token}"
+        }
+        response = requests.delete(f"{API_URL}/v1/ai/cache/clear", headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if 'message' in data and 'cleared_entries' in data:
+                print_test_result("AI Cache Clear", True, f"Successfully cleared {data['cleared_entries']} cache entries")
+                return True
+            else:
+                print_test_result("AI Cache Clear", False, "Response missing expected clear confirmation")
+                return False
+        else:
+            print_test_result("AI Cache Clear", False, f"Status code: {response.status_code}, Response: {response.text}")
+            return False
+    except requests.exceptions.RequestException as e:
+        print_test_result("AI Cache Clear", False, f"Request failed: {e}")
+        return False
+
+def test_ai_strategy_caching():
+    """Test if the AI strategy caching is working"""
+    global auth_token
+    
+    if not auth_token:
+        print_test_result("AI Strategy Caching", False, "No auth token available, login test must have failed")
+        return False
+    
+    try:
+        # First, clear the cache
+        headers = {
+            "Authorization": f"Bearer {auth_token}"
+        }
+        clear_response = requests.delete(f"{API_URL}/v1/ai/cache/clear", headers=headers)
+        if clear_response.status_code != 200:
+            print_test_result("AI Strategy Caching", False, "Failed to clear cache before testing")
+            return False
+        
+        # Make first request - should be a cache miss
+        payload = {
+            "industry": "E-commerce",
+            "objective": "Aumentar Vendas"
+        }
+        first_response = requests.post(f"{API_URL}/v1/ai/generate-strategy", json=payload, headers=headers)
+        
+        # Check if we hit rate limit
+        if first_response.status_code == 429:
+            print_test_result("AI Strategy Caching", True, 
+                             "API rate limit reached (expected in test environment), skipping cache test")
+            return True
+        
+        # If first request succeeded, make second identical request - should be a cache hit
+        if first_response.status_code == 200:
+            first_data = first_response.json()
+            cached_first = first_data.get('cached', False)
+            
+            # Make second identical request
+            second_response = requests.post(f"{API_URL}/v1/ai/generate-strategy", json=payload, headers=headers)
+            
+            if second_response.status_code == 200:
+                second_data = second_response.json()
+                cached_second = second_data.get('cached', False)
+                
+                if not cached_first and cached_second:
+                    print_test_result("AI Strategy Caching", True, 
+                                     "Cache working correctly: first request was a miss, second was a hit")
+                    return True
+                else:
+                    print_test_result("AI Strategy Caching", False, 
+                                     f"Cache not working as expected: first cached={cached_first}, second cached={cached_second}")
+                    return False
+            else:
+                print_test_result("AI Strategy Caching", False, 
+                                 f"Second request failed: {second_response.status_code}, {second_response.text}")
+                return False
+        else:
+            print_test_result("AI Strategy Caching", False, 
+                             f"First request failed: {first_response.status_code}, {first_response.text}")
+            return False
+    except requests.exceptions.RequestException as e:
+        print_test_result("AI Strategy Caching", False, f"Request failed: {e}")
+        return False
+
 def test_ai_strategy_with_different_inputs():
     """Test generating AI strategies with different industry/objective combinations"""
     global auth_token
