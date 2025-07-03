@@ -234,11 +234,11 @@ const AdminDashboard = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Total de depoimentos:</span>
-                      <Badge variant="secondary">{testimonialsStats.totalTestimonials}</Badge>
+                      <Badge variant="secondary">{testimonialsStats?.totalTestimonials || 0}</Badge>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Avaliação média:</span>
-                      <Badge variant="secondary">{testimonialsStats.averageRating} ⭐</Badge>
+                      <Badge variant="secondary">{testimonialsStats?.averageRating || '0.0'} ⭐</Badge>
                     </div>
                     <Button 
                       onClick={() => setActiveTab('testimonials')}
