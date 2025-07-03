@@ -194,6 +194,9 @@ Evoluir o projeto VERTEX TARGET de um protótipo funcional para uma aplicação 
           comment: "Testar especificamente o login de administrador que estava falhando com erro 401. As credenciais são admin@vertextarget.com e senha VT@admin2025!."
         - working: true
           agent: "testing"
+          comment: "Testado o login de administrador com sucesso. Criado script login_test.py para testar especificamente o login com as credenciais admin@vertextarget.com / VT@admin2025!. O login funciona corretamente e retorna um token JWT válido. Também testados os logins de user@vertextarget.com / User@2025! e joao@empresa.com / Joao@123! - todos funcionando corretamente. Criado script connection_test.py para testar a conexão frontend-backend e verificar o problema de 'Failed to fetch'. Todos os testes passaram: o backend está acessível, o endpoint de login está funcionando corretamente, os cabeçalhos CORS estão configurados adequadamente para permitir requisições do frontend (localhost:3000), e as requisições preflight OPTIONS são tratadas corretamente. O problema de 'Failed to fetch' deve estar resolvido."
+        - working: true
+          agent: "testing"
           comment: "Login de administrador testado com sucesso após correção do problema. Criado script admin_login_test.py para testar especificamente o login de administrador. Confirmado que o endpoint POST /api/auth/login está funcionando corretamente com as credenciais admin@vertextarget.com / VT@admin2025!. O token JWT é gerado corretamente e pode ser usado para acessar endpoints protegidos. O problema foi resolvido após corrigir a configuração do banco de dados no server.py para usar o nome correto do banco de dados (vertex_target_db) a partir da variável de ambiente DB_NAME."
 
   - task: "Script de Seed do Banco de Dados"
