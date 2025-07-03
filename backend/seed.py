@@ -320,11 +320,12 @@ class DatabaseSeeder:
             print("\n📋 Resumo:")
             print(f"   • {len(self.seed_data.get_portfolio_items())} projetos de portfólio")
             print(f"   • {len(self.seed_data.get_testimonials())} depoimentos")
-            print(f"   • 1 usuário administrador")
-            print(f"\n🔐 Credenciais do administrador:")
-            print(f"   • Email: admin@vertextarget.com")
-            print(f"   • Senha: VT@admin2025!")
-            print("\n⚠️  IMPORTANTE: Altere a senha do administrador em produção!")
+            print(f"   • {len(self.seed_data.get_users())} usuários")
+            print(f"\n🔐 Credenciais de acesso:")
+            print(f"   • Admin: admin@vertextarget.com / VT@admin2025!")
+            print(f"   • User: user@vertextarget.com / User@2025!")
+            print(f"   • User: joao@empresa.com / Joao@123!")
+            print("\n⚠️  IMPORTANTE: Altere as senhas em produção!")
             
             return True
             
