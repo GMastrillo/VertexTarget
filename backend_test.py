@@ -125,6 +125,54 @@ def test_login_with_admin():
         print_test_result("Admin login", False, f"Request failed: {e}")
         return False
 
+def test_login_with_user():
+    """Test login with regular user credentials"""
+    try:
+        payload = {
+            "email": "user@vertextarget.com",
+            "password": "User@2025!"
+        }
+        response = requests.post(f"{API_URL}/auth/login", json=payload)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if 'access_token' in data and 'token_type' in data and data.get('user', {}).get('role') == 'user':
+                print_test_result("User login", True, "Successfully logged in as regular user and received JWT token")
+                return True
+            else:
+                print_test_result("User login", False, "Response missing token data or incorrect role")
+                return False
+        else:
+            print_test_result("User login", False, f"Status code: {response.status_code}, Response: {response.text}")
+            return False
+    except requests.exceptions.RequestException as e:
+        print_test_result("User login", False, f"Request failed: {e}")
+        return False
+
+def test_login_with_joao():
+    """Test login with Joao's user credentials"""
+    try:
+        payload = {
+            "email": "joao@empresa.com",
+            "password": "Joao@123!"
+        }
+        response = requests.post(f"{API_URL}/auth/login", json=payload)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if 'access_token' in data and 'token_type' in data and data.get('user', {}).get('role') == 'user':
+                print_test_result("Joao login", True, "Successfully logged in as Joao and received JWT token")
+                return True
+            else:
+                print_test_result("Joao login", False, "Response missing token data or incorrect role")
+                return False
+        else:
+            print_test_result("Joao login", False, f"Status code: {response.status_code}, Response: {response.text}")
+            return False
+    except requests.exceptions.RequestException as e:
+        print_test_result("Joao login", False, f"Request failed: {e}")
+        return False
+
 def test_register_new_user():
     """Test user registration"""
     try:
