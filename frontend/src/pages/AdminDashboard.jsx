@@ -203,11 +203,11 @@ const AdminDashboard = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Total de projetos:</span>
-                      <Badge variant="secondary">{portfolioStats.totalProjects}</Badge>
+                      <Badge variant="secondary">{portfolioStats?.totalProjects || 0}</Badge>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Categorias:</span>
-                      <Badge variant="secondary">{portfolioStats.categories.length}</Badge>
+                      <Badge variant="secondary">{portfolioStats?.categories?.length || 0}</Badge>
                     </div>
                     <Button 
                       onClick={() => setActiveTab('portfolio')}
