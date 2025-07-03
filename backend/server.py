@@ -35,6 +35,59 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Portfolio Models
+class Portfolio(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str
+    description: str
+    image: Optional[str] = None
+    technologies: List[str] = []
+    status: str = "active"  # active, draft, archived
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class PortfolioCreate(BaseModel):
+    title: str
+    description: str
+    image: Optional[str] = None
+    technologies: List[str] = []
+    status: str = "active"
+
+class PortfolioUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    image: Optional[str] = None
+    technologies: Optional[List[str]] = None
+    status: Optional[str] = None
+
+# Testimonials Models
+class Testimonial(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    cliente: str  # client name
+    empresa: str  # company
+    cargo: str    # role/position
+    conteudo: str # content/testimonial text
+    rating: int   # 1-5 stars
+    avatar: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class TestimonialCreate(BaseModel):
+    cliente: str
+    empresa: str
+    cargo: str
+    conteudo: str
+    rating: int = Field(ge=1, le=5)  # rating between 1-5
+    avatar: Optional[str] = None
+
+class TestimonialUpdate(BaseModel):
+    cliente: Optional[str] = None
+    empresa: Optional[str] = None
+    cargo: Optional[str] = None
+    conteudo: Optional[str] = None
+    rating: Optional[int] = Field(None, ge=1, le=5)
+    avatar: Optional[str] = None
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
