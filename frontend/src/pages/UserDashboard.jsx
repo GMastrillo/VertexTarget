@@ -57,29 +57,31 @@ const UserDashboard = () => {
   const statsCards = [
     {
       title: 'Projetos Disponíveis',
-      value: portfolioProjects.length,
+      value: Array.isArray(portfolioProjects) ? portfolioProjects.length : 0,
       description: 'Projetos no portfólio',
       icon: '📁',
       color: 'blue'
     },
     {
       title: 'Depoimentos',
-      value: testimonials.length,
+      value: Array.isArray(testimonials) ? testimonials.length : 0,
       description: 'Avaliações de clientes',
       icon: '💬',
       color: 'green'
     },
     {
       title: 'Categorias',
-      value: [...new Set(portfolioProjects.map(p => p.category))].length,
+      value: Array.isArray(portfolioProjects) && portfolioProjects.length > 0 
+        ? [...new Set(portfolioProjects.map(p => p.category))].length 
+        : 0,
       description: 'Áreas de atuação',
       icon: '🏷️',
       color: 'purple'
     },
     {
       title: 'Média de Avaliação',
-      value: testimonials.length > 0 
-        ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1)
+      value: Array.isArray(testimonials) && testimonials.length > 0
+        ? (testimonials.reduce((sum, t) => sum + (t.rating || 0), 0) / testimonials.length).toFixed(1)
         : '0.0',
       description: 'Estrelas de satisfação',
       icon: '⭐',
@@ -87,7 +89,7 @@ const UserDashboard = () => {
     }
   ];
 
-  const recentProjects = portfolioProjects.slice(0, 3);
+  const recentProjects = Array.isArray(portfolioProjects) ? portfolioProjects.slice(0, 3) : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
