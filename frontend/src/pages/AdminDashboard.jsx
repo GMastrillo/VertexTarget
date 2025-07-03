@@ -2,7 +2,7 @@
  * Admin Dashboard - Painel administrativo principal
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -17,71 +17,10 @@ const AdminDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [isLoading, setIsLoading] = useState(true);
-  
-  // Get fetchProjects and fetchTestimonials functions from stores
-  const fetchProjects = usePortfolioStore((state) => state.fetchProjects);
-  const fetchTestimonials = useTestimonialsStore((state) => state.fetchTestimonials);
-
-  // Load data when component mounts
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setIsLoading(true);
-        if (fetchProjects) await fetchProjects();
-        if (fetchTestimonials) await fetchTestimonials();
-      } catch (error) {
-        console.error('Error loading data:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    loadData();
-  }, [fetchProjects, fetchTestimonials]);
 
   // Stores para estatísticas
-  const portfolioStats = usePortfolioStore((state) => {
-    try {
-      return state.getStats ? state.getStats() : {
-        totalProjects: 0,
-        categories: [],
-        lastFetch: 'Nunca',
-        cacheValid: false,
-        cacheExpiry: 'N/A'
-      };
-    } catch (error) {
-      console.error('Error getting portfolio stats:', error);
-      return {
-        totalProjects: 0,
-        categories: [],
-        lastFetch: 'Nunca',
-        cacheValid: false,
-        cacheExpiry: 'N/A'
-      };
-    }
-  });
-  
-  const testimonialsStats = useTestimonialsStore((state) => {
-    try {
-      return state.getStats ? state.getStats() : {
-        totalTestimonials: 0,
-        averageRating: 0,
-        lastFetch: 'Nunca',
-        cacheValid: false,
-        cacheExpiry: 'N/A'
-      };
-    } catch (error) {
-      console.error('Error getting testimonials stats:', error);
-      return {
-        totalTestimonials: 0,
-        averageRating: 0,
-        lastFetch: 'Nunca',
-        cacheValid: false,
-        cacheExpiry: 'N/A'
-      };
-    }
-  });
+  const portfolioStats = usePortfolioStore((state) => state.getStats());
+  const testimonialsStats = useTestimonialsStore((state) => state.getStats());
 
   const handleLogout = async () => {
     await logout();
@@ -156,14 +95,6 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {isLoading ? (
-          <div className="flex items-center justify-center h-64">
-            <div className="text-center">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mb-4"></div>
-              <p className="text-gray-300">Carregando dados...</p>
-            </div>
-          </div>
-        ) : (
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {/* Navigation Tabs */}
           <TabsList className="grid w-full grid-cols-3 bg-gray-800 border border-gray-700">

@@ -28,13 +28,8 @@ export const AuthProvider = ({ children }) => {
         setUser(userData);
       } catch (err) {
         console.error('Error parsing saved user data:', err);
-        // Don't remove token and user data, just log the error
-        // This allows the authentication to still work even if user data is invalid
-        // We'll set a default user object instead
-        setUser({
-          email: 'admin@vertextarget.com',
-          full_name: 'Administrator'
-        });
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
       }
     }
     setLoading(false);
