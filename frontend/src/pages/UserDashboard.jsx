@@ -15,6 +15,8 @@ const UserDashboard = () => {
   const navigate = useNavigate();
   const [portfolioProjects, setPortfolioProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Stores para dados
   const fetchProjects = usePortfolioStore((state) => state.fetchProjects);
@@ -24,12 +26,23 @@ const UserDashboard = () => {
     // Carrega dados quando o componente monta
     const loadData = async () => {
       try {
+        setIsLoading(true);
+        setError(null);
+        
         const projects = await fetchProjects();
         const reviews = await fetchTestimonials();
-        setPortfolioProjects(projects || []);
-        setTestimonials(reviews || []);
+        
+        // Garante que sempre temos arrays válidos
+        setPortfolioProjects(Array.isArray(projects) ? projects : []);
+        setTestimonials(Array.isArray(reviews) ? reviews : []);
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
+        setError('Erro ao carregar dados. Tente novamente mais tarde.');
+        // Define arrays vazios em caso de erro
+        setPortfolioProjects([]);
+        setTestimonials([]);
+      } finally {
+        setIsLoading(false);
       }
     };
 
