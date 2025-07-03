@@ -509,8 +509,18 @@ async def login_user(user_credentials: UserLogin):
             headers={"WWW-Authenticate": "Bearer"},
         )
     
+    # Criar objeto User com os dados do banco
+    user = User(
+        id=user_data["id"],
+        email=user_data["email"],
+        full_name=user_data["full_name"],
+        role=user_data.get("role", "user"),  # Default para 'user' se não existir
+        is_active=user_data.get("is_active", True),
+        created_at=user_data.get("created_at", datetime.utcnow())
+    )
+    
     access_token = create_access_token(data={"sub": user_data["id"]})
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "user": user}
 
 # Portfolio Routes
 @api_router.get("/portfolio", response_model=List[PortfolioItem])
