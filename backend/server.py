@@ -847,8 +847,10 @@ async def get_cache_health():
 app.include_router(api_router)
 
 # Lista de origens permitidas
+
 origins = [
     "https://vertex-target.vercel.app",
+    "https://*.vercel.app",  # <--- ADICIONE ESTA LINHA PARA PERMITIR SUBDOMÍNIOS DO VERCEL
     "http://localhost:3000",
     "http://localhost:5173",
 ]
