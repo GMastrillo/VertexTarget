@@ -274,9 +274,10 @@ const AdminDashboard = () => {
                     <p className="text-gray-400">Expira em: {testimonialsStats?.cacheExpiry || 'N/A'}</p>
                   </div>
                 </div>
-              )}
               </CardContent>
             </Card>
+            </>
+            )}
           </TabsContent>
 
           {/* Portfolio Management Tab */}
