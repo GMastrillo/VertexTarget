@@ -52,31 +52,31 @@ const AdminDashboard = () => {
   const statsCards = [
     {
       title: 'Projetos do Portfólio',
-      value: portfolioStats.totalProjects,
-      description: `${portfolioStats.categories.length} categorias`,
+      value: portfolioStats?.totalProjects || 0,
+      description: `${portfolioStats?.categories?.length || 0} categorias`,
       icon: '📁',
       color: 'purple'
     },
     {
       title: 'Depoimentos',
-      value: testimonialsStats.totalTestimonials,
-      description: `Média: ${testimonialsStats.averageRating} ⭐`,
+      value: testimonialsStats?.totalTestimonials || 0,
+      description: `Média: ${testimonialsStats?.averageRating || '0.0'} ⭐`,
       icon: '💬',
       color: 'indigo'
     },
     {
       title: 'Cache Portfolio',
-      value: portfolioStats.cacheValid ? 'Ativo' : 'Expirado',
-      description: portfolioStats.lastFetch,
+      value: portfolioStats?.cacheValid ? 'Ativo' : 'Expirado',
+      description: portfolioStats?.lastFetch || 'Nunca carregado',
       icon: '⚡',
-      color: portfolioStats.cacheValid ? 'green' : 'orange'
+      color: portfolioStats?.cacheValid ? 'green' : 'orange'
     },
     {
       title: 'Cache Depoimentos',
-      value: testimonialsStats.cacheValid ? 'Ativo' : 'Expirado',
-      description: testimonialsStats.lastFetch,
+      value: testimonialsStats?.cacheValid ? 'Ativo' : 'Expirado',
+      description: testimonialsStats?.lastFetch || 'Nunca carregado',
       icon: '📦',
-      color: testimonialsStats.cacheValid ? 'green' : 'orange'
+      color: testimonialsStats?.cacheValid ? 'green' : 'orange'
     }
   ];
 
