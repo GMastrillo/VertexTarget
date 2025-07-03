@@ -22,7 +22,28 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+# Tentar múltiplas variáveis de ambiente para a URL do MongoDB
+MONGO_URL = None
+possible_env_vars = [
+    "MONGO_DB_CONNECTION_STRING",
+    "MONGODB_URI", 
+    "DATABASE_URL",
+    "MONGO_URL", # Manter esta para compatibilidade, mas as outras têm prioridade
+    "MONGODB_CONNECTION_STRING"
+]
+
+for var_name in possible_env_vars:
+    value = os.getenv(var_name)
+    if value and not MONGO_URL:
+        MONGO_URL = value
+        break # Encontrou, pode parar de procurar
+
+if not MONGO_URL:
+    # Fallback para localhost se nenhuma variável de ambiente for encontrada (apenas para dev local)
+    MONGO_URL = "mongodb://localhost:27017" 
+    print("⚠️  Aviso: Nenhuma variável de ambiente MONGO_URL encontrada, usando localhost. Isso pode falhar em produção.")
+
+mongo_url = MONGO_URL
 db_name = os.environ.get('DB_NAME', 'vertextarget_db')
 
 
