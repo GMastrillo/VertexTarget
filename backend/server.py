@@ -255,7 +255,7 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
     full_name: str
-    role: str = Field(default="user", regex="^(admin|user)$")
+    role: str = Field(default="user", pattern="^(admin|user)$")
     
     @validator('password')
     def validate_password(cls, v):
@@ -277,7 +277,7 @@ class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     email: EmailStr
     full_name: str
-    role: str = Field(default="user", regex="^(admin|user)$")
+    role: str = Field(default="user", pattern="^(admin|user)$")
     is_active: bool = True
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
