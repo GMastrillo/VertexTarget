@@ -100,8 +100,9 @@ const AdminDashboard = () => {
             {/* User Info e Logout */}
             <div className="flex items-center space-x-4">
               <div className="text-right">
-                <p className="text-white font-semibold">{user?.full_name}</p>
-                <p className="text-gray-400 text-sm">{user?.email}</p>
+                <p className="text-white font-semibold">{user?.full_name || 'Administrador'}</p>
+                <p className="text-gray-400 text-sm">{user?.email || 'admin@vertextarget.com'}</p>
+                <Badge variant="secondary" className="mt-1 text-xs">{user?.role || 'admin'}</Badge>
               </div>
               <Button
                 onClick={handleLogout}
