@@ -6,7 +6,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login, isAuthenticated, error, setError } = useAuth();
+  const { login, isAuthenticated, error, setError, user, getDashboardRoute } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -15,9 +15,10 @@ const LoginPage = () => {
     setError(null);
   }, [setError]);
 
-  // If already authenticated, redirect to admin dashboard
+  // If already authenticated, redirect to appropriate dashboard
   if (isAuthenticated()) {
-    const from = location.state?.from?.pathname || '/admin';
+    const dashboardRoute = getDashboardRoute(user?.role);
+    const from = location.state?.from?.pathname || dashboardRoute;
     return <Navigate to={from} replace />;
   }
 
@@ -28,8 +29,9 @@ const LoginPage = () => {
     const result = await login(email, password);
     
     if (result.success) {
-      // Redirect to intended page or admin dashboard
-      const from = location.state?.from?.pathname || '/admin';
+      // Redirect based on user role
+      const dashboardRoute = getDashboardRoute(result.user.role);
+      const from = location.state?.from?.pathname || dashboardRoute;
       navigate(from, { replace: true });
     }
     
