@@ -201,14 +201,14 @@ const UserDashboard = () => {
                     <div key={index} className="flex items-center space-x-3 p-3 bg-gray-800/50 rounded-lg">
                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex-shrink-0 flex items-center justify-center">
                         <span className="text-white text-xs font-bold">
-                          {project.category.substring(0, 2).toUpperCase()}
+                          {project?.category?.substring(0, 2).toUpperCase() || 'PR'}
                         </span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-white font-medium text-sm truncate">{project.title}</p>
-                        <p className="text-gray-400 text-xs">{project.category}</p>
+                        <p className="text-white font-medium text-sm truncate">{project?.title || 'Projeto'}</p>
+                        <p className="text-gray-400 text-xs">{project?.category || 'Categoria'}</p>
                         <Badge variant="outline" className="mt-1 text-xs border-blue-500/50 text-blue-300">
-                          {project.metric}
+                          {project?.metric || 'Métrica'}
                         </Badge>
                       </div>
                     </div>
@@ -294,6 +294,8 @@ const UserDashboard = () => {
             </CardContent>
           </Card>
         </div>
+        </>
+        )}
       </div>
     </div>
   );
