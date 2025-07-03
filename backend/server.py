@@ -553,7 +553,12 @@ async def register_user(user_data: UserCreate):
     # Criar token de acesso
     access_token = create_access_token(data={"sub": new_user.id})
     
-    return {"access_token": access_token, "token_type": "bearer", "user": new_user}
+    # Retornar resposta com estrutura Token
+    return Token(
+        access_token=access_token,
+        token_type="bearer",
+        user=new_user
+    )
 
 # Admin Users Management Routes
 @api_router.get("/admin/users", response_model=List[User])
