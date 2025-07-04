@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { AdminLayout } from './AdminLayout'; // Importado AdminLayout
 
 const ProtectedRoute = ({ children, requiredRole = null }) => {
   const { isAuthenticated, loading, user } = useAuth();
@@ -30,6 +31,14 @@ const ProtectedRoute = ({ children, requiredRole = null }) => {
     return <Navigate to={userDashboard} replace />;
   }
 
+  // Se o usuário está autenticado e tem o role correto, renderiza o conteúdo
+  // Se for um admin, envolve o conteúdo com AdminLayout
+  if (requiredRole === 'admin') {
+    // Aqui, o AdminLayout envolverá os children (que é o AdminDashboard)
+    return <AdminLayout>{children}</AdminLayout>;
+  }
+
+  // Para outros roles (ex: 'user'), apenas renderiza os children diretamente
   return children;
 };
 
