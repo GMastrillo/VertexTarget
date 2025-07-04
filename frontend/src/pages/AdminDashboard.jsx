@@ -18,44 +18,42 @@ const AdminDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Os estados isLoading e error são agora primariamente gerenciados pelos stores.
+  // Vamos usar os estados isLoading e error diretamente dos stores para a renderização.
   const isMounted = useRef(true); // Flag para verificar se o componente está montado
 
-  // Stores para estatísticas
-  // Estes são getters do Zustand, eles não disparam requisições por si só
-  const portfolioStats = usePortfolioStore((state) => state.getStats());
-  const testimonialsStats = useTestimonialsStore((state) => state.getStats());
+  // Stores para estatísticas e estados de carregamento/erro
+  const portfolioStore = usePortfolioStore();
+  const testimonialsStore = useTestimonialsStore();
+
+  // Desestruturar estados e ações dos stores
+  const { projects, isLoading: portfolioLoading, error: portfolioError, fetchProjects } = portfolioStore;
+  const { testimonials, isLoading: testimonialsLoading, error: testimonialsError, fetchTestimonials } = testimonialsStore;
+
+  // Combinar estados de loading e erro para o dashboard
+  const isLoading = portfolioLoading || testimonialsLoading;
+  const error = portfolioError || testimonialsError;
 
   // Carrega dados quando o componente monta
   useEffect(() => {
     isMounted.current = true; // Marca o componente como montado no início do efeito
 
-    const loadData = async () => {
-      try {
-        if (isMounted.current) setIsLoading(true); // Só atualiza o estado se o componente ainda estiver montado
-        if (isMounted.current) setError(null); // Só atualiza o estado se o componente ainda estiver montado
-        
-        // Força o carregamento dos dados para garantir que as estatísticas estejam atualizadas
-        // Estas chamadas de fetchProjects e fetchTestimonials são as que podem causar o erro
-        // se o componente for desmontado antes delas concluírem.
-        await usePortfolioStore.getState().fetchProjects();
-        await useTestimonialsStore.getState().fetchTestimonials();
-      } catch (error) {
-        console.error('Erro ao carregar dados do admin:', error);
-        if (isMounted.current) setError('Erro ao carregar dados. Tente novamente mais tarde.'); // Só atualiza o estado se o componente ainda estiver montado
-      } finally {
-        if (isMounted.current) setIsLoading(false); // Só atualiza o estado se o componente ainda estiver montado
-      }
+    const loadInitialData = async () => {
+      // As chamadas fetchProjects e fetchTestimonials já gerenciam seus próprios loadings e erros
+      // e atualizam o estado do store. Não precisamos de try/catch/finally aqui
+      // para setar isLoading/error do componente, pois já vem dos stores.
+      // Apenas precisamos disparar as ações.
+      await fetchProjects();
+      await fetchTestimonials();
     };
 
-    loadData();
+    loadInitialData();
 
     // Função de cleanup: executa quando o componente é desmontado
     return () => {
       isMounted.current = false; // Marca o componente como desmontado
     };
-  }, []); // Dependências vazias para rodar apenas uma vez na montagem
+  }, [fetchProjects, fetchTestimonials]); // Dependências: as funções de fetch dos stores
 
   const handleLogout = async () => {
     await logout();
@@ -65,31 +63,31 @@ const AdminDashboard = () => {
   const statsCards = [
     {
       title: 'Projetos do Portfólio',
-      value: portfolioStats?.totalProjects || 0,
-      description: `${portfolioStats?.categories?.length || 0} categorias`,
+      value: projects?.length || 0, // Usar projects diretamente do store
+      description: `${[...new Set(projects?.map(p => p.category))].length || 0} categorias`,
       icon: '📁',
       color: 'purple'
     },
     {
       title: 'Depoimentos',
-      value: testimonialsStats?.totalTestimonials || 0,
-      description: `Média: ${testimonialsStats?.averageRating || '0.0'} ⭐`,
+      value: testimonials?.length || 0, // Usar testimonials diretamente do store
+      description: `Média: ${testimonials.length > 0 ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1) : '0.0'} ⭐`,
       icon: '💬',
       color: 'indigo'
     },
     {
       title: 'Cache Portfolio',
-      value: portfolioStats?.cacheValid ? 'Ativo' : 'Expirado',
-      description: portfolioStats?.lastFetch || 'Nunca carregado',
+      value: portfolioStore.isCacheValid() ? 'Ativo' : 'Expirado', // Usar isCacheValid do store
+      description: portfolioStore.lastFetch ? new Date(portfolioStore.lastFetch).toLocaleString() : 'Nunca carregado',
       icon: '⚡',
-      color: portfolioStats?.cacheValid ? 'green' : 'orange'
+      color: portfolioStore.isCacheValid() ? 'green' : 'orange'
     },
     {
       title: 'Cache Depoimentos',
-      value: testimonialsStats?.cacheValid ? 'Ativo' : 'Expirado',
-      description: testimonialsStats?.lastFetch || 'Nunca carregado',
+      value: testimonialsStore.isCacheValid() ? 'Ativo' : 'Expirado', // Usar isCacheValid do store
+      description: testimonialsStore.lastFetch ? new Date(testimonialsStore.lastFetch).toLocaleString() : 'N/A',
       icon: '📦',
-      color: testimonialsStats?.cacheValid ? 'green' : 'orange'
+      color: testimonialsStore.isCacheValid() ? 'green' : 'orange'
     }
   ];
 
@@ -219,11 +217,11 @@ const AdminDashboard = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Total de projetos:</span>
-                      <Badge variant="secondary">{portfolioStats?.totalProjects || 0}</Badge>
+                      <Badge variant="secondary">{projects?.length || 0}</Badge>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Categorias:</span>
-                      <Badge variant="secondary">{portfolioStats?.categories?.length || 0}</Badge>
+                      <Badge variant="secondary">{[...new Set(projects?.map(p => p.category))].length || 0}</Badge>
                     </div>
                     <Button 
                       onClick={() => setActiveTab('portfolio')}
@@ -250,11 +248,11 @@ const AdminDashboard = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Total de depoimentos:</span>
-                      <Badge variant="secondary">{testimonialsStats?.totalTestimonials || 0}</Badge>
+                      <Badge variant="secondary">{testimonials?.length || 0}</Badge>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Avaliação média:</span>
-                      <Badge variant="secondary">{testimonialsStats?.averageRating || '0.0'} ⭐</Badge>
+                      <Badge variant="secondary">{testimonials.length > 0 ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1) : '0.0'} ⭐</Badge>
                     </div>
                     <Button 
                       onClick={() => setActiveTab('testimonials')}
@@ -279,15 +277,15 @@ const AdminDashboard = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                   <div>
                     <h4 className="text-purple-400 font-semibold mb-2">Cache Portfolio</h4>
-                    <p className="text-gray-400 mb-1">Status: {portfolioStats?.cacheValid ? '✅ Ativo' : '❌ Expirado'}</p>
-                    <p className="text-gray-400 mb-1">Última atualização: {portfolioStats?.lastFetch || 'Nunca carregado'}</p>
-                    <p className="text-gray-400">Expira em: {portfolioStats?.cacheExpiry || 'N/A'}</p>
+                    <p className="text-gray-400 mb-1">Status: {portfolioStore.isCacheValid() ? '✅ Ativo' : '❌ Expirado'}</p>
+                    <p className="text-gray-400 mb-1">Última atualização: {portfolioStore.lastFetch ? new Date(portfolioStore.lastFetch).toLocaleString() : 'Nunca carregado'}</p>
+                    <p className="text-gray-400">Expira em: {portfolioStore.lastFetch ? new Date(portfolioStore.lastFetch + portfolioStore.CACHE_DURATION).toLocaleString() : 'N/A'}</p>
                   </div>
                   <div>
                     <h4 className="text-indigo-400 font-semibold mb-2">Cache Depoimentos</h4>
-                    <p className="text-gray-400 mb-1">Status: {testimonialsStats?.cacheValid ? '✅ Ativo' : '❌ Expirado'}</p>
-                    <p className="text-gray-400 mb-1">Última atualização: {testimonialsStats?.lastFetch || 'Nunca carregado'}</p>
-                    <p className="text-gray-400">Expira em: {testimonialsStats?.cacheExpiry || 'N/A'}</p>
+                    <p className="text-gray-400 mb-1">Status: {testimonialsStore.isCacheValid() ? '✅ Ativo' : '❌ Expirado'}</p>
+                    <p className="text-gray-400 mb-1">Última atualização: {testimonialsStore.lastFetch ? new Date(testimonialsStore.lastFetch).toLocaleString() : 'Nunca carregado'}</p>
+                    <p className="text-gray-400">Expira em: {testimonialsStore.lastFetch ? new Date(testimonialsStore.lastFetch + testimonialsStore.CACHE_DURATION).toLocaleString() : 'N/A'}</p>
                   </div>
                 </div>
               </CardContent>
