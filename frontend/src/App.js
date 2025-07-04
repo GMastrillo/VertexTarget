@@ -17,10 +17,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "./components/ui/toaster";
 import { UserCircle2 } from 'lucide-react'; // Ícone de usuário
 // Importar os componentes de gerenciamento para as rotas aninhadas
-import { AdminLayout } from "./components/AdminLayout";
-import PortfolioManager from "./components/admin/PortfolioManager"; // <--- ALTERADO
-import TestimonialsManager from "./components/admin/TestimonialsManager"; // <--- ALTERADO
-import UsersManager from "./components/admin/UsersManager"; // <--- ALTERADO
+import { AdminLayout } from "./components/AdminLayout"; // Importar AdminLayout
+import PortfolioManager from "./components/admin/PortfolioManager"; // <--- AGORA CORRETO: Default import
+import TestimonialsManager from "./components/admin/TestimonialsManager"; // <--- AGORA CORRETO: Default import
+import UsersManager from "./components/admin/UsersManager"; // <--- AGORA CORRETO: Default import
 
 // Navigation Component
 const Navigation = () => {
@@ -212,15 +212,14 @@ function App() {
               path="/admin" 
               element={
                 <ProtectedRoute requiredRole="admin">
-                  {/* Removido AdminDashboard aqui */}
                   <AdminLayout /> {/* AdminLayout agora é o elemento principal da rota /admin */}
                 </ProtectedRoute>
               } 
             >
               {/* Rotas aninhadas para o Admin Dashboard */}
               <Route index element={<AdminDashboard />} /> {/* Conteúdo padrão para /admin */}
-              <Route path="portfolio" element={<AdminPortfolio />} /> {/* /admin/portfolio */}
-              <Route path="testimonials" element={<AdminTestimonials />} /> {/* /admin/testimonials */}
+              <Route path="portfolio" element={<PortfolioManager />} /> {/* /admin/portfolio */}
+              <Route path="testimonials" element={<TestimonialsManager />} /> {/* /admin/testimonials */}
               <Route path="users" element={<UsersManager />} /> {/* /admin/users */}
             </Route>
             
