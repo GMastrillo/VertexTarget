@@ -2,27 +2,30 @@
  * Admin Dashboard - Painel administrativo principal
  */
 
-import React, { useState, useEffect, useRef } from 'react'; // Adicionado useEffect e useRef
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+// Removidas as importações de Tabs, TabsContent, TabsList, TabsTrigger
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'; 
 import { useAuth } from '../contexts/AuthContext';
 import { usePortfolioStore, useTestimonialsStore } from '../stores';
-import PortfolioManager from '../components/admin/PortfolioManager';
-import TestimonialsManager from '../components/admin/TestimonialsManager';
-import UsersManager from '../components/admin/UsersManager';
+// Os componentes de gerenciamento serão renderizados via rotas aninhadas, não mais por TabsContent aqui
+// import PortfolioManager from '../components/admin/PortfolioManager'; 
+// import TestimonialsManager from '../components/admin/TestimonialsManager'; 
+// import UsersManager from '../components/admin/UsersManager'; 
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('dashboard');
-  // Os estados isLoading e error são agora primariamente gerenciados pelos stores.
-  // Vamos usar os estados isLoading e error diretamente dos stores para a renderização.
+  // Removido o estado activeTab, pois não haverá abas no dashboard principal
+  // const [activeTab, setActiveTab] = useState('dashboard'); 
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const isMounted = useRef(true); // Flag para verificar se o componente está montado
 
-  // Stores para estatísticas e estados de carregamento/erro
+  // Stores para estatísticas
   const portfolioStore = usePortfolioStore();
   const testimonialsStore = useTestimonialsStore();
 
@@ -31,8 +34,8 @@ const AdminDashboard = () => {
   const { testimonials, isLoading: testimonialsLoading, error: testimonialsError, fetchTestimonials } = testimonialsStore;
 
   // Combinar estados de loading e erro para o dashboard
-  const isLoading = portfolioLoading || testimonialsLoading;
-  const error = portfolioError || testimonialsError;
+  const isLoadingCombined = portfolioLoading || testimonialsLoading; // Renomeado para evitar conflito com o estado local
+  const errorCombined = portfolioError || testimonialsError; // Renomeado para evitar conflito com o estado local
 
   // Carrega dados quando o componente monta
   useEffect(() => {
@@ -40,11 +43,12 @@ const AdminDashboard = () => {
 
     const loadInitialData = async () => {
       // As chamadas fetchProjects e fetchTestimonials já gerenciam seus próprios loadings e erros
-      // e atualizam o estado do store. Não precisamos de try/catch/finally aqui
-      // para setar isLoading/error do componente, pois já vem dos stores.
-      // Apenas precisamos disparar as ações.
       await fetchProjects();
       await fetchTestimonials();
+      // O estado isLoading e error do componente AdminDashboard será baseado nos stores
+      if (isMounted.current) {
+        setIsLoading(false); // Define o loading local como false após as chamadas dos stores
+      }
     };
 
     loadInitialData();
@@ -60,31 +64,35 @@ const AdminDashboard = () => {
     navigate('/');
   };
 
+  // Usar isLoadingCombined e errorCombined para a renderização do dashboard
+  const currentLoadingState = isLoadingCombined || isLoading; // Combina loading do store com o loading local inicial
+  const currentErrorState = errorCombined || error; // Combina erro do store com o erro local
+
   const statsCards = [
     {
       title: 'Projetos do Portfólio',
-      value: projects?.length || 0, // Usar projects diretamente do store
+      value: projects?.length || 0,
       description: `${[...new Set(projects?.map(p => p.category))].length || 0} categorias`,
       icon: '📁',
       color: 'purple'
     },
     {
       title: 'Depoimentos',
-      value: testimonials?.length || 0, // Usar testimonials diretamente do store
+      value: testimonials?.length || 0,
       description: `Média: ${testimonials.length > 0 ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1) : '0.0'} ⭐`,
       icon: '💬',
       color: 'indigo'
     },
     {
       title: 'Cache Portfolio',
-      value: portfolioStore.isCacheValid() ? 'Ativo' : 'Expirado', // Usar isCacheValid do store
+      value: portfolioStore.isCacheValid() ? 'Ativo' : 'Expirado',
       description: portfolioStore.lastFetch ? new Date(portfolioStore.lastFetch).toLocaleString() : 'Nunca carregado',
       icon: '⚡',
       color: portfolioStore.isCacheValid() ? 'green' : 'orange'
     },
     {
       title: 'Cache Depoimentos',
-      value: testimonialsStore.isCacheValid() ? 'Ativo' : 'Expirado', // Usar isCacheValid do store
+      value: testimonialsStore.isCacheValid() ? 'Ativo' : 'Expirado',
       description: testimonialsStore.lastFetch ? new Date(testimonialsStore.lastFetch).toLocaleString() : 'N/A',
       icon: '📦',
       color: testimonialsStore.isCacheValid() ? 'green' : 'orange'
@@ -93,11 +101,10 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
-      {/* Header */}
-      <div className="bg-gray-900/90 border-b border-gray-700 backdrop-blur-sm sticky top-0 z-50">
+      {/* O Header foi movido para AdminLayout.jsx */}
+      {/* <div className="bg-gray-900/90 border-b border-gray-700 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            {/* Logo e Title */}
             <div className="flex items-center space-x-4">
               <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold">VT</span>
@@ -107,8 +114,6 @@ const AdminDashboard = () => {
                 <p className="text-gray-400 text-sm">VERTEX TARGET</p>
               </div>
             </div>
-
-            {/* User Info e Logout */}
             <div className="flex items-center space-x-4">
               <div className="text-right">
                 <p className="text-white font-semibold">{user?.full_name || 'Administrador'}</p>
@@ -125,12 +130,12 @@ const AdminDashboard = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          {/* Navigation Tabs */}
+        {/* Removidas as Tabs de navegação superior */}
+        {/* <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4 bg-gray-800 border border-gray-700">
             <TabsTrigger value="dashboard" className="data-[state=active]:bg-purple-600">
               📊 Dashboard
@@ -144,12 +149,13 @@ const AdminDashboard = () => {
             <TabsTrigger value="users" className="data-[state=active]:bg-purple-600">
               👥 Usuários
             </TabsTrigger>
-          </TabsList>
+          </TabsList> */}
 
-          {/* Dashboard Tab */}
-          <TabsContent value="dashboard" className="space-y-8">
+          {/* Conteúdo do Dashboard - Agora renderizado diretamente */}
+          {/* O TabsContent para 'dashboard' agora é o conteúdo principal */}
+          <div className="space-y-8"> {/* Mantido o div para o espaçamento */}
             {/* Loading State */}
-            {isLoading && (
+            {currentLoadingState && (
               <div className="text-center py-12">
                 <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mb-4"></div>
                 <p className="text-gray-400">Carregando informações administrativas...</p>
@@ -157,14 +163,14 @@ const AdminDashboard = () => {
             )}
 
             {/* Error State */}
-            {error && (
+            {currentErrorState && (
               <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                <p className="text-red-400 text-center">{error}</p>
+                <p className="text-red-400 text-center">{currentErrorState}</p>
               </div>
             )}
 
             {/* Content - Only show when not loading */}
-            {!isLoading && (
+            {!currentLoadingState && (
               <>
             {/* Welcome */}
             <div className="text-center">
@@ -223,8 +229,9 @@ const AdminDashboard = () => {
                       <span className="text-gray-400">Categorias:</span>
                       <Badge variant="secondary">{[...new Set(projects?.map(p => p.category))].length || 0}</Badge>
                     </div>
+                    {/* Botão para navegar para a rota de Portfólio */}
                     <Button 
-                      onClick={() => setActiveTab('portfolio')}
+                      onClick={() => navigate('/admin/portfolio')} // Usa navigate para ir para a rota
                       className="w-full bg-purple-600 hover:bg-purple-700"
                     >
                       Gerenciar Projetos
@@ -254,8 +261,9 @@ const AdminDashboard = () => {
                       <span className="text-gray-400">Avaliação média:</span>
                       <Badge variant="secondary">{testimonials.length > 0 ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1) : '0.0'} ⭐</Badge>
                     </div>
+                    {/* Botão para navegar para a rota de Depoimentos */}
                     <Button 
-                      onClick={() => setActiveTab('testimonials')}
+                      onClick={() => navigate('/admin/testimonials')} // Usa navigate para ir para a rota
                       className="w-full bg-indigo-600 hover:bg-indigo-700"
                     >
                       Gerenciar Depoimentos
@@ -292,23 +300,19 @@ const AdminDashboard = () => {
             </Card>
             </>
             )}
-          </TabsContent>
+          </div> {/* Fim do div que envolve o conteúdo principal do dashboard */}
 
-          {/* Portfolio Management Tab */}
-          <TabsContent value="portfolio">
+          {/* Removidos os TabsContent para as outras abas, pois agora são rotas */}
+          {/* <TabsContent value="portfolio">
             <PortfolioManager />
           </TabsContent>
-
-          {/* Testimonials Management Tab */}
           <TabsContent value="testimonials">
             <TestimonialsManager />
           </TabsContent>
-
-          {/* Users Management Tab */}
           <TabsContent value="users">
             <UsersManager />
           </TabsContent>
-        </Tabs>
+        </Tabs> */}
       </div>
     </div>
   );
