@@ -29,6 +29,11 @@ const sidebarItems = [
     href: '/admin/testimonials',
     icon: MessageSquare,
   },
+  { // Adicionado Usuários à navegação da sidebar
+    title: 'Usuários',
+    href: '/admin/users',
+    icon: MessageSquare, // Ou um ícone de usuário
+  },
 ];
 
 function SidebarContent({ className = "", onCloseSheet }) {
@@ -59,7 +64,11 @@ function SidebarContent({ className = "", onCloseSheet }) {
       <nav className="flex-1 p-4 space-y-2">
         {sidebarItems.map((item) => {
           const Icon = item.icon;
-          const isActive = location.pathname === item.href;
+          // location.pathname pode ser '/admin' ou '/admin/portfolio'
+          // item.href é o link da sidebar
+          // Ativa se o caminho atual começa com o href do item
+          const isActive = location.pathname.startsWith(item.href) && 
+                           (location.pathname === item.href || item.href === '/admin');
           
           return (
             <Link
@@ -103,7 +112,7 @@ function SidebarContent({ className = "", onCloseSheet }) {
   );
 }
 
-export function AdminLayout({ children }) { // AdminLayout agora recebe children como prop
+export function AdminLayout() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
@@ -130,7 +139,7 @@ export function AdminLayout({ children }) { // AdminLayout agora recebe children
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto bg-gray-900 text-white">
         <div className="p-6 lg:p-8">
-          {children} {/* <--- ALTERADO DE <Outlet /> PARA {children} */}
+          <Outlet /> {/* <--- ALTERADO DE {children} PARA <Outlet /> NOVAMENTE */}
         </div>
       </main>
     </div>
