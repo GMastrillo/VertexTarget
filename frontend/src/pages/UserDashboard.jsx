@@ -2,66 +2,59 @@
  * User Dashboard - Painel para usuários comuns
  */
 
-import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
-import { useNavigate } from 'react-router-dom'; // Mantido useNavigate para o botão "Ver Site Principal"
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { useAuth } from '../contexts/AuthContext'; // Mantido useAuth para user info
+import { useAuth } from '../contexts/AuthContext';
 import { usePortfolioStore, useTestimonialsStore } from '../stores';
 
 const UserDashboard = () => {
-  const { user } = useAuth(); // Apenas user, logout será no UserLayout
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [portfolioProjects, setPortfolioProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const isMounted = useRef(true); // Flag para verificar se o componente está montado
+  const isMounted = useRef(true);
 
-  // Stores para dados
   const fetchProjects = usePortfolioStore((state) => state.fetchProjects);
   const fetchTestimonials = useTestimonialsStore((state) => state.fetchTestimonials);
 
   useEffect(() => {
-    isMounted.current = true; // Componente montado
+    isMounted.current = true;
 
-    // Carrega dados quando o componente monta
     const loadData = async () => {
       try {
-        if (isMounted.current) setIsLoading(true); // Só atualiza o estado se o componente ainda estiver montado
-        if (isMounted.current) setError(null); // Só atualiza o estado se o componente ainda estiver montado
+        if (isMounted.current) setIsLoading(true);
+        if (isMounted.current) setError(null);
         
         const projects = await fetchProjects();
         const reviews = await fetchTestimonials();
         
-        // Garante que sempre temos arrays válidos
-        if (isMounted.current) { // Só atualiza o estado se o componente ainda estiver montado
+        if (isMounted.current) {
           setPortfolioProjects(Array.isArray(projects) ? projects : []);
           setTestimonials(Array.isArray(reviews) ? reviews : []);
         }
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
-        if (isMounted.current) { // Só atualiza o estado se o componente ainda estiver montado
+        if (isMounted.current) {
           setError('Erro ao carregar dados. Tente novamente mais tarde.');
-          // Define arrays vazios em caso de erro
           setPortfolioProjects([]);
           setTestimonials([]);
         }
       } finally {
-        if (isMounted.current) setIsLoading(false); // Só atualiza o estado se o componente ainda estiver montado
+        if (isMounted.current) setIsLoading(false);
       }
     };
 
     loadData();
 
-    // Função de cleanup: executa quando o componente é desmontado
     return () => {
-      isMounted.current = false; // Marca o componente como desmontado
+      isMounted.current = false;
     };
-  }, [fetchProjects, fetchTestimonials]); // Dependências do useEffect
-
-  // handleLogout removido, será tratado no UserLayout
+  }, [fetchProjects, fetchTestimonials]);
 
   const statsCards = [
     {
@@ -101,40 +94,9 @@ const UserDashboard = () => {
   const recentProjects = Array.isArray(portfolioProjects) ? portfolioProjects.slice(0, 3) : [];
 
   return (
-    // Removido o min-h-screen e o bg-gradient-to-br, pois o layout pai já define isso
-    <div className="max-w-7xl mx-auto px-6 py-8"> {/* Ajustado para ser o conteúdo interno do layout */}
-      {/* Header removido, agora no UserLayout */}
-      {/* <div className="bg-gray-900/90 border-b border-gray-700 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">VT</span>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-white">Dashboard do Usuário</h1>
-                <p className="text-gray-400 text-sm">VERTEX TARGET</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="text-right">
-                <p className="text-white font-semibold">{user?.full_name}</p>
-                <p className="text-gray-400 text-sm">{user?.email}</p>
-                <Badge variant="secondary" className="mt-1 text-xs">{user?.role}</Badge>
-              </div>
-              <Button
-                onClick={handleLogout}
-                variant="outline"
-                className="border-gray-700 text-gray-300 hover:bg-red-600 hover:text-white hover:border-red-600"
-              >
-                Sair 🚪
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Main Content - Agora é o conteúdo principal do Dashboard */}
+    // REMOVIDO O DIV EXTERNO QUE TINHA min-h-screen e bg-gradient-to-br
+    // E o header, pois o UserLayout já fornece isso.
+    <div className="max-w-7xl mx-auto px-6 py-8"> {/* Este div agora é o container principal do conteúdo */}
       {/* Welcome */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-black text-white mb-4">
