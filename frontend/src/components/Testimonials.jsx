@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
@@ -8,6 +8,7 @@ import { partners } from '../mockData'; // Mantemos partners como mock por enqua
 const Testimonials = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const isMounted = useRef(true); // Flag para verificar se o componente está montado
 
   // Zustand store
   const {
@@ -23,19 +24,39 @@ const Testimonials = () => {
 
   // Carregar depoimentos usando o store
   useEffect(() => {
-    fetchTestimonials();
+    isMounted.current = true; // Componente montado
+
+    const loadTestimonials = async () => {
+      try {
+        await fetchTestimonials();
+        // O estado `testimonials` é atualizado pelo store, então não precisamos de setItems aqui.
+        // Apenas garantimos que o fetchTestimonials é chamado.
+      } catch (err) {
+        // O erro já é tratado pelo store, mas podemos logar aqui se necessário
+        console.error("Erro ao carregar depoimentos no Testimonials.jsx:", err);
+      } finally {
+        // O isLoading é gerenciado pelo store, não precisamos de setLoading aqui.
+      }
+    };
+
+    loadTestimonials();
     
     // Debug: mostrar estatísticas do cache
     if (process.env.NODE_ENV === 'development') {
       console.log('📊 Testimonials Store Stats:', getStats());
     }
-  }, [fetchTestimonials, getStats]);
+
+    // Função de cleanup: executa quando o componente é desmontado
+    return () => {
+      isMounted.current = false; // Marca o componente como desmontado
+    };
+  }, [fetchTestimonials, getStats]); // Dependências do useEffect
 
   // Intersection Observer for scroll-triggered animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (isMounted.current && entry.isIntersecting) { // Verifica isMounted antes de atualizar o estado
           setIsVisible(true);
         }
       },
@@ -46,7 +67,12 @@ const Testimonials = () => {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+      isMounted.current = false; // Marca como desmontado também aqui
+    };
   }, []);
 
   // Auto-rotate testimonials
@@ -54,14 +80,18 @@ const Testimonials = () => {
     if (!isVisible || testimonials.length === 0) return;
     
     const interval = setInterval(() => {
-      nextTestimonial();
+      if (isMounted.current) { // Verifica isMounted antes de chamar a função do store
+        nextTestimonial();
+      }
     }, 5000);
 
     return () => clearInterval(interval);
   }, [isVisible, testimonials.length, nextTestimonial]);
 
   const handleTestimonialClick = (index) => {
-    setActiveTestimonial(index);
+    if (isMounted.current) { // Verifica isMounted antes de atualizar o estado
+      setActiveTestimonial(index);
+    }
   };
 
   const renderStars = (rating) => {
