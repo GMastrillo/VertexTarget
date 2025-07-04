@@ -2,7 +2,7 @@
  * User Dashboard - Painel para usuários comuns
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -17,37 +17,49 @@ const UserDashboard = () => {
   const [testimonials, setTestimonials] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isMounted = useRef(true); // Flag para verificar se o componente está montado
 
   // Stores para dados
   const fetchProjects = usePortfolioStore((state) => state.fetchProjects);
   const fetchTestimonials = useTestimonialsStore((state) => state.fetchTestimonials);
 
   useEffect(() => {
+    isMounted.current = true; // Componente montado
+
     // Carrega dados quando o componente monta
     const loadData = async () => {
       try {
-        setIsLoading(true);
-        setError(null);
+        if (isMounted.current) setIsLoading(true); // Só atualiza o estado se o componente ainda estiver montado
+        if (isMounted.current) setError(null); // Só atualiza o estado se o componente ainda estiver montado
         
         const projects = await fetchProjects();
         const reviews = await fetchTestimonials();
         
         // Garante que sempre temos arrays válidos
-        setPortfolioProjects(Array.isArray(projects) ? projects : []);
-        setTestimonials(Array.isArray(reviews) ? reviews : []);
+        if (isMounted.current) { // Só atualiza o estado se o componente ainda estiver montado
+          setPortfolioProjects(Array.isArray(projects) ? projects : []);
+          setTestimonials(Array.isArray(reviews) ? reviews : []);
+        }
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
-        setError('Erro ao carregar dados. Tente novamente mais tarde.');
-        // Define arrays vazios em caso de erro
-        setPortfolioProjects([]);
-        setTestimonials([]);
+        if (isMounted.current) { // Só atualiza o estado se o componente ainda estiver montado
+          setError('Erro ao carregar dados. Tente novamente mais tarde.');
+          // Define arrays vazios em caso de erro
+          setPortfolioProjects([]);
+          setTestimonials([]);
+        }
       } finally {
-        setIsLoading(false);
+        if (isMounted.current) setIsLoading(false); // Só atualiza o estado se o componente ainda estiver montado
       }
     };
 
     loadData();
-  }, [fetchProjects, fetchTestimonials]);
+
+    // Função de cleanup: executa quando o componente é desmontado
+    return () => {
+      isMounted.current = false; // Marca o componente como desmontado
+    };
+  }, [fetchProjects, fetchTestimonials]); // Dependências do useEffect
 
   const handleLogout = async () => {
     await logout();
