@@ -3,15 +3,15 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Mantido useNavigate para o botão "Ver Site Principal"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext'; // Mantido useAuth para user info
 import { usePortfolioStore, useTestimonialsStore } from '../stores';
 
 const UserDashboard = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth(); // Apenas user, logout será no UserLayout
   const navigate = useNavigate();
   const [portfolioProjects, setPortfolioProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
@@ -61,10 +61,7 @@ const UserDashboard = () => {
     };
   }, [fetchProjects, fetchTestimonials]); // Dependências do useEffect
 
-  const handleLogout = async () => {
-    await logout();
-    navigate('/');
-  };
+  // handleLogout removido, será tratado no UserLayout
 
   const statsCards = [
     {
@@ -104,12 +101,12 @@ const UserDashboard = () => {
   const recentProjects = Array.isArray(portfolioProjects) ? portfolioProjects.slice(0, 3) : [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
-      {/* Header */}
-      <div className="bg-gray-900/90 border-b border-gray-700 backdrop-blur-sm sticky top-0 z-50">
+    // Removido o min-h-screen e o bg-gradient-to-br, pois o layout pai já define isso
+    <div className="max-w-7xl mx-auto px-6 py-8"> {/* Ajustado para ser o conteúdo interno do layout */}
+      {/* Header removido, agora no UserLayout */}
+      {/* <div className="bg-gray-900/90 border-b border-gray-700 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            {/* Logo e Title */}
             <div className="flex items-center space-x-4">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold">VT</span>
@@ -119,8 +116,6 @@ const UserDashboard = () => {
                 <p className="text-gray-400 text-sm">VERTEX TARGET</p>
               </div>
             </div>
-
-            {/* User Info e Logout */}
             <div className="flex items-center space-x-4">
               <div className="text-right">
                 <p className="text-white font-semibold">{user?.full_name}</p>
@@ -137,38 +132,37 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
+      </div> */}
+
+      {/* Main Content - Agora é o conteúdo principal do Dashboard */}
+      {/* Welcome */}
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-black text-white mb-4">
+          Bem-vindo, <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">{user?.full_name || 'Usuário'}!</span>
+        </h2>
+        <p className="text-gray-400 max-w-2xl mx-auto">
+          Explore nosso portfólio de projetos e descubra como podemos ajudar sua empresa a alcançar novos patamares.
+        </p>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Welcome */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-black text-white mb-4">
-            Bem-vindo, <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">{user?.full_name || 'Usuário'}!</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Explore nosso portfólio de projetos e descubra como podemos ajudar sua empresa a alcançar novos patamares.
-          </p>
+      {/* Loading State */}
+      {isLoading && (
+        <div className="text-center py-12">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mb-4"></div>
+          <p className="text-gray-400">Carregando informações...</p>
         </div>
+      )}
 
-        {/* Loading State */}
-        {isLoading && (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mb-4"></div>
-            <p className="text-gray-400">Carregando informações...</p>
-          </div>
-        )}
+      {/* Error State */}
+      {error && (
+        <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+          <p className="text-red-400 text-center">{error}</p>
+        </div>
+      )}
 
-        {/* Error State */}
-        {error && (
-          <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-            <p className="text-red-400 text-center">{error}</p>
-          </div>
-        )}
-
-        {/* Content - Only show when not loading */}
-        {!isLoading && (
-          <>
+      {/* Content - Only show when not loading */}
+      {!isLoading && (
+        <>
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {statsCards.map((stat, index) => (
