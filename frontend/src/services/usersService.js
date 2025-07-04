@@ -171,7 +171,10 @@ export const updateUserProfile = async (userData, token) => {
   try {
     console.log('Atualizando perfil do usuário logado...');
     
-    const url = normalizeUrl(API_BASE_URL, '/api/users/profile'); // Endpoint para o próprio perfil
+    // ALTERAÇÃO PARA TESTE AGRESSIVO: Bypass normalizeUrl
+    // const url = normalizeUrl(API_BASE_URL, '/api/users/profile'); 
+    const url = `${API_BASE_URL}/api/users/profile`; // Construção direta para depurar a barra dupla
+
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
