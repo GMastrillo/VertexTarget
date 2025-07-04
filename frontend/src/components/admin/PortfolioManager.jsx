@@ -2,7 +2,7 @@
  * Portfolio Manager - Componente para gerenciamento completo do portfólio
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -16,10 +16,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { useAuth } from '../../contexts/AuthContext';
 import { getPortfolioProjects, createPortfolioProject, updatePortfolioProject, deletePortfolioProject } from '../../services/portfolioService';
 import { useToast } from '../../hooks/use-toast';
+import { Loader2 } from 'lucide-react'; // Adicionado Loader2 para o botão de exclusão
 
 const PortfolioManager = () => {
   const { token } = useAuth();
   const { toast } = useToast();
+  const isMounted = useRef(true); // Flag para verificar se o componente está montado
   
   // Estados principais
   const [projects, setProjects] = useState([]);
@@ -44,22 +46,30 @@ const PortfolioManager = () => {
 
   // Carregar projetos na inicialização
   useEffect(() => {
+    isMounted.current = true; // Componente montado
+
     loadProjects();
-  }, []);
+
+    return () => {
+      isMounted.current = false; // Função de cleanup: marca o componente como desmontado
+    };
+  }, []); // Dependências vazias para rodar apenas uma vez na montagem
 
   const loadProjects = async () => {
     try {
-      setLoading(true);
+      if (isMounted.current) setLoading(true);
       const data = await getPortfolioProjects();
-      setProjects(data);
+      if (isMounted.current) setProjects(data);
     } catch (error) {
-      toast({
-        title: "Erro ao carregar projetos",
-        description: error.message,
-        variant: "destructive",
-      });
+      if (isMounted.current) {
+        toast({
+          title: "Erro ao carregar projetos",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     } finally {
-      setLoading(false);
+      if (isMounted.current) setLoading(false);
     }
   };
 
@@ -151,7 +161,7 @@ const PortfolioManager = () => {
     if (!validateForm()) return;
 
     try {
-      setLoading(true);
+      if (isMounted.current) setLoading(true);
 
       // Preparar dados para envio
       const projectData = {
@@ -170,53 +180,65 @@ const PortfolioManager = () => {
       if (selectedProject) {
         // Atualizar projeto existente
         await updatePortfolioProject(selectedProject.id, projectData, token);
-        toast({
-          title: "Projeto atualizado",
-          description: "O projeto foi atualizado com sucesso!",
-        });
+        if (isMounted.current) {
+          toast({
+            title: "Projeto atualizado",
+            description: "O projeto foi atualizado com sucesso!",
+          });
+        }
       } else {
         // Criar novo projeto
         await createPortfolioProject(projectData, token);
-        toast({
-          title: "Projeto criado",
-          description: "O projeto foi criado com sucesso!",
-        });
+        if (isMounted.current) {
+          toast({
+            title: "Projeto criado",
+            description: "O projeto foi criado com sucesso!",
+          });
+        }
       }
 
-      setIsFormOpen(false);
-      resetForm();
-      loadProjects();
+      if (isMounted.current) {
+        setIsFormOpen(false);
+        resetForm();
+        loadProjects(); // Recarrega a lista de projetos após a operação
+      }
 
     } catch (error) {
-      toast({
-        title: "Erro ao salvar projeto",
-        description: error.message,
-        variant: "destructive",
-      });
+      if (isMounted.current) {
+        toast({
+          title: "Erro ao salvar projeto",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     } finally {
-      setLoading(false);
+      if (isMounted.current) setLoading(false);
     }
   };
 
   const handleDelete = async (project) => {
     try {
-      setIsDeleting(true);
+      if (isMounted.current) setIsDeleting(true);
       await deletePortfolioProject(project.id, token);
       
-      toast({
-        title: "Projeto deletado",
-        description: "O projeto foi removido com sucesso!",
-      });
+      if (isMounted.current) {
+        toast({
+          title: "Projeto deletado",
+          description: "O projeto foi removido com sucesso!",
+        });
+      }
       
-      loadProjects();
+      loadProjects(); // Recarrega a lista de projetos após a exclusão
     } catch (error) {
-      toast({
-        title: "Erro ao deletar projeto",
-        description: error.message,
-        variant: "destructive",
-      });
+      if (isMounted.current) {
+        toast({
+          title: "Erro ao deletar projeto",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     } finally {
-      setIsDeleting(false);
+      if (isMounted.current) setIsDeleting(false);
     }
   };
 
