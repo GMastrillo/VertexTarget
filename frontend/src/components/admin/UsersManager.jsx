@@ -2,7 +2,7 @@
  * Users Manager - Componente para gerenciamento de usuários (Admin)
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -15,6 +15,7 @@ import { useToast } from '../../hooks/use-toast';
 const UsersManager = () => {
   const { token } = useAuth();
   const { toast } = useToast();
+  const isMounted = useRef(true); // Flag para verificar se o componente está montado
   
   // Estados principais
   const [users, setUsers] = useState([]);
@@ -23,25 +24,33 @@ const UsersManager = () => {
 
   // Carregar usuários na inicialização
   useEffect(() => {
+    isMounted.current = true; // Componente montado
+
     loadUsers();
-  }, []);
+
+    return () => {
+      isMounted.current = false; // Função de cleanup: marca o componente como desmontado
+    };
+  }, []); // Dependências vazias para rodar apenas uma vez na montagem
 
   const loadUsers = async () => {
     try {
-      setLoading(true);
-      setError(null);
+      if (isMounted.current) setLoading(true);
+      if (isMounted.current) setError(null);
       const data = await getAllUsers(token);
-      setUsers(data);
+      if (isMounted.current) setUsers(data);
     } catch (error) {
       console.error('Erro ao carregar usuários:', error);
-      setError(error.message);
-      toast({
-        title: "Erro ao carregar usuários",
-        description: error.message,
-        variant: "destructive",
-      });
+      if (isMounted.current) {
+        setError(error.message);
+        toast({
+          title: "Erro ao carregar usuários",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     } finally {
-      setLoading(false);
+      if (isMounted.current) setLoading(false);
     }
   };
 
