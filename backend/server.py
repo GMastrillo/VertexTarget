@@ -276,6 +276,29 @@ class UserCreate(BaseModel):
             raise ValueError('A senha deve conter pelo menos um número')
         return v
 
+# Novo modelo para atualização de usuário (apenas campos editáveis pelo admin)
+class UserUpdate(BaseModel):
+    full_name: Optional[str] = Field(None, min_length=1, max_length=100)
+    email: Optional[EmailStr] = None # Email pode ser editado, mas com cuidado
+    role: Optional[str] = Field(None, pattern="^(admin|user)$")
+    is_active: Optional[bool] = None
+    password: Optional[str] = None # Para redefinir senha
+
+    @validator('password')
+    def validate_password_update(cls, v):
+        if v is None: # Senha é opcional na atualização
+            return v
+        if len(v) < 8:
+            raise ValueError('A senha deve ter pelo menos 8 caracteres')
+        if not re.search(r'[A-Z]', v):
+            raise ValueError('A senha deve conter pelo menos uma letra maiúscula')
+        if not re.search(r'[a-z]', v):
+            raise ValueError('A senha deve conter pelo menos uma letra minúscula')
+        if not re.search(r'\d', v):
+            raise ValueError('A senha deve conter pelo menos um número')
+        return v
+
+
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
@@ -575,6 +598,56 @@ async def get_all_users(current_user: User = Depends(get_current_user)):
         created_at=user.get("created_at", datetime.utcnow())
     ) for user in users_data]
 
+# Novo endpoint para atualizar um usuário (Admin)
+@api_router.put("/admin/users/{user_id}", response_model=User)
+async def update_user(
+    user_id: str,
+    user_update_data: UserUpdate, # Usar o novo modelo UserUpdate
+    current_user: User = Depends(get_current_user)
+):
+    # 1. Verificar se o usuário atual é admin
+    if current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Acesso negado. Apenas administradores podem atualizar usuários."
+        )
+    
+    # 2. Buscar o usuário no banco de dados
+    existing_user = await db.users.find_one({"id": user_id})
+    if not existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Usuário não encontrado."
+        )
+    
+    # 3. Preparar os dados para atualização
+    update_fields = {k: v for k, v in user_update_data.dict(exclude_unset=True).items() if v is not None}
+    
+    # Se a senha for fornecida, hashá-la
+    if "password" in update_fields:
+        update_fields["hashed_password"] = hash_password(update_fields["password"])
+        del update_fields["password"] # Remover a senha em texto limpo
+    
+    # Se o email for alterado, verificar se já existe outro usuário com o novo email
+    if "email" in update_fields and update_fields["email"] != existing_user["email"]:
+        email_exists = await db.users.find_one({"email": update_fields["email"]})
+        if email_exists and email_exists["id"] != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Este email já está em uso por outro usuário."
+            )
+    
+    # 4. Realizar a atualização no MongoDB
+    await db.users.update_one(
+        {"id": user_id},
+        {"$set": update_fields}
+    )
+    
+    # 5. Retornar o usuário atualizado
+    updated_user_data = await db.users.find_one({"id": user_id})
+    return User(**updated_user_data)
+
+
 # Portfolio Routes
 @api_router.get("/portfolio", response_model=List[PortfolioItem])
 async def get_portfolio_items():
@@ -689,7 +762,7 @@ async def get_contact_submissions(current_user: User = Depends(get_current_user)
     submissions = await db.contact_submissions.find().to_list(1000)
     return [ContactSubmissionResponse(**submission) for submission in submissions]
 
-# Legacy Status Check Routes (mantendo compatibilidade)
+# Legacy Status Check Models (mantendo compatibilidade)
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     status_obj = StatusCheck(**input.dict())
