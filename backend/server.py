@@ -226,4 +226,8 @@ class AIStrategyCache:
         return CacheStats(
             total_entries=len(self.cache),
             cache_hits=self.cache_hits,
-            cache_misses
+            cache_misses=self.cache_misses,
+            hit_ratio=round(hit_ratio, 3),
+            oldest_entry=oldest,
+            newest_entry=newest # <--- Adicionei as duas linhas abaixo
+        )
