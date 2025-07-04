@@ -15,46 +15,65 @@ const UserDashboard = () => {
   const navigate = useNavigate();
   const [portfolioProjects, setPortfolioProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const isMounted = useRef(true);
+  const [isLoading, setIsLoading] = useState(true); // Estado de loading local
+  const [error, setError] = useState(null); // Estado de erro local
+  const isMounted = useRef(true); // Flag para verificar se o componente está montado
 
+  // Stores para dados
   const fetchProjects = usePortfolioStore((state) => state.fetchProjects);
   const fetchTestimonials = useTestimonialsStore((state) => state.fetchTestimonials);
 
+  // Estados de loading e erro diretamente dos stores
+  const portfolioLoading = usePortfolioStore((state) => state.isLoading);
+  const portfolioError = usePortfolioStore((state) => state.error);
+  const testimonialsLoading = useTestimonialsStore((state) => state.isLoading);
+  const testimonialsError = useTestimonialsStore((state) => state.error);
+
+  // Combina os estados de loading e erro dos stores com o estado local inicial
+  const combinedIsLoading = isLoading || portfolioLoading || testimonialsLoading;
+  const combinedError = error || portfolioError || testimonialsError;
+
+
   useEffect(() => {
-    isMounted.current = true;
+    isMounted.current = true; // Marca o componente como montado no início do efeito
 
     const loadData = async () => {
       try {
+        // Define o loading local como true antes de iniciar as chamadas assíncronas
         if (isMounted.current) setIsLoading(true);
-        if (isMounted.current) setError(null);
-        
+        if (isMounted.current) setError(null); // Limpa erros anteriores
+
+        // As chamadas fetchProjects e fetchTestimonials já gerenciam seus próprios loadings e erros
+        // e atualizam o estado do store.
         const projects = await fetchProjects();
         const reviews = await fetchTestimonials();
         
+        // Só atualiza o estado local se o componente ainda estiver montado
         if (isMounted.current) {
           setPortfolioProjects(Array.isArray(projects) ? projects : []);
           setTestimonials(Array.isArray(reviews) ? reviews : []);
         }
-      } catch (error) {
-        console.error('Erro ao carregar dados:', error);
+      } catch (err) {
+        console.error('Erro ao carregar dados no UserDashboard:', err);
+        // Só atualiza o estado de erro local se o componente ainda estiver montado
         if (isMounted.current) {
           setError('Erro ao carregar dados. Tente novamente mais tarde.');
-          setPortfolioProjects([]);
+          setPortfolioProjects([]); // Define arrays vazios em caso de erro
           setTestimonials([]);
         }
       } finally {
+        // Define o loading local como false após as chamadas assíncronas, se o componente ainda estiver montado
         if (isMounted.current) setIsLoading(false);
       }
     };
 
     loadData();
 
+    // Função de cleanup: executa quando o componente é desmontado
     return () => {
-      isMounted.current = false;
+      isMounted.current = false; // Marca o componente como desmontado
     };
-  }, [fetchProjects, fetchTestimonials]);
+  }, [fetchProjects, fetchTestimonials]); // Dependências do useEffect
 
   const statsCards = [
     {
@@ -94,7 +113,6 @@ const UserDashboard = () => {
   const recentProjects = Array.isArray(portfolioProjects) ? portfolioProjects.slice(0, 3) : [];
 
   return (
-    // Envolvendo todo o conteúdo do return com um Fragment
     <> 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Welcome */}
@@ -108,7 +126,7 @@ const UserDashboard = () => {
         </div>
 
         {/* Loading State */}
-        {isLoading && (
+        {combinedIsLoading && ( // Usar o estado combinado de loading
           <div className="text-center py-12">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mb-4"></div>
             <p className="text-gray-400">Carregando informações...</p>
@@ -116,14 +134,14 @@ const UserDashboard = () => {
         )}
 
         {/* Error State */}
-        {error && (
+        {combinedError && ( // Usar o estado combinado de erro
           <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-            <p className="text-red-400 text-center">{error}</p>
+            <p className="text-red-400 text-center">{combinedError}</p>
           </div>
         )}
 
-        {/* Content - Only show when not loading */}
-        {!isLoading && (
+        {/* Content - Only show when not loading and no error */}
+        {!combinedIsLoading && !combinedError && (
           <>
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -228,40 +246,40 @@ const UserDashboard = () => {
                           "{testimonial?.quote && testimonial.quote.length > 100 
                             ? testimonial.quote.substring(0, 100) + '...' 
                             : testimonial?.quote || 'Mensagem não disponível'}"
-                        </p>
+                          </p>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-4">
+                        <p className="text-gray-400 text-sm">Nenhum depoimento disponível</p>
                       </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-4">
-                      <p className="text-gray-400 text-sm">Nenhum depoimento disponível</p>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
-          {/* CTA Section */}
-          <div className="mt-8">
-            <Card className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 border-purple-500/50">
-              <CardHeader className="text-center">
-                <CardTitle className="text-white text-xl">
-                  Pronto para começar seu projeto?
-                </CardTitle>
-                <CardDescription className="text-gray-300">
-                  Entre em contato conosco e descubra como podemos transformar suas ideias em realidade
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <Button 
-                  onClick={() => navigate('/')}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3"
-                >
-                  Ver Site Principal 🚀
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+            {/* CTA Section */}
+            <div className="mt-8">
+              <Card className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 border-purple-500/50">
+                <CardHeader className="text-center">
+                  <CardTitle className="text-white text-xl">
+                    Pronto para começar seu projeto?
+                  </CardTitle>
+                  <CardDescription className="text-gray-300">
+                    Entre em contato conosco e descubra como podemos transformar suas ideias em realidade
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <Button 
+                    onClick={() => navigate('/')}
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3"
+                  >
+                    Ver Site Principal 🚀
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </>
         )}
       </div>
