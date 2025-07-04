@@ -3,8 +3,8 @@ import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
 import { 
   LayoutDashboard, 
-  Briefcase, // Exemplo: para "Meus Projetos" se o usuário tiver
-  MessageSquare, // Exemplo: para "Meus Depoimentos"
+  Briefcase, 
+  MessageSquare, 
   User, // Para "Meu Perfil"
   LogOut,
   Menu,
@@ -42,7 +42,7 @@ const sidebarItems = [
 function UserSidebarContent({ className = "", onCloseSheet }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout, user } = useAuth(); // Importado user do useAuth
+  const { logout, user } = useAuth();
 
   const handleLogout = async () => {
     await logout();
