@@ -113,7 +113,8 @@ const LoginPage = () => {
               )}
             </button>
 
-            {/* Credentials Help */}
+            {/* Credenciais de Teste REMOVIDAS */}
+            {/*
             <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
               <p className="text-blue-400 text-sm font-semibold mb-2">🔐 Credenciais de Teste:</p>
               <div className="space-y-2 text-xs">
@@ -131,6 +132,7 @@ const LoginPage = () => {
                 </div>
               </div>
             </div>
+            */}
           </div>
         </form>
 
