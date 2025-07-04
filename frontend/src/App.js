@@ -13,6 +13,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminDashboard from "./pages/AdminDashboard"; // Dashboard content for /admin
 import UserDashboard from "./pages/UserDashboard"; // Dashboard content for /dashboard
+import UserProfilePage from "./pages/UserProfilePage"; // Importar UserProfilePage
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "./components/ui/toaster";
 import { UserCircle2 } from 'lucide-react'; // Ícone de usuário
@@ -235,8 +236,7 @@ function App() {
             >
               {/* Rotas aninhadas para o User Dashboard */}
               <Route index element={<UserDashboard />} /> {/* Conteúdo padrão para /dashboard */}
-              {/* Adicione outras rotas de usuário aqui no futuro, como /dashboard/profile */}
-              {/* <Route path="profile" element={<UserProfilePage />} /> */}
+              <Route path="profile" element={<UserProfilePage />} /> {/* Nova rota para /dashboard/profile */}
             </Route>
           </Routes>
         </BrowserRouter>
