@@ -2,15 +2,21 @@
  * Users Manager - Componente para gerenciamento de usuários (Admin)
  */
 
-import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useAuth } from '../../contexts/AuthContext';
-import { getAllUsers } from '../../services/usersService';
+import { getAllUsers, updateUser } from '../../services/usersService'; // Importado updateUser
 import { useToast } from '../../hooks/use-toast';
+import { Edit, Loader2 } from 'lucide-react'; // Importado ícone Edit e Loader2
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'; // Importado Dialog components
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Switch } from '../ui/switch'; // Importado Switch para is_active
 
 const UsersManager = () => {
   const { token } = useAuth();
@@ -21,6 +27,16 @@ const UsersManager = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false); // Estado para controlar o modal do formulário
+  const [selectedUser, setSelectedUser] = useState(null); // Usuário selecionado para edição
+  const [formData, setFormData] = useState({ // Estado para os dados do formulário de edição
+    full_name: '',
+    email: '',
+    role: 'user',
+    is_active: true,
+    password: '' // Campo opcional para redefinir senha
+  });
+  const [isSaving, setIsSaving] = useState(false); // Estado para o loading do botão Salvar
 
   // Carregar usuários na inicialização
   useEffect(() => {
@@ -53,6 +69,70 @@ const UsersManager = () => {
       if (isMounted.current) setLoading(false);
     }
   };
+
+  const openEditForm = (user) => {
+    setSelectedUser(user);
+    setFormData({
+      full_name: user.full_name || '',
+      email: user.email || '',
+      role: user.role || 'user',
+      is_active: user.is_active,
+      password: '' // Sempre limpa a senha ao abrir o formulário
+    });
+    setIsFormOpen(true);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = async () => {
+    if (!selectedUser) return; // Deve ter um usuário selecionado para editar
+
+    try {
+      if (isMounted.current) setIsSaving(true);
+      
+      const updatePayload = {
+        full_name: formData.full_name,
+        email: formData.email,
+        role: formData.role,
+        is_active: formData.is_active,
+      };
+
+      // Adiciona a senha apenas se não estiver vazia
+      if (formData.password) {
+        updatePayload.password = formData.password;
+      }
+
+      await updateUser(selectedUser.id, updatePayload, token);
+      
+      if (isMounted.current) {
+        toast({
+          title: "Usuário atualizado",
+          description: `O usuário ${formData.email} foi atualizado com sucesso!`,
+        });
+      }
+      
+      setIsFormOpen(false);
+      loadUsers(); // Recarrega a lista de usuários para mostrar as mudanças
+
+    } catch (error) {
+      console.error('Erro ao salvar usuário:', error);
+      if (isMounted.current) {
+        toast({
+          title: "Erro ao atualizar usuário",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+    } finally {
+      if (isMounted.current) setIsSaving(false);
+    }
+  };
+
 
   const formatDate = (dateString) => {
     try {
@@ -189,6 +269,7 @@ const UsersManager = () => {
                   <TableHead className="text-gray-300">Role</TableHead>
                   <TableHead className="text-gray-300">Status</TableHead>
                   <TableHead className="text-gray-300">Registrado em</TableHead>
+                  <TableHead className="text-gray-300">Ações</TableHead> {/* Adicionada coluna Ações */}
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -222,6 +303,16 @@ const UsersManager = () => {
                     <TableCell className="text-gray-300">
                       {formatDate(user.created_at)}
                     </TableCell>
+                    <TableCell> {/* Coluna de Ações */}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => openEditForm(user)}
+                        className="border-gray-700 text-gray-300 hover:bg-purple-600"
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -229,6 +320,96 @@ const UsersManager = () => {
           )}
         </CardContent>
       </Card>
+
+      {/* Modal de Edição de Usuário */}
+      <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+        <DialogContent className="max-w-md bg-gray-900 border-gray-700 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-white">Editar Usuário</DialogTitle>
+            <DialogDescription className="text-gray-400">
+              Edite as informações do usuário selecionado.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            {/* Nome Completo */}
+            <div className="space-y-2">
+              <Label htmlFor="edit-full-name" className="text-white">Nome Completo</Label>
+              <Input
+                id="edit-full-name"
+                value={formData.full_name}
+                onChange={(e) => handleInputChange('full_name', e.target.value)}
+                className="bg-gray-800 border-gray-700 text-white"
+              />
+            </div>
+            {/* Email */}
+            <div className="space-y-2">
+              <Label htmlFor="edit-email" className="text-white">Email</Label>
+              <Input
+                id="edit-email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                className="bg-gray-800 border-gray-700 text-white"
+              />
+            </div>
+            {/* Role */}
+            <div className="space-y-2">
+              <Label htmlFor="edit-role" className="text-white">Role</Label>
+              <Select value={formData.role} onValueChange={(value) => handleInputChange('role', value)}>
+                <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectValue placeholder="Selecione o role" />
+                </SelectTrigger>
+                <SelectContent className="bg-gray-800 border-gray-700">
+                  <SelectItem value="user">Usuário</SelectItem>
+                  <SelectItem value="admin">Administrador</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {/* Status Ativo */}
+            <div className="flex items-center justify-between space-x-2">
+              <Label htmlFor="edit-is-active" className="text-white">Ativo</Label>
+              <Switch
+                id="edit-is-active"
+                checked={formData.is_active}
+                onCheckedChange={(checked) => handleInputChange('is_active', checked)}
+                className="data-[state=checked]:bg-purple-600"
+              />
+            </div>
+            {/* Senha (Opcional) */}
+            <div className="space-y-2">
+              <Label htmlFor="edit-password" className="text-white">Nova Senha (opcional)</Label>
+              <Input
+                id="edit-password"
+                type="password"
+                value={formData.password}
+                onChange={(e) => handleInputChange('password', e.target.value)}
+                placeholder="Deixe em branco para não alterar"
+                className="bg-gray-800 border-gray-700 text-white"
+              />
+              <p className="text-gray-400 text-xs">Mínimo 8 caracteres, maiúscula, minúscula e número.</p>
+            </div>
+          </div>
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setIsFormOpen(false)} className="border-gray-700 text-gray-300">
+              Cancelar
+            </Button>
+            <Button 
+              onClick={handleSubmit} 
+              disabled={isSaving}
+              className="bg-purple-600 hover:bg-purple-700"
+            >
+              {isSaving ? (
+                <div className="flex items-center">
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  Salvando...
+                </div>
+              ) : (
+                'Salvar Alterações'
+              )}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
