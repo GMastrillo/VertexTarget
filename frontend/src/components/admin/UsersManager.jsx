@@ -9,7 +9,7 @@ import { Badge } from '../ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useAuth } from '../../contexts/AuthContext';
-import { getAllUsers, updateUser } from '../../services/usersService'; // Importado updateUser
+import usersService from '../../services/usersService'; // Importa o default export
 import { useToast } from '../../hooks/use-toast';
 import { Edit, Loader2 } from 'lucide-react'; // Importado ícone Edit e Loader2
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'; // Importado Dialog components
@@ -21,8 +21,10 @@ import { Switch } from '../ui/switch'; // Importado Switch para is_active
 const UsersManager = () => {
   const { token } = useAuth();
   const { toast } = useToast();
-  const isMounted = useRef(true); // Flag para verificar se o componente está montado
+  const isMounted = useRef(true);
   
+const { getAllUsers, updateUser } = usersService;
+
   // Estados principais
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
