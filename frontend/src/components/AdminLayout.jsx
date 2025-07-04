@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom'; // Adicionado useNavigate
+import React, { useState, useEffect } from 'react'; // Adicionado useState e useEffect
+import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
 import { 
   LayoutDashboard, 
@@ -7,11 +7,11 @@ import {
   MessageSquare, 
   LogOut,
   Menu,
-  Home // Adicionado ícone Home
+  Home 
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
-import { useAuth } from '../contexts/AuthContext'; // Importado useAuth
+import { useAuth } from '../contexts/AuthContext';
 
 const sidebarItems = [
   {
@@ -31,20 +31,20 @@ const sidebarItems = [
   },
 ];
 
-function SidebarContent({ className = "", onCloseSheet }) { // Adicionado onCloseSheet para fechar o menu mobile
+function SidebarContent({ className = "", onCloseSheet }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout } = useAuth(); // Usando o hook useAuth
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     await logout();
-    navigate('/'); // Redireciona para a página inicial após o logout
-    if (onCloseSheet) onCloseSheet(); // Fecha o menu mobile se estiver aberto
+    navigate('/');
+    if (onCloseSheet) onCloseSheet();
   };
 
   const handleGoHome = () => {
-    navigate('/'); // Redireciona para a página inicial
-    if (onCloseSheet) onCloseSheet(); // Fecha o menu mobile se estiver aberto
+    navigate('/');
+    if (onCloseSheet) onCloseSheet();
   };
 
   return (
@@ -65,11 +65,11 @@ function SidebarContent({ className = "", onCloseSheet }) { // Adicionado onClos
             <Link
               key={item.href}
               to={item.href}
-              onClick={onCloseSheet} // Fecha o menu mobile ao clicar em um link
+              onClick={onCloseSheet}
               className={cn(
                 "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors",
                 isActive
-                  ? "bg-purple-600 text-white" // Cor mais vibrante para ativo
+                  ? "bg-purple-600 text-white"
                   : "text-gray-300 hover:bg-gray-800 hover:text-white"
               )}
             >
@@ -78,7 +78,7 @@ function SidebarContent({ className = "", onCloseSheet }) { // Adicionado onClos
             </Link>
           );
         })}
-        {/* Novo Link para Voltar ao Site Principal */}
+        {/* Link para Voltar ao Site Principal */}
         <button
           onClick={handleGoHome}
           className="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors w-full text-left text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -92,7 +92,7 @@ function SidebarContent({ className = "", onCloseSheet }) { // Adicionado onClos
       <div className="p-4 border-t border-gray-800">
         <Button
           variant="ghost"
-          className="w-full justify-start text-red-400 hover:text-white hover:bg-red-800" // Cor vermelha para Sair
+          className="w-full justify-start text-red-400 hover:text-white hover:bg-red-800"
           onClick={handleLogout}
         >
           <LogOut className="h-5 w-5 mr-3" />
@@ -104,31 +104,32 @@ function SidebarContent({ className = "", onCloseSheet }) { // Adicionado onClos
 }
 
 export function AdminLayout() {
+  // O erro 'useState is not defined' ocorre aqui se useState não for importado
   const [isSheetOpen, setIsSheetOpen] = useState(false); // Estado para controlar o Sheet (menu mobile)
 
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-64 border-r border-gray-800"> {/* Adicionado border-gray-800 */}
+      <aside className="hidden lg:block w-64 border-r border-gray-800">
         <SidebarContent />
       </aside>
 
       {/* Mobile Navigation */}
       <div className="lg:hidden">
-        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}> {/* Controla o estado do Sheet */}
+        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="fixed top-4 left-4 z-50 bg-gray-900 text-white hover:bg-gray-800">
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="p-0 w-64 bg-gray-900 border-r border-gray-800"> {/* Ajustado estilo do SheetContent */}
-            <SidebarContent onCloseSheet={() => setIsSheetOpen(false)} /> {/* Passa a função para fechar o Sheet */}
+          <SheetContent side="left" className="p-0 w-64 bg-gray-900 border-r border-gray-800">
+            <SidebarContent onCloseSheet={() => setIsSheetOpen(false)} />
           </SheetContent>
         </Sheet>
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto bg-gray-900 text-white"> {/* Ajustado background e texto */}
+      <main className="flex-1 overflow-y-auto bg-gray-900 text-white">
         <div className="p-6 lg:p-8">
           <Outlet />
         </div>
