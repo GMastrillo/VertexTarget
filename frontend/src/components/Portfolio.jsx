@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
@@ -7,6 +7,7 @@ import { usePortfolioStore } from '../stores';
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const isMounted = useRef(true); // Flag para verificar se o componente está montado
   
   // Zustand store
   const {
@@ -19,13 +20,33 @@ const Portfolio = () => {
 
   // Carregar projetos usando o store
   useEffect(() => {
-    fetchProjects();
+    isMounted.current = true; // Componente montado
+
+    const loadProjects = async () => {
+      try {
+        await fetchProjects();
+        // O estado `projects` é atualizado pelo store, então não precisamos de setItems aqui.
+        // Apenas garantimos que o fetchProjects é chamado.
+      } catch (err) {
+        // O erro já é tratado pelo store, mas podemos logar aqui se necessário
+        console.error("Erro ao carregar projetos no Portfolio.jsx:", err);
+      } finally {
+        // O isLoading é gerenciado pelo store, não precisamos de setLoading aqui.
+      }
+    };
+
+    loadProjects();
     
     // Debug: mostrar estatísticas do cache
     if (process.env.NODE_ENV === 'development') {
       console.log('📊 Portfolio Store Stats:', getStats());
     }
-  }, [fetchProjects, getStats]);
+
+    // Função de cleanup: executa quando o componente é desmontado
+    return () => {
+      isMounted.current = false; // Marca o componente como desmontado
+    };
+  }, [fetchProjects, getStats]); // Dependências do useEffect
 
   // Estado de loading
   if (isLoading) {
