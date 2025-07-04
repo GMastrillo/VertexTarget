@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom"; // Importado useNavigate
+import { AuthProvider, useAuth } from "./contexts/AuthContext"; // Importado useAuth
 import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Portfolio from "./components/Portfolio";
@@ -15,11 +15,14 @@ import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "./components/ui/toaster";
+import { UserCircle2 } from 'lucide-react'; // Ícone de usuário
 
 // Navigation Component
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  
+  const { isAuthenticated, user, getDashboardRoute, logout } = useAuth(); // Usando o hook useAuth
+  const navigate = useNavigate(); // Usando o hook useNavigate
+
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
     setIsMobileMenuOpen(false); // Close mobile menu after clicking
@@ -27,6 +30,21 @@ const Navigation = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleDashboardClick = () => {
+    if (isAuthenticated() && user) {
+      const dashboardPath = getDashboardRoute(user.role);
+      navigate(dashboardPath);
+    } else {
+      navigate('/login'); // Se por algum motivo não estiver autenticado, vai para o login
+    }
+    setIsMobileMenuOpen(false); // Fecha o menu mobile
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
+    setIsMobileMenuOpen(false); // Fecha o menu mobile
   };
 
   return (
@@ -42,7 +60,7 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8"> {/* Adicionado items-center */}
             <button onClick={() => scrollToSection('services')} className="text-gray-300 hover:text-purple-400 transition-colors">
               Serviços
             </button>
@@ -58,9 +76,25 @@ const Navigation = () => {
             <button onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all">
               Contato
             </button>
-            <a href="/admin" className="text-gray-500 hover:text-gray-400 text-xs transition-colors">
-              Admin
-            </a>
+            
+            {/* Botão de Login / Ícone de Perfil */}
+            {isAuthenticated() ? (
+              <button
+                onClick={handleDashboardClick}
+                className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white text-sm font-semibold hover:bg-purple-700 transition-colors duration-200 shadow-md"
+                title={`Acessar Dashboard (${user?.email})`}
+              >
+                {/* Você pode usar as iniciais do usuário ou um ícone genérico */}
+                {user?.full_name ? user.full_name.charAt(0).toUpperCase() : <UserCircle2 size={24} />}
+              </button>
+            ) : (
+              <button
+                onClick={handleLoginClick}
+                className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors duration-200 shadow-md"
+              >
+                Login
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -119,6 +153,22 @@ const Navigation = () => {
             >
               Contato
             </button>
+            {/* Botão de Login / Ícone de Perfil para Mobile */}
+            {isAuthenticated() ? (
+              <button
+                onClick={handleDashboardClick}
+                className="block w-full text-left text-gray-300 hover:text-purple-400 py-3 px-4 hover:bg-gray-800/50 rounded-lg transition-colors"
+              >
+                Acessar Dashboard
+              </button>
+            ) : (
+              <button
+                onClick={handleLoginClick}
+                className="block w-full text-left text-gray-300 hover:text-purple-400 py-3 px-4 hover:bg-gray-800/50 rounded-lg transition-colors"
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       </div>
