@@ -12,15 +12,16 @@ import Contact from "./components/Contact";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminDashboard from "./pages/AdminDashboard"; // Dashboard content for /admin
-import UserDashboard from "./pages/UserDashboard";
+import UserDashboard from "./pages/UserDashboard"; // Dashboard content for /dashboard
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "./components/ui/toaster";
 import { UserCircle2 } from 'lucide-react'; // Ícone de usuário
 // Importar os componentes de gerenciamento para as rotas aninhadas
 import { AdminLayout } from "./components/AdminLayout"; // Importar AdminLayout
-import PortfolioManager from "./components/admin/PortfolioManager"; // <--- AGORA CORRETO: Default import
-import TestimonialsManager from "./components/admin/TestimonialsManager"; // <--- AGORA CORRETO: Default import
-import UsersManager from "./components/admin/UsersManager"; // <--- AGORA CORRETO: Default import
+import PortfolioManager from "./components/admin/PortfolioManager";
+import TestimonialsManager from "./components/admin/TestimonialsManager";
+import UsersManager from "./components/admin/UsersManager";
+import { UserLayout } from "./components/UserLayout"; // Importar UserLayout
 
 // Navigation Component
 const Navigation = () => {
@@ -212,7 +213,7 @@ function App() {
               path="/admin" 
               element={
                 <ProtectedRoute requiredRole="admin">
-                  <AdminLayout /> {/* AdminLayout agora é o elemento principal da rota /admin */}
+                  <AdminLayout />
                 </ProtectedRoute>
               } 
             >
@@ -228,10 +229,15 @@ function App() {
               path="/dashboard" 
               element={
                 <ProtectedRoute requiredRole="user">
-                  <UserDashboard />
+                  <UserLayout /> {/* UserLayout agora é o elemento principal da rota /dashboard */}
                 </ProtectedRoute>
               } 
-            />
+            >
+              {/* Rotas aninhadas para o User Dashboard */}
+              <Route index element={<UserDashboard />} /> {/* Conteúdo padrão para /dashboard */}
+              {/* Adicione outras rotas de usuário aqui no futuro, como /dashboard/profile */}
+              {/* <Route path="profile" element={<UserProfilePage />} /> */}
+            </Route>
           </Routes>
         </BrowserRouter>
         <Toaster />
