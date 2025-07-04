@@ -2,7 +2,7 @@
  * Testimonials Manager - Componente para gerenciamento completo dos depoimentos
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Adicionado useRef
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -21,6 +21,7 @@ import { useToast } from '../../hooks/use-toast';
 const TestimonialsManager = () => {
   const { token } = useAuth();
   const { toast } = useToast();
+  const isMounted = useRef(true); // Flag para verificar se o componente está montado
   
   // Estados principais
   const [testimonials, setTestimonials] = useState([]);
@@ -42,22 +43,30 @@ const TestimonialsManager = () => {
 
   // Carregar depoimentos na inicialização
   useEffect(() => {
+    isMounted.current = true; // Componente montado
+
     loadTestimonials();
-  }, []);
+
+    return () => {
+      isMounted.current = false; // Função de cleanup: marca o componente como desmontado
+    };
+  }, []); // Dependências vazias para rodar apenas uma vez na montagem
 
   const loadTestimonials = async () => {
     try {
-      setLoading(true);
+      if (isMounted.current) setLoading(true);
       const data = await getTestimonials();
-      setTestimonials(data);
+      if (isMounted.current) setTestimonials(data);
     } catch (error) {
-      toast({
-        title: "Erro ao carregar depoimentos",
-        description: error.message,
-        variant: "destructive",
-      });
+      if (isMounted.current) {
+        toast({
+          title: "Erro ao carregar depoimentos",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     } finally {
-      setLoading(false);
+      if (isMounted.current) setLoading(false);
     }
   };
 
@@ -141,7 +150,7 @@ const TestimonialsManager = () => {
     if (!validateForm()) return;
 
     try {
-      setLoading(true);
+      if (isMounted.current) setLoading(true);
 
       // Preparar dados para envio
       const testimonialData = {
@@ -157,53 +166,65 @@ const TestimonialsManager = () => {
       if (selectedTestimonial) {
         // Atualizar depoimento existente
         await updateTestimonial(selectedTestimonial.id, testimonialData, token);
-        toast({
-          title: "Depoimento atualizado",
-          description: "O depoimento foi atualizado com sucesso!",
-        });
+        if (isMounted.current) {
+          toast({
+            title: "Depoimento atualizado",
+            description: "O depoimento foi atualizado com sucesso!",
+          });
+        }
       } else {
         // Criar novo depoimento
         await createTestimonial(testimonialData, token);
-        toast({
-          title: "Depoimento criado",
-          description: "O depoimento foi criado com sucesso!",
-        });
+        if (isMounted.current) {
+          toast({
+            title: "Depoimento criado",
+            description: "O depoimento foi criado com sucesso!",
+          });
+        }
       }
 
-      setIsFormOpen(false);
-      resetForm();
-      loadTestimonials();
+      if (isMounted.current) {
+        setIsFormOpen(false);
+        resetForm();
+        loadTestimonials(); // Recarrega a lista de depoimentos após a operação
+      }
 
     } catch (error) {
-      toast({
-        title: "Erro ao salvar depoimento",
-        description: error.message,
-        variant: "destructive",
-      });
+      if (isMounted.current) {
+        toast({
+          title: "Erro ao salvar depoimento",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     } finally {
-      setLoading(false);
+      if (isMounted.current) setLoading(false);
     }
   };
 
   const handleDelete = async (testimonial) => {
     try {
-      setIsDeleting(true);
+      if (isMounted.current) setIsDeleting(true);
       await deleteTestimonial(testimonial.id, token);
       
-      toast({
-        title: "Depoimento deletado",
-        description: "O depoimento foi removido com sucesso!",
-      });
+      if (isMounted.current) {
+        toast({
+          title: "Depoimento deletado",
+          description: "O depoimento foi removido com sucesso!",
+        });
+      }
       
-      loadTestimonials();
+      loadTestimonials(); // Recarrega a lista de depoimentos após a exclusão
     } catch (error) {
-      toast({
-        title: "Erro ao deletar depoimento",
-        description: error.message,
-        variant: "destructive",
-      });
+      if (isMounted.current) {
+        toast({
+          title: "Erro ao deletar depoimento",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     } finally {
-      setIsDeleting(false);
+      if (isMounted.current) setIsDeleting(false);
     }
   };
 
