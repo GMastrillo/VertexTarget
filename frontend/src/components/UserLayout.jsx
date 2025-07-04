@@ -136,8 +136,8 @@ export function UserLayout() {
         </Sheet>
       </div>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto bg-gray-900 text-white">
+      {/* Main Content - Adicionado o fundo aqui */}
+      <main className="flex-1 overflow-y-auto min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white">
         <div className="p-6 lg:p-8">
           <Outlet /> {/* Aqui o conteúdo da rota filha será renderizado */}
         </div>
