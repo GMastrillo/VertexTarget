@@ -2,7 +2,7 @@
  * Admin Dashboard - Painel administrativo principal
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Adicionado useEffect e useRef
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -20,30 +20,39 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isMounted = useRef(true); // Flag para verificar se o componente está montado
 
   // Stores para estatísticas
   const portfolioStats = usePortfolioStore((state) => state.getStats());
   const testimonialsStats = useTestimonialsStore((state) => state.getStats());
 
   // Carrega dados quando o componente monta
-  React.useEffect(() => {
+  useEffect(() => { // Usando useEffect diretamente
+    isMounted.current = true; // Componente montado
+
     const loadData = async () => {
       try {
-        setIsLoading(true);
-        setError(null);
+        if (isMounted.current) setIsLoading(true); // Só atualiza o estado se o componente ainda estiver montado
+        if (isMounted.current) setError(null); // Só atualiza o estado se o componente ainda estiver montado
+        
         // Força o carregamento dos dados para garantir que as estatísticas estejam atualizadas
         await usePortfolioStore.getState().fetchProjects();
         await useTestimonialsStore.getState().fetchTestimonials();
       } catch (error) {
         console.error('Erro ao carregar dados do admin:', error);
-        setError('Erro ao carregar dados. Tente novamente mais tarde.');
+        if (isMounted.current) setError('Erro ao carregar dados. Tente novamente mais tarde.'); // Só atualiza o estado se o componente ainda estiver montado
       } finally {
-        setIsLoading(false);
+        if (isMounted.current) setIsLoading(false); // Só atualiza o estado se o componente ainda estiver montado
       }
     };
 
     loadData();
-  }, []);
+
+    // Função de cleanup: executa quando o componente é desmontado
+    return () => {
+      isMounted.current = false; // Marca o componente como desmontado
+    };
+  }, []); // Dependências vazias para rodar apenas uma vez na montagem
 
   const handleLogout = async () => {
     await logout();
@@ -269,7 +278,7 @@ const AdminDashboard = () => {
                     <h4 className="text-purple-400 font-semibold mb-2">Cache Portfolio</h4>
                     <p className="text-gray-400 mb-1">Status: {portfolioStats?.cacheValid ? '✅ Ativo' : '❌ Expirado'}</p>
                     <p className="text-gray-400 mb-1">Última atualização: {portfolioStats?.lastFetch || 'Nunca carregado'}</p>
-                    <p className="text-gray-400">Expira em: {portfolioStats?.cacheExpiry || 'N/A'}</p>
+                    <p className="text-400">Expira em: {portfolioStats?.cacheExpiry || 'N/A'}</p>
                   </div>
                   <div>
                     <h4 className="text-indigo-400 font-semibold mb-2">Cache Depoimentos</h4>
