@@ -23,12 +23,13 @@ const AdminDashboard = () => {
   const isMounted = useRef(true); // Flag para verificar se o componente está montado
 
   // Stores para estatísticas
+  // Estes são getters do Zustand, eles não disparam requisições por si só
   const portfolioStats = usePortfolioStore((state) => state.getStats());
   const testimonialsStats = useTestimonialsStore((state) => state.getStats());
 
   // Carrega dados quando o componente monta
-  useEffect(() => { // Usando useEffect diretamente
-    isMounted.current = true; // Componente montado
+  useEffect(() => {
+    isMounted.current = true; // Marca o componente como montado no início do efeito
 
     const loadData = async () => {
       try {
@@ -36,6 +37,8 @@ const AdminDashboard = () => {
         if (isMounted.current) setError(null); // Só atualiza o estado se o componente ainda estiver montado
         
         // Força o carregamento dos dados para garantir que as estatísticas estejam atualizadas
+        // Estas chamadas de fetchProjects e fetchTestimonials são as que podem causar o erro
+        // se o componente for desmontado antes delas concluírem.
         await usePortfolioStore.getState().fetchProjects();
         await useTestimonialsStore.getState().fetchTestimonials();
       } catch (error) {
@@ -278,7 +281,7 @@ const AdminDashboard = () => {
                     <h4 className="text-purple-400 font-semibold mb-2">Cache Portfolio</h4>
                     <p className="text-gray-400 mb-1">Status: {portfolioStats?.cacheValid ? '✅ Ativo' : '❌ Expirado'}</p>
                     <p className="text-gray-400 mb-1">Última atualização: {portfolioStats?.lastFetch || 'Nunca carregado'}</p>
-                    <p className="text-400">Expira em: {portfolioStats?.cacheExpiry || 'N/A'}</p>
+                    <p className="text-gray-400">Expira em: {portfolioStats?.cacheExpiry || 'N/A'}</p>
                   </div>
                   <div>
                     <h4 className="text-indigo-400 font-semibold mb-2">Cache Depoimentos</h4>
