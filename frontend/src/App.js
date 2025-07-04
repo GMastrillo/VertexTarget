@@ -17,10 +17,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "./components/ui/toaster";
 import { UserCircle2 } from 'lucide-react'; // Ícone de usuário
 // Importar os componentes de gerenciamento para as rotas aninhadas
-import { AdminLayout } from "./components/AdminLayout"; // Importar AdminLayout
-import { AdminPortfolio } from "./components/admin/PortfolioManager"; // Note o caminho relativo
-import { AdminTestimonials } from "./components/admin/TestimonialsManager"; // Note o caminho relativo
-import { UsersManager } from "./components/admin/UsersManager"; // Note o caminho relativo
+import { AdminLayout } from "./components/AdminLayout";
+import PortfolioManager from "./components/admin/PortfolioManager"; // <--- ALTERADO
+import TestimonialsManager from "./components/admin/TestimonialsManager"; // <--- ALTERADO
+import UsersManager from "./components/admin/UsersManager"; // <--- ALTERADO
 
 // Navigation Component
 const Navigation = () => {
