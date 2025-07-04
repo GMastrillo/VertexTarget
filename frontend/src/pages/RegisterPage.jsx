@@ -19,7 +19,7 @@ const RegisterPage = () => {
     email: '',
     password: '',
     full_name: '',
-    role: 'user'
+    role: 'user' // Default para 'user'
   });
   
   const [isLoading, setIsLoading] = useState(false);
@@ -172,7 +172,7 @@ const RegisterPage = () => {
                 </p>
               </div>
 
-              {/* Tipo de Conta */}
+              {/* Tipo de Conta - REMOVIDO A OPÇÃO DE ADMIN */}
               <div className="space-y-2">
                 <Label htmlFor="role" className="text-white">Tipo de Conta</Label>
                 <Select value={formData.role} onValueChange={(value) => handleInputChange('role', value)}>
@@ -181,7 +181,7 @@ const RegisterPage = () => {
                   </SelectTrigger>
                   <SelectContent className="bg-gray-800 border-gray-700">
                     <SelectItem value="user">👤 Usuário</SelectItem>
-                    <SelectItem value="admin">⚡ Administrador</SelectItem>
+                    {/* <SelectItem value="admin">⚡ Administrador</SelectItem> */} {/* REMOVIDO */}
                   </SelectContent>
                 </Select>
               </div>
