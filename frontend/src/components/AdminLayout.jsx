@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Adicionado useState e useEffect
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
 import { 
@@ -103,9 +103,8 @@ function SidebarContent({ className = "", onCloseSheet }) {
   );
 }
 
-export function AdminLayout() {
-  // O erro 'useState is not defined' ocorre aqui se useState não for importado
-  const [isSheetOpen, setIsSheetOpen] = useState(false); // Estado para controlar o Sheet (menu mobile)
+export function AdminLayout({ children }) { // AdminLayout agora recebe children como prop
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -131,7 +130,7 @@ export function AdminLayout() {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto bg-gray-900 text-white">
         <div className="p-6 lg:p-8">
-          <Outlet />
+          {children} {/* <--- ALTERADO DE <Outlet /> PARA {children} */}
         </div>
       </main>
     </div>
