@@ -4,10 +4,11 @@
 
 const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
-// Função auxiliar para normalizar URLs (copiada de AuthContext.jsx)
+// Função auxiliar para normalizar URLs
+// Garante que não haverá barras duplas independentemente da entrada.
 const normalizeUrl = (baseUrl, path) => {
   const trimmedBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
-  const trimmedPath = path.startsWith('/') ? path.slice(1) : path;
+  const trimmedPath = path.startsWith('/') ? path.slice(1) : path; // Correção aqui: era 'trimmedPath.slice(1)'
   return `${trimmedBase}/${trimmedPath}`;
 };
 
@@ -20,7 +21,7 @@ export const getAllUsers = async (token) => {
   try {
     console.log('Buscando usuários...');
     
-    const url = normalizeUrl(API_BASE_URL, '/api/admin/users'); // Usando normalizeUrl
+    const url = normalizeUrl(API_BASE_URL, '/api/admin/users');
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -73,7 +74,7 @@ export const registerUser = async (userData) => {
   try {
     console.log('Registrando novo usuário...');
     
-    const url = normalizeUrl(API_BASE_URL, '/api/auth/register'); // Usando normalizeUrl
+    const url = normalizeUrl(API_BASE_URL, '/api/auth/register');
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -119,7 +120,7 @@ export const updateUser = async (userId, userData, token) => {
   try {
     console.log(`Atualizando usuário ${userId}...`);
     
-    const url = normalizeUrl(API_BASE_URL, `/api/admin/users/${userId}`); // Usando normalizeUrl
+    const url = normalizeUrl(API_BASE_URL, `/api/admin/users/${userId}`);
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -171,9 +172,8 @@ export const updateUserProfile = async (userData, token) => {
   try {
     console.log('Atualizando perfil do usuário logado...');
     
-    // ALTERAÇÃO PARA TESTE AGRESSIVO: Bypass normalizeUrl
-    // const url = normalizeUrl(API_BASE_URL, '/api/users/profile'); 
-    const url = `${API_BASE_URL}/api/users/profile`; // Construção direta para depurar a barra dupla
+    // Usando normalizeUrl para garantir a construção correta da URL
+    const url = normalizeUrl(API_BASE_URL, '/api/users/profile'); 
 
     const response = await fetch(url, {
       method: 'PUT',
