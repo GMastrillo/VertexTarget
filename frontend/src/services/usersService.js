@@ -10,19 +10,18 @@ const normalizeUrl = (baseUrl, path) => {
   return `${trimmedBase}/${trimmedPath}`;
 };
 
-// ---- NOTA: A palavra "export" foi removida da frente de cada função ----
+// ============================================================================
+// NOTA: A palavra 'export' foi ADICIONADA DE VOLTA na frente de cada função.
+// Isso cria as "exportações nomeadas" que o seu projeto precisa.
+// ============================================================================
 
-const getAllUsers = async (token) => {
+export const getAllUsers = async (token) => {
   try {
     const url = normalizeUrl(API_BASE_URL, '/api/admin/users');
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
     });
-
     if (!response.ok) {
       const errorData = await response.json().catch(() => null);
       switch (response.status) {
@@ -43,7 +42,7 @@ const getAllUsers = async (token) => {
   }
 };
 
-const registerUser = async (userData) => {
+export const registerUser = async (userData) => {
   try {
     const url = normalizeUrl(API_BASE_URL, '/api/auth/register');
     const response = await fetch(url, {
@@ -51,7 +50,6 @@ const registerUser = async (userData) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData)
     });
-
     if (!response.ok) {
       const errorData = await response.json().catch(() => null);
       switch (response.status) {
@@ -68,18 +66,14 @@ const registerUser = async (userData) => {
   }
 };
 
-const updateUser = async (userId, userData, token) => {
+export const updateUser = async (userId, userData, token) => {
   try {
     const url = normalizeUrl(API_BASE_URL, `/api/admin/users/${userId}`);
     const response = await fetch(url, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify(userData)
     });
-
     if (!response.ok) {
       const errorData = await response.json().catch(() => null);
       switch (response.status) {
@@ -99,18 +93,14 @@ const updateUser = async (userId, userData, token) => {
   }
 };
 
-const updateUserProfile = async (userData, token) => {
+export const updateUserProfile = async (userData, token) => {
   try {
     const url = normalizeUrl(API_BASE_URL, '/api/users/profile');
     const response = await fetch(url, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify(userData)
     });
-
     if (!response.ok) {
       const errorData = await response.json().catch(() => null);
       switch (response.status) {
@@ -128,14 +118,10 @@ const updateUserProfile = async (userData, token) => {
   }
 };
 
-
-// Criamos um objeto com todas as funções que definimos acima
-const usersService = {
+// Também mantemos a exportação padrão para garantir a compatibilidade.
+export default {
   getAllUsers,
   registerUser,
   updateUser,
   updateUserProfile
 };
-
-// E finalmente, exportamos esse objeto como o padrão do módulo
-export default usersService;
