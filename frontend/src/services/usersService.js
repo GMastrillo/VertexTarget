@@ -36,8 +36,6 @@ export const updateUserProfile = async (userData, token) => {
       },
       body: JSON.stringify(userData)
     });
-    // ...
-};
 
 export const getAllUsers = async (token) => {
   try {
