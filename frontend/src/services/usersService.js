@@ -48,3 +48,10 @@ export const updateUserProfile = async (userData, token) => {
     throw error;
   }
 };
+
+export default {
+  getAllUsers,
+  registerUser,
+  updateUser,
+  updateUserProfile
+};
