@@ -18,24 +18,6 @@ const normalizeUrl = (baseUrl, path) => {
  * @returns {Promise<Array>} Lista de usuários
  */
 
-export const updateUserProfile = async (userData, token) => {
-  try {
-    console.log('Atualizando perfil do usuário logado...');
-
-    // --- NOVO LOG DE DEBUGGING ---
-    console.log('DEBUG USERSERVICE: API_BASE_URL:', API_BASE_URL);
-    const url = normalizeUrl(API_BASE_URL, '/api/users/profile'); 
-    console.log('DEBUG USERSERVICE: URL final construída:', url);
-    // --- FIM DO NOVO LOG ---
-
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(userData)
-    });
 
 export const getAllUsers = async (token) => {
   try {
@@ -191,6 +173,21 @@ export const updateUser = async (userId, userData, token) => {
 export const updateUserProfile = async (userData, token) => {
   try {
     console.log('Atualizando perfil do usuário logado...');
+    
+// --- NOVO LOG DE DEBUGGING ---
+    console.log('DEBUG USERSERVICE: API_BASE_URL:', API_BASE_URL);
+    const url = normalizeUrl(API_BASE_URL, '/api/users/profile'); 
+    console.log('DEBUG USERSERVICE: URL final construída:', url);
+    // --- FIM DO NOVO LOG ---
+
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(userData)
+    });
     
     // Usando normalizeUrl para garantir a construção correta da URL
     const url = normalizeUrl(API_BASE_URL, '/api/users/profile'); 
