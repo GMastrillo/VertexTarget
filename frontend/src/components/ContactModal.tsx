@@ -1,7 +1,7 @@
 // src/components/ContactModal.tsx
 import React from 'react';
 
-// Tipamos as props que o componente vai receber
+// Tipamos as props que o componente vai recebe
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
