@@ -1,86 +1,76 @@
+// src/components/ContactModal.jsx
+
 import React from 'react';
 
-// Props:
-// isOpen: boolean que controla se o modal está visível
-// onClose: função para fechar o modal
 const ContactModal = ({ isOpen, onClose }) => {
-  if (!isOpen) {
-    return null;
-  }
-
-  // Impede que o clique dentro do modal o feche
-  const handleModalContentClick = (e) => {
-    e.stopPropagation();
-  };
+  if (!isOpen) return null;
 
   return (
     // Overlay (fundo escuro)
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 transition-opacity duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm"
     >
       {/* Conteúdo do Modal */}
       <div
-        onClick={handleModalContentClick}
-        className="bg-[#1e1e1e] text-gray-200 p-8 rounded-lg shadow-2xl w-full max-w-md mx-4 border border-gray-700"
+        onClick={(e) => e.stopPropagation()} // Impede que o clique dentro do modal o feche
+        className="relative w-full max-w-md p-8 mx-4 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl text-white transform transition-all duration-300 ease-in-out"
       >
-        {/* Cabeçalho */}
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-white">Diagnóstico Gratuito</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-white text-3xl font-light"
-            aria-label="Fechar modal"
-          >
-            &times;
-          </button>
-        </div>
+        {/* Botão de Fechar (X) */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
 
-        {/* Formulário */}
-        <form>
+        <h2 className="text-2xl font-bold mb-2">Vamos começar seu projeto?</h2>
+        <p className="text-gray-400 mb-6">Preencha o formulário e retornaremos em breve.</p>
+
+        {/* ----- FORMULÁRIO COM A AÇÃO PARA O FORMSPREE ----- */}
+        <form action="https://formspree.io/f/myzpryzk" method="POST"> {/* <-- COLE SEU LINK AQUI */}
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
-              Nome
-            </label>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Nome</label>
             <input
               type="text"
               id="name"
-              className="w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none" // <-- TROQUE A COR DO FOCO AQUI
+              name="name" // O atributo 'name' é crucial para o Formspree
+              required
+              className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500" // <-- TROQUE a cor do 'focus:ring' se quiser
               placeholder="Seu nome completo"
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
-              E-mail
-            </label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">E-mail</label>
             <input
               type="email"
               id="email"
-              className="w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none" // <-- TROQUE A COR DO FOCO AQUI
-              placeholder="seu.email@exemplo.com"
+              name="email" // O atributo 'name' é crucial
+              required
+              className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500" // <-- TROQUE a cor do 'focus:ring' se quiser
+              placeholder="seu@email.com"
             />
           </div>
-
+          
           <div className="mb-6">
-            <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
-              Qual seu maior desafio hoje?
-            </label>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">Mensagem</label>
             <textarea
               id="message"
+              name="message" // O atributo 'name' é crucial
               rows="4"
-              className="w-full p-3 bg-gray-800 border border-gray-600 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none" // <-- TROQUE A COR DO FOCO AQUI
-              placeholder="Ex: 'Não consigo atrair clientes qualificados', 'Meu site não gera vendas', etc."
+              className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500" // <-- TROQUE a cor do 'focus:ring' se quiser
+              placeholder="Fale um pouco sobre seu projeto..."
             ></textarea>
           </div>
 
-          {/* Botão de Envio */}
           <button
             type="submit"
-            className="w-full p-3 font-bold text-white rounded-md transition-transform transform hover:scale-105
-            bg-purple-500 hover:bg-purple-600" // <-- TROQUE AS CORES DO BOTÃO AQUI
+            className="w-full py-3 px-4 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-md transition-colors duration-300" // <-- TROQUE as cores do botão para as da sua marca
           >
-            Receber Diagnóstico
+            Enviar Mensagem
           </button>
         </form>
       </div>
