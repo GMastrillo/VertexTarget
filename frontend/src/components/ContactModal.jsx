@@ -67,21 +67,21 @@ const ContactModal = ({ isOpen, onClose }) => {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-300">Seu nome</label>
-                  <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Seu nome" required />
+                  <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" placeholder="Seu nome" required />
                 </div>
                 <div>
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-300">Seu email</label>
-                  <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="seu@email.com" required />
+                  <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" placeholder="seu@email.com" required />
                 </div>
                 <div>
                   <label htmlFor="whatsapp" className="block mb-2 text-sm font-medium text-gray-300">WhatsApp</label>
-                  <input type="tel" name="whatsapp" id="whatsapp" value={formData.whatsapp} onChange={handleChange} className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="(XX) XXXXX-XXXX" />
+                  <input type="tel" name="whatsapp" id="whatsapp" value={formData.whatsapp} onChange={handleChange} className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" placeholder="(XX) XXXXX-XXXX" />
                 </div>
                 <div>
                   <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-300">Sua mensagem</label>
-                  <textarea id="message" name="message" rows="4" value={formData.message} onChange={handleChange} className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Deixe sua mensagem..." required></textarea>
+                  <textarea id="message" name="message" rows="4" value={formData.message} onChange={handleChange} className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" placeholder="Deixe sua mensagem..." required></textarea>
                 </div>
-                <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" disabled={status === 'Enviando...'}>
+                <button type="submit" className="w-full text-white bg-purple-700 hover:bg-[purple]-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" disabled={status === 'Enviando...'}>
                   {status === 'Enviando...' ? 'Enviando...' : 'Enviar Mensagem'}
                 </button>
               </form>
