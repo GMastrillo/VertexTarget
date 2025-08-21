@@ -1,8 +1,57 @@
 // src/components/ContactModal.jsx
 
-import React from 'react';
+import React, { useState } from 'react';
 
 const ContactModal = ({ isOpen, onClose }) => {
+  // 1. Estados para controlar os dados do formulário e o status do envio
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    whatsapp: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState(null); // 'success' ou 'error'
+
+  // 2. Função para lidar com o envio
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Impede o recarregamento da página!
+    setIsSubmitting(true);
+    setSubmissionStatus(null);
+
+    try {
+      const response = await fetch('https://formspree.io/f/myzpryzk', { // <-- NÃO ESQUEÇA DE TROCAR
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setSubmissionStatus('success');
+        setFormData({ name: '', email: '', whatsapp: '', message: '' }); // Limpa o formulário
+        setTimeout(() => {
+          onClose(); // Fecha o modal após 2 segundos
+          setSubmissionStatus(null); // Reseta o status para a próxima vez que abrir
+        }, 2000);
+      } else {
+        throw new Error('Houve um problema ao enviar o formulário.');
+      }
+    } catch (error) {
+      console.error(error);
+      setSubmissionStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Função para atualizar o estado quando o usuário digita
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -10,52 +59,29 @@ const ContactModal = ({ isOpen, onClose }) => {
       <div className="bg-gray-800 p-8 rounded-lg shadow-2xl w-full max-w-md relative border border-purple-500/30">
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">&times;</button>
         <h2 className="text-2xl font-bold text-white mb-6 text-center">Vamos conversar?</h2>
-        <p className="text-center text-gray-400 mb-6">Preencha o formulário e retornaremos o mais breve possível.</p>
         
-        <form 
-          action="https://formspree.io/f/myzpryzk" // <-- NÃO ESQUEÇA DE TROCAR
-          method="POST" 
-          className="space-y-6"
-        >
-          {/* Campo Nome */}
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300">Nome</label>
-            <input type="text" name="name" id="name" required className="mt-1 block w-full bg-gray-700 border-gray-600 rounded-md shadow-sm text-white focus:ring-purple-500 focus:border-purple-500"/>
+        {/* Renderiza o formulário ou a mensagem de sucesso */}
+        {!submissionStatus ? (
+          <>
+            <p className="text-center text-gray-400 mb-6">Preencha o formulário e retornaremos o mais breve possível.</p>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Campos do formulário agora são controlados pelo estado */}
+              <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Seu nome" required className="..."/>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Seu e-mail" required className="..."/>
+              <input type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange} placeholder="Seu WhatsApp" className="..."/>
+              <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Sua mensagem" required rows="4" className="..."></textarea>
+              
+              <button type="submit" disabled={isSubmitting} className="...">
+                {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
+              </button>
+            </form>
+          </>
+        ) : (
+          <div className="text-center">
+            {submissionStatus === 'success' && <p className="text-green-400 text-lg">Obrigado! Sua mensagem foi enviada com sucesso. Já fecharemos esta janela.</p>}
+            {submissionStatus === 'error' && <p className="text-red-400 text-lg">Ops! Algo deu errado. Por favor, tente novamente.</p>}
           </div>
-
-          {/* Campo E-mail */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300">E-mail</label>
-            <input type="email" name="email" id="email" required className="mt-1 block w-full bg-gray-700 border-gray-600 rounded-md shadow-sm text-white focus:ring-purple-500 focus:border-purple-500"/>
-          </div>
-
-          {/* --- NOVO CAMPO DE WHATSAPP --- */}
-          <div>
-            <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-300">WhatsApp</label>
-            <input 
-              type="tel" // Usar "tel" é bom para semântica e teclados mobile
-              name="whatsapp" 
-              id="whatsapp" 
-              placeholder="(XX) XXXXX-XXXX"
-              className="mt-1 block w-full bg-gray-700 border-gray-600 rounded-md shadow-sm text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-          {/* --- FIM DO NOVO CAMPO --- */}
-
-          {/* Campo Mensagem */}
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300">Sua mensagem</label>
-            <textarea name="message" id="message" rows="4" required className="mt-1 block w-full bg-gray-700 border-gray-600 rounded-md shadow-sm text-white focus:ring-purple-500 focus:border-purple-500"></textarea>
-          </div>
-
-          {/* Botão de Envio */}
-          <button 
-            type="submit" 
-            className="w-full bg-purple-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-purple-500 transition-colors duration-300"
-          >
-            Enviar Mensagem
-          </button>
-        </form>
+        )}
       </div>
     </div>
   );
