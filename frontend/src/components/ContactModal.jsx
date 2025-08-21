@@ -78,7 +78,7 @@ const ContactModal = ({ isOpen, onClose }) => {
           <button
             type="submit"
             className="w-full p-3 font-bold text-white rounded-md transition-transform transform hover:scale-105
-            bg-green-500 hover:bg-green-600" // <-- TROQUE AS CORES DO BOTÃO AQUI
+            bg-purple-500 hover:bg-purple-600" // <-- TROQUE AS CORES DO BOTÃO AQUI
           >
             Receber Diagnóstico
           </button>
