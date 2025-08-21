@@ -30,7 +30,10 @@ const ContactModal = ({ isOpen, onClose }) => {
         <p className="text-gray-400 mb-6">Preencha o formulário e retornaremos em breve.</p>
 
         {/* ----- FORMULÁRIO COM A AÇÃO PARA O FORMSPREE ----- */}
-        <form action="https://formspree.io/f/myzpryzk" method="POST"> {/* <-- COLE SEU LINK AQUI */}
+        // Versão CORRETA (com action e method)
+<form  action="https://formspree.io/f/myzpryzk" 
+  method="POST" 
+  className="space-y-6">
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Nome</label>
             <input
