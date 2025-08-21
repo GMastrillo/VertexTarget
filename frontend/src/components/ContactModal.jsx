@@ -31,7 +31,7 @@ const ContactModal = ({ isOpen, onClose }) => {
 
           {/* --- NOVO CAMPO DE WHATSAPP --- */}
           <div>
-            <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-300">WhatsApp (Opcional)</label>
+            <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-300">WhatsApp</label>
             <input 
               type="tel" // Usar "tel" é bom para semântica e teclados mobile
               name="whatsapp" 
