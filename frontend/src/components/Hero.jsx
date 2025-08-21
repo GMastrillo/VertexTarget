@@ -76,14 +76,13 @@ const Hero = () => {
 
           {/* Main Slogan */}
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl text-gray-300 mb-6 sm:mb-8 font-light max-w-4xl mx-auto leading-relaxed">
-            Atingindo o <span className="text-purple-400 font-semibold">Pico</span> do seu 
-            <span className="text-indigo-400 font-semibold"> Potencial Digital</span>
+            Sua  <span className="text-purple-400 font-semibold">Presença Online Completa: </span> Do Site Profissional à 
+            <span className="text-indigo-400 font-semibold"> Geração Diária de Leads. </span>
           </h2>
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
-            Criação de sites/aplicações, automações com IA e marketing digital de precisão. 
-            Sua agência tecnológica para conquista do mercado digital.
+            Soluções de site e gestão de tráfego focadas em uma única métrica: o seu resultado.
           </p>
 
           {/* CTA Button */}
@@ -93,7 +92,7 @@ const Hero = () => {
             onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}
           >
             <span className="mr-2">🎯</span>
-            <span className="hidden sm:inline">Nossas Estratégias</span>
+            <span className="hidden sm:inline">Receber Diagnóstico Gratuito</span>
             <span className="sm:hidden">Estratégias</span>
           </Button>
         </div>
