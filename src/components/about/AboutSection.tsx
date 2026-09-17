@@ -4,7 +4,6 @@ import { useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ExperienceTimeline from "./ExperienceTimeline";
 
 const SkillsOrbit = dynamic(() => import("./SkillsOrbit"), {
   ssr: false,
@@ -25,6 +24,31 @@ const SkillsOrbit = dynamic(() => import("./SkillsOrbit"), {
 
 gsap.registerPlugin(ScrollTrigger);
 
+const CEOS = [
+  {
+    name: "Gabriel Mastrillo",
+    badge: "⚡ CEO & CTO",
+    subtitle: "Engenharia de Software, Arquitetura de Sistemas & IA",
+    bio: "Fundador e líder técnico-executivo da VertexTarget. Com sólida formação prática em suporte técnico, hardware e resolução de problemas complexos, projeta ecossistemas digitais de alta precisão: arquiteturas full-stack, WebGL/3D com shaders customizados e integrações com inteligência artificial para marcas que buscam autoridade absoluta.",
+    accent: "#00f0ff",
+    accentRgb: "0, 240, 255",
+    sideLabel: "Engenharia & IA",
+    tags: ["Arquitetura Full-Stack", "Three.js / WebGL", "IA Generativa", "DevOps & Cloud"],
+    initials: "GM",
+  },
+  {
+    name: "Denis Braghin",
+    badge: "🚀 CEO · Vendas & Marketing",
+    subtitle: "Estratégia Comercial, Growth Hacking & Funis de Conversão",
+    bio: "Co-CEO especializado em vendas e marketing da VertexTarget. Especialista em acelerar receitas através de estratégias data-driven, funis de vendas de alta performance, automação de processos comerciais e posicionamento premium para transformar leads em clientes fiéis.",
+    accent: "#8b5cf6",
+    accentRgb: "139, 92, 246",
+    sideLabel: "Growth & Tração",
+    tags: ["Estratégia de Vendas", "Growth Hacking", "Funis de Conversão", "Posicionamento B2B"],
+    initials: "DB",
+  },
+];
+
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -33,7 +57,6 @@ export default function AboutSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title reveal
       if (titleRef.current) {
         gsap.from(titleRef.current.children, {
           y: 40,
@@ -48,7 +71,6 @@ export default function AboutSection() {
         });
       }
 
-      // Leadership cards reveal
       if (cardsRef.current) {
         gsap.from(cardsRef.current.children, {
           y: 35,
@@ -63,7 +85,6 @@ export default function AboutSection() {
         });
       }
 
-      // Stats reveal
       if (statsRef.current) {
         gsap.from(statsRef.current.children, {
           y: 30,
@@ -106,125 +127,116 @@ export default function AboutSection() {
           </p>
         </div>
 
-        {/* Executive Duo Cards */}
+        {/* CEO Cards */}
         <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-          {/* Gabriel Mastrillo — CEO & CTO */}
-          <div
-            className="p-8 md:p-10 rounded-2xl border relative overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:border-cyan-400/50"
-            style={{
-              background: "var(--color-vt-bg-card)",
-              borderColor: "var(--color-vt-border)",
-            }}
-          >
-            {/* Top Glow Accent */}
+          {CEOS.map((ceo) => (
             <div
-              className="absolute top-0 left-0 right-0 h-[2px] opacity-70 group-hover:opacity-100 transition-opacity"
+              key={ceo.name}
+              className="p-8 md:p-10 rounded-2xl border relative overflow-hidden flex flex-col group transition-all duration-300 hover:-translate-y-1"
               style={{
-                background: "linear-gradient(90deg, transparent, #00f0ff, transparent)",
+                background:
+                  "linear-gradient(180deg, rgba(15, 15, 36, 0.95) 0%, rgba(10, 10, 26, 0.98) 100%)",
+                borderColor: "rgba(255,255,255,0.08)",
               }}
-            />
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = `rgba(${ceo.accentRgb}, 0.45)`;
+                e.currentTarget.style.boxShadow = `0 24px 60px -20px rgba(${ceo.accentRgb}, 0.25)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              {/* Top glow accent */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[2px] opacity-70 group-hover:opacity-100 transition-opacity"
+                style={{
+                  background: `linear-gradient(90deg, transparent, ${ceo.accent}, transparent)`,
+                }}
+              />
 
-            <div>
-              <div className="flex items-center justify-between mb-5">
-                <span
-                  className="px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase border"
+              {/* Corner radial glow */}
+              <div
+                className="absolute -top-20 -right-20 w-56 h-56 rounded-full pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity duration-500"
+                style={{
+                  background: `radial-gradient(circle, rgba(${ceo.accentRgb}, 0.14), transparent 70%)`,
+                }}
+              />
+
+              {/* Header: avatar + badge */}
+              <div className="flex items-start justify-between mb-7">
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-xl tracking-tight"
                   style={{
-                    background: "rgba(0, 240, 255, 0.1)",
-                    color: "#00f0ff",
-                    borderColor: "rgba(0, 240, 255, 0.3)",
+                    fontFamily: "var(--font-heading)",
+                    background: `linear-gradient(135deg, rgba(${ceo.accentRgb}, 0.18), rgba(${ceo.accentRgb}, 0.06))`,
+                    border: `1px solid rgba(${ceo.accentRgb}, 0.35)`,
+                    color: ceo.accent,
+                    boxShadow: `0 0 24px rgba(${ceo.accentRgb}, 0.15)`,
                   }}
                 >
-                  ⚡ CEO & CTO
-                </span>
-                <span className="text-xs font-mono text-zinc-500">Engenharia & IA</span>
-              </div>
+                  {ceo.initials}
+                </div>
 
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
-                Gabriel Mastrillo
-              </h3>
-              <p className="text-xs md:text-sm font-mono text-cyan-300 mb-6">
-                Engenharia de Software, Arquitetura de Sistemas & IA
-              </p>
-
-              <p className="body-md mb-6" style={{ color: "var(--color-vt-text-muted)" }}>
-                Liderança técnica e executiva da VertexTarget. Com sólida formação prática em suporte,
-                hardware e resolução de problemas complexos, projeta ecossistemas digitais de alta precisão,
-                WebGL/3D com shaders customizados e integrações com inteligência artificial para marcas que buscam autoridade absoluta.
-              </p>
-            </div>
-
-            <div className="pt-6 border-t border-white/[0.06]">
-              <div className="flex flex-wrap gap-2">
-                {["Arquitetura Full-Stack", "Three.js / WebGL", "IA Generativa", "DevOps & Cloud"].map((tag) => (
+                <div className="flex flex-col items-end gap-2">
                   <span
-                    key={tag}
-                    className="px-2.5 py-1 rounded-md text-[11px] font-mono text-cyan-200 border border-cyan-400/20 bg-cyan-500/[0.05]"
+                    className="px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase border"
+                    style={{
+                      background: `rgba(${ceo.accentRgb}, 0.10)`,
+                      color: ceo.accent,
+                      borderColor: `rgba(${ceo.accentRgb}, 0.30)`,
+                    }}
                   >
-                    {tag}
+                    {ceo.badge}
                   </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Denis Braghin — CEO Vendas & Marketing */}
-          <div
-            className="p-8 md:p-10 rounded-2xl border relative overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:border-violet-400/50"
-            style={{
-              background: "var(--color-vt-bg-card)",
-              borderColor: "var(--color-vt-border)",
-            }}
-          >
-            {/* Top Glow Accent */}
-            <div
-              className="absolute top-0 left-0 right-0 h-[2px] opacity-70 group-hover:opacity-100 transition-opacity"
-              style={{
-                background: "linear-gradient(90deg, transparent, #8b5cf6, transparent)",
-              }}
-            />
-
-            <div>
-              <div className="flex items-center justify-between mb-5">
-                <span
-                  className="px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase border"
-                  style={{
-                    background: "rgba(139, 92, 246, 0.12)",
-                    color: "#a78bfa",
-                    borderColor: "rgba(139, 92, 246, 0.3)",
-                  }}
-                >
-                  🚀 CEO · Vendas & Marketing
-                </span>
-                <span className="text-xs font-mono text-zinc-500">Growth & Tração</span>
+                  <span className="text-xs font-mono" style={{ color: "var(--color-vt-text-dim)" }}>
+                    {ceo.sideLabel}
+                  </span>
+                </div>
               </div>
 
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
-                Denis Braghin
+              {/* Name & role */}
+              <h3
+                className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                {ceo.name}
               </h3>
-              <p className="text-xs md:text-sm font-mono text-violet-300 mb-6">
-                Estratégia Comercial, Growth Hacking & Funis de Conversão
+              <p
+                className="text-xs md:text-sm font-mono mb-6"
+                style={{ color: ceo.accent }}
+              >
+                {ceo.subtitle}
               </p>
 
-              <p className="body-md mb-6" style={{ color: "var(--color-vt-text-muted)" }}>
-                Liderança comercial e estratégica da VertexTarget. Especialista em acelerar receitas através de
-                estratégias data-driven, funis de vendas de alta performance, automação de processos comerciais e
-                posicionamento premium para transformar leads em clientes fiéis.
+              {/* Bio */}
+              <p
+                className="text-sm leading-relaxed mb-8 flex-1"
+                style={{ color: "var(--color-vt-text-muted)" }}
+              >
+                {ceo.bio}
               </p>
-            </div>
 
-            <div className="pt-6 border-t border-white/[0.06]">
-              <div className="flex flex-wrap gap-2">
-                {["Estratégia de Vendas", "Growth Hacking", "Funis de Conversão", "Posicionamento B2B"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2.5 py-1 rounded-md text-[11px] font-mono text-violet-200 border border-violet-400/20 bg-violet-500/[0.05]"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              {/* Tags */}
+              <div className="pt-6 border-t border-white/[0.06]">
+                <div className="flex flex-wrap gap-2">
+                  {ceo.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-1 rounded-md text-[11px] font-mono"
+                      style={{
+                        color: `${ceo.accent}dd`,
+                        border: `1px solid rgba(${ceo.accentRgb}, 0.20)`,
+                        background: `rgba(${ceo.accentRgb}, 0.05)`,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
 
         {/* Stats Row */}
@@ -253,9 +265,6 @@ export default function AboutSection() {
 
         {/* 3D Skills Constellation */}
         <SkillsOrbit />
-
-        {/* Experience Timeline */}
-        <ExperienceTimeline />
       </div>
 
       <div className="divider mt-16" />

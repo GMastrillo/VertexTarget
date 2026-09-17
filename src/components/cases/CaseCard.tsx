@@ -12,6 +12,104 @@ interface CaseCardProps {
   caseStudy: CaseStudy;
   index: number;
   onExpand: () => void;
+}/**
+ * Live site screenshot — free, no API key (Microlink screenshot API, cached).
+ * Single <img> always mounted; fades in when complete (event + ref + polling
+ * safety nets so the card never gets stuck on the placeholder).
+ */
+function SitePreview({ url, color }: { url: string; color: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  const src = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
+
+  // Safety net #1: image may already be complete when the ref attaches (cached)
+  const handleRef = (node: HTMLImageElement | null) => {
+    imgRef.current = node;
+    if (node && node.complete && node.naturalWidth > 0) setLoaded(true);
+  };
+
+  // Safety net #2: poll for completion in case the load event is missed
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const img = imgRef.current;
+      if (img?.complete) {
+        if (img.naturalWidth > 0) setLoaded(true);
+        else setFailed(true);
+        clearInterval(interval);
+      }
+    }, 300);
+    const timeout = setTimeout(() => clearInterval(interval), 25000);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  return (
+    <div
+      className="relative w-full h-full overflow-hidden"
+      style={{ background: "#0a0a1a" }}
+    >
+      {/* Placeholder while loading / on failure */}
+      {!loaded && (
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            background: failed
+              ? `radial-gradient(circle at 50% 40%, ${color}18, #0a0a1a 70%)`
+              : `radial-gradient(circle at 50% 40%, ${color}14, #0a0a1a 70%)`,
+          }}
+        >
+          {!failed && (
+            <div className="text-center">
+              <div className="flex gap-1.5 justify-center mb-3">
+                {[0, 1, 2].map((i) => (
+                  <motion.span
+                    key={i}
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: color, opacity: 0.5 }}
+                    animate={{ y: [0, -6, 0], opacity: [0.3, 0.8, 0.3] }}
+                    transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.15 }}
+                  />
+                ))}
+              </div>
+              <span
+                className="text-[10px] font-mono uppercase tracking-widest"
+                style={{ color: `${color}88` }}
+              >
+                Carregando preview
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Screenshot — always mounted, fades in when ready */}
+      {!failed && (
+        <img
+          ref={handleRef}
+          src={src}
+          alt={`Preview do site ${url}`}
+          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+        />
+      )}
+
+      {/* Gradient overlays for text legibility */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(5,5,16,0.55) 0%, rgba(5,5,16,0.15) 30%, rgba(5,5,16,0.65) 70%, rgba(10,10,26,0.97) 100%)",
+        }}
+      />
+    </div>
+  );
 }
 
 export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) {
@@ -48,88 +146,70 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
         isLarge ? "md:col-span-2" : ""
       }`}
       style={{
-        minHeight: isLarge ? "420px" : "380px",
-        background: "var(--color-vt-bg-card)",
-        borderColor: isHovered ? `${caseStudy.color}60` : "var(--color-vt-border)",
-        boxShadow: isHovered ? `0 20px 50px -15px ${caseStudy.color}25` : "none",
+        minHeight: isLarge ? "440px" : "460px",
+        background: "#0a0a1a",
+        borderColor: isHovered ? `${caseStudy.color}55` : "rgba(255,255,255,0.08)",
+        boxShadow: isHovered
+          ? `0 24px 60px -18px ${caseStudy.color}30`
+          : "0 12px 40px -18px rgba(0,0,0,0.55)",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onExpand}
-      whileHover={{ scale: 1.015, y: -4 }}
+      whileHover={{ scale: 1.01, y: -4 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
-      {/* Gradient Background */}
-      <div
-        className="absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40"
-        style={{
-          background: `radial-gradient(circle at 25% 75%, ${caseStudy.color}35, transparent 65%)`,
-        }}
-      />
+      {/* Full-bleed screenshot background */}
+      <div className="absolute inset-0">
+        <SitePreview url={caseStudy.liveUrl} color={caseStudy.color} />
+      </div>
 
-      {/* Subtle Grid Pattern on Hover */}
+      {/* Top accent line */}
       <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(${caseStudy.color}0a 1px, transparent 1px),
-            linear-gradient(90deg, ${caseStudy.color}0a 1px, transparent 1px)
-          `,
-          backgroundSize: "32px 32px",
-        }}
-      />
-
-      {/* Top Banner Accent Line */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[2px] transition-all duration-500 opacity-60 group-hover:opacity-100"
+        className="absolute top-0 left-0 right-0 h-[2px] transition-all duration-500 opacity-60 group-hover:opacity-100 z-20"
         style={{
           background: `linear-gradient(90deg, transparent, ${caseStudy.color}, transparent)`,
         }}
       />
 
-      {/* Content */}
+      {/* Content overlay */}
       <div className="relative z-10 h-full p-7 md:p-8 flex flex-col justify-between">
-        {/* Card Header */}
+        {/* Card Header — category + year + external link */}
         <div className="flex items-start justify-between gap-4">
-          <div className="flex flex-col gap-1.5">
-            <div className="flex items-center gap-2">
-              <span
-                className="label text-[11px] uppercase tracking-wider font-semibold"
-                style={{ color: caseStudy.color }}
-              >
-                {caseStudy.category}
-              </span>
-              <span className="text-[11px] opacity-40">•</span>
-              <span
-                className="text-[11px] font-mono tracking-wider"
-                style={{ color: "var(--color-vt-text-dim)" }}
-              >
-                {caseStudy.client}
-              </span>
-            </div>
-          </div>
+          <span
+            className="label text-[11px] uppercase tracking-wider font-semibold px-3 py-1.5 rounded-full"
+            style={{
+              color: caseStudy.color,
+              background: "rgba(5, 5, 16, 0.65)",
+              backdropFilter: "blur(8px)",
+              border: `1px solid ${caseStudy.color}30`,
+            }}
+          >
+            {caseStudy.category}
+          </span>
 
           <div className="flex items-center gap-2">
             <span
-              className="text-xs font-mono px-2.5 py-1 rounded-full border"
+              className="text-xs font-mono px-2.5 py-1.5 rounded-full border"
               style={{
-                borderColor: `${caseStudy.color}30`,
-                color: "var(--color-vt-text-dim)",
-                background: "rgba(255,255,255,0.02)",
+                borderColor: "rgba(255,255,255,0.12)",
+                color: "var(--color-vt-text-muted)",
+                background: "rgba(5, 5, 16, 0.65)",
+                backdropFilter: "blur(8px)",
               }}
             >
               {caseStudy.year}
             </span>
 
-            {/* Direct External Link Icon */}
             <a
               href={caseStudy.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
               style={{
-                background: `${caseStudy.color}15`,
+                background: "rgba(5, 5, 16, 0.65)",
+                backdropFilter: "blur(8px)",
                 border: `1px solid ${caseStudy.color}40`,
                 color: caseStudy.color,
               }}
@@ -148,12 +228,13 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
           </div>
         </div>
 
-        {/* Card Body */}
-        <div className="my-auto pt-6 pb-4">
+        {/* Card Body — bottom aligned over the screenshot */}
+        <div className="mt-auto pt-6">
           <h3
-            className="heading-md mb-2 transition-colors duration-300 tracking-tight"
+            className="text-2xl md:text-3xl font-bold tracking-tight mb-1.5 transition-colors duration-300"
             style={{
-              color: isHovered ? caseStudy.color : "var(--color-vt-text)",
+              fontFamily: "var(--font-heading)",
+              color: isHovered ? caseStudy.color : "#ffffff",
             }}
           >
             {caseStudy.title}
@@ -161,93 +242,67 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
 
           <p
             className="text-xs md:text-sm font-mono mb-3"
-            style={{ color: `${caseStudy.color}cc` }}
+            style={{ color: `${caseStudy.color}dd` }}
           >
             {caseStudy.tagline}
           </p>
 
           <p
-            className="body-md max-w-2xl mb-5 line-clamp-2"
-            style={{ color: "var(--color-vt-text-muted)" }}
+            className="text-sm leading-relaxed mb-4 max-w-2xl"
+            style={{
+              color: "var(--color-vt-text-muted)",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}
           >
             {caseStudy.description}
           </p>
 
-          {/* Metric Pill */}
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border mb-5 text-xs font-mono"
-            style={{
-              background: `${caseStudy.color}0a`,
-              borderColor: `${caseStudy.color}25`,
-              color: caseStudy.color,
-            }}
-          >
+          {/* Metrics + tags row */}
+          <div className="flex flex-wrap items-center gap-2 mb-5">
             <span
-              className="w-1.5 h-1.5 rounded-full animate-pulse"
-              style={{ background: caseStudy.color }}
-            />
-            <span>{caseStudy.metrics}</span>
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-mono"
+              style={{
+                background: `${caseStudy.color}12`,
+                borderColor: `${caseStudy.color}30`,
+                color: caseStudy.color,
+                backdropFilter: "blur(6px)",
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full animate-pulse"
+                style={{ background: caseStudy.color }}
+              />
+              {caseStudy.metrics}
+            </span>
           </div>
 
-          {/* Tags */}
           <div className="flex flex-wrap gap-2">
-            {caseStudy.tags.slice(0, 4).map((tag) => (
+            {caseStudy.tags.slice(0, 5).map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-1 rounded-full text-[11px] font-medium tracking-wide"
+                className="px-2.5 py-1 rounded-full text-[11px] font-medium"
                 style={{
-                  background: `${caseStudy.color}10`,
-                  color: `${caseStudy.color}dd`,
-                  border: `1px solid ${caseStudy.color}25`,
+                  background: "rgba(5, 5, 16, 0.55)",
+                  backdropFilter: "blur(6px)",
+                  color: "var(--color-vt-text-muted)",
+                  border: "1px solid rgba(255,255,255,0.10)",
                 }}
               >
                 {tag}
               </span>
             ))}
-            {caseStudy.tags.length > 4 && (
+            {caseStudy.tags.length > 5 && (
               <span
-                className="px-2 py-1 rounded-full text-[10px] font-mono opacity-60"
-                style={{ color: "var(--color-vt-text-dim)" }}
+                className="px-2 py-1 rounded-full text-[10px] font-mono"
+                style={{ color: "var(--color-vt-text-dim)", background: "rgba(5,5,16,0.55)" }}
               >
-                +{caseStudy.tags.length - 4}
+                +{caseStudy.tags.length - 5}
               </span>
             )}
           </div>
-        </div>
-
-        {/* Card Footer Actions */}
-        <div className="flex items-center justify-between pt-4 border-t border-white/[0.05]">
-          <span
-            className="text-xs font-mono uppercase tracking-wider flex items-center gap-1.5"
-            style={{ color: "var(--color-vt-text-dim)" }}
-          >
-            <span>Ver Estudo & Arquitetura</span>
-            <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
-          </span>
-
-          <a
-            href={caseStudy.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-all duration-200"
-            style={{
-              color: caseStudy.color,
-              background: `${caseStudy.color}15`,
-              border: `1px solid ${caseStudy.color}35`,
-            }}
-          >
-            <span>Live Demo</span>
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M4 12L12 4M12 4H5M12 4v7"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
         </div>
       </div>
     </motion.div>

@@ -56,48 +56,50 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Footer Content */}
-      <div className="section-inner py-12 px-6 md:px-12">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
-          {/* Left */}
-          <div>
-            <div className="mb-4" style={{ fontFamily: "var(--font-heading)" }}>
-              <span className="gradient-text text-2xl font-bold">Vertex</span>
-              <span className="text-2xl font-bold" style={{ color: "var(--color-vt-text)" }}>
-                Target
-              </span>
-            </div>
-            <p className="body-md max-w-md" style={{ color: "var(--color-vt-text-dim)" }}>
-              Engenharia digital de alto impacto.
-              <br />
-              Marketing + IA + Código.
-            </p>
-          </div>
-
-          {/* Right */}
-          <div className="flex flex-col items-start md:items-end gap-4">
-            <div className="flex gap-6">
-              {[
-                { label: "GitHub", href: "#" },
-                { label: "LinkedIn", href: "#" },
-                { label: "Instagram", href: "#" },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  className="text-sm font-medium transition-colors duration-300 hover:text-white"
-                  style={{ color: "var(--color-vt-text-muted)" }}
-                >
-                  {social.label}
-                </a>
-              ))}
-            </div>
-            <p className="text-xs" style={{ color: "var(--color-vt-text-dim)" }}>
-              © {new Date().getFullYear()} VertexTarget. Engineered with{" "}
-              <span className="gradient-text">precision</span>.
-            </p>
-          </div>
+      {/* Footer Content — fully centered */}
+      <div className="section-inner py-14 px-6 flex flex-col items-center text-center gap-8">
+        {/* Logo */}
+        <div style={{ fontFamily: "var(--font-heading)" }}>
+          <span className="gradient-text text-3xl font-black tracking-tight">Vertex</span>
+          <span className="text-3xl font-bold tracking-tight" style={{ color: "var(--color-vt-text)" }}>
+            Target
+          </span>
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#00f0ff] animate-pulse inline-block ml-1.5" />
         </div>
+
+        {/* Tagline */}
+        <p className="body-md max-w-md" style={{ color: "var(--color-vt-text-dim)" }}>
+          Engenharia digital de alto impacto.
+          <br />
+          Marketing + IA + Código.
+        </p>
+
+        {/* Divider */}
+        <div className="w-24 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--color-vt-accent-cyan), transparent)" }} />
+
+        {/* Social Links — centered */}
+        <div className="flex items-center gap-8">
+          {[
+            { label: "GitHub", href: "#" },
+            { label: "LinkedIn", href: "#" },
+            { label: "Instagram", href: "#" },
+          ].map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              className="text-sm font-medium transition-all duration-300 hover:text-white hover:-translate-y-0.5"
+              style={{ color: "var(--color-vt-text-muted)" }}
+            >
+              {social.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Copyright */}
+        <p className="text-xs" style={{ color: "var(--color-vt-text-dim)" }}>
+          © {new Date().getFullYear()} VertexTarget. Engineered with{" "}
+          <span className="gradient-text">precision</span>.
+        </p>
       </div>
     </footer>
   );
