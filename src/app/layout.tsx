@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, Inter } from "next/font/google";
+import ThemeProvider from "@/providers/ThemeProvider";
+import LanguageProvider from "@/providers/LanguageProvider";
+import ThemeTransition from "@/components/layout/ThemeTransition";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -50,8 +53,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${outfit.variable} ${inter.variable}`}>
-      <body className="grain">{children}</body>
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${outfit.variable} ${inter.variable}`}
+    >
+      <body className="grain">
+        <ThemeProvider>
+          <LanguageProvider>
+            <ThemeTransition />
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -5,12 +5,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
 import MagneticButton from "@/components/ui/MagneticButton";
+import { useT } from "@/providers/LanguageProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
 
 export default function HeroSection() {
+  const t = useT();
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sublineRef = useRef<HTMLParagraphElement>(null);
@@ -102,8 +104,8 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* WebGL Background */}
-      <div className="absolute inset-0 z-0">
+      {/* WebGL Background — dimmed in light mode via .hero-canvas */}
+      <div className="absolute inset-0 z-0 hero-canvas transition-opacity duration-500">
         <HeroCanvas />
       </div>
 
@@ -119,7 +121,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto flex flex-col items-center justify-center w-full">
         <div ref={labelRef} className="label mb-6 tracking-widest">
-          VertexTarget Studio
+          {t.hero.label}
         </div>
 
         <h1
@@ -127,10 +129,10 @@ export default function HeroSection() {
           className="heading-xl mb-6 text-center w-full flex flex-col items-center"
         >
           <span className="hero-line block text-center">
-            We engineer
+            {t.hero.title1}
           </span>
           <span className="hero-line inline-block gradient-text text-glow text-center">
-            digital gravity.
+            {t.hero.title2}
           </span>
         </h1>
 
@@ -139,8 +141,7 @@ export default function HeroSection() {
           className="body-lg max-w-2xl mx-auto mb-10 sm:mb-12 text-center leading-relaxed"
           style={{ color: "var(--color-vt-text-muted)" }}
         >
-          Marketing digital, automação com IA e experiências web imersivas.
-          Transformamos marcas em forças gravitacionais do digital.
+          {t.hero.subtitle}
         </p>
 
         <div
@@ -149,7 +150,7 @@ export default function HeroSection() {
         >
           {/* Primary CTA — Radiant Obsidian/Cyan/Violet */}
           <MagneticButton href="#contact" variant="primary">
-            <span>Iniciar Projeto</span>
+            <span>{t.hero.ctaPrimary}</span>
             <svg
               className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300"
               viewBox="0 0 16 16"
@@ -168,7 +169,7 @@ export default function HeroSection() {
           {/* Secondary CTA — Luxury Obsidian Glass Pill */}
           <MagneticButton href="#cases" variant="secondary">
             <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#00f0ff] animate-pulse" />
-            <span>Ver Cases</span>
+            <span>{t.hero.ctaSecondary}</span>
             <svg
               className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 opacity-90 group-hover:opacity-100"
               viewBox="0 0 16 16"
@@ -195,7 +196,7 @@ export default function HeroSection() {
           className="text-xs tracking-widest uppercase"
           style={{ color: "var(--color-vt-text-dim)" }}
         >
-          Scroll
+          {t.hero.scroll}
         </span>
         <div
           className="w-[1px] h-8 overflow-hidden"

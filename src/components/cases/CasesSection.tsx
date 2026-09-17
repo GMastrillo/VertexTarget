@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { CASES } from "@/lib/constants";
 import CaseCard from "./CaseCard";
+import { useLanguage } from "@/providers/LanguageProvider";
+import { CARD_CONTENT } from "@/lib/i18n-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,9 +88,16 @@ function ModalPreview({ url, color }: { url: string; color: string }) {
 }
 
 export default function CasesSection() {
+  const { t, locale } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const [activeCase, setActiveCase] = useState<string | null>(null);
+
+  // Card copy follows the active locale (category, tagline, description, metrics, tags)
+  const localizedCases = CASES.map((c) => ({
+    ...c,
+    ...CARD_CONTENT[locale].cases[c.id],
+  }));
 
   // Close on Escape key + lock body scroll while modal is open
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -122,28 +131,25 @@ export default function CasesSection() {
     return () => ctx.revert();
   }, []);
 
-  const c = CASES.find((cs) => cs.id === activeCase);
+  const c = localizedCases.find((cs) => cs.id === activeCase);
 
   return (
     <section ref={sectionRef} id="cases" className="section">
       <div className="section-inner">
         {/* Section Header */}
         <div ref={titleRef} className="mb-16">
-          <div className="label mb-4">Portfólio & Engenharia</div>
+          <div className="label mb-4">{t.cases.label}</div>
           <h2 className="heading-lg mb-6">
-            Projetos que
+            {t.cases.title1}
             <br />
-            <span className="gradient-text">definem mercados.</span>
+            <span className="gradient-text">{t.cases.title2}</span>
           </h2>
-          <p className="body-lg max-w-2xl">
-            Cada aplicação é uma obra de alta precisão técnica. Unimos arquitetura full-stack,
-            design imersivo, automação inteligente e performance extrema para transformar negócios reais.
-          </p>
+          <p className="body-lg max-w-2xl">{t.cases.subtitle}</p>
         </div>
 
         {/* Cases Grid — responsive staggered layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {CASES.map((caseStudy, index) => (
+          {localizedCases.map((caseStudy, index) => (
             <CaseCard
               key={caseStudy.id}
               caseStudy={caseStudy}
@@ -200,6 +206,7 @@ export default function CasesSection() {
                       className="w-8 h-8 rounded-full flex items-center justify-center text-lg hover:bg-white/10 transition-colors flex-shrink-0"
                       style={{ color: "rgba(255,255,255,0.7)" }}
                       aria-label="Fechar modal"
+                      data-i18n-ignore
                     >
                       ✕
                     </button>
@@ -217,7 +224,7 @@ export default function CasesSection() {
                       boxShadow: `0 10px 30px -8px ${c.color}90`,
                     }}
                   >
-                    <span>Visitar Projeto</span>
+                    <span>{t.cases.visitProject}</span>
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path
                         d="M4 12L12 4M12 4H5M12 4v7"
@@ -293,7 +300,7 @@ export default function CasesSection() {
                         border: "1px solid rgba(0, 230, 118, 0.25)",
                       }}
                     >
-                      ✓ Produção 100% Ativa
+                      {t.cases.production}
                     </span>
                   </div>
 
@@ -303,7 +310,7 @@ export default function CasesSection() {
                       className="text-[11px] font-mono uppercase tracking-widest mb-3"
                       style={{ color: "var(--color-vt-text-dim)" }}
                     >
-                      Sobre o projeto
+                      {t.cases.aboutProject}
                     </div>
                     <p
                       className="text-sm sm:text-base leading-relaxed"
@@ -319,7 +326,7 @@ export default function CasesSection() {
                       className="text-[11px] font-mono uppercase tracking-widest mb-3"
                       style={{ color: "var(--color-vt-text-dim)" }}
                     >
-                      Tecnologias & Arquitetura
+                      {t.cases.techStack}
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {c.tags.map((tag) => (
@@ -343,7 +350,7 @@ export default function CasesSection() {
                     className="pt-6 border-t border-white/[0.06] text-xs font-mono"
                     style={{ color: "var(--color-vt-text-dim)" }}
                   >
-                    Deploy oficial hospedado e otimizado na Vercel Edge Network
+                    {t.cases.deployNote}
                   </div>
                 </div>
               </motion.div>

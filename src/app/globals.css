@@ -27,6 +27,25 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+
+  /* Liquid Glass (iOS-style) tokens */
+  --glass-bg: rgba(10, 10, 26, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.22);
+  --glass-inner-shadow: rgba(0, 0, 0, 0.1);
+  --glass-outer-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5);
+
+  /* Card surface gradient (theme-aware) */
+  --card-grad-a: rgba(15, 15, 36, 0.95);
+  --card-grad-b: rgba(10, 10, 26, 0.98);
+  --menu-overlay: rgba(5, 5, 16, 0.98);
+
+  /* Logo shadow (theme-aware, for the "Target" wordmark) */
+  --logo-shadow: rgba(255, 255, 255, 0.35);
+
+  /* Button surface (secondary variant) */
+  --color-vt-glass-btn-bg: rgba(10, 10, 34, 0.85);
+  --color-vt-btn-primary-text: #050510;
 }
 
 @theme {
@@ -68,9 +87,79 @@
   }
 }
 
+/* ═══════════════════════════════════════════════════════
+   LIGHT THEME — toggled by next-themes (<html class="light">)
+   ═══════════════════════════════════════════════════════ */
+
+html.light {
+  color-scheme: light;
+
+  --color-vt-bg: #f2f5fa;
+  --color-vt-bg-elevated: #ffffff;
+  --color-vt-bg-card: rgba(255, 255, 255, 0.78);
+  --color-vt-surface: #eef1f7;
+  --color-vt-border: #d9dfeb;
+  --color-vt-text: #0b1020;
+  --color-vt-text-muted: #4a5570;
+  --color-vt-text-dim: #8a93aa;
+  --color-vt-accent-cyan: #0090c8;
+  --color-vt-accent-violet: #7c3aed;
+  --color-vt-accent-magenta: #c026d3;
+  --color-vt-success: #059669;
+  --color-vt-error: #dc2626;
+
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-highlight: rgba(255, 255, 255, 0.95);
+  --glass-inner-shadow: rgba(11, 16, 32, 0.06);
+  --glass-outer-shadow: 0 20px 50px -24px rgba(15, 23, 42, 0.25);
+
+  --card-grad-a: rgba(255, 255, 255, 0.92);
+  --card-grad-b: rgba(244, 246, 251, 0.96);
+  --menu-overlay: rgba(242, 245, 250, 0.98);
+
+  /* Logo shadow (theme-aware, for the "Target" wordmark) */
+  --logo-shadow: rgba(11, 16, 32, 0.45);
+
+  /* Button surface (secondary variant) */
+  --color-vt-glass-btn-bg: rgba(255, 255, 255, 0.75);
+  --color-vt-btn-primary-text: #ffffff;
+}
+
+/* ═══════════════════════════════════════════════════════
+   LIQUID GLASS (iOS-style) UTILITIES
+   Frosted translucent surface with specular top highlight
+   ═══════════════════════════════════════════════════════ */
+
+.liquid-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 var(--glass-highlight),
+    inset 0 -1px 0 var(--glass-inner-shadow),
+    var(--glass-outer-shadow);
+}
+
+.liquid-glass-card {
+  background: linear-gradient(180deg, var(--card-grad-a) 0%, var(--card-grad-b) 100%);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 var(--glass-highlight),
+    var(--glass-outer-shadow);
+}
+
+/* Soften the WebGL hero backdrop in light mode */
+html.light .hero-canvas {
+  opacity: 0.35;
+}
+
 html {
-  background-color: #050510;
-  color: #e8e8f0;
+  background-color: var(--color-vt-bg);
+  color: var(--color-vt-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -95,10 +184,22 @@ html.lenis body {
 }
 
 body {
-  background-color: #050510;
-  color: #e8e8f0;
+  background-color: var(--color-vt-bg);
+  color: var(--color-vt-text);
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+/* Respect prefers-reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 ::selection {

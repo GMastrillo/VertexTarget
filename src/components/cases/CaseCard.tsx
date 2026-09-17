@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { CaseStudy } from "@/lib/constants";
+import { useT } from "@/providers/LanguageProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +19,7 @@ interface CaseCardProps {
  * safety nets so the card never gets stuck on the placeholder).
  */
 function SitePreview({ url, color }: { url: string; color: string }) {
+  const t = useT();
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -50,16 +52,14 @@ function SitePreview({ url, color }: { url: string; color: string }) {
   return (
     <div
       className="relative w-full h-full overflow-hidden"
-      style={{ background: "#0a0a1a" }}
+      style={{ background: "var(--color-vt-surface)" }}
     >
       {/* Placeholder while loading / on failure */}
       {!loaded && (
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{
-            background: failed
-              ? `radial-gradient(circle at 50% 40%, ${color}18, #0a0a1a 70%)`
-              : `radial-gradient(circle at 50% 40%, ${color}14, #0a0a1a 70%)`,
+            background: `radial-gradient(circle at 50% 40%, ${color}18, var(--color-vt-surface) 70%)`,
           }}
         >
           {!failed && (
@@ -79,7 +79,7 @@ function SitePreview({ url, color }: { url: string; color: string }) {
                 className="text-[10px] font-mono uppercase tracking-widest"
                 style={{ color: `${color}88` }}
               >
-                Carregando preview
+                {t.ui.loadingPreview}
               </span>
             </div>
           )}
@@ -113,6 +113,7 @@ function SitePreview({ url, color }: { url: string; color: string }) {
 }
 
 export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) {
+  const t = useT();
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -147,8 +148,8 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
       }`}
       style={{
         minHeight: isLarge ? "440px" : "460px",
-        background: "#0a0a1a",
-        borderColor: isHovered ? `${caseStudy.color}55` : "rgba(255,255,255,0.08)",
+        background: "var(--color-vt-surface)",
+        borderColor: isHovered ? `${caseStudy.color}55` : "var(--glass-border)",
         boxShadow: isHovered
           ? `0 24px 60px -18px ${caseStudy.color}30`
           : "0 12px 40px -18px rgba(0,0,0,0.55)",
@@ -213,7 +214,7 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
                 border: `1px solid ${caseStudy.color}40`,
                 color: caseStudy.color,
               }}
-              title="Abrir projeto em nova aba"
+              title={t.cases.openProject}
             >
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path
@@ -234,6 +235,7 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
             className="text-2xl md:text-3xl font-bold tracking-tight mb-1.5 transition-colors duration-300"
             style={{
               fontFamily: "var(--font-heading)",
+              /* Always white: sits over the dark gradient on top of the screenshot */
               color: isHovered ? caseStudy.color : "#ffffff",
             }}
           >
@@ -250,7 +252,8 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
           <p
             className="text-sm leading-relaxed mb-4 max-w-2xl"
             style={{
-              color: "var(--color-vt-text-muted)",
+              /* Fixed light color — always sits over the dark gradient overlay */
+              color: "rgba(255,255,255,0.75)",
               display: "-webkit-box",
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",

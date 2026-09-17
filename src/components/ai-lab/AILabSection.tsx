@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import { useT } from "@/providers/LanguageProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ interface Message {
 }
 
 export default function AILabSection() {
+  const t = useT();
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState("");
@@ -96,28 +98,18 @@ export default function AILabSection() {
     }
   };
 
-  const suggestions = [
-    "Loja de roupas femininas em SP",
-    "SaaS de gestão financeira",
-    "Clínica de estética premium",
-    "Agência de viagens de luxo",
-  ];
-
   return (
     <section ref={sectionRef} id="ai-lab" className="section">
       <div className="section-inner">
         {/* Header */}
         <div ref={titleRef} className="mb-12">
-          <div className="label mb-4">AI Lab</div>
+          <div className="label mb-4">{t.aiLab.label}</div>
           <h2 className="heading-lg mb-6">
-            Experimente o poder
+            {t.aiLab.title1}
             <br />
-            <span className="gradient-text">da IA em ação.</span>
+            <span className="gradient-text">{t.aiLab.title2}</span>
           </h2>
-          <p className="body-lg max-w-xl">
-            Descreva seu negócio e veja uma estratégia de marketing sendo gerada em
-            tempo real pelo motor de IA da VertexTarget.
-          </p>
+          <p className="body-lg max-w-xl">{t.aiLab.subtitle}</p>
         </div>
 
         {/* Chat Interface */}
@@ -159,11 +151,9 @@ export default function AILabSection() {
                 >
                   ⚡
                 </div>
-                <p className="body-md mb-6">
-                  Descreva seu negócio para gerar uma estratégia de marketing com IA.
-                </p>
+                <p className="body-md mb-6">{t.aiLab.empty}</p>
                 <div className="flex flex-wrap gap-2 justify-center">
-                  {suggestions.map((s) => (
+                  {t.aiLab.suggestions.map((s) => (
                     <button
                       key={s}
                       onClick={() => setInput(s)}
@@ -239,7 +229,7 @@ export default function AILabSection() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Descreva seu negócio..."
+              placeholder={t.aiLab.placeholder}
               className="flex-1 px-4 py-3 rounded-xl text-sm outline-none transition-colors duration-200"
               style={{
                 background: "var(--color-vt-surface)",
@@ -263,7 +253,7 @@ export default function AILabSection() {
                 color: "var(--color-vt-bg)",
               }}
             >
-              Enviar
+              {t.aiLab.send}
             </button>
           </form>
         </div>

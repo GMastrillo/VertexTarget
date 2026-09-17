@@ -4,10 +4,12 @@ import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import { useT } from "@/providers/LanguageProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
+  const t = useT();
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -87,16 +89,13 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Left — Info */}
           <div ref={titleRef}>
-            <div className="label mb-4">Contato</div>
+            <div className="label mb-4">{t.contact.label}</div>
             <h2 className="heading-lg mb-6">
-              Vamos criar algo
+              {t.contact.title1}
               <br />
-              <span className="gradient-text">extraordinário.</span>
+              <span className="gradient-text">{t.contact.title2}</span>
             </h2>
-            <p className="body-lg mb-8">
-              Pronto para transformar sua presença digital? Conte-nos sobre seu
-              projeto e vamos engenheirar a solução perfeita juntos.
-            </p>
+            <p className="body-lg mb-8">{t.contact.subtitle}</p>
 
             <div className="space-y-4">
               <div>
@@ -104,7 +103,7 @@ export default function ContactSection() {
                   className="text-xs tracking-wider uppercase mb-1"
                   style={{ color: "var(--color-vt-text-dim)" }}
                 >
-                  Email
+                  {t.contact.email}
                 </div>
                 <a
                   href="mailto:contato@vertextarget.com"
@@ -119,13 +118,13 @@ export default function ContactSection() {
                   className="text-xs tracking-wider uppercase mb-1"
                   style={{ color: "var(--color-vt-text-dim)" }}
                 >
-                  Localização
+                  {t.contact.location}
                 </div>
                 <span
                   className="text-lg"
                   style={{ color: "var(--color-vt-text-muted)" }}
                 >
-                  Brasil — Remoto Global
+                  {t.contact.locationValue}
                 </span>
               </div>
             </div>
@@ -138,7 +137,7 @@ export default function ContactSection() {
                 className="text-xs tracking-wider uppercase block mb-2"
                 style={{ color: "var(--color-vt-text-dim)" }}
               >
-                Nome
+                {t.contact.name}
               </label>
               <input
                 type="text"
@@ -146,7 +145,7 @@ export default function ContactSection() {
                 onChange={(e) =>
                   setFormState((s) => ({ ...s, name: e.target.value }))
                 }
-                placeholder="Seu nome"
+                placeholder={t.contact.namePlaceholder}
                 required
                 style={inputStyle}
                 onFocus={(e) => {
@@ -163,7 +162,7 @@ export default function ContactSection() {
                 className="text-xs tracking-wider uppercase block mb-2"
                 style={{ color: "var(--color-vt-text-dim)" }}
               >
-                Email
+                {t.contact.email}
               </label>
               <input
                 type="email"
@@ -171,7 +170,7 @@ export default function ContactSection() {
                 onChange={(e) =>
                   setFormState((s) => ({ ...s, email: e.target.value }))
                 }
-                placeholder="seu@email.com"
+                placeholder={t.contact.emailPlaceholder}
                 required
                 style={inputStyle}
                 onFocus={(e) => {
@@ -188,7 +187,7 @@ export default function ContactSection() {
                 className="text-xs tracking-wider uppercase block mb-2"
                 style={{ color: "var(--color-vt-text-dim)" }}
               >
-                Orçamento Estimado
+                {t.contact.budget}
               </label>
               <select
                 value={formState.budget}
@@ -208,20 +207,17 @@ export default function ContactSection() {
                 }}
               >
                 <option value="" style={{ background: "var(--color-vt-bg)" }}>
-                  Selecione...
+                  {t.contact.budgetPlaceholder}
                 </option>
-                <option value="5k-10k" style={{ background: "var(--color-vt-bg)" }}>
-                  R$ 5.000 — R$ 10.000
-                </option>
-                <option value="10k-25k" style={{ background: "var(--color-vt-bg)" }}>
-                  R$ 10.000 — R$ 25.000
-                </option>
-                <option value="25k-50k" style={{ background: "var(--color-vt-bg)" }}>
-                  R$ 25.000 — R$ 50.000
-                </option>
-                <option value="50k+" style={{ background: "var(--color-vt-bg)" }}>
-                  R$ 50.000+
-                </option>
+                {t.contact.budgetOptions.map((label, i) => (
+                  <option
+                    key={label}
+                    value={String(i)}
+                    style={{ background: "var(--color-vt-bg)" }}
+                  >
+                    {label}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -230,14 +226,14 @@ export default function ContactSection() {
                 className="text-xs tracking-wider uppercase block mb-2"
                 style={{ color: "var(--color-vt-text-dim)" }}
               >
-                Mensagem
+                {t.contact.message}
               </label>
               <textarea
                 value={formState.message}
                 onChange={(e) =>
                   setFormState((s) => ({ ...s, message: e.target.value }))
                 }
-                placeholder="Conte sobre seu projeto..."
+                placeholder={t.contact.messagePlaceholder}
                 required
                 rows={4}
                 style={{
@@ -267,10 +263,10 @@ export default function ContactSection() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              {status === "idle" && "Enviar Mensagem"}
-              {status === "sending" && "Enviando..."}
-              {status === "sent" && "✓ Mensagem Enviada!"}
-              {status === "error" && "Erro — Tente novamente"}
+              {status === "idle" && t.contact.submit}
+              {status === "sending" && t.contact.sending}
+              {status === "sent" && t.contact.sent}
+              {status === "error" && t.contact.error}
             </motion.button>
           </form>
         </div>

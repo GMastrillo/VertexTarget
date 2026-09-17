@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useT } from "@/providers/LanguageProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +11,7 @@ const MARQUEE_TEXT =
   "VERTEXTARGET • MARKETING DIGITAL • AUTOMAÇÃO IA • DESENVOLVIMENTO WEB • WEBGL • ESTRATÉGIA DIGITAL • ";
 
 export default function Footer() {
+  const t = useT();
   const marqueeRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
 
@@ -69,9 +71,9 @@ export default function Footer() {
 
         {/* Tagline */}
         <p className="body-md max-w-md" style={{ color: "var(--color-vt-text-dim)" }}>
-          Engenharia digital de alto impacto.
+          {t.footer.tagline1}
           <br />
-          Marketing + IA + Código.
+          {t.footer.tagline2}
         </p>
 
         {/* Divider */}
@@ -87,8 +89,10 @@ export default function Footer() {
             <a
               key={social.label}
               href={social.href}
-              className="text-sm font-medium transition-all duration-300 hover:text-white hover:-translate-y-0.5"
+              className="text-sm font-medium transition-all duration-300 hover:-translate-y-0.5"
               style={{ color: "var(--color-vt-text-muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-vt-text)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-vt-text-muted)")}
             >
               {social.label}
             </a>
@@ -97,8 +101,8 @@ export default function Footer() {
 
         {/* Copyright */}
         <p className="text-xs" style={{ color: "var(--color-vt-text-dim)" }}>
-          © {new Date().getFullYear()} VertexTarget. Engineered with{" "}
-          <span className="gradient-text">precision</span>.
+          © {new Date().getFullYear()} {t.footer.copyright}{" "}
+          <span className="gradient-text">{t.footer.precision}</span>.
         </p>
       </div>
     </footer>

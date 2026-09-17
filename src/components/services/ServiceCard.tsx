@@ -85,11 +85,13 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
         perspective: "1000px",
         transformStyle: "preserve-3d",
         background:
-          "linear-gradient(180deg, rgba(15, 15, 36, 0.95) 0%, rgba(10, 10, 26, 0.98) 100%)",
-        border: `1px solid ${glow.active ? `rgba(${accentRgb}, 0.45)` : "rgba(255, 255, 255, 0.07)"}`,
+          "linear-gradient(180deg, var(--card-grad-a) 0%, var(--card-grad-b) 100%)",
+        backdropFilter: "blur(20px) saturate(170%)",
+        WebkitBackdropFilter: "blur(20px) saturate(170%)",
+        border: `1px solid ${glow.active ? `rgba(${accentRgb}, 0.45)` : "var(--glass-border)"}`,
         boxShadow: glow.active
-          ? `0 24px 60px -20px rgba(${accentRgb}, 0.35), inset 0 1px 0 rgba(255,255,255,0.05)`
-          : "0 12px 40px -18px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.04)",
+          ? `0 24px 60px -20px rgba(${accentRgb}, 0.35), inset 0 1px 0 var(--glass-highlight)`
+          : "var(--glass-outer-shadow), inset 0 1px 0 var(--glass-highlight)",
         transition: "border-color 0.35s ease, box-shadow 0.35s ease",
       }}
     >
