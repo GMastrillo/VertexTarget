@@ -23,30 +23,35 @@ export default function ServicesSection() {
   }));
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (trackRef.current && scrollContainerRef.current) {
-        const totalWidth = () =>
-          trackRef.current
-            ? Math.max(0, trackRef.current.scrollWidth - window.innerWidth + (window.innerWidth < 768 ? 40 : 80))
-            : 0;
+    const mm = gsap.matchMedia();
 
-        gsap.to(trackRef.current, {
-          x: () => -totalWidth(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: scrollContainerRef.current,
-            start: "top top",
-            end: () => `+=${totalWidth()}`,
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-      }
-    }, sectionRef);
+    // Desktop/tablet only: pinned horizontal scroll driven by vertical scroll.
+    // Mobile uses native swipe (overflow-x + snap) — a pinned 480px card stack
+    // cannot fit a phone viewport.
+    mm.add("(min-width: 768px)", () => {
+      if (!trackRef.current || !scrollContainerRef.current) return;
 
-    return () => ctx.revert();
+      const totalWidth = () =>
+        trackRef.current
+          ? Math.max(0, trackRef.current.scrollWidth - window.innerWidth + 80)
+          : 0;
+
+      gsap.to(trackRef.current, {
+        x: () => -totalWidth(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: scrollContainerRef.current,
+          start: "top top",
+          end: () => `+=${totalWidth()}`,
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    return () => mm.revert();
   }, []);
 
   // Card copy changes size on locale switch — recalculate the pinned scroll distance
@@ -57,10 +62,13 @@ export default function ServicesSection() {
 
   return (
     <section ref={sectionRef} id="services">
-      {/* Pinned viewport: header + cards together — no dead space */}
-      <div ref={scrollContainerRef} className="relative min-h-screen flex flex-col justify-center">
+      {/* Mobile: native swipe with snap. Desktop: pinned viewport with header + cards */}
+      <div
+        ref={scrollContainerRef}
+        className="relative md:min-h-screen flex flex-col justify-center"
+      >
         {/* Section Header */}
-        <div className="section-inner px-4 sm:px-8 md:px-12 pt-24 pb-10">
+        <div className="section-inner px-5 sm:px-8 md:px-12 pt-24 pb-8 md:pb-10">
           <div className="label mb-4">{t.services.label}</div>
           <h2 className="heading-lg mb-4">
             {t.services.title1}
@@ -70,15 +78,25 @@ export default function ServicesSection() {
           <p className="body-lg max-w-xl">{t.services.subtitle}</p>
         </div>
 
-        {/* Horizontal Cards Track */}
+        {/* Horizontal Cards Track — native swipe on mobile, GSAP-pinned on desktop */}
         <div
           ref={trackRef}
-          className="flex items-stretch gap-5 sm:gap-8 px-4 sm:px-8 md:px-12 pb-20"
-          style={{ width: "fit-content" }}
+          className="flex items-stretch gap-4 sm:gap-8 px-5 sm:px-8 md:px-12 pb-16 md:pb-20 w-full md:w-fit overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-hide"
+          style={{ WebkitOverflowScrolling: "touch" }}
         >
           {localizedServices.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}
+        </div>
+
+        {/* Mobile swipe hint */}
+        <div className="md:hidden flex justify-center pb-8">
+          <span
+            className="text-[11px] font-mono uppercase tracking-widest animate-pulse"
+            style={{ color: "var(--color-vt-text-dim)" }}
+          >
+            ← {t.services.swipeHint} →
+          </span>
         </div>
       </div>
 

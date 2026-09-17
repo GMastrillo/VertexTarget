@@ -414,6 +414,23 @@ body {
   background: var(--color-vt-accent-cyan);
 }
 
+/* Hide scrollbar for native swipe tracks (mobile services carousel) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Reduced motion: kill marquee and infinite animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse,
+  [class*="animate-"] {
+    animation-iteration-count: 1 !important;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════
    LINE DIVIDERS
    ═══════════════════════════════════════════════════════ */

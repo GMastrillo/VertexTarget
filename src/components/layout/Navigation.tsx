@@ -51,29 +51,30 @@ export default function Navigation() {
         className="fixed top-0 left-0 right-0 z-[100] px-5 sm:px-14 lg:px-20 py-4 sm:py-8 transition-[padding] duration-500"
         style={{ paddingTop: scrolled ? 14 : undefined, paddingBottom: scrolled ? 14 : undefined }}
       >
-        {/* Liquid Glass shell — invisible at top, frosted when scrolled */}
+        {/* Liquid Glass shell — invisible at top, frosted when scrolled.
+            Mobile: auto/1fr/auto so buttons never overlap the logo.
+            Desktop: symmetric 3-col grid keeps links dead-center. */}
         <div
-          className={`relative mx-auto max-w-[1400px] w-full grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center rounded-full transition-all duration-500 ${
-            scrolled ? "liquid-glass px-6 sm:px-8 py-2.5" : "bg-transparent border-0 shadow-none px-0 py-0"
+          className={`relative mx-auto max-w-[1400px] w-full grid grid-cols-[auto_1fr_auto] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center rounded-full transition-all duration-500 ${
+            scrolled ? "liquid-glass px-4 sm:px-8 py-2 sm:py-2.5" : "bg-transparent border-0 shadow-none px-0 py-0"
           }`}
         >
-          {/* Logo — detached from the top-left corner with generous spacing */}
-          <a
-            href="#hero"
-            className="flex items-center gap-2 transition-transform duration-300 hover:scale-[1.03] justify-self-start"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick("#hero");
-            }}
-          >
-            <span
-              className="gradient-text font-heading font-black text-2xl sm:text-4xl lg:text-[40px] tracking-tight leading-none"
-              style={{ filter: "drop-shadow(0 2px 8px rgba(0, 240, 255, 0.25))" }}
+          {/* Logo — detached from the top-left corner with generous spacing */}            <a
+              href="#hero"
+              className="flex items-center gap-1.5 sm:gap-2 transition-transform duration-300 hover:scale-[1.03] justify-self-start min-w-0"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick("#hero");
+              }}
             >
-              Vertex
-            </span>
-            <span
-              className="font-bold text-2xl sm:text-4xl lg:text-[40px] tracking-tight leading-none"
+              <span
+                className="gradient-text font-heading font-black text-xl sm:text-4xl lg:text-[40px] tracking-tight leading-none whitespace-nowrap"
+                style={{ filter: "drop-shadow(0 2px 8px rgba(0, 240, 255, 0.25))" }}
+              >
+                Vertex
+              </span>
+              <span
+                className="font-bold text-xl sm:text-4xl lg:text-[40px] tracking-tight leading-none whitespace-nowrap"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-vt-text)",
@@ -82,7 +83,7 @@ export default function Navigation() {
             >
               Target
             </span>
-            <span className="w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_14px_#00f0ff] animate-pulse ml-1" />
+            <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-cyan-400 shadow-[0_0_14px_#00f0ff] animate-pulse ml-0.5 sm:ml-1 flex-shrink-0" />
           </a>
 
           {/* Links — dead-center of the viewport (middle grid column) */}
@@ -113,11 +114,11 @@ export default function Navigation() {
           </div>
 
           {/* Mobile: language + theme + hamburger in the right grid column */}
-          <div className="lg:hidden flex items-center gap-2 justify-self-end">
+          <div className="lg:hidden flex items-center gap-1.5 sm:gap-2 justify-self-end">
             <LanguageSwitcher />
             <ThemeToggle />
             <button
-              className="relative z-[110] w-10 h-10 rounded-full bg-white/[0.06] border border-white/15 hover:border-cyan-400/60 flex flex-col items-center justify-center gap-1.5 transition-colors"
+              className="relative z-[110] w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] border border-white/15 hover:border-cyan-400/60 flex flex-col items-center justify-center gap-1.5 transition-colors flex-shrink-0"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Menu"
             >
@@ -196,7 +197,7 @@ export default function Navigation() {
               className="mt-6 px-8 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-white/[0.08] border border-cyan-400/50 shadow-[0_0_25px_rgba(0,240,255,0.3)]"
               style={{ color: "var(--color-vt-text)" }}
             >
-              Iniciar Projeto
+              {t.hero.ctaPrimary}
             </motion.a>
           </motion.div>
         )}

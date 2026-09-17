@@ -49,6 +49,7 @@ const pt = {
     title2: "o seu digital.",
     subtitle:
       "Da estratégia à execução. Combinamos marketing digital, engenharia de software e inteligência artificial para criar resultados mensuráveis.",
+    swipeHint: "Deslize",
   },
   cases: {
     label: "Portfólio & Engenharia",
@@ -182,6 +183,7 @@ const en: Dict = {
     title2: "your digital world.",
     subtitle:
       "From strategy to execution. We combine digital marketing, software engineering and artificial intelligence to create measurable results.",
+    swipeHint: "Swipe",
   },
   cases: {
     label: "Portfolio & Engineering",
@@ -313,6 +315,7 @@ const es: Dict = {
     title2: "tu mundo digital.",
     subtitle:
       "De la estrategia a la ejecución. Combinamos marketing digital, ingeniería de software e inteligencia artificial para crear resultados medibles.",
+    swipeHint: "Desliza",
   },
   cases: {
     label: "Portafolio e Ingeniería",
@@ -444,6 +447,7 @@ const fr: Dict = {
     title2: "bouger votre digital.",
     subtitle:
       "De la stratégie à l'exécution. Nous allions marketing digital, ingénierie logicielle et intelligence artificielle pour créer des résultats mesurables.",
+    swipeHint: "Glissez",
   },
   cases: {
     label: "Portfolio & Ingénierie",
@@ -575,6 +579,7 @@ const it: Dict = {
     title2: "il tuo digitale.",
     subtitle:
       "Dalla strategia all'esecuzione. Combiniamo marketing digitale, ingegneria del software e intelligenza artificiale per creare risultati misurabili.",
+    swipeHint: "Scorri",
   },
   cases: {
     label: "Portfolio & Ingegneria",

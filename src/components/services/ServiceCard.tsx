@@ -73,7 +73,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <motion.div
       ref={cardRef}
-      className="service-card flex-shrink-0 w-[82vw] max-w-[400px] min-w-[280px] sm:w-[380px] md:w-[400px] h-[480px] rounded-2xl relative overflow-hidden"
+      className="service-card flex-shrink-0 w-[78vw] max-w-[400px] min-w-[260px] sm:w-[380px] md:w-[400px] h-[440px] sm:h-[480px] rounded-2xl relative overflow-hidden snap-center"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{
