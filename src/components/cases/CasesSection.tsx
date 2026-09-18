@@ -148,6 +148,15 @@ export default function CasesSection() {
             <span className="gradient-text">{t.cases.title2}</span>
           </h2>
           <p className="body-lg max-w-2xl">{t.cases.subtitle}</p>
+          <Link
+            href="/cases"
+            className="mt-6 inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-cyan-300 transition-all duration-300 hover:gap-3 hover:text-cyan-200"
+          >
+            Explorar todos os estudos de caso
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
 
         {/* Cases Grid — responsive staggered layout */}

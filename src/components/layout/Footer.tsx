@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -108,6 +109,14 @@ export default function Footer() {
           © {new Date().getFullYear()} {t.footer.copyright}{" "}
           <span className="gradient-text">{t.footer.precision}</span>.
         </p>
+
+        <Link
+          href="/login"
+          className="text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 hover:text-cyan-300"
+          style={{ color: "var(--color-vt-text-muted)" }}
+        >
+          Acesso interno · Login do painel
+        </Link>
       </div>
     </footer>
   );
