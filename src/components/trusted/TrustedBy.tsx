@@ -85,7 +85,7 @@ export default function TrustedBy() {
   );
 
   return (
-    <section ref={sectionRef} className="relative py-14 sm:py-16" aria-label={t.trusted.label}>
+    <section ref={sectionRef} className="relative overflow-hidden py-14 sm:py-16" aria-label={t.trusted.label}>
       <div className="section-inner mb-8 text-center">
         <div className="label mb-3">{t.trusted.label}</div>
         <p

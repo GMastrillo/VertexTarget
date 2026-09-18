@@ -115,6 +115,15 @@ export default function CasesSection() {
   }, [handleKeyDown]);
 
   useEffect(() => {
+    if (!activeCase) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [activeCase]);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       if (titleRef.current) {
         gsap.from(titleRef.current.children, {
@@ -150,9 +159,9 @@ export default function CasesSection() {
           <p className="body-lg max-w-2xl">{t.cases.subtitle}</p>
           <Link
             href="/cases"
-            className="mt-6 inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-cyan-300 transition-all duration-300 hover:gap-3 hover:text-cyan-200"
+            className="mt-6 inline-flex min-h-11 items-center gap-3 rounded-xl border border-cyan-300/40 bg-gradient-to-r from-cyan-300 to-violet-400 px-4 py-2.5 text-xs font-mono font-semibold uppercase tracking-wider text-slate-950 shadow-[0_10px_30px_-12px_rgba(0,240,255,.8)] transition-all duration-300 hover:-translate-y-0.5 hover:gap-4 hover:shadow-[0_14px_34px_-12px_rgba(139,92,246,.9)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
           >
-            Explorar todos os estudos de caso
+            {t.cases.exploreAll}
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -179,6 +188,9 @@ export default function CasesSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
+              role="dialog"
+              aria-modal="true"
+              aria-label={c.title}
               style={{ background: "rgba(5, 5, 16, 0.88)", backdropFilter: "blur(14px)" }}
               onClick={() => setActiveCase(null)}
             >

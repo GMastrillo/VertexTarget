@@ -57,7 +57,8 @@ const pt = {
     title2: "definem mercados.",
     subtitle:
       "Cada aplicação é uma obra de alta precisão técnica. Unimos arquitetura full-stack, design imersivo, automação inteligente e performance extrema para transformar negócios reais.",
-    viewStudy: "Ver Estudo & Arquitetura",
+    viewStudy: "Como resolvemos",
+    exploreAll: "Explorar todas as soluções",
     liveDemo: "Live Demo",
     openProject: "Abrir projeto em nova aba",
     production: "✓ Produção 100% Ativa",
@@ -248,7 +249,8 @@ const en: Dict = {
     title2: "define markets.",
     subtitle:
       "Every application is a work of high technical precision. We combine full-stack architecture, immersive design, intelligent automation and extreme performance to transform real businesses.",
-    viewStudy: "View Study & Architecture",
+    viewStudy: "How we solved it",
+    exploreAll: "Explore all solutions",
     liveDemo: "Live Demo",
     openProject: "Open project in a new tab",
     production: "✓ Production 100% Active",
@@ -437,7 +439,8 @@ const es: Dict = {
     title2: "definen mercados.",
     subtitle:
       "Cada aplicación es una obra de alta precisión técnica. Unimos arquitectura full-stack, diseño inmersivo, automatización inteligente y rendimiento extremo para transformar negocios reales.",
-    viewStudy: "Ver Estudio y Arquitectura",
+    viewStudy: "Cómo lo resolvimos",
+    exploreAll: "Explorar todas las soluciones",
     liveDemo: "Demo en Vivo",
     openProject: "Abrir proyecto en nueva pestaña",
     production: "✓ Producción 100% Activa",
@@ -626,7 +629,8 @@ const fr: Dict = {
     title2: "définissent les marchés.",
     subtitle:
       "Chaque application est une œuvre de haute précision technique. Nous unissons architecture full-stack, design immersif, automatisation intelligente et performances extrêmes pour transformer de vraies entreprises.",
-    viewStudy: "Voir l'Étude & l'Architecture",
+    viewStudy: "Notre solution",
+    exploreAll: "Explorer toutes les solutions",
     liveDemo: "Démo Live",
     openProject: "Ouvrir le projet dans un nouvel onglet",
     production: "✓ Production 100% Active",
@@ -815,7 +819,8 @@ const it: Dict = {
     title2: "definiscono i mercati.",
     subtitle:
       "Ogni applicazione è un'opera di alta precisione tecnica. Uniamo architettura full-stack, design immersivo, automazione intelligente e prestazioni estreme per trasformare aziende reali.",
-    viewStudy: "Vedi Studio e Architettura",
+    viewStudy: "Come l'abbiamo risolto",
+    exploreAll: "Esplora tutte le soluzioni",
     liveDemo: "Demo Live",
     openProject: "Apri il progetto in una nuova scheda",
     production: "✓ Produzione 100% Attiva",

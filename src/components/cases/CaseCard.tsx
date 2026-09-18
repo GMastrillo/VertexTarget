@@ -15,101 +15,27 @@ interface CaseCardProps {
   index: number;
   onExpand: () => void;
 }/**
- * Live site screenshot — free, no API key (Microlink screenshot API, cached).
- * Single <img> always mounted; fades in when complete (event + ref + polling
- * safety nets so the card never gets stuck on the placeholder).
+ * Branded card backdrop. Remote screenshots are intentionally kept in the
+ * detail modal only; card previews can become stale and duplicate old CTAs.
  */
-function SitePreview({ url, color }: { url: string; color: string }) {
-  const t = useT();
-  const [loaded, setLoaded] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const imgRef = useRef<HTMLImageElement | null>(null);
-
-  const src = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
-
-  // Safety net #1: image may already be complete when the ref attaches (cached)
-  const handleRef = (node: HTMLImageElement | null) => {
-    imgRef.current = node;
-    if (node && node.complete && node.naturalWidth > 0) setLoaded(true);
-  };
-
-  // Safety net #2: poll for completion in case the load event is missed
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const img = imgRef.current;
-      if (img?.complete) {
-        if (img.naturalWidth > 0) setLoaded(true);
-        else setFailed(true);
-        clearInterval(interval);
-      }
-    }, 300);
-    const timeout = setTimeout(() => clearInterval(interval), 25000);
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, []);
-
+function SitePreview({ color }: { color: string }) {
   return (
     <div
-      className="relative w-full h-full overflow-hidden"
-      style={{ background: "var(--color-vt-surface)" }}
+      className="relative h-full w-full overflow-hidden"
+      aria-hidden="true"
+      style={{
+        background: `radial-gradient(circle at 80% 20%, ${color}28, var(--color-vt-surface) 55%, var(--color-vt-bg) 100%)`,
+      }}
     >
-      {/* Placeholder while loading / on failure */}
-      {!loaded && (
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            background: `radial-gradient(circle at 50% 40%, ${color}18, var(--color-vt-surface) 70%)`,
-          }}
-        >
-          {!failed && (
-            <div className="text-center">
-              <div className="flex gap-1.5 justify-center mb-3">
-                {[0, 1, 2].map((i) => (
-                  <motion.span
-                    key={i}
-                    className="w-2 h-2 rounded-full"
-                    style={{ background: color, opacity: 0.5 }}
-                    animate={{ y: [0, -6, 0], opacity: [0.3, 0.8, 0.3] }}
-                    transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.15 }}
-                  />
-                ))}
-              </div>
-              <span
-                className="text-[10px] font-mono uppercase tracking-widest"
-                style={{ color: `${color}88` }}
-              >
-                {t.ui.loadingPreview}
-              </span>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Screenshot — always mounted, fades in when ready */}
-      {!failed && (
-        <img
-          ref={handleRef}
-          src={src}
-          alt={`Preview do site ${url}`}
-          loading="lazy"
-          decoding="async"
-          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
-            loaded ? "opacity-100" : "opacity-0"
-          }`}
-          onLoad={() => setLoaded(true)}
-          onError={() => setFailed(true)}
-        />
-      )}
-
-      {/* Gradient overlays for text legibility */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(5,5,16,0.55) 0%, rgba(5,5,16,0.15) 30%, rgba(5,5,16,0.65) 70%, rgba(10,10,26,0.97) 100%)",
+          background: `linear-gradient(145deg, ${color}14, transparent 45%, rgba(5,5,16,.72))`,
         }}
+      />
+      <div
+        className="absolute -right-20 top-16 h-64 w-64 rounded-full blur-3xl"
+        style={{ background: `${color}20` }}
       />
     </div>
   );
@@ -165,7 +91,7 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
     >
       {/* Full-bleed screenshot background */}
       <div className="absolute inset-0">
-        <SitePreview url={caseStudy.liveUrl} color={caseStudy.color} />
+        <SitePreview color={caseStudy.color} />
       </div>
 
       {/* Top accent line */}
@@ -289,12 +215,16 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
           <Link
             href={`/cases/${caseStudy.id}`}
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-2 text-xs font-mono font-semibold tracking-wide mt-4 group/study transition-all duration-300 hover:gap-3"
-            style={{ color: caseStudy.color }}
+            className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-mono font-semibold tracking-wide shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 group/study"
+            style={{
+              color: "#050510",
+              background: `linear-gradient(110deg, ${caseStudy.color}, #a78bfa)`,
+              borderColor: `${caseStudy.color}99`,
+              boxShadow: `0 8px 24px -10px ${caseStudy.color}`,
+            }}
           >
             <span
-              className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover/study:scale-110"
-              style={{ background: `${caseStudy.color}15`, border: `1px solid ${caseStudy.color}40` }}
+              className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-black/10 transition-transform duration-300 group-hover/study:scale-110"
             >
               <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
                 <path d="M4 12L12 4M12 4H5M12 4v7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

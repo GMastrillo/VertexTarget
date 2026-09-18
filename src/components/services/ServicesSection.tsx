@@ -61,7 +61,7 @@ export default function ServicesSection() {
   }, [locale]);
 
   return (
-    <section ref={sectionRef} id="services">
+    <section ref={sectionRef} id="services" className="overflow-hidden">
       {/* Mobile: native swipe with snap. Desktop: pinned viewport with header + cards */}
       <div
         ref={scrollContainerRef}

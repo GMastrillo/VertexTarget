@@ -1,41 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getClientAddress, isRateLimited, parseJsonBody } from "@/lib/request-security";
 
 export const runtime = "nodejs";
 
 const MAX_PROMPT_LENGTH = 2_000;
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS_PER_WINDOW = 8;
-const requestsByIp = new Map<string, { count: number; resetAt: number }>();
-
-function getClientKey(request: NextRequest) {
-  // Prefer the platform-provided address. Do not trust arbitrary user payloads for identity.
-  return request.headers.get("x-real-ip") || request.headers.get("cf-connecting-ip") || "unknown";
-}
-
-function isRateLimited(key: string) {
-  const now = Date.now();
-  // Bound this process-local fallback so attacker-controlled IPs cannot grow it forever.
-  if (requestsByIp.size > 10_000) {
-    for (const [storedKey, value] of requestsByIp) {
-      if (value.resetAt <= now) requestsByIp.delete(storedKey);
-    }
-  }
-  const current = requestsByIp.get(key);
-  if (!current || current.resetAt <= now) {
-    requestsByIp.set(key, { count: 1, resetAt: now + WINDOW_MS });
-    return false;
-  }
-  current.count += 1;
-  return current.count > MAX_REQUESTS_PER_WINDOW;
-}
-
 export async function POST(request: NextRequest) {
-  if (isRateLimited(getClientKey(request))) {
+  if (isRateLimited("gemini", getClientAddress(request), MAX_REQUESTS_PER_WINDOW, WINDOW_MS)) {
     return NextResponse.json({ error: "Muitas solicitações. Tente novamente em instantes." }, { status: 429 });
   }
 
-  const body = await request.json().catch(() => null) as { prompt?: unknown } | null;
-  const prompt = typeof body?.prompt === "string" ? body.prompt.trim() : "";
+  if (request.headers.get("content-type")?.split(";", 1)[0]?.trim().toLowerCase() !== "application/json") {
+    return NextResponse.json({ error: "Formato inválido." }, { status: 415 });
+  }
+  const parsed = await parseJsonBody<{ prompt?: unknown }>(request, 8_192);
+  if (!parsed.ok || !parsed.value || typeof parsed.value !== "object" || Array.isArray(parsed.value)) {
+    return NextResponse.json({ error: "Payload inválido ou muito longo." }, { status: 400 });
+  }
+  const prompt = typeof parsed.value.prompt === "string" ? parsed.value.prompt.trim() : "";
   if (!prompt || prompt.length > MAX_PROMPT_LENGTH || /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(prompt)) {
     return NextResponse.json({ error: "Prompt inválido ou muito longo." }, { status: 400 });
   }

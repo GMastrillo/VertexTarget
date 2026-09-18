@@ -224,7 +224,7 @@ export default function AILabSection() {
           {/* Input */}
           <form
             onSubmit={handleSubmit}
-            className="flex gap-3 p-4 border-t"
+            className="flex flex-col gap-3 border-t p-4 sm:flex-row"
             style={{ borderColor: "var(--color-vt-border)" }}
           >
             <input
@@ -232,7 +232,7 @@ export default function AILabSection() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={t.aiLab.placeholder}
-              className="flex-1 px-4 py-3 rounded-xl text-sm outline-none transition-colors duration-200"
+              className="min-w-0 flex-1 rounded-xl px-4 py-3 text-sm outline-none transition-colors duration-200"
               style={{
                 background: "var(--color-vt-surface)",
                 color: "var(--color-vt-text)",
@@ -248,7 +248,7 @@ export default function AILabSection() {
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 disabled:opacity-40"
+              className="w-full rounded-xl px-6 py-3 text-sm font-medium transition-all duration-200 disabled:opacity-40 sm:w-auto"
               style={{
                 background:
                   "linear-gradient(135deg, var(--color-vt-accent-cyan), var(--color-vt-accent-violet))",
