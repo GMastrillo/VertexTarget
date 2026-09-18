@@ -1,6 +1,5 @@
 import "server-only";
 import Stripe from "stripe";
-import { revenue as mockRevenue, transactions as mockTransactions } from "@/lib/admin-data";
 
 export type FinanceData = {
   mrr: number;
@@ -22,14 +21,30 @@ export function getStripeClient() {
 const brl = (cents: number) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
 
 export async function getFinanceData(): Promise<FinanceData> {
+  const manual = await getManualSalesData();
+  const now = new Date();
+  // Shared 6-month buckets (labels + YYYY-MM keys) used by both data sources.
+  const months = Array.from({ length: 6 }, (_, index) => {
+    const date = new Date(now.getFullYear(), now.getMonth() - 5 + index, 1);
+    return {
+      label: date.toLocaleDateString("pt-BR", { month: "short" }).replace(".", ""),
+      key: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`,
+    };
+  });
+
   const stripe = getStripeClient();
-  const manual = await getManualSalesTotals();
   if (!stripe) {
     // No Stripe key: real manual sales still flow through; Stripe columns stay zero (no fake demo data).
-    return { mrr: 0, grossThisMonth: 0, overdue: 0, activeCustomers: 0, ...manual, revenue: mockRevenue.map((r) => ({ ...r, value: 0 })), transactions: [], source: "mock" };
+    return {
+      mrr: 0, grossThisMonth: 0, overdue: 0, activeCustomers: 0,
+      manualTotalCents: manual.totalCents,
+      manualThisMonthCents: manual.thisMonthCents,
+      revenue: months.map((m) => ({ month: m.label, value: manual.monthly[m.key] ?? 0 })),
+      transactions: [],
+      source: "mock",
+    };
   }
 
-  const now = new Date();
   const monthStartDate = new Date(now.getFullYear(), now.getMonth(), 1);
   const monthStart = Math.floor(monthStartDate.getTime() / 1000);
   const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 5, 1);
@@ -50,16 +65,16 @@ export async function getFinanceData(): Promise<FinanceData> {
   }, 0), 0);
   const grossThisMonth = paidInvoices.data.reduce((total, invoice) => total + (invoice.amount_paid ?? 0), 0);
   const overdue = openInvoices.data.reduce((total, invoice) => total + (invoice.amount_remaining ?? 0), 0);
-  const revenue = Array.from({ length: 6 }, (_, index) => {
-    const date = new Date(now.getFullYear(), now.getMonth() - 5 + index, 1);
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const value = historicalInvoices.data.reduce((total, invoice) => {
-      const created = new Date(invoice.created * 1000);
-      return created.getFullYear() === year && created.getMonth() === month ? total + (invoice.amount_paid ?? 0) : total;
-    }, 0);
-    return { month: date.toLocaleDateString("pt-BR", { month: "short" }).replace(".", ""), value };
-  });
+
+  // Stripe revenue grouped by YYYY-MM bucket (local calendar).
+  const stripeMonthly: Record<string, number> = {};
+  for (const invoice of historicalInvoices.data) {
+    const created = new Date(invoice.created * 1000);
+    const key = `${created.getFullYear()}-${String(created.getMonth() + 1).padStart(2, "0")}`;
+    stripeMonthly[key] = (stripeMonthly[key] ?? 0) + (invoice.amount_paid ?? 0);
+  }
+  // Chart = Stripe + manual (PIX/cash/transfer) per month.
+  const revenue = months.map((m) => ({ month: m.label, value: (stripeMonthly[m.key] ?? 0) + (manual.monthly[m.key] ?? 0) }));
   const transactions = paidInvoices.data.slice(0, 8).map((invoice) => ({
     id: invoice.number ?? invoice.id,
     client: typeof invoice.customer === "object" && invoice.customer && !("deleted" in invoice.customer)
@@ -71,23 +86,33 @@ export async function getFinanceData(): Promise<FinanceData> {
     status: "Pago",
   }));
 
-  return { mrr, grossThisMonth, overdue, activeCustomers: customers.data.length, ...manual, revenue, transactions, source: "stripe" };
+  return { mrr, grossThisMonth, overdue, activeCustomers: customers.data.length, manualTotalCents: manual.totalCents, manualThisMonthCents: manual.thisMonthCents, revenue, transactions, source: "stripe" };
 }
 
-// Manual (PIX/cash/transfer) sales totals from Supabase — always real data.
-async function getManualSalesTotals(): Promise<{ manualTotalCents: number; manualThisMonthCents: number }> {
+// Manual (PIX/cash/transfer) sales from Supabase — always real data.
+// Returns totals plus per-month buckets (YYYY-MM → cents) for the chart.
+async function getManualSalesData(): Promise<{ totalCents: number; thisMonthCents: number; monthly: Record<string, number> }> {
   try {
     const { createSupabaseServerClient } = await import("@/lib/supabase-server");
     const supabase = await createSupabaseServerClient();
-    if (!supabase) return { manualTotalCents: 0, manualThisMonthCents: 0 };
+    if (!supabase) return { totalCents: 0, thisMonthCents: 0, monthly: {} };
     const { data } = await supabase.from("manual_sales").select("amount_cents,sold_at").order("sold_at", { ascending: false }).limit(500);
     const rows = data ?? [];
-    const prefix = new Date().toISOString().slice(0, 7);
-    return {
-      manualTotalCents: rows.reduce((sum, r) => sum + Number(r.amount_cents ?? 0), 0),
-      manualThisMonthCents: rows.filter((r) => String(r.sold_at).startsWith(prefix)).reduce((sum, r) => sum + Number(r.amount_cents ?? 0), 0),
-    };
+    const thisMonthKey = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}`;
+    const monthly: Record<string, number> = {};
+    let totalCents = 0;
+    let thisMonthCents = 0;
+    for (const row of rows) {
+      const cents = Number(row.amount_cents ?? 0);
+      totalCents += cents;
+      // sold_at is a calendar date (YYYY-MM-DD); bucket it on the local calendar.
+      const date = new Date(String(row.sold_at) + "T00:00:00");
+      const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+      monthly[key] = (monthly[key] ?? 0) + cents;
+      if (key === thisMonthKey) thisMonthCents += cents;
+    }
+    return { totalCents, thisMonthCents, monthly };
   } catch {
-    return { manualTotalCents: 0, manualThisMonthCents: 0 };
+    return { totalCents: 0, thisMonthCents: 0, monthly: {} };
   }
 }

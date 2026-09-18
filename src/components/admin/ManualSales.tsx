@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Plus, Trash2 } from "lucide-react";
 
 export type ManualSaleItem = {
@@ -15,18 +16,20 @@ export type ManualSaleItem = {
 const METHOD_LABEL: Record<string, string> = { pix: "PIX", cash: "Dinheiro", transfer: "Transferência", other: "Outro" };
 const brl = (cents: number) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
 
+// Accepts snake_case (API responses) or camelCase (server page props) rows.
 function normalize(s: Record<string, unknown>): ManualSaleItem {
   return {
     id: String(s.id),
-    clientName: String(s.client_name ?? ""),
+    clientName: String(s.clientName ?? s.client_name ?? ""),
     description: String(s.description ?? ""),
-    amountCents: Number(s.amount_cents ?? 0),
-    method: (s.method ?? "pix") as ManualSaleItem["method"],
-    soldAt: String(s.sold_at ?? ""),
+    amountCents: Number(s.amountCents ?? s.amount_cents ?? 0),
+    method: ((s.method ?? "pix") as ManualSaleItem["method"]),
+    soldAt: String(s.soldAt ?? s.sold_at ?? "").slice(0, 10),
   };
 }
 
 export function ManualSales({ initialSales, canManage }: { initialSales: ManualSaleItem[]; canManage: boolean }) {
+  const router = useRouter();
   const [sales, setSales] = useState(initialSales.map(normalize));
   const [open, setOpen] = useState(false);
   const [clientName, setClientName] = useState("");
@@ -55,6 +58,8 @@ export function ManualSales({ initialSales, canManage }: { initialSales: ManualS
         return;
       }
       setSales((prev) => [normalize(json.sale), ...prev]);
+      // Refresh server components so KPIs, summary and the chart include this sale.
+      router.refresh();
       setOpen(false);
       setClientName("");
       setValue("R$ ");
@@ -71,7 +76,10 @@ export function ManualSales({ initialSales, canManage }: { initialSales: ManualS
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
     });
-    if (res.ok) setSales((prev) => prev.filter((s) => s.id !== id));
+    if (res.ok) {
+      setSales((prev) => prev.filter((s) => s.id !== id));
+      router.refresh();
+    }
   }
 
   return (
