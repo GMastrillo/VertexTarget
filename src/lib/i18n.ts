@@ -143,6 +143,37 @@ const pt = {
     sent: "✓ Mensagem Enviada!",
     error: "Erro — Tente novamente",
   },
+  trusted: {
+    label: "Quem confia",
+    title: "Negócios reais, resultados reais.",
+  },
+  faq: {
+    label: "Perguntas Frequentes",
+    title1: "Tudo que você precisa",
+    title2: "saber antes de começar.",
+    items: [
+      {
+        q: "Quanto custa um projeto com a VertexTarget?",
+        a: "Cada projeto é dimensionado sob medida. Trabalhamos de landing pages premium a plataformas completas com IA — o orçamento segue o escopo, não o contrário. O diagnóstico inicial é gratuito: conversamos sobre suas metas e retornamos com proposta em até 48h.",
+      },
+      {
+        q: "Quanto tempo leva para ficar pronto?",
+        a: "Landing pages premium: 2–3 semanas. Sites institucionais com CMS: 4–6 semanas. Plataformas com automação e IA: 6–10 semanas. Você acompanha cada etapa com demos semanais — nada de surpresas no final.",
+      },
+      {
+        q: "O que é incluso no suporte pós-entrega?",
+        a: "Todos os projetos incluem 30 dias de suporte dedicado pós-launch: correções, ajustes e monitoramento. Depois disso, oferecemos planos de manutenção contínua com SLA definido — o site nunca fica sem dono.",
+      },
+      {
+        q: "Vocês trabalham com clientes fora do Brasil?",
+        a: "Sim — atendemos em português, inglês, espanhol, francês e italiano. O processo é 100% remoto e assíncrono, com reuniões no fuso que funcionar para você.",
+      },
+      {
+        q: "Por que escolher a VertexTarget?",
+        a: "Porque unimos as duas pontas que agências separam: engenharia de software de alto nível e estratégia de vendas que converte. Seu site não é só bonito — ele é uma máquina de gerar receita. E você fala direto com os CEOs, sem intermediários.",
+      },
+    ],
+  },
   footer: {
     tagline1: "Engenharia digital de alto impacto.",
     tagline2: "Marketing + IA + Código.",
@@ -277,6 +308,37 @@ const en: Dict = {
     sent: "✓ Message Sent!",
     error: "Error — Try again",
   },
+  trusted: {
+    label: "Trusted by",
+    title: "Real businesses, real results.",
+  },
+  faq: {
+    label: "Frequently Asked Questions",
+    title1: "Everything you need",
+    title2: "to know before starting.",
+    items: [
+      {
+        q: "How much does a VertexTarget project cost?",
+        a: "Every project is custom-scoped. We work from premium landing pages to complete AI-powered platforms — budget follows scope, not the other way around. The initial diagnosis is free: we discuss your goals and return a proposal within 48h.",
+      },
+      {
+        q: "How long does it take to be ready?",
+        a: "Premium landing pages: 2–3 weeks. Institutional sites with CMS: 4–6 weeks. Platforms with automation and AI: 6–10 weeks. You follow every step with weekly demos — no surprises at the end.",
+      },
+      {
+        q: "What does post-delivery support include?",
+        a: "Every project includes 30 days of dedicated post-launch support: fixes, adjustments and monitoring. After that, we offer ongoing maintenance plans with defined SLA — your site is never left orphaned.",
+      },
+      {
+        q: "Do you work with clients outside Brazil?",
+        a: "Yes — we serve clients in Portuguese, English, Spanish, French and Italian. The process is 100% remote and asynchronous, with meetings in whatever timezone works for you.",
+      },
+      {
+        q: "Why choose VertexTarget?",
+        a: "Because we unite the two ends that agencies separate: high-level software engineering and sales strategy that converts. Your site isn't just beautiful — it's a revenue-generating machine. And you talk directly with the CEOs, no middlemen.",
+      },
+    ],
+  },
   footer: {
     tagline1: "High-impact digital engineering.",
     tagline2: "Marketing + AI + Code.",
@@ -408,6 +470,37 @@ const es: Dict = {
     sending: "Enviando...",
     sent: "✓ ¡Mensaje Enviado!",
     error: "Error — Intenta de nuevo",
+  },
+  trusted: {
+    label: "Quién confía",
+    title: "Negocios reales, resultados reales.",
+  },
+  faq: {
+    label: "Preguntas Frecuentes",
+    title1: "Todo lo que necesitas",
+    title2: "saber antes de empezar.",
+    items: [
+      {
+        q: "¿Cuánto cuesta un proyecto con VertexTarget?",
+        a: "Cada proyecto se dimensiona a medida. Trabajamos desde landing pages premium hasta plataformas completas con IA — el presupuesto sigue al alcance, no al revés. El diagnóstico inicial es gratuito: conversamos sobre tus metas y devolvemos propuesta en hasta 48h.",
+      },
+      {
+        q: "¿Cuánto tiempo tarda en estar listo?",
+        a: "Landing pages premium: 2–3 semanas. Sitios institucionales con CMS: 4–6 semanas. Plataformas con automatización e IA: 6–10 semanas. Acompañas cada etapa con demos semanales — sin sorpresas al final.",
+      },
+      {
+        q: "¿Qué incluye el soporte post-entrega?",
+        a: "Todos los proyectos incluyen 30 días de soporte dedicado post-lanzamiento: correcciones, ajustes y monitoreo. Después ofrecemos planes de mantenimiento continuo con SLA definido — tu sitio nunca queda huérfano.",
+      },
+      {
+        q: "¿Trabajan con clientes fuera de Brasil?",
+        a: "Sí — atendemos en portugués, inglés, español, francés e italiano. El proceso es 100% remoto y asíncrono, con reuniones en el huso horario que te funcione.",
+      },
+      {
+        q: "¿Por qué elegir VertexTarget?",
+        a: "Porque unimos las dos puntas que las agencias separan: ingeniería de software de alto nivel y estrategia de ventas que convierte. Tu sitio no es solo bonito — es una máquina de generar ingresos. Y hablas directo con los CEOs, sin intermediarios.",
+      },
+    ],
   },
   footer: {
     tagline1: "Ingeniería digital de alto impacto.",
@@ -541,6 +634,37 @@ const fr: Dict = {
     sent: "✓ Message Envoyé !",
     error: "Erreur — Réessayez",
   },
+  trusted: {
+    label: "Ils nous font confiance",
+    title: "Des business réels, des résultats réels.",
+  },
+  faq: {
+    label: "Questions Fréquentes",
+    title1: "Tout ce qu'il faut",
+    title2: "savoir avant de commencer.",
+    items: [
+      {
+        q: "Combien coûte un projet avec VertexTarget?",
+        a: "Chaque projet est dimensionné sur mesure. Nous travaillons des landing pages premium aux plateformes complètes avec IA — le budget suit le périmètre, pas l'inverse. Le diagnostic initial est gratuit : nous discutons de vos objectifs et revenons avec une proposition sous 48h.",
+      },
+      {
+        q: "Combien de temps pour être prêt ?",
+        a: "Landing pages premium : 2–3 semaines. Sites institutionnels avec CMS : 4–6 semaines. Plateformes avec automatisation et IA : 6–10 semaines. Vous suivez chaque étape avec des démos hebdomadaires — aucune surprise à la fin.",
+      },
+      {
+        q: "Que comprend le support après livraison ?",
+        a: "Tous les projets incluent 30 jours de support dédié post-lancement : corrections, ajustements et monitoring. Ensuite, nous proposons des plans de maintenance continue avec SLA défini — votre site n'est jamais orphelin.",
+      },
+      {
+        q: "Travaillez-vous avec des clients hors Brésil ?",
+        a: "Oui — nous servons en portugais, anglais, espagnol, français et italien. Le processus est 100% remote et asynchrone, avec des réunions au fuseau qui vous convient.",
+      },
+      {
+        q: "Pourquoi choisir VertexTarget ?",
+        a: "Parce que nous unissons les deux bouts que les agences séparent : ingénierie logicielle de haut niveau et stratégie commerciale qui convertit. Votre site n'est pas seulement beau — c'est une machine à générer du revenu. Et vous parlez directement aux CEO, sans intermédiaires.",
+      },
+    ],
+  },
   footer: {
     tagline1: "Ingénierie numérique à fort impact.",
     tagline2: "Marketing + IA + Code.",
@@ -672,6 +796,37 @@ const it: Dict = {
     sending: "Invio...",
     sent: "✓ Messaggio Inviato!",
     error: "Errore — Riprova",
+  },
+  trusted: {
+    label: "Chi si fida di noi",
+    title: "Business reali, risultati reali.",
+  },
+  faq: {
+    label: "Domande Frequenti",
+    title1: "Tutto ciò che devi",
+    title2: "sapere prima di iniziare.",
+    items: [
+      {
+        q: "Quanto costa un progetto con VertexTarget?",
+        a: "Ogni progetto è dimensionato su misura. Lavoriamo da landing page premium a piattaforme complete con IA — il budget segue lo scope, non il contrario. La diagnosi iniziale è gratuita: parliamo dei tuoi obiettivi e restituiamo una proposta entro 48h.",
+      },
+      {
+        q: "Quanto tempo serve per essere pronto?",
+        a: "Landing page premium: 2–3 settimane. Siti istituzionali con CMS: 4–6 settimane. Piattaforme con automazione e IA: 6–10 settimane. Segui ogni fase con demo settimanali — nessuna sorpresa alla fine.",
+      },
+      {
+        q: "Cosa include il supporto post-consegna?",
+        a: "Tutti i progetti includono 30 giorni di supporto dedicato post-lancio: correzioni, aggiustamenti e monitoraggio. Dopo offriamo piani di manutenzione continua con SLA definito — il tuo sito non resta mai orfano.",
+      },
+      {
+        q: "Lavorate con clienti fuori dal Brasile?",
+        a: "Sì — serviamo in portoghese, inglese, spagnolo, francese e italiano. Il processo è 100% remoto e asincrono, con riunioni nel fuso orario che ti serve.",
+      },
+      {
+        q: "Perché scegliere VertexTarget?",
+        a: "Perché uniamo le due estremità che le agenzie separano: ingegneria del software di alto livello e strategia di vendita che converte. Il tuo sito non è solo bello — è una macchina che genera fatturato. E parli direttamente con i CEO, senza intermediari.",
+      },
+    ],
   },
   footer: {
     tagline1: "Ingegneria digitale ad alto impatto.",

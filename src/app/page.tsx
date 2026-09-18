@@ -12,6 +12,8 @@ import ServicesSection from "@/components/services/ServicesSection";
 import CasesSection from "@/components/cases/CasesSection";
 import AboutSection from "@/components/about/AboutSection";
 import AILabSection from "@/components/ai-lab/AILabSection";
+import FAQSection from "@/components/faq/FAQSection";
+import TrustedBy from "@/components/trusted/TrustedBy";
 import ContactSection from "@/components/contact/ContactSection";
 
 export default function HomePage() {
@@ -25,10 +27,12 @@ export default function HomePage() {
 
       <main>
         <HeroSection />
+        <TrustedBy />
         <ServicesSection />
         <CasesSection />
         <AboutSection />
         <AILabSection />
+        <FAQSection />
         <ContactSection />
       </main>
 
