@@ -15,27 +15,73 @@ interface CaseCardProps {
   index: number;
   onExpand: () => void;
 }/**
- * Branded card backdrop. Remote screenshots are intentionally kept in the
- * detail modal only; card previews can become stale and duplicate old CTAs.
+ * Branded card backdrop with a live site screenshot.
+ * The screenshot fades in over the gradient when loaded; on failure the
+ * gradient alone remains, so the card never shows a broken image.
  */
-function SitePreview({ color }: { color: string }) {
+function SitePreview({ url, color }: { url: string; color: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  const src = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
+
+  const handleRef = (node: HTMLImageElement | null) => {
+    imgRef.current = node;
+    if (node && node.complete && node.naturalWidth > 0) setLoaded(true);
+  };
+
+  useEffect(() => {
+    // Cached images can complete before onLoad fires — poll as a safety net
+    // (same proven pattern as the modal preview).
+    const interval = setInterval(() => {
+      const img = imgRef.current;
+      if (img?.complete) {
+        if (img.naturalWidth > 0) setLoaded(true);
+        else setFailed(true);
+        clearInterval(interval);
+      }
+    }, 300);
+    const timeout = setTimeout(() => clearInterval(interval), 25000);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
-    <div
-      className="relative h-full w-full overflow-hidden"
-      aria-hidden="true"
-      style={{
-        background: `radial-gradient(circle at 80% 20%, ${color}28, var(--color-vt-surface) 55%, var(--color-vt-bg) 100%)`,
-      }}
-    >
+    <div className="relative h-full w-full overflow-hidden" aria-hidden="true">
+      {/* Gradient base — also the graceful fallback when the screenshot fails */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(145deg, ${color}14, transparent 45%, rgba(5,5,16,.72))`,
+          background: `radial-gradient(circle at 80% 20%, ${color}28, var(--color-vt-surface) 55%, var(--color-vt-bg) 100%)`,
         }}
       />
       <div
         className="absolute -right-20 top-16 h-64 w-64 rounded-full blur-3xl"
         style={{ background: `${color}20` }}
+      />
+      {!failed && (
+        <img
+          ref={handleRef}
+          src={src}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+        />
+      )}
+      {/* Readability overlay: keeps title/CTA legible over the screenshot */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(180deg, rgba(5,5,16,.42) 0%, rgba(5,5,16,.55) 40%, rgba(5,5,16,.88) 78%, rgba(5,5,16,.94) 100%)`,
+        }}
       />
     </div>
   );
@@ -91,7 +137,7 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
     >
       {/* Full-bleed screenshot background */}
       <div className="absolute inset-0">
-        <SitePreview color={caseStudy.color} />
+        <SitePreview url={caseStudy.liveUrl} color={caseStudy.color} />
       </div>
 
       {/* Top accent line */}
@@ -215,7 +261,7 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
           <Link
             href={`/cases/${caseStudy.id}`}
             onClick={(e) => e.stopPropagation()}
-            className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-mono font-semibold tracking-wide shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 group/study"
+            className="mt-4 mb-5 inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-mono font-semibold tracking-wide shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 group/study"
             style={{
               color: "#050510",
               background: `linear-gradient(110deg, ${caseStudy.color}, #a78bfa)`,
