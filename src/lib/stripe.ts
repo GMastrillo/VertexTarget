@@ -7,6 +7,8 @@ export type FinanceData = {
   grossThisMonth: number;
   overdue: number;
   activeCustomers: number;
+  manualTotalCents: number;
+  manualThisMonthCents: number;
   revenue: { month: string; value: number }[];
   transactions: { id: string; client: string; method: string; date: string; value: string; status: string }[];
   source: "stripe" | "mock";
@@ -21,8 +23,10 @@ const brl = (cents: number) => new Intl.NumberFormat("pt-BR", { style: "currency
 
 export async function getFinanceData(): Promise<FinanceData> {
   const stripe = getStripeClient();
+  const manual = await getManualSalesTotals();
   if (!stripe) {
-    return { mrr: 42600, grossThisMonth: 64200, overdue: 2180, activeCustomers: 12, revenue: mockRevenue, transactions: mockTransactions, source: "mock" };
+    // No Stripe key: real manual sales still flow through; Stripe columns stay zero (no fake demo data).
+    return { mrr: 0, grossThisMonth: 0, overdue: 0, activeCustomers: 0, ...manual, revenue: mockRevenue.map((r) => ({ ...r, value: 0 })), transactions: [], source: "mock" };
   }
 
   const now = new Date();
@@ -67,5 +71,23 @@ export async function getFinanceData(): Promise<FinanceData> {
     status: "Pago",
   }));
 
-  return { mrr, grossThisMonth, overdue, activeCustomers: customers.data.length, revenue, transactions, source: "stripe" };
+  return { mrr, grossThisMonth, overdue, activeCustomers: customers.data.length, ...manual, revenue, transactions, source: "stripe" };
+}
+
+// Manual (PIX/cash/transfer) sales totals from Supabase — always real data.
+async function getManualSalesTotals(): Promise<{ manualTotalCents: number; manualThisMonthCents: number }> {
+  try {
+    const { createSupabaseServerClient } = await import("@/lib/supabase-server");
+    const supabase = await createSupabaseServerClient();
+    if (!supabase) return { manualTotalCents: 0, manualThisMonthCents: 0 };
+    const { data } = await supabase.from("manual_sales").select("amount_cents,sold_at").order("sold_at", { ascending: false }).limit(500);
+    const rows = data ?? [];
+    const prefix = new Date().toISOString().slice(0, 7);
+    return {
+      manualTotalCents: rows.reduce((sum, r) => sum + Number(r.amount_cents ?? 0), 0),
+      manualThisMonthCents: rows.filter((r) => String(r.sold_at).startsWith(prefix)).reduce((sum, r) => sum + Number(r.amount_cents ?? 0), 0),
+    };
+  } catch {
+    return { manualTotalCents: 0, manualThisMonthCents: 0 };
+  }
 }

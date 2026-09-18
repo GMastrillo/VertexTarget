@@ -1,12 +1,19 @@
-import { Plus } from "lucide-react";
-import { PageHeader, StatusBadge } from "@/components/admin/AdminUI";
-import { getProjects } from "@/lib/admin-repository";
-import type { ProjectStage } from "@/lib/admin-data";
+import { PageHeader } from "@/components/admin/AdminUI";
+import { ProjectsBoard } from "@/components/admin/ProjectsBoard";
+import { getClients, getProjects } from "@/lib/admin-repository";
 
-const columns: ProjectStage[] = ["Backlog", "Design", "Desenvolvimento", "QA", "Entregue"];
-const colors: Record<ProjectStage, string> = { Backlog: "bg-slate-400", Design: "bg-violet-400", Desenvolvimento: "bg-cyan-300", QA: "bg-orange-300", Entregue: "bg-emerald-400" };
+export const dynamic = "force-dynamic";
 
 export default async function ProjetosPage() {
-  const projects = await getProjects();
-  return <div><PageHeader eyebrow="Operations / delivery pipeline" title="Projetos" description="Do primeiro briefing ao deploy: visualize o fluxo de entrega da equipe." action={<span className="admin-secondary-btn">{projects.length} projetos <Plus size={16} /></span>} /><div className="kanban-grid">{columns.map((column) => <section key={column} className="kanban-column"><div className="mb-4 flex items-center justify-between"><div className="flex items-center gap-2"><i className={`h-2 w-2 rounded-full ${colors[column]}`} /><h2 className="text-sm font-medium">{column}</h2><span className="rounded-md bg-white/[.07] px-1.5 py-0.5 text-[10px] text-slate-400">{projects.filter((project) => project.stage === column).length}</span></div></div><div className="space-y-3">{projects.filter((project) => project.stage === column).map((project) => <article key={project.id} className="kanban-card"><div className="mb-3 flex justify-between gap-2"><span className="rounded-md border border-white/[.08] px-2 py-1 text-[10px] text-slate-400">{project.type}</span><span className={`text-[10px] ${project.priority === "Alta" ? "text-rose-300" : project.priority === "Média" ? "text-orange-300" : "text-slate-500"}`}>{project.priority}</span></div><h3 className="text-sm font-medium leading-5">{project.title}</h3><p className="mt-1 text-xs text-slate-500">{project.client}</p><div className="mt-4 flex items-center justify-between border-t border-white/[.06] pt-3"><span className="text-[10px] text-slate-500">Prazo {project.due}</span><StatusBadge status={project.stage} /></div></article>)}</div></section>)}</div></div>;
+  const [projects, clients] = await Promise.all([getProjects(), getClients()]);
+  return (
+    <div>
+      <PageHeader
+        eyebrow="Operations / delivery pipeline"
+        title="Projetos"
+        description="Do primeiro briefing ao deploy: crie projetos, mova entre etapas e acompanhe o fluxo de entrega da equipe."
+      />
+      <ProjectsBoard initialProjects={projects} clients={clients.map((c) => ({ id: c.id, name: c.name }))} />
+    </div>
+  );
 }
