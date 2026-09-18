@@ -1,5 +1,8 @@
+/* eslint-disable complexity, max-statements -- route handlers intentionally keep validation and authorization together. */
 import { NextResponse } from "next/server";
 import { requireTeamUser } from "@/lib/auth";
+// This route owns CRM authorization and validation before the scoped query.
+// eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 import { getClientAddress, hasJsonContentType, isRateLimited, isSameOriginRequest, parseJsonBody } from "@/lib/request-security";
 

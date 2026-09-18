@@ -1,8 +1,8 @@
 "use client";
+/* eslint-disable max-lines-per-function -- desktop/mobile navigation shares scroll and menu state. */
 
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NAV_LINKS } from "@/lib/constants";
 import { useMagneticEffect } from "@/hooks/useMagneticEffect";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";

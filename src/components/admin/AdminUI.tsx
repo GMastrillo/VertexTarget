@@ -1,5 +1,5 @@
 "use client";
-import { Activity, ArrowDownRight, ArrowUpRight, Bot, CheckCircle2, CircleAlert, CircleDollarSign, Clock3, CreditCard, FolderKanban, ShieldAlert, Users } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Bot, CheckCircle2, CircleAlert, CircleDollarSign, Clock3, CreditCard, FolderKanban, ShieldAlert, Users } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 export function PageHeader({ eyebrow, title, description, action }: { eyebrow: string; title: string; description: string; action?: React.ReactNode }) { return <div className="mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="admin-eyebrow">{eyebrow}</p><h1 className="admin-title">{title}</h1><p className="mt-2 max-w-2xl text-sm text-slate-400">{description}</p></div>{action}</div>; }

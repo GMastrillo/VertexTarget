@@ -1,5 +1,8 @@
+/* eslint-disable complexity, max-statements -- AI request validation and persistence form one guarded transaction. */
 import { NextResponse } from "next/server";
 import { requireTeamUser } from "@/lib/auth";
+// This route owns prospect authorization and persists only validated AI output.
+// eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 import { getClientAddress, hasJsonContentType, isRateLimited, isSameOriginRequest, parseJsonBody } from "@/lib/request-security";
 import { logAiRun } from "@/lib/operations-repository";

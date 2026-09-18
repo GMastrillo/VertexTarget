@@ -63,8 +63,10 @@ export default function MetricsBand() {
         onEnter: () => tween.play(),
       });
 
+      const grid = gridRef.current;
+      if (!grid) return;
       gsap.fromTo(
-        gridRef.current!.children,
+        grid.children,
         { y: 24, opacity: 0 },
         {
           y: 0,

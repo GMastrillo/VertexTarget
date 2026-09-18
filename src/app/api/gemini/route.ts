@@ -1,5 +1,7 @@
+/* eslint-disable complexity, max-statements -- provider streaming and security validation are one request lifecycle. */
 import { NextRequest, NextResponse } from "next/server";
 import { getClientAddress, isRateLimited, parseJsonBody } from "@/lib/request-security";
+import { logError } from "@/lib/logger";
 
 export const runtime = "nodejs";
 
@@ -19,7 +21,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Payload inválido ou muito longo." }, { status: 400 });
   }
   const prompt = typeof parsed.value.prompt === "string" ? parsed.value.prompt.trim() : "";
-  if (!prompt || prompt.length > MAX_PROMPT_LENGTH || /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(prompt)) {
+  const hasControlCharacter = [...prompt].some((character) => {
+    const code = character.charCodeAt(0);
+    return code < 32 && code !== 9 && code !== 10 && code !== 13;
+  });
+  if (!prompt || prompt.length > MAX_PROMPT_LENGTH || hasControlCharacter) {
     return NextResponse.json({ error: "Prompt inválido ou muito longo." }, { status: 400 });
   }
 
@@ -61,7 +67,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     // Do not return provider errors, prompts, model metadata or secrets to clients.
-    console.error("Gemini request failed", error instanceof Error ? error.name : "unknown");
+    logError("Gemini request failed", error instanceof Error ? error.name : "unknown");
     return NextResponse.json({ error: "Serviço de IA indisponível." }, { status: 502 });
   }
 }

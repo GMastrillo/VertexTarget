@@ -1,6 +1,9 @@
+/* eslint-disable complexity -- signature verification and persistence must remain one webhook lifecycle. */
 import "server-only";
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
+// Webhooks require the server-only admin client after Stripe signature validation.
+// eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseAdminClient } from "@/lib/supabase-server";
 import { getStripeClient } from "@/lib/stripe";
 

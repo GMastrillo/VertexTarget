@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function, @next/next/no-img-element -- case grid and detail sheet share selection state. */
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
@@ -73,7 +74,7 @@ function ModalPreview({ url, color }: { url: string; color: string }) {
         </div>
       )}
       {!failed && (
-        <img
+      <img
           ref={handleRef}
           src={src}
           alt={`Screenshot do site ${url}`}

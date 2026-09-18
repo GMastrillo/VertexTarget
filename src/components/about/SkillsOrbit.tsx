@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function, max-statements -- Three.js scene lifecycle must stay colocated for disposal correctness. */
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
@@ -215,7 +216,7 @@ export default function SkillsOrbit() {
 
     // Animation Loop
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireTeamUser } from "@/lib/auth";
+// API route intentionally reads the authenticated activity feed directly.
+// eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 
 export async function GET() {

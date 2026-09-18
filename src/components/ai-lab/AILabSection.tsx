@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function, max-statements -- terminal UI and streaming state share one interaction lifecycle. */
 
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";

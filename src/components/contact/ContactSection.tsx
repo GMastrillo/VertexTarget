@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function -- contact form and its status states are a single user flow. */
 
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";

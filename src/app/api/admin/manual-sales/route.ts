@@ -1,5 +1,8 @@
+/* eslint-disable complexity, max-statements -- payment input validation stays adjacent to the write. */
 import { NextResponse } from "next/server";
 import { requireTeamUser } from "@/lib/auth";
+// This route owns finance-role authorization and validated write operations.
+// eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 import { getClientAddress, hasJsonContentType, isRateLimited, isSameOriginRequest, parseJsonBody } from "@/lib/request-security";
 

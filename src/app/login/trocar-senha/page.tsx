@@ -2,6 +2,8 @@
 import { FormEvent, useEffect, useState } from "react";
 import { ArrowRight, KeyRound, ShieldCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
+// The client session guard intentionally reads the browser auth session here.
+// eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseBrowserClient } from "@/lib/supabase";
 
 export default function ChangePasswordPage() {

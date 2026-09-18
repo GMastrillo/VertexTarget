@@ -102,7 +102,16 @@ try {
   await cleanup();
   const final = await invoicesFor("in_test_e2e_");
   check("cleanup: linhas de teste removidas", final.length === 0, `rows=${final.length}`);
-  try { process.kill(-server.pid); } catch { try { process.kill(server.pid); } catch {} }
+  try {
+    process.kill(-server.pid);
+  } catch {
+    // Windows does not support process groups; fall back to the child PID.
+    try {
+      process.kill(server.pid);
+    } catch {
+      // The test server may already have exited.
+    }
+  }
 }
 
 console.log(failed === 0 ? "\nTODOS OS CHECKS DO WEBHOOK PASSARAM" : `\n${failed} CHECK(S) FALHARAM`);

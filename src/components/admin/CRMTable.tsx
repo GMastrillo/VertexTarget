@@ -1,10 +1,10 @@
 "use client";
+/* eslint-disable complexity -- client creation validates and submits one form transaction. */
 
 import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Mail, Plus, Search, X } from "lucide-react";
 import type { Client, ClientStatus } from "@/lib/admin-data";
-import { StatusBadge } from "./AdminUI";
 
 const STATUS_OPTIONS: { value: ClientStatus; api: string }[] = [
   { value: "Ativo", api: "active" },
@@ -53,7 +53,9 @@ export function CRMTable({ clients: initialClients, canCreate }: { clients: Clie
       const response = await fetch("/api/admin/clients", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const result = await response.json().catch(() => null) as { client?: Client; error?: string } | null;
       if (!response.ok || !result?.client) throw new Error(result?.error ?? "Não foi possível criar o cliente.");
-      setClients((current) => [result.client!, ...current]);
+      const createdClient = result.client;
+      if (!createdClient) throw new Error("Resposta inválida do servidor.");
+      setClients((current) => [createdClient, ...current]);
       setCreating(false);
       event.currentTarget.reset();
     } catch (reason) {

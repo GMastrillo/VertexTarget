@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function, @next/next/no-img-element -- card preview, fallback and CTA are one reusable composition. */
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
@@ -63,7 +64,7 @@ function SitePreview({ url, color }: { url: string; color: string }) {
         style={{ background: `${color}20` }}
       />
       {!failed && (
-        <img
+      <img
           ref={handleRef}
           src={src}
           alt=""

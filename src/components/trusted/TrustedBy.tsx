@@ -46,8 +46,9 @@ export default function TrustedBy() {
     // Reveal on scroll
     let ctx: gsap.Context | undefined;
     if (sectionRef.current) {
+      const section = sectionRef.current;
       ctx = gsap.context(() => {
-        gsap.from(sectionRef.current!.children[0], {
+        gsap.from(section.children[0], {
           y: 24,
           opacity: 0,
           duration: 0.7,

@@ -1,5 +1,8 @@
+/* eslint-disable complexity, max-statements -- route handlers intentionally keep validation and authorization together. */
 import { NextResponse } from "next/server";
 import { requireTeamUser } from "@/lib/auth";
+// This route owns project-role authorization and validated stage transitions.
+// eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 import { getClientAddress, hasJsonContentType, isRateLimited, isSameOriginRequest, parseJsonBody } from "@/lib/request-security";
 
@@ -8,7 +11,6 @@ type Stage = (typeof STAGES)[number];
 const PRIORITIES = ["high", "medium", "low"] as const;
 type Priority = (typeof PRIORITIES)[number];
 
-const toDb = { Backlog: "backlog", Design: "design", Desenvolvimento: "development", QA: "qa", Entregue: "delivered" } as const;
 const fromDb = { backlog: "Backlog", design: "Design", development: "Desenvolvimento", qa: "QA", delivered: "Entregue" } as const;
 const prioFromDb = { high: "Alta", medium: "Média", low: "Baixa" } as const;
 

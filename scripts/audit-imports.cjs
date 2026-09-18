@@ -7,7 +7,8 @@ const gitFiles = new Set(execSync("git ls-files src").toString().trim().split(/\
 function walk(dir, out = []) {
   for (const f of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, f.name);
-    f.isDirectory() ? walk(p, out) : out.push(p);
+    if (f.isDirectory()) walk(p, out);
+    else out.push(p);
   }
   return out;
 }

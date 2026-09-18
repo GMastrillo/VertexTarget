@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
 import Navigation from "@/components/layout/Navigation";
 import CustomCursor from "@/components/layout/CustomCursor";

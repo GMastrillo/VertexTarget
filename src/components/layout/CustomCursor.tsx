@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable complexity -- pointer, reduced-motion and theme fallbacks are one cursor lifecycle. */
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useSpring } from "framer-motion";
@@ -41,7 +42,7 @@ export default function CustomCursor() {
   useEffect(() => {
     // Only show custom cursor on non-touch devices
     const isTouchDevice = "ontouchstart" in window;
-    if (isTouchDevice) return;
+    if (isTouchDevice || reducedMotion) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -93,7 +94,7 @@ export default function CustomCursor() {
       });
       observer.disconnect();
     };
-  }, [cursorX, cursorY, isVisible]);
+  }, [cursorX, cursorY, isVisible, reducedMotion]);
 
   if (!isVisible) return null;
 

@@ -17,7 +17,6 @@ export default async function AdminOverview() {
     getFinanceData(),
   ]);
 
-  const hourAgo = Date.now() - 24 * 60 * 60 * 1000;
   const manualTotalCents = finance.manualTotalCents;
   const monthLabel = finance.manualThisMonthCents > 0 ? "Stripe + manual este mês" : "Atual";
 

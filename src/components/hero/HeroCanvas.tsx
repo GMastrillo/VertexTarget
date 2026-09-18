@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function, max-statements -- imperative WebGL setup and disposal share one lifecycle. */
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -128,7 +129,7 @@ export default function HeroCanvas() {
     // Animation Loop — paused while offscreen (saves main thread during scroll)
     let animationFrameId: number;
     let running = true;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const io = new IntersectionObserver(
       (entries) => {

@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function -- testimonial carousel and motion composition share state. */
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";

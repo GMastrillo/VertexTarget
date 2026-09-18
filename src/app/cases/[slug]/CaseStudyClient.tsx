@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function -- this page is a cohesive case-study composition. */
 
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
@@ -49,6 +50,7 @@ function SiteShot({ url, color }: { url: string; color: string }) {
           </span>
         </div>
       )}
+      {/* eslint-disable-next-line @next/next/no-img-element -- case screenshots use runtime URLs from the case registry. */}
       <img
         ref={handleRef}
         src={src}

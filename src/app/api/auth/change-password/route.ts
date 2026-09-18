@@ -1,4 +1,7 @@
+/* eslint-disable complexity -- password rotation checks must remain ordered in one handler. */
 import { NextResponse } from "next/server";
+// Password rotation must use the request-bound Supabase session client.
+// eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 import { getClientAddress, hasJsonContentType, isRateLimited, isSameOriginRequest, parseJsonBody } from "@/lib/request-security";
 

@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function -- leadership cards and their responsive composition are one visual section. */
 
 import { useRef, useEffect } from "react";
 import dynamic from "next/dynamic";

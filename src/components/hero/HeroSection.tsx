@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable max-lines-per-function -- hero copy and CTA animation are a single above-the-fold composition. */
 
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";

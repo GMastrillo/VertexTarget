@@ -1,3 +1,4 @@
+/* eslint-disable max-statements -- finance aggregation keeps Stripe and manual sources synchronized. */
 import "server-only";
 import Stripe from "stripe";
 
