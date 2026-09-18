@@ -1,35 +1,39 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
-
-function isTeamEmail(email: string | undefined | null) {
-  const allowed = (process.env.VERTEX_TEAM_EMAILS ?? "").split(",").map((value) => value.trim().toLowerCase()).filter(Boolean);
-  return Boolean(email && allowed.length > 0 && allowed.includes(email.toLowerCase()));
-}
+import { getSupabaseConfig } from "@/lib/supabase-config";
 
 export async function middleware(request: NextRequest) {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    // Never grant access just because a deployment is missing configuration.
-    return NextResponse.redirect(new URL("/login?error=auth-config", request.url));
+  const config = getSupabaseConfig();
+  const login = new URL("/login", request.url);
+  login.searchParams.set("next", request.nextUrl.pathname);
+
+  if (!config) {
+    login.searchParams.set("error", "auth-config");
+    return NextResponse.redirect(login);
   }
 
-  let response = NextResponse.next({ request });
-  const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
+  let response = NextResponse.next({ request: { headers: request.headers } });
+  const supabase = createServerClient(config.url, config.key, {
     cookies: {
       getAll: () => request.cookies.getAll(),
-      setAll: (items) => items.forEach(({ name, value, options }) => {
-        request.cookies.set(name, value);
-        response.cookies.set(name, value, options);
-      }),
+      setAll: (items) => {
+        items.forEach(({ name, value }) => request.cookies.set(name, value));
+        response = NextResponse.next({ request: { headers: request.headers } });
+        items.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
+      },
     },
   });
 
-  // getUser validates the session with Supabase; getSession alone is not sufficient.
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user || !user.email_confirmed_at || !isTeamEmail(user.email)) {
-    const login = new URL("/login", request.url);
-    login.searchParams.set("next", request.nextUrl.pathname);
-    return NextResponse.redirect(login);
-  }
+  if (!user?.email || !user.email_confirmed_at) return NextResponse.redirect(login);
+
+  const { data: member } = await supabase
+    .from("team_members")
+    .select("active")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  if (!member?.active) return NextResponse.redirect(login);
+
   return response;
 }
 

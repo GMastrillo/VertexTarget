@@ -47,6 +47,16 @@ npm run start
 
 ---
 
+## 🔐 Painel interno: Supabase, Stripe e Gemini
+
+1. Copie `.env.example` para `.env.local` e preencha apenas com credenciais novas/rotacionadas.
+2. Execute `supabase/migrations/001_internal_operations.sql` no SQL Editor do projeto Supabase.
+3. No Supabase Auth, crie/confirme o usuário da equipe e insira seu `user_id` em `team_members` com a role adequada.
+4. Configure o endpoint Stripe `/api/stripe/webhook` no Dashboard Stripe e use `STRIPE_WEBHOOK_SECRET` para validar a assinatura.
+5. Configure `STRIPE_SECRET_KEY`, `SUPABASE_SERVICE_ROLE_KEY` e `GOOGLE_GEMINI_API_KEY` somente em variáveis server-side. Nunca use esses valores com o prefixo `NEXT_PUBLIC_`.
+
+Sem essas variáveis, a aplicação mantém dados mockados apenas nas telas de desenvolvimento; rotas protegidas e mutações continuam negando acesso.
+
 ## 🚀 Deploy na Vercel
 Este projeto está 100% otimizado para deploy imediato na **Vercel** através do repositório conectado.
 - **Framework Preset:** Next.js
