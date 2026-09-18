@@ -87,11 +87,13 @@ export default function AILabSection() {
         }
       }
     } catch {
-      // Fallback demo response
-      const demoResponse = generateDemoResponse(userMessage);
+      // Do not hide production outages behind fabricated AI output.
+      const message = process.env.NODE_ENV === "development"
+        ? generateDemoResponse(userMessage)
+        : "O serviço de IA está indisponível no momento. Tente novamente mais tarde.";
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: demoResponse },
+        { role: "assistant", content: message },
       ]);
     } finally {
       setIsLoading(false);

@@ -15,19 +15,31 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const lastScrollY = useRef(0);
 
-  // rAF loop: immune to Lenis scroll interception and missed scroll events.
-  // React bails out of re-renders when the computed value is unchanged.
+  // Event-driven scroll state: avoids a permanent 60fps React render loop.
   useEffect(() => {
-    let raf: number;
-    const loop = () => {
+    let raf = 0;
+    let ticking = false;
+    const update = () => {
       const y = window.scrollY;
-      setScrolled(y > 60);
-      setHidden(y > lastScrollY.current && y > 300);
+      setScrolled((current) => (current === (y > 60) ? current : y > 60));
+      setHidden((current) => {
+        const next = y > lastScrollY.current && y > 300;
+        return current === next ? current : next;
+      });
       lastScrollY.current = y;
-      raf = requestAnimationFrame(loop);
+      ticking = false;
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      raf = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   const handleNavClick = (href: string) => {

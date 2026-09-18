@@ -28,6 +28,7 @@ export function useMagneticEffect<T extends HTMLElement>(
         y: deltaY,
         duration: ease,
         ease: "power2.out",
+        overwrite: "auto",
       });
     },
     [strength, ease]
@@ -40,6 +41,7 @@ export function useMagneticEffect<T extends HTMLElement>(
       y: 0,
       duration: 0.6,
       ease: "elastic.out(1, 0.3)",
+      overwrite: "auto",
     });
   }, []);
 

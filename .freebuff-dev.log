@@ -1,0 +1,19 @@
+
+> vertex-target@1.0.0 dev
+> next dev -p 3004
+
+ ⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::3004
+    at <unknown> (Error: listen EADDRINUSE: address already  ○ Compiling / ...
+ ✓ Compiled / in 8.9s (1459 modules)
+ GET / 200 in 284ms
+ GET / 200 in 252ms
+ GET / 200 in 347ms
+ GET / 200 in 408ms
+ ⚠ Cross origin request detected from 127.0.0.1 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 8.6s (2492 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /admin 200 in 10495ms
+[?25h

@@ -15,8 +15,14 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const preloaderElement = preloaderRef.current;
+    const counterElement = counterRef.current;
+    const barFillElement = barFillRef.current;
+    const logoElement = logoRef.current;
+
     // Reduced motion: skip the theatrical countdown entirely
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (preloaderElement) preloaderElement.style.display = "none";
       onComplete?.();
       return;
     }
@@ -26,22 +32,22 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         // Reveal animation
         const revealTl = gsap.timeline({
           onComplete: () => {
-            if (preloaderRef.current) {
-              preloaderRef.current.style.display = "none";
+            if (preloaderElement) {
+              preloaderElement.style.display = "none";
             }
             onComplete?.();
           },
         });
 
         revealTl
-          .to(counterRef.current, {
+          .to(counterElement, {
             y: -60,
             opacity: 0,
             duration: 0.25,
             ease: "power2.in",
           })
           .to(
-            logoRef.current,
+            logoElement,
             {
               y: -40,
               opacity: 0,
@@ -50,7 +56,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             },
             "-=0.15"
           )
-          .to(preloaderRef.current, {
+          .to(preloaderElement, {
             yPercent: -100,
             duration: 0.55,
             ease: "power3.inOut",
@@ -59,7 +65,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     });
 
     // Logo entrance
-    tl.from(logoRef.current, {
+    tl.from(logoElement, {
       y: 30,
       opacity: 0,
       duration: 0.6,
@@ -83,7 +89,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
     // Bar fill
     tl.to(
-      barFillRef.current,
+      barFillElement,
       {
         scaleX: 1,
         duration: 0.8,
@@ -94,6 +100,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
     return () => {
       tl.kill();
+      gsap.killTweensOf([preloaderElement, counterElement, barFillElement, logoElement]);
     };
   }, [onComplete]);
 

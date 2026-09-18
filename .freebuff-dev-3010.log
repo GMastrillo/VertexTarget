@@ -1,0 +1,28 @@
+   ▲ Next.js 15.5.25
+   - Local:        http://localhost:3010
+   - Network:      http://26.2.137.224:3010
+
+ ✓ Starting...
+ ✓ Ready in 4.1s
+ ○ Compiling / ...
+ ✓ Compiled / in 10.5s (1427 modules)
+ GET / 200 in 335ms
+ GET / 200 in 219ms
+ GET / 200 in 351ms
+ GET / 200 in 385ms
+ ⚠ Cross origin request detected from 127.0.0.1 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 15.2s (2478 modules)
+ GET /admin 200 in 17519ms
+ GET /admin 200 in 177ms
+ ✓ Compiled in 1508ms (1165 modules)
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 2.3s (173 modules)
+ ○ Compiling /login ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (113kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (267kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled /login in 1128ms (2511 modules)
+ GET /login?error=auth-config 200 in 1409ms
+ GET /login?error=auth-config 200 in 52ms
+ GET / 200 in 1420ms

@@ -38,6 +38,7 @@ export default function SplitText({
     const elements = elementsRef.current;
     if (elements.length === 0) return;
 
+    const ctx = gsap.context(() => {
     gsap.set(elements, {
       y,
       opacity: 0,
@@ -67,12 +68,11 @@ export default function SplitText({
       gsap.to(elements, animConfig);
     }
 
-    const currentContainer = containerRef.current;
+    });
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === currentContainer) t.kill();
-      });
+      // Revert kills both the tween and its ScrollTrigger without scanning global triggers.
+      ctx.revert();
     };
   }, [children, stagger, duration, delay, scrollTrigger, y]);
 

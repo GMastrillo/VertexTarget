@@ -71,6 +71,8 @@ export default function SkillsOrbit() {
     // Orbit Rings
     const ringRadii = [2.6, 3.8, 5.0];
     const ringMaterials: THREE.MeshBasicMaterial[] = [];
+    const disposableGeometries: THREE.BufferGeometry[] = [];
+    const disposableMaterials: THREE.Material[] = [];
     ringRadii.forEach((r, i) => {
       const ringGeo = new THREE.RingGeometry(r - 0.015, r + 0.015, 64);
       const ringMat = new THREE.MeshBasicMaterial({
@@ -80,6 +82,8 @@ export default function SkillsOrbit() {
         side: THREE.DoubleSide,
       });
       ringMaterials.push(ringMat);
+      disposableGeometries.push(ringGeo);
+      disposableMaterials.push(ringMat);
       const ringMesh = new THREE.Mesh(ringGeo, ringMat);
       ringMesh.rotation.x = Math.PI / 2.3 + i * 0.15;
       ringMesh.rotation.y = (i * Math.PI) / 6;
@@ -130,6 +134,8 @@ export default function SkillsOrbit() {
         roughness: 0.3,
         metalness: 0.7,
       });
+      disposableGeometries.push(sphereGeo);
+      disposableMaterials.push(sphereMat);
       const mesh = new THREE.Mesh(sphereGeo, sphereMat);
       orbitGroup.add(mesh);
 
@@ -246,11 +252,14 @@ export default function SkillsOrbit() {
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("resize", handleResize);
 
+      // Dispose every GPU allocation, including orbit rings and skill nodes.
       coreGeometry.dispose();
       coreMaterial.dispose();
       innerGeometry.dispose();
       innerMaterial.dispose();
-      ringMaterials.forEach((m) => m.dispose());
+      disposableGeometries.forEach((geometry) => geometry.dispose());
+      disposableMaterials.forEach((material) => material.dispose());
+      renderer.renderLists.dispose();
       renderer.dispose();
     };
   }, []);

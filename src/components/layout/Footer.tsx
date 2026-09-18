@@ -18,16 +18,17 @@ export default function Footer() {
   useEffect(() => {
     if (!marqueeRef.current) return;
 
-    gsap.to(marqueeRef.current, {
-      xPercent: -50,
-      duration: 20,
-      ease: "none",
-      repeat: -1,
-    });
+    const ctx = gsap.context(() => {
+      gsap.to(marqueeRef.current, {
+        xPercent: -50,
+        duration: 20,
+        ease: "none",
+        repeat: -1,
+      });
 
-    // Footer reveal
-    if (footerRef.current) {
-      gsap.from(footerRef.current, {
+      // Footer reveal
+      if (footerRef.current) {
+        gsap.from(footerRef.current, {
         y: 60,
         opacity: 0,
         duration: 1,
@@ -35,9 +36,12 @@ export default function Footer() {
         scrollTrigger: {
           trigger: footerRef.current,
           start: "top 95%",
-        },
-      });
-    }
+          },
+        });
+      }
+    }, footerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
