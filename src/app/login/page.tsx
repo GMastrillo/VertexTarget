@@ -16,10 +16,16 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      const payload = await response.json().catch(() => null) as { error?: string } | null;
+      const payload = await response.json().catch(() => null) as { error?: string; mustChangePassword?: boolean } | null;
 
       if (!response.ok) {
         setError(payload?.error || "Não foi possível validar o acesso.");
+        return;
+      }
+
+      // First login with a temporary password: rotate it before entering the dashboard.
+      if (payload?.mustChangePassword) {
+        router.replace("/login/trocar-senha");
         return;
       }
 

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 import { getClientAddress, hasJsonContentType, isRateLimited, isSameOriginRequest, parseJsonBody } from "@/lib/request-security";
 
-const json = (body: Record<string, string>, status = 200) => NextResponse.json(body, { status });
+const json = (body: Record<string, string | boolean>, status = 200) => NextResponse.json(body, { status });
 
 export async function POST(request: Request) {
   if (!isSameOriginRequest(request)) return json({ error: "Origem inválida." }, 403);
@@ -31,6 +31,11 @@ export async function POST(request: Request) {
   if (!user?.email_confirmed_at || !member?.active) {
     await supabase.auth.signOut();
     return json({ error: "Credenciais inválidas." }, 401);
+  }
+
+  // First login: the session is valid, but the user must rotate the temporary password before entering.
+  if (user.user_metadata?.password_must_change === true) {
+    return json({ mustChangePassword: true });
   }
 
   return json({ ok: "true" });

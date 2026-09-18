@@ -34,6 +34,11 @@ export async function middleware(request: NextRequest) {
     .maybeSingle();
   if (!member?.active) return NextResponse.redirect(login);
 
+  // First-login guard: owners with a pending password rotation cannot reach /admin.
+  if (user.user_metadata?.password_must_change === true) {
+    return NextResponse.redirect(new URL("/login/trocar-senha", request.url));
+  }
+
   return response;
 }
 
