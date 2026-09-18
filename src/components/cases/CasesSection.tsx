@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
@@ -347,12 +348,27 @@ export default function CasesSection() {
                     </div>
                   </div>
 
-                  {/* Footer note */}
+                  {/* Footer note + study CTA */}
                   <div
-                    className="pt-6 border-t border-white/[0.06] text-xs font-mono"
-                    style={{ color: "var(--color-vt-text-dim)" }}
+                    className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                   >
-                    {t.cases.deployNote}
+                    <span className="text-xs font-mono" style={{ color: "var(--color-vt-text-dim)" }}>
+                      {t.cases.deployNote}
+                    </span>
+                    <Link
+                      href={`/cases/${c.id}`}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-semibold tracking-wide transition-all duration-300 hover:scale-105 flex-shrink-0"
+                      style={{
+                        background: `${c.color}12`,
+                        border: `1px solid ${c.color}40`,
+                        color: c.color,
+                      }}
+                    >
+                      {t.cases.viewStudy}
+                      <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </Link>
                   </div>
                 </div>
               </motion.div>

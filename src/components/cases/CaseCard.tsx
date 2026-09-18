@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -283,6 +284,24 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
               {caseStudy.metrics}
             </span>
           </div>
+
+          {/* Study link — only for cases with an architecture study */}
+          <Link
+            href={`/cases/${caseStudy.id}`}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-2 text-xs font-mono font-semibold tracking-wide mt-4 group/study transition-all duration-300 hover:gap-3"
+            style={{ color: caseStudy.color }}
+          >
+            <span
+              className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover/study:scale-110"
+              style={{ background: `${caseStudy.color}15`, border: `1px solid ${caseStudy.color}40` }}
+            >
+              <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+                <path d="M4 12L12 4M12 4H5M12 4v7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            {t.cases.viewStudy}
+          </Link>
 
           <div className="flex flex-wrap gap-2">
             {caseStudy.tags.slice(0, 5).map((tag) => (
