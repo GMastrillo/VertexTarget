@@ -1,14 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { CASES } from "@/lib/constants";
-import { CARD_CONTENT } from "@/lib/i18n-data";
+import { CARD_CONTENT, type CaseContent } from "@/lib/i18n-data";
+import type { CaseStudy } from "@/lib/constants";
 import { useLanguage } from "@/providers/LanguageProvider";
 import { CASE_INDEX_COPY } from "@/lib/case-index-i18n";
 import CaseCard from "@/components/cases/CaseCard";
 import { useRouter } from "next/navigation";
+
+type LocalizedCaseStudy = CaseStudy & CaseContent;
 
 export default function CasesIndexClient() {
   const { locale } = useLanguage();
@@ -23,6 +26,12 @@ export default function CasesIndexClient() {
   const years = useMemo(() => [...new Set(localizedCases.map((item) => item.year))].sort((a, b) => b.localeCompare(a)), [localizedCases]);
   const filteredCases = localizedCases.filter((item) => (category === "all" || item.category === category) && (technology === "all" || item.tags.includes(technology)) && (year === "all" || item.year === year));
   const hasFilters = category !== "all" || technology !== "all" || year !== "all";
+
+  useEffect(() => {
+    setCategory("all");
+    setTechnology("all");
+    setYear("all");
+  }, [locale]);
 
   function resetFilters() {
     setCategory("all");

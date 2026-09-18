@@ -13,20 +13,28 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const lastScrollY = useRef(0);
+  const lastDirectionY = useRef(0);
 
-  // Event-driven scroll state: avoids a permanent 60fps React render loop.
+  // Event-driven scroll state with hysteresis: prevents Lenis micro-bounces from toggling the bar.
   useEffect(() => {
     let raf = 0;
     let ticking = false;
+    const TOP_THRESHOLD = 80;
+    const DIRECTION_THRESHOLD = 12;
     const update = () => {
-      const y = window.scrollY;
+      const y = Math.max(window.scrollY, 0);
       setScrolled((current) => (current === (y > 60) ? current : y > 60));
-      setHidden((current) => {
-        const next = y > lastScrollY.current && y > 300;
-        return current === next ? current : next;
-      });
-      lastScrollY.current = y;
+
+      const delta = y - lastDirectionY.current;
+      if (y <= TOP_THRESHOLD) {
+        setHidden(false);
+        lastDirectionY.current = y;
+      } else if (Math.abs(delta) >= DIRECTION_THRESHOLD) {
+        // Change visibility only after meaningful movement, not every tiny scroll reversal.
+        setHidden(delta > 0);
+        lastDirectionY.current = y;
+      }
+
       ticking = false;
     };
     const onScroll = () => {
@@ -59,7 +67,7 @@ export default function Navigation() {
           y: hidden ? -120 : 0,
           opacity: hidden ? 0 : 1,
         }}
-        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-[100] px-5 sm:px-14 lg:px-20 py-4 sm:py-8 transition-[padding] duration-500"
         style={{ paddingTop: scrolled ? 14 : undefined, paddingBottom: scrolled ? 14 : undefined }}
       >
