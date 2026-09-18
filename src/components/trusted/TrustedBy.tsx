@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
  * Typographic "logos" stay grayscale/dim and light up on hover (VTEX pattern).
  */
 const CLIENTS = [
+  { name: "ELON", suffix: "Watches" },
   { name: "ClinicFlow", suffix: "Co." },
   { name: "Absoluto", suffix: "Sistemas" },
   { name: "Ale Rei", suffix: "Marine" },

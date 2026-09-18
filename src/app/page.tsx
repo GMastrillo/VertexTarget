@@ -14,6 +14,9 @@ import AboutSection from "@/components/about/AboutSection";
 import AILabSection from "@/components/ai-lab/AILabSection";
 import FAQSection from "@/components/faq/FAQSection";
 import TrustedBy from "@/components/trusted/TrustedBy";
+import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
+import MetricsBand from "@/components/metrics/MetricsBand";
+import CommandPalette from "@/components/layout/CommandPalette";
 import ContactSection from "@/components/contact/ContactSection";
 
 export default function HomePage() {
@@ -24,12 +27,15 @@ export default function HomePage() {
       <Preloader onComplete={() => setPreloaderDone(true)} />
       <CustomCursor />
       <Navigation />
+      <CommandPalette />
 
       <main>
         <HeroSection />
         <TrustedBy />
+        <MetricsBand />
         <ServicesSection />
         <CasesSection />
+        <TestimonialsSection />
         <AboutSection />
         <AILabSection />
         <FAQSection />

@@ -18,9 +18,16 @@ export interface CaseContent {
   tags: string[];
 }
 
+export interface TestimonialContent {
+  quote: string;
+  author: string;
+  role: string;
+}
+
 interface LocaleCardContent {
   services: Record<ServiceId, ServiceContent>;
   cases: Record<CaseId, CaseContent>;
+  testimonials: TestimonialContent[];
 }
 
 /**
@@ -62,6 +69,14 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
       },
     },
     cases: {
+      "elon-watches": {
+        category: "Luxury E-Commerce & Intermediação",
+        tagline: "O maior ecossistema de relógios de luxo do Brasil.",
+        description:
+          "Plataforma digital para o maior ecossistema de intermediação de relógios de luxo do Brasil. Catálogo premium com mais de 1.000 peças autenticadas — Rolex, Patek Philippe, Audemars Piguet — com fluxo de consignação, curadoria de coleções e jornada de compra de alto padrão para colecionadores e investidores.",
+        metrics: "+1.000 Relógios Autenticados · Rolex · Patek · AP · Consignação",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Catálogo Premium", "Consignação", "High-Value Leads"],
+      },
       clinicflow: {
         category: "SaaS · Automação Odonto / IA",
         tagline: "Cada paciente, no momento certo.",
@@ -103,6 +118,32 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
         tags: ["Next.js", "TailwindCSS", "Simulador Algorítmico", "Agro Solar", "Payback Calc", "Energisa MS"],
       },
     },
+    testimonials: [
+      {
+        quote:
+          "A plataforma transformou nossa operação: agendamento automatizado, comunicação preditiva e um painel que finalmente nos dá clareza. A retenção de pacientes subiu de forma perceptível.",
+        author: "Direção Clínica",
+        role: "ClinicFlow",
+      },
+      {
+        quote:
+          "Raro ver uma equipe que entende o negócio de verdade. A calculadora técnica que construíram virou ferramenta de vendas do time comercial.",
+        author: "Direção Comercial",
+        role: "Absoluto & Lucena",
+      },
+      {
+        quote:
+          "O showroom digital traduziu o padrão da nossa loja. Os leads chegaram muito mais qualificados depois do novo catálogo.",
+        author: "Fundador",
+        role: "Ale Rei Jet Ski & Marine",
+      },
+      {
+        quote:
+          "Do briefing ao deploy, precisão e prazo. O simulador de payback é hoje o nosso principal argumento comercial.",
+        author: "Direção",
+        role: "CACCIA Energia Solar",
+      },
+    ],
   },
 
   en: {
@@ -139,6 +180,14 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
       },
     },
     cases: {
+      "elon-watches": {
+        category: "Luxury E-Commerce & Brokerage",
+        tagline: "Brazil's largest luxury watch ecosystem.",
+        description:
+          "Digital platform for Brazil's largest luxury watch brokerage ecosystem. A premium catalog with over 1,000 authenticated pieces — Rolex, Patek Philippe, Audemars Piguet — featuring consignment flows, collection curation and a high-end purchasing journey for collectors and investors.",
+        metrics: "+1,000 Authenticated Watches · Rolex · Patek · AP · Consignment",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Premium Catalog", "Consignment", "High-Value Leads"],
+      },
       clinicflow: {
         category: "SaaS · Dental Automation / AI",
         tagline: "Every patient, at the right moment.",
@@ -180,6 +229,32 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
         tags: ["Next.js", "TailwindCSS", "Algorithmic Simulator", "Agro Solar", "Payback Calc", "Energisa MS"],
       },
     },
+    testimonials: [
+      {
+        quote:
+          "The platform transformed our operation: automated scheduling, predictive communication and a dashboard that finally gives us clarity. Patient retention rose noticeably.",
+        author: "Clinical Direction",
+        role: "ClinicFlow",
+      },
+      {
+        quote:
+          "Rare to find a team that truly understands the business. The technical calculator they built became a sales tool for our commercial team.",
+        author: "Commercial Direction",
+        role: "Absoluto & Lucena",
+      },
+      {
+        quote:
+          "The digital showroom captured our store's standard. Leads arrived far more qualified after the new catalog.",
+        author: "Founder",
+        role: "Ale Rei Jet Ski & Marine",
+      },
+      {
+        quote:
+          "From briefing to deploy: precision and deadlines met. The payback simulator is now our strongest sales argument.",
+        author: "Direction",
+        role: "CACCIA Energia Solar",
+      },
+    ],
   },
 
   es: {
@@ -216,6 +291,14 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
       },
     },
     cases: {
+      "elon-watches": {
+        category: "Luxury E-Commerce & Intermediación",
+        tagline: "El mayor ecosistema de relojes de lujo de Brasil.",
+        description:
+          "Plataforma digital para el mayor ecosistema de intermediación de relojes de lujo de Brasil. Catálogo premium con más de 1.000 piezas autenticadas — Rolex, Patek Philippe, Audemars Piguet — con flujo de consignación, curaduría de colecciones y jornada de compra de alto estándar para coleccionistas e inversores.",
+        metrics: "+1.000 Relojes Autenticados · Rolex · Patek · AP · Consignación",
+        tags: ["Next.js", "TailwindCSS", "UI de Lujo", "Catálogo Premium", "Consignación", "Leads de Alto Valor"],
+      },
       clinicflow: {
         category: "SaaS · Automatización Dental / IA",
         tagline: "Cada paciente, en el momento correcto.",
@@ -257,6 +340,32 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
         tags: ["Next.js", "TailwindCSS", "Simulador Algorítmico", "Agro Solar", "Cálculo Payback", "Energisa MS"],
       },
     },
+    testimonials: [
+      {
+        quote:
+          "La plataforma transformó nuestra operación: agendado automatizado, comunicación predictiva y un panel que finalmente nos da claridad. La retención de pacientes subió de forma perceptible.",
+        author: "Dirección Clínica",
+        role: "ClinicFlow",
+      },
+      {
+        quote:
+          "Es raro encontrar un equipo que entiende el negocio de verdad. La calculadora técnica que construyeron se volvió herramienta de ventas del equipo comercial.",
+        author: "Dirección Comercial",
+        role: "Absoluto & Lucena",
+      },
+      {
+        quote:
+          "El showroom digital tradujo el estándar de nuestra tienda. Los leads llegaron mucho más calificados después del nuevo catálogo.",
+        author: "Fundador",
+        role: "Ale Rei Jet Ski & Marine",
+      },
+      {
+        quote:
+          "Del briefing al deploy, precisión y plazo. El simulador de payback es hoy nuestro principal argumento comercial.",
+        author: "Dirección",
+        role: "CACCIA Energia Solar",
+      },
+    ],
   },
 
   fr: {
@@ -293,6 +402,14 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
       },
     },
     cases: {
+      "elon-watches": {
+        category: "Luxury E-Commerce & Courtage",
+        tagline: "Le plus grand écosystème de montres de luxe du Brésil.",
+        description:
+          "Plateforme digitale pour le plus grand écosystème de courtage de montres de luxe du Brésil. Un catalogue premium de plus de 1 000 pièces authentifiées — Rolex, Patek Philippe, Audemars Piguet — avec flux de dépôt-vente, curation de collections et parcours d'achat haut de gamme pour collectionneurs et investisseurs.",
+        metrics: "+1 000 Montres Authentifiées · Rolex · Patek · AP · Dépôt-Vente",
+        tags: ["Next.js", "TailwindCSS", "UI de Luxe", "Catalogue Premium", "Dépôt-Vente", "Leads Haut Valeur"],
+      },
       clinicflow: {
         category: "SaaS · Automatisation Dentaire / IA",
         tagline: "Chaque patient, au bon moment.",
@@ -334,6 +451,32 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
         tags: ["Next.js", "TailwindCSS", "Simulateur Algorithmique", "Agro Solaire", "Calcul Retour", "Energisa MS"],
       },
     },
+    testimonials: [
+      {
+        quote:
+          "La plateforme a transformé notre opération : prise de rendez-vous automatisée, communication prédictive et un tableau de bord enfin clair. La rétention des patients a nettement augmenté.",
+        author: "Direction Clinique",
+        role: "ClinicFlow",
+      },
+      {
+        quote:
+          "Rare de trouver une équipe qui comprend vraiment le métier. La calculatrice technique qu'ils ont construite est devenue un outil de vente pour l'équipe commerciale.",
+        author: "Direction Commerciale",
+        role: "Absoluto & Lucena",
+      },
+      {
+        quote:
+          "Le showroom digital a traduit le standing de notre magasin. Les leads sont arrivés bien mieux qualifiés après le nouveau catalogue.",
+        author: "Fondateur",
+        role: "Ale Rei Jet Ski & Marine",
+      },
+      {
+        quote:
+          "Du brief au déploiement : précision et délais respectés. Le simulateur de retour sur investissement est aujourd'hui notre meilleur argument commercial.",
+        author: "Direction",
+        role: "CACCIA Energia Solar",
+      },
+    ],
   },
 
   it: {
@@ -370,6 +513,14 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
       },
     },
     cases: {
+      "elon-watches": {
+        category: "Luxury E-Commerce & Intermediazione",
+        tagline: "Il più grande ecosistema di orologi di lusso del Brasile.",
+        description:
+          "Piattaforma digitale per il più grande ecosistema di intermediazione di orologi di lusso del Brasile. Catalogo premium con oltre 1.000 pezzi autenticati — Rolex, Patek Philippe, Audemars Piguet — con flusso di consignment, cura delle collezioni e percorso d'acquisto di alto livello per collezionisti e investitori.",
+        metrics: "+1.000 Orologi Autenticati · Rolex · Patek · AP · Consignment",
+        tags: ["Next.js", "TailwindCSS", "UI di Lusso", "Catalogo Premium", "Consignment", "Lead Alto Valore"],
+      },
       clinicflow: {
         category: "SaaS · Automazione Dentale / IA",
         tagline: "Ogni paziente, al momento giusto.",
@@ -411,5 +562,31 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
         tags: ["Next.js", "TailwindCSS", "Simulatore Algoritmico", "Agro Solare", "Calcolo Payback", "Energisa MS"],
       },
     },
+    testimonials: [
+      {
+        quote:
+          "La piattaforma ha trasformato la nostra operazione: prenotazioni automatizzate, comunicazione predittiva e una dashboard che finalmente dà chiarezza. La fidelizzazione dei pazienti è aumentata in modo evidente.",
+        author: "Direzione Clinica",
+        role: "ClinicFlow",
+      },
+      {
+        quote:
+          "Raro trovare un team che capisce davvero il business. La calcolatrice tecnica che hanno costruito è diventata uno strumento di vendita per il team commerciale.",
+        author: "Direzione Commerciale",
+        role: "Absoluto & Lucena",
+      },
+      {
+        quote:
+          "Lo showroom digitale ha tradotto lo standard del nostro negozio. I lead sono arrivati molto più qualificati dopo il nuovo catalogo.",
+        author: "Fondatore",
+        role: "Ale Rei Jet Ski & Marine",
+      },
+      {
+        quote:
+          "Dal brief al deploy, precisione e tempi rispettati. Il simulatore di payback è oggi il nostro principale argomento di vendita.",
+        author: "Direzione",
+        role: "CACCIA Energia Solar",
+      },
+    ],
   },
 };

@@ -88,6 +88,20 @@ export interface CaseStudy {
 
 export const CASES: CaseStudy[] = [
   {
+    id: "elon-watches",
+    title: "ELON Watches",
+    category: "Luxury E-Commerce & Intermediação",
+    tagline: "O maior ecossistema de relógios de luxo do Brasil.",
+    description:
+      "Plataforma digital para o maior ecossistema de intermediação de relógios de luxo do Brasil. Catálogo premium com mais de 1.000 peças autenticadas — Rolex, Patek Philippe, Audemars Piguet — com fluxo de consignação, curadoria de coleções e jornada de compra de alto padrão para colecionadores e investidores.",
+    tags: ["Next.js", "TailwindCSS", "Luxury UI", "Catálogo Premium", "Consignação", "High-Value Leads"],
+    color: "#d4af37",
+    year: "2026",
+    liveUrl: "https://elonwatches.com/",
+    metrics: "+1.000 Relógios Autenticados · Rolex · Patek · AP · Consignação",
+    client: "ELON Watches (Elon Chaves)",
+  },
+  {
     id: "clinicflow",
     title: "ClinicFlow",
     category: "SaaS · Automação Odonto / IA",
