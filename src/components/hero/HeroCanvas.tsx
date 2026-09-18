@@ -20,18 +20,21 @@ export default function HeroCanvas() {
     const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
     camera.position.z = 4;
 
-    // Renderer
+    // Particle density / DPR adapt to screen size (mobile = lighter scene)
+    const isSmallScreen = Math.min(width, height) < 768;
+
+    // Renderer — antialias off + capped DPR: big GPU/CPU win on mobile
     const renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
-      antialias: true,
+      antialias: false,
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isSmallScreen ? Math.min(window.devicePixelRatio, 1.25) : Math.min(window.devicePixelRatio, 1.5));
 
-    // Particle Field
-    const count = 2500;
+    // Particle Field — fewer particles on small/low-power screens
+    const count = isSmallScreen ? 1200 : 2500;
     const positions = new Float32Array(count * 3);
     const velocities = new Float32Array(count * 3);
 
@@ -122,12 +125,22 @@ export default function HeroCanvas() {
 
     window.addEventListener("resize", handleResize);
 
-    // Animation Loop
+    // Animation Loop — paused while offscreen (saves main thread during scroll)
     let animationFrameId: number;
+    let running = true;
     let clock = new THREE.Clock();
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        running = entries[0]?.isIntersecting ?? true;
+      },
+      { threshold: 0 }
+    );
+    io.observe(container);
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+      if (!running) return;
 
       const elapsedTime = clock.getElapsedTime();
 
@@ -186,6 +199,7 @@ export default function HeroCanvas() {
       meshMaterial.dispose();
       innerGeometry.dispose();
       innerMaterial.dispose();
+      io.disconnect();
       renderer.dispose();
     };
   }, []);

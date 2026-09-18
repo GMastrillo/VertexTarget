@@ -12,7 +12,7 @@
   --color-vt-border: #1a1a3e;
   --color-vt-text: #e8e8f0;
   --color-vt-text-muted: #8888a8;
-  --color-vt-text-dim: #55557a;
+  --color-vt-text-dim: #8a8fb0;
   --color-vt-accent-cyan: #00f0ff;
   --color-vt-accent-violet: #8b5cf6;
   --color-vt-accent-magenta: #e040fb;
@@ -56,7 +56,7 @@
   --color-vt-border: #1a1a3e;
   --color-vt-text: #e8e8f0;
   --color-vt-text-muted: #8888a8;
-  --color-vt-text-dim: #55557a;
+  --color-vt-text-dim: #8a8fb0;
   --color-vt-accent-cyan: #00f0ff;
   --color-vt-accent-violet: #8b5cf6;
   --color-vt-accent-magenta: #e040fb;
@@ -101,7 +101,7 @@ html.light {
   --color-vt-border: #d9dfeb;
   --color-vt-text: #0b1020;
   --color-vt-text-muted: #4a5570;
-  --color-vt-text-dim: #8a93aa;
+  --color-vt-text-dim: #6b7490;
   --color-vt-accent-cyan: #0090c8;
   --color-vt-accent-violet: #7c3aed;
   --color-vt-accent-magenta: #c026d3;

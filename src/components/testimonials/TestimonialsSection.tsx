@@ -116,7 +116,7 @@ export default function TestimonialsSection() {
                 </span>
 
                 {/* Stars */}
-                <div className="flex gap-1" aria-label="5/5">
+                <div className="flex gap-1" role="img" aria-label="5/5">
                   {[0, 1, 2, 3, 4].map((s) => (
                     <svg
                       key={s}

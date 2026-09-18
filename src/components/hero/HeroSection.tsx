@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
@@ -11,8 +11,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
 
-export default function HeroSection() {
+export default function HeroSection({ canvasReady = true }: { canvasReady?: boolean }) {
   const t = useT();
+  const [showCanvas, setShowCanvas] = useState(false);
+
+  // Defer the Three.js chunk evaluation to browser idle time: the hero looks
+  // complete without it (gradient overlay) and the main thread stays free
+  // for first interaction (TBT/TTI win).
+  useEffect(() => {
+    if (!canvasReady) return;
+    const ric =
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback
+        : (cb: IdleRequestCallback) =>
+            window.setTimeout(() => cb({ didTimeout: false, timeRemaining: () => 0 }), 300);
+    const id = ric(() => setShowCanvas(true));
+    return () => {
+      if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(id as number);
+      else window.clearTimeout(id as number);
+    };
+  }, [canvasReady]);
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sublineRef = useRef<HTMLParagraphElement>(null);
@@ -22,7 +40,7 @@ export default function HeroSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 2.8 });
+      const tl = gsap.timeline({ delay: canvasReady ? 0 : 2.8 });
 
       // Label
       tl.from(labelRef.current, {
@@ -96,7 +114,7 @@ export default function HeroSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [canvasReady]);
 
   return (
     <section
@@ -104,9 +122,10 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* WebGL Background — dimmed in light mode via .hero-canvas */}
+      {/* WebGL Background — dimmed in light mode via .hero-canvas.
+          Mounted after preloader + idle: keeps first paint interactive. */}
       <div className="absolute inset-0 z-0 hero-canvas transition-opacity duration-500">
-        <HeroCanvas />
+        {showCanvas && <HeroCanvas />}
       </div>
 
       {/* Gradient overlay */}

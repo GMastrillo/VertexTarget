@@ -76,6 +76,8 @@ function ModalPreview({ url, color }: { url: string; color: string }) {
           ref={handleRef}
           src={src}
           alt={`Screenshot do site ${url}`}
+          loading="lazy"
+          decoding="async"
           className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
             loaded ? "opacity-100" : "opacity-0"
           }`}

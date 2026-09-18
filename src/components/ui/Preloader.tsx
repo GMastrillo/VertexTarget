@@ -15,6 +15,12 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Reduced motion: skip the theatrical countdown entirely
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      onComplete?.();
+      return;
+    }
+
     const tl = gsap.timeline({
       onComplete: () => {
         // Reveal animation
@@ -31,7 +37,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           .to(counterRef.current, {
             y: -60,
             opacity: 0,
-            duration: 0.4,
+            duration: 0.25,
             ease: "power2.in",
           })
           .to(
@@ -39,14 +45,14 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             {
               y: -40,
               opacity: 0,
-              duration: 0.4,
+              duration: 0.25,
               ease: "power2.in",
             },
-            "-=0.3"
+            "-=0.15"
           )
           .to(preloaderRef.current, {
             yPercent: -100,
-            duration: 0.8,
+            duration: 0.55,
             ease: "power3.inOut",
           });
       },
@@ -60,12 +66,12 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       ease: "power2.out",
     });
 
-    // Counter animation
+    // Counter animation — shortened: long pre-loaders delay LCP for zero gain
     tl.to(
       { value: 0 },
       {
         value: 100,
-        duration: 2.2,
+        duration: 0.8,
         ease: "power2.inOut",
         onUpdate: function () {
           const val = Math.round(this.targets()[0].value);
@@ -80,7 +86,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       barFillRef.current,
       {
         scaleX: 1,
-        duration: 2.2,
+        duration: 0.8,
         ease: "power2.inOut",
       },
       "<"

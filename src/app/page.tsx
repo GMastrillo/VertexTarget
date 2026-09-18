@@ -30,7 +30,7 @@ export default function HomePage() {
       <CommandPalette />
 
       <main>
-        <HeroSection />
+        <HeroSection canvasReady={preloaderDone} />
         <TrustedBy />
         <MetricsBand />
         <ServicesSection />

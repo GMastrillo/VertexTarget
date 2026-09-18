@@ -184,12 +184,15 @@ export default function ContactSection() {
 
             <div className="form-field">
               <label
+                htmlFor="vt-budget"
                 className="text-xs tracking-wider uppercase block mb-2"
                 style={{ color: "var(--color-vt-text-dim)" }}
               >
                 {t.contact.budget}
               </label>
               <select
+                id="vt-budget"
+                name="budget"
                 value={formState.budget}
                 onChange={(e) =>
                   setFormState((s) => ({ ...s, budget: e.target.value }))
