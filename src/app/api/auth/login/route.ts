@@ -5,7 +5,24 @@ import { isTeamEmail } from "@/lib/auth";
 
 const json = (body: Record<string, string>, status = 200) => NextResponse.json(body, { status });
 
+function isSameOrigin(request: Request) {
+  const originHeader = request.headers.get("origin");
+  const host = request.headers.get("host");
+  if (!originHeader || !host) return false;
+
+  try {
+    const origin = new URL(originHeader);
+    const forwardedProto = request.headers.get("x-forwarded-proto");
+    const protocol = forwardedProto?.split(",")[0]?.trim() || origin.protocol.replace(":", "");
+    return origin.host === host && origin.protocol === `${protocol}:`;
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
+  // Login/logout are state-changing cookie operations; reject cross-origin requests.
+  if (!isSameOrigin(request)) return json({ error: "Origem inválida." }, 403);
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || !process.env.VERTEX_TEAM_EMAILS) {
     return json({ error: "Autenticação não configurada." }, 503);
   }
@@ -28,7 +45,8 @@ export async function POST(request: Request) {
   return json({ ok: "true" });
 }
 
-export async function DELETE() {
+export async function DELETE(request: Request) {
+  if (!isSameOrigin(request)) return json({ error: "Origem inválida." }, 403);
   if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     const cookieStore = await cookies();
     const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {

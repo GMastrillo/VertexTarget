@@ -5,6 +5,32 @@ import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter(); const [email, setEmail] = useState(""); const [password, setPassword] = useState(""); const [loading, setLoading] = useState(false); const [error, setError] = useState("");
-  async function submit(event: FormEvent) { event.preventDefault(); setError(""); setLoading(true); const res = await fetch("/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) }); setLoading(false); if (!res.ok) { setError("Use um e-mail válido e uma senha com pelo menos 8 caracteres."); return; } router.push(new URLSearchParams(window.location.search).get("next") || "/admin"); }
+  async function submit(event: FormEvent) {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const payload = await response.json().catch(() => null) as { error?: string } | null;
+
+      if (!response.ok) {
+        setError(payload?.error || "Não foi possível validar o acesso.");
+        return;
+      }
+
+      const requestedPath = new URLSearchParams(window.location.search).get("next");
+      const destination = requestedPath?.startsWith("/") && !requestedPath.startsWith("//") ? requestedPath : "/admin";
+      router.push(destination);
+    } catch {
+      setError("Não foi possível conectar ao serviço de autenticação.");
+    } finally {
+      setLoading(false);
+    }
+  }
   return <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#050510] px-5 py-10 text-[#e8e8f0]"><div className="pointer-events-none absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-cyan-400/10 blur-[120px]"/><div className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-violet-600/15 blur-[140px]"/><div className="relative grid w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-white/[.035] shadow-2xl shadow-violet-950/20 backdrop-blur-2xl lg:grid-cols-[1fr_0.9fr]"><section className="hidden flex-col justify-between border-r border-white/[.08] p-12 lg:flex"><div><div className="mb-20 flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-violet-500 text-sm font-black text-[#050510]">VT</span><span className="font-[var(--font-heading)] text-xl font-semibold">Vertex<span className="text-cyan-300">Target</span></span></div><p className="mb-5 text-xs uppercase tracking-[.3em] text-cyan-300">Internal command center</p><h1 className="max-w-md font-[var(--font-heading)] text-5xl font-semibold leading-[1.05] tracking-tight">A engenharia por trás do <span className="gradient-text">impacto.</span></h1><p className="mt-6 max-w-sm text-sm leading-7 text-slate-400">Dados, clientes e operações em um só lugar. Bem-vindo ao núcleo da VertexTarget.</p></div><div className="flex items-center gap-2 text-xs text-slate-500"><ShieldCheck size={16} className="text-emerald-400"/> Ambiente seguro · acesso restrito à equipe</div></section><section className="p-7 sm:p-12"><div className="mb-12 flex items-center gap-3 lg:hidden"><span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-violet-500 text-xs font-black text-[#050510]">VT</span><span className="font-[var(--font-heading)] text-lg font-semibold">Vertex<span className="text-cyan-300">Target</span></span></div><div className="mb-9"><div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[.2em] text-violet-300"><Sparkles size={14}/> Área restrita</div><h2 className="font-[var(--font-heading)] text-3xl font-semibold">Olá, equipe.</h2><p className="mt-2 text-sm text-slate-400">Entre para acessar seu workspace.</p></div><form onSubmit={submit} className="space-y-5"><label className="block"><span className="mb-2 block text-xs font-medium text-slate-300">E-mail profissional</span><div className="relative"><Mail size={17} className="absolute left-3.5 top-3.5 text-slate-500"/><input required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="voce@vertextarget.com" className="admin-input pl-11"/></div></label><label className="block"><div className="mb-2 flex justify-between"><span className="text-xs font-medium text-slate-300">Senha</span><button type="button" className="text-xs text-cyan-300">Esqueceu?</button></div><div className="relative"><LockKeyhole size={17} className="absolute left-3.5 top-3.5 text-slate-500"/><input required minLength={8} type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" className="admin-input pl-11"/></div></label>{error && <p className="text-xs text-rose-300">{error}</p>}<button disabled={loading} className="admin-primary-btn mt-3 w-full">{loading ? "Validando acesso..." : "Acessar painel"}<ArrowRight size={17}/></button></form><p className="mt-8 text-center text-[11px] leading-5 text-slate-600">Acesso monitorado e protegido por autenticação.<br/>O acesso exige uma conta Supabase confirmada e cadastrada na equipe VertexTarget.</p></section></div></main>;
 }
