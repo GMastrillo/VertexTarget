@@ -1,5 +1,6 @@
 import { strict as assert } from "node:assert";
 import { parseCommercialAction } from "../src/lib/commercial-validation.ts";
+import { parsePaymentLinkAction } from "../src/lib/payment-link-validation.ts";
 
 const ids = { orgA: "00000000-0000-0000-0000-000000000001", orgB: "00000000-0000-0000-0000-000000000002", company: "10000000-0000-0000-0000-000000000001", pipeline: "30000000-0000-0000-0000-000000000001", stageA: "40000000-0000-0000-0000-000000000001", stageB: "40000000-0000-0000-0000-000000000002", deal: "50000000-0000-0000-0000-000000000001" };
 const cases = [
@@ -22,5 +23,14 @@ editDeal(ids.orgA, "Site atualizado"); assert.equal(deal.title, "Site atualizado
 toggleTask(ids.orgA, true); assert.equal(task.done, true);
 for (const attempt of [() => moveDeal(ids.orgB, ids.stageA), () => editDeal(ids.orgB, "forjado"), () => toggleTask(ids.orgB, false)]) assert.throws(attempt);
 
-console.log(`commercial contract: ${cases.length + 6} assertions passed`);
-console.log("remote migration validation: blocked until migrations 003 and 004 are applied");
+const paymentCases = [
+  ["recurring payment link accepted", { action: "payment-link.create", kind: "recurring", amountCents: 150000, currency: "brl", description: "Mensalidade", recurringInterval: "month", installments: 1 }, true],
+  ["one-time installments accepted", { action: "payment-link.create", kind: "one_time", amountCents: 500000, currency: "brl", description: "Projeto", installments: 6 }, true],
+  ["payment link organization_id rejected", { action: "payment-link.create", kind: "one_time", amountCents: 1000, currency: "brl", description: "Projeto", organization_id: ids.orgB }, false],
+  ["zero amount rejected", { action: "payment-link.create", kind: "one_time", amountCents: 0, currency: "brl", description: "Projeto" }, false],
+  ["recurring installments rejected", { action: "payment-link.create", kind: "recurring", amountCents: 1000, currency: "brl", description: "Plano", recurringInterval: "month", installments: 3 }, false],
+];
+for (const [name, payload, expected] of paymentCases) assert.equal(parsePaymentLinkAction(payload).ok, expected, name);
+
+console.log(`commercial and payment-link contract: ${cases.length + 6 + paymentCases.length} assertions passed`);
+console.log("remote migration validation: blocked until migrations 003 through 007 are applied");
