@@ -1,0 +1,7 @@
+import { NextResponse } from "next/server";
+import { getAuthenticatedTeamUser } from "@/lib/auth";
+import { createAchievement, createChallenge, createGoal, getPerformanceSnapshot, updateGoal } from "@/lib/performance-repository";
+import { parsePerformanceAction } from "@/lib/performance-validation";
+
+export async function GET() { if (!await getAuthenticatedTeamUser()) return NextResponse.json({ error: "Não autenticado." }, { status: 401 }); try { return NextResponse.json(await getPerformanceSnapshot()); } catch (error) { return NextResponse.json({ error: error instanceof Error ? error.message : "Performance indisponível." }, { status: 500 }); } }
+export async function POST(request: Request) { if (!await getAuthenticatedTeamUser()) return NextResponse.json({ error: "Não autenticado." }, { status: 401 }); try { const parsed = parsePerformanceAction(await request.json()); if (!parsed.ok) return NextResponse.json({ error: "Dados inválidos.", reason: parsed.reason }, { status: 400 }); const action = parsed.value; if (action.action === "goal.create") await createGoal(action); else if (action.action === "goal.update") await updateGoal(action); else if (action.action === "challenge.create") await createChallenge(action); else await createAchievement(action); return NextResponse.json({ ok: true }, { status: 201 }); } catch (error) { return NextResponse.json({ error: error instanceof Error ? error.message : "Não foi possível concluir." }, { status: 400 }); } }

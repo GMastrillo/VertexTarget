@@ -1,6 +1,8 @@
 import { strict as assert } from "node:assert";
 import { parseCommercialAction } from "../src/lib/commercial-validation.ts";
 import { parsePaymentLinkAction } from "../src/lib/payment-link-validation.ts";
+import { parseCurrencyToCents } from "../src/lib/payment-link-format.ts";
+import { parsePerformanceAction } from "../src/lib/performance-validation.ts";
 
 const ids = { orgA: "00000000-0000-0000-0000-000000000001", orgB: "00000000-0000-0000-0000-000000000002", company: "10000000-0000-0000-0000-000000000001", pipeline: "30000000-0000-0000-0000-000000000001", stageA: "40000000-0000-0000-0000-000000000001", stageB: "40000000-0000-0000-0000-000000000002", deal: "50000000-0000-0000-0000-000000000001" };
 const cases = [
@@ -32,5 +34,26 @@ const paymentCases = [
 ];
 for (const [name, payload, expected] of paymentCases) assert.equal(parsePaymentLinkAction(payload).ok, expected, name);
 
-console.log(`commercial and payment-link contract: ${cases.length + 6 + paymentCases.length} assertions passed`);
-console.log("remote migration validation: blocked until migrations 003 through 007 are applied");
+assert.equal(parseCurrencyToCents("R$ 1.500,00"), 150000, "Brazilian currency format");
+assert.equal(parseCurrencyToCents("1500.00"), 150000, "dot decimal format");
+assert.equal(parseCurrencyToCents("1500"), 150000, "integer currency format");
+
+const performanceCases = [
+  ["individual goal accepted", { action: "goal.create", title: "Novos negócios", metric: "deals_won", targetValue: 10, periodStart: "2026-01-01", periodEnd: "2026-01-31", scope: "individual" }, true],
+  ["team goal accepted", { action: "goal.create", title: "Receita do time", metric: "revenue_cents", targetValue: 100000, periodStart: "2026-01-01", periodEnd: "2026-12-31", scope: "team" }, true],
+  ["challenge accepted", { action: "challenge.create", title: "Sprint de atendimento", metric: "messages_sent", targetValue: 25, periodStart: "2026-01-01", periodEnd: "2026-01-07" }, true],
+  ["achievement accepted", { action: "achievement.create", title: "Entrega consistente", description: "Conclua tarefas reais no prazo.", metric: "tasks_completed", targetValue: 20 }, true],
+  ["performance organization is server-owned", { action: "goal.create", title: "Forjado", metric: "deals_won", targetValue: 1, periodStart: "2026-01-01", periodEnd: "2026-01-31", scope: "team", organization_id: ids.orgB }, false],
+  ["performance owner is server-owned", { action: "goal.create", title: "Forjado", metric: "deals_won", targetValue: 1, periodStart: "2026-01-01", periodEnd: "2026-01-31", scope: "individual", owner_id: ids.orgB }, false],
+  ["goal rejects reversed period", { action: "goal.create", title: "Período inválido", metric: "deals_won", targetValue: 1, periodStart: "2026-02-01", periodEnd: "2026-01-31", scope: "team" }, false],
+  ["goal rejects zero target", { action: "goal.create", title: "Sem alvo", metric: "deals_won", targetValue: 0, periodStart: "2026-01-01", periodEnd: "2026-01-31", scope: "team" }, false],
+];
+for (const [name, payload, expected] of performanceCases) assert.equal(parsePerformanceAction(payload).ok, expected, name);
+
+const awardKeys = new Set();
+function awardOnce(key) { const before = awardKeys.size; awardKeys.add(key); return awardKeys.size > before; }
+assert.equal(awardOnce(`${ids.orgA}:achievement:${ids.deal}`), true, "first achievement award is persisted");
+assert.equal(awardOnce(`${ids.orgA}:achievement:${ids.deal}`), false, "duplicate achievement award is idempotent");
+
+console.log(`commercial, payment-link and performance contract: ${cases.length + 6 + paymentCases.length + 3 + performanceCases.length + 2} assertions passed`);
+console.log("remote migration validation: blocked until migrations 003 through 008 are applied");

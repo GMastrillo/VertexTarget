@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Bell, Bot, BriefcaseBusiness, ChevronLeft, ChevronRight, MessageSquare, Smartphone,
+  Activity, Bell, Bot, BriefcaseBusiness, ChevronLeft, ChevronRight, MessageSquare, Smartphone, Trophy,
   CircleDollarSign, LayoutDashboard, LogOut, Menu, Radar, Settings, Users, X,
 } from "lucide-react";
 import type { TeamUser } from "@/lib/auth";
@@ -17,6 +17,7 @@ const links = [
   { href: "/admin/comercial", label: "Pipeline comercial", icon: BriefcaseBusiness },
   { href: "/admin/inbox", label: "Inbox & suporte", icon: MessageSquare },
   { href: "/admin/whatsapp", label: "WhatsApp", icon: Smartphone },
+  { href: "/admin/performance", label: "Performance", icon: Trophy },
   { href: "/admin/prospecting", label: "Prospecção IA", icon: Radar },
   { href: "/admin/projetos", label: "Projetos", icon: BriefcaseBusiness },
   { href: "/admin/ai-logs", label: "AI Lab", icon: Bot },

@@ -5,10 +5,17 @@ import type { PaymentLink } from "@/lib/payment-link-types";
 
 type Supabase = NonNullable<Awaited<ReturnType<typeof createSupabaseServerClient>>>;
 type Context = { supabase: Supabase; userId: string; organizationId: string };
-async function context(): Promise<Context | null> { const user = await getAuthenticatedTeamUser(); const supabase = await createSupabaseServerClient(); return user?.organizationId && supabase ? { supabase, userId: user.id, organizationId: user.organizationId } : null; }
+async function context(): Promise<Context> {
+  const user = await getAuthenticatedTeamUser();
+  if (!user) throw new Error("Sessão não autenticada.");
+  if (!user.organizationId) throw new Error("Workspace não configurado. Aplique a migration 003_multi_tenant_foundation.sql e associe o usuário a uma organização.");
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) throw new Error("Supabase server não configurado.");
+  return { supabase, userId: user.id, organizationId: user.organizationId };
+}
 function map(row: Record<string, unknown>): PaymentLink { return { id: String(row.id), clientId: row.client_id ? String(row.client_id) : null, dealId: row.deal_id ? String(row.deal_id) : null, stripePaymentLinkId: String(row.stripe_payment_link_id), url: String(row.url), kind: row.kind === "recurring" ? "recurring" : "one_time", status: String(row.status) as PaymentLink["status"], amountCents: Number(row.amount_cents), currency: String(row.currency), recurringInterval: row.recurring_interval === "month" || row.recurring_interval === "year" ? row.recurring_interval : null, installments: Number(row.installments ?? 1), description: String(row.description ?? ""), createdAt: String(row.created_at) }; }
 
-export async function listPaymentLinks(): Promise<PaymentLink[]> { const ctx = await context(); if (!ctx) return []; const { data, error } = await ctx.supabase.from("stripe_payment_links").select("id,client_id,deal_id,stripe_payment_link_id,url,kind,status,amount_cents,currency,recurring_interval,installments,description,created_at").eq("organization_id", ctx.organizationId).order("created_at", { ascending: false }).limit(100); if (error) throw new Error("Falha ao carregar Payment Links. A migration 007 pode ainda não estar aplicada."); return (data ?? []).map((row) => map(row as Record<string, unknown>)); }
+export async function listPaymentLinks(): Promise<PaymentLink[]> { const ctx = await context(); const { data, error } = await ctx.supabase.from("stripe_payment_links").select("id,client_id,deal_id,stripe_payment_link_id,url,kind,status,amount_cents,currency,recurring_interval,installments,description,created_at").eq("organization_id", ctx.organizationId).order("created_at", { ascending: false }).limit(100); if (error) throw new Error("Falha ao carregar Payment Links. A migration 007 pode ainda não estar aplicada."); return (data ?? []).map((row) => map(row as Record<string, unknown>)); }
 
 export async function getPaymentLinksData() { try { return { links: await listPaymentLinks(), error: "" }; } catch (error) { return { links: [], error: error instanceof Error ? error.message : "Payment Links indisponíveis." }; } }
 

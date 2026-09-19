@@ -8,7 +8,6 @@ type Input = { kind: PaymentLink["kind"]; amountCents: number; currency: "brl" |
 export async function createStripePaymentLink(input: Input) {
   const ctx = await context();
   const stripe = getStripeClient();
-  if (!ctx) throw new Error("Workspace não disponível.");
   if (!stripe) throw new Error("Stripe não configurado no servidor.");
   await validatePaymentReferences(ctx, input.clientId, input.dealId);
   const product = await stripe.products.create({ name: input.description.trim(), metadata: { organization_id: ctx.organizationId, kind: input.kind } });
