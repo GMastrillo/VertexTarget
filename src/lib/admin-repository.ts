@@ -30,7 +30,9 @@ export async function getProjects(): Promise<Project[]> {
   if (!user) return [];
   const supabase = await createSupabaseServerClient();
   if (!supabase) return [];
-  const { data, error } = await supabase.from("projects").select("id,title,project_type,stage,priority,due_date,clients(name)").order("updated_at", { ascending: false });
+  let query = supabase.from("projects").select("id,title,project_type,stage,priority,due_date,clients(name)").order("updated_at", { ascending: false });
+  if (user.organizationId) query = query.eq("organization_id", user.organizationId);
+  const { data, error } = await query;
   if (error) throw new Error("Falha ao carregar projetos do Supabase.");
   return (data ?? []).map((row) => {
     const client = Array.isArray(row.clients) ? row.clients[0] : row.clients;
@@ -52,7 +54,9 @@ export async function getAiLogs() {
   if (!user) return [];
   const supabase = await createSupabaseServerClient();
   if (!supabase) return [];
-  const { data, error } = await supabase.from("ai_runs").select("created_at,automation,model,tokens,status,latency_ms,clients(name)").order("created_at", { ascending: false }).limit(100);
+  let query = supabase.from("ai_runs").select("created_at,automation,model,tokens,status,latency_ms,clients(name)").order("created_at", { ascending: false }).limit(100);
+  if (user.organizationId) query = query.eq("organization_id", user.organizationId);
+  const { data, error } = await query;
   if (error) throw new Error("Falha ao carregar logs de IA do Supabase.");
   return (data ?? []).map((row) => {
     const client = Array.isArray(row.clients) ? row.clients[0] : row.clients;
@@ -74,7 +78,9 @@ export async function getClients(): Promise<Client[]> {
   if (!user) return [];
   const supabase = await createSupabaseServerClient();
   if (!supabase) return [];
-  const { data, error } = await supabase.from("clients").select("id,name,service,status,value_cents,billing_type,email,description,created_at").order("updated_at", { ascending: false });
+  let query = supabase.from("clients").select("id,name,service,status,value_cents,billing_type,email,description,created_at").order("updated_at", { ascending: false });
+  if (user.organizationId) query = query.eq("organization_id", user.organizationId);
+  const { data, error } = await query;
   if (error) throw new Error("Falha ao carregar clientes do Supabase.");
   return (data ?? []).map((row) => mapClient(row as Record<string, unknown>));
 }

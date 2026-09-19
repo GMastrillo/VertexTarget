@@ -34,11 +34,13 @@ export async function GET() {
   if (!auth.user) return NextResponse.json({ error: "Não autorizado." }, { status: auth.status });
   const supabase = await createSupabaseServerClient();
   if (!supabase) return NextResponse.json({ error: "Banco não configurado." }, { status: 503 });
-  const { data, error } = await supabase
+  let query = supabase
     .from("prospects")
     .select("id,company_name,category,city,region,country,website,phone,opportunity,score,status,created_at")
     .order("created_at", { ascending: false })
     .limit(200);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { data, error } = await query;
   if (error) return NextResponse.json({ error: "Falha ao carregar prospecções." }, { status: 502 });
   return NextResponse.json({ prospects: data ?? [] }, { headers: { "Cache-Control": "private, no-store" } });
 }
@@ -134,7 +136,8 @@ export async function POST(request: Request) {
 
     const supabase = await createSupabaseServerClient();
     if (!supabase) return NextResponse.json({ error: "Banco não configurado." }, { status: 503 });
-    const { data, error } = await supabase.from("prospects").insert(rows).select();
+    const scopedRows = rows.map((row) => auth.user?.organizationId ? { ...row, organization_id: auth.user.organizationId } : row);
+    const { data, error } = await supabase.from("prospects").insert(scopedRows).select();
     if (error) return NextResponse.json({ error: "Não foi possível salvar as prospecções." }, { status: 502 });
 
     await logAiRun({ automation: "prospectar-empresas", model: MODEL, status: "success", tokens, latencyMs: Date.now() - startedAt, errorCode: null });
@@ -160,7 +163,9 @@ export async function PATCH(request: Request) {
   if (!/^[0-9a-f-]{36}$/i.test(id) || !["new", "contacted", "client", "discarded"].includes(status)) {
     return NextResponse.json({ error: "Dados inválidos." }, { status: 400 });
   }
-  const { error } = await supabase.from("prospects").update({ status, updated_at: new Date().toISOString() }).eq("id", id);
+  let query = supabase.from("prospects").update({ status, updated_at: new Date().toISOString() }).eq("id", id);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { error } = await query;
   if (error) return NextResponse.json({ error: "Não foi possível atualizar." }, { status: 502 });
   return NextResponse.json({ ok: true });
 }
@@ -175,7 +180,9 @@ export async function DELETE(request: Request) {
   const parsed = await parseJsonBody<{ id?: unknown }>(request, 512);
   const id = parsed.ok && typeof parsed.value?.id === "string" ? parsed.value.id : "";
   if (!/^[0-9a-f-]{36}$/i.test(id)) return NextResponse.json({ error: "ID inválido." }, { status: 400 });
-  const { error } = await supabase.from("prospects").delete().eq("id", id);
+  let query = supabase.from("prospects").delete().eq("id", id);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { error } = await query;
   if (error) return NextResponse.json({ error: "Não foi possível remover." }, { status: 502 });
   return NextResponse.json({ ok: true });
 }

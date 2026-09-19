@@ -19,10 +19,12 @@ export async function GET() {
   if (!auth.user) return NextResponse.json({ error: "Não autorizado." }, { status: auth.status });
   const supabase = await createSupabaseServerClient();
   if (!supabase) return NextResponse.json({ error: "Banco não configurado." }, { status: 503 });
-  const { data, error } = await supabase
+  let query = supabase
     .from("projects")
     .select("id,title,project_type,stage,priority,due_date,clients(name)")
     .order("updated_at", { ascending: false });
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { data, error } = await query;
   if (error) return NextResponse.json({ error: "Falha ao carregar projetos." }, { status: 502 });
   const projects = (data ?? []).map((row) => {
     const client = Array.isArray(row.clients) ? row.clients[0] : row.clients;
@@ -66,7 +68,7 @@ export async function POST(request: Request) {
 
   const { data, error } = await supabase
     .from("projects")
-    .insert({ title, client_id: clientId, project_type: type, stage, priority, due_date: dueDate })
+    .insert({ title, client_id: clientId, project_type: type, stage, priority, due_date: dueDate, ...(auth.user.organizationId ? { organization_id: auth.user.organizationId } : {}) })
     .select("id,title,project_type,stage,priority,due_date")
     .single();
   if (error || !data) return NextResponse.json({ error: "Não foi possível criar o projeto." }, { status: 502 });
@@ -110,7 +112,9 @@ export async function PATCH(request: Request) {
   if (typeof b.title === "string" && b.title.trim().length >= 2) updates.title = b.title.trim().slice(0, 160);
   if (Object.keys(updates).length === 1) return NextResponse.json({ error: "Nada para atualizar." }, { status: 400 });
 
-  const { error } = await supabase.from("projects").update(updates).eq("id", id);
+  let query = supabase.from("projects").update(updates).eq("id", id);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { error } = await query;
   if (error) return NextResponse.json({ error: "Não foi possível atualizar o projeto." }, { status: 502 });
   return NextResponse.json({ ok: true });
 }
@@ -125,7 +129,9 @@ export async function DELETE(request: Request) {
   const parsed = await parseJsonBody<{ id?: unknown }>(request, 512);
   const id = parsed.ok && typeof parsed.value?.id === "string" ? parsed.value.id : "";
   if (!/^[0-9a-f-]{36}$/i.test(id)) return NextResponse.json({ error: "ID inválido." }, { status: 400 });
-  const { error } = await supabase.from("projects").delete().eq("id", id);
+  let query = supabase.from("projects").delete().eq("id", id);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { error } = await query;
   if (error) return NextResponse.json({ error: "Não foi possível remover o projeto." }, { status: 502 });
   return NextResponse.json({ ok: true });
 }

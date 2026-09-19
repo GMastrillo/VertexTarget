@@ -31,11 +31,13 @@ export async function GET() {
   if (!auth.user) return NextResponse.json({ error: "Não autorizado." }, { status: auth.status });
   const supabase = await createSupabaseServerClient();
   if (!supabase) return NextResponse.json({ error: "Banco não configurado." }, { status: 503 });
-  const { data, error } = await supabase
+  let query = supabase
     .from("manual_sales")
     .select("id,client_name,description,amount_cents,method,sold_at")
     .order("sold_at", { ascending: false })
     .limit(200);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { data, error } = await query;
   if (error) return NextResponse.json({ error: "Falha ao carregar vendas." }, { status: 502 });
   return NextResponse.json({ sales: data ?? [] }, { headers: { "Cache-Control": "private, no-store" } });
 }
@@ -69,7 +71,7 @@ export async function POST(request: Request) {
 
   const { data, error } = await supabase
     .from("manual_sales")
-    .insert({ client_name: clientName, description: description.slice(0, 240), amount_cents: amountCents, method, sold_at: soldAt, created_by: auth.user.id })
+    .insert({ client_name: clientName, description: description.slice(0, 240), amount_cents: amountCents, method, sold_at: soldAt, created_by: auth.user.id, ...(auth.user.organizationId ? { organization_id: auth.user.organizationId } : {}) })
     .select("id,client_name,description,amount_cents,method,sold_at")
     .single();
   if (error || !data) return NextResponse.json({ error: "Não foi possível registrar a venda." }, { status: 502 });
@@ -88,7 +90,9 @@ export async function DELETE(request: Request) {
   if (typeof id !== "string" || !/^[0-9a-f-]{36}$/i.test(id)) {
     return NextResponse.json({ error: "ID inválido." }, { status: 400 });
   }
-  const { error } = await supabase.from("manual_sales").delete().eq("id", id);
+  let query = supabase.from("manual_sales").delete().eq("id", id);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { error } = await query;
   if (error) return NextResponse.json({ error: "Não foi possível remover a venda." }, { status: 502 });
   return NextResponse.json({ ok: true });
 }

@@ -1,6 +1,7 @@
 /* eslint-disable max-statements -- finance aggregation keeps Stripe and manual sources synchronized. */
 import "server-only";
 import Stripe from "stripe";
+import { getAuthenticatedTeamUser } from "@/lib/auth";
 
 export type FinanceData = {
   mrr: number;
@@ -96,8 +97,11 @@ async function getManualSalesData(): Promise<{ totalCents: number; thisMonthCent
   try {
     const { createSupabaseServerClient } = await import("@/lib/supabase-server");
     const supabase = await createSupabaseServerClient();
-    if (!supabase) return { totalCents: 0, thisMonthCents: 0, monthly: {} };
-    const { data } = await supabase.from("manual_sales").select("amount_cents,sold_at").order("sold_at", { ascending: false }).limit(500);
+    const user = await getAuthenticatedTeamUser();
+    if (!supabase || !user) return { totalCents: 0, thisMonthCents: 0, monthly: {} };
+    let query = supabase.from("manual_sales").select("amount_cents,sold_at").order("sold_at", { ascending: false }).limit(500);
+    if (user.organizationId) query = query.eq("organization_id", user.organizationId);
+    const { data } = await query;
     const rows = data ?? [];
     const thisMonthKey = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}`;
     const monthly: Record<string, number> = {};

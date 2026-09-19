@@ -34,6 +34,14 @@ export async function middleware(request: NextRequest) {
     .maybeSingle();
   if (!member?.active) return NextResponse.redirect(login);
 
+  // After migration 003, membership in at least one active organization is required.
+  const { data: memberships, error: membershipsError } = await supabase
+    .from("organization_members")
+    .select("organization_id")
+    .eq("user_id", user.id)
+    .eq("active", true);
+  if (!membershipsError && !memberships?.length) return NextResponse.redirect(login);
+
   // First-login guard: owners with a pending password rotation cannot reach /admin.
   if (user.user_metadata?.password_must_change === true) {
     return NextResponse.redirect(new URL("/login/trocar-senha", request.url));

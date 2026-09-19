@@ -33,11 +33,13 @@ export async function listManualSales(limit = 200): Promise<ManualSale[]> {
   if (!supabase) return [];
   const user = await getAuthenticatedTeamUser();
   if (!user) return [];
-  const { data, error } = await supabase
+  let query = supabase
     .from("manual_sales")
     .select("id,client_name,description,amount_cents,method,sold_at")
     .order("sold_at", { ascending: false })
     .limit(limit);
+  if (user.organizationId) query = query.eq("organization_id", user.organizationId);
+  const { data, error } = await query;
   if (error) throw new Error("Falha ao carregar vendas manuais.");
   return (data ?? []).map((row) => ({
     id: String(row.id),
@@ -54,11 +56,13 @@ export async function listProspects(): Promise<Prospect[]> {
   if (!supabase) return [];
   const user = await getAuthenticatedTeamUser();
   if (!user) return [];
-  const { data, error } = await supabase
+  let query = supabase
     .from("prospects")
     .select("id,company_name,category,city,region,country,website,phone,opportunity,score,status,created_at")
     .order("created_at", { ascending: false })
     .limit(200);
+  if (user.organizationId) query = query.eq("organization_id", user.organizationId);
+  const { data, error } = await query;
   if (error) throw new Error("Falha ao carregar prospects.");
   return (data ?? []).map((row) => ({
     id: String(row.id),
@@ -83,10 +87,13 @@ export async function listAiRunsOverview() {
   const user = await getAuthenticatedTeamUser();
   if (!user) return { recent: [], total24h: 0, success24h: 0 };
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  const [{ data: recent }, { data: last24h }] = await Promise.all([
-    supabase.from("ai_runs").select("automation,model,status,created_at").order("created_at", { ascending: false }).limit(4),
-    supabase.from("ai_runs").select("status,created_at").gte("created_at", since),
-  ]);
+  let recentQuery = supabase.from("ai_runs").select("automation,model,status,created_at").order("created_at", { ascending: false }).limit(4);
+  let last24hQuery = supabase.from("ai_runs").select("status,created_at").gte("created_at", since);
+  if (user.organizationId) {
+    recentQuery = recentQuery.eq("organization_id", user.organizationId);
+    last24hQuery = last24hQuery.eq("organization_id", user.organizationId);
+  }
+  const [{ data: recent }, { data: last24h }] = await Promise.all([recentQuery, last24hQuery]);
   const rows24 = last24h ?? [];
   return {
     recent: (recent ?? []).map((row, i) => ({
@@ -126,6 +133,7 @@ export async function logAiRun(run: AiRunLog) {
       latency_ms: run.latencyMs,
       error_code: run.errorCode,
       client_id: null,
+      organization_id: user?.organizationId ?? undefined,
       // audit-style metadata: who triggered it, no payload content persisted
       created_by: user?.id ?? null,
     });

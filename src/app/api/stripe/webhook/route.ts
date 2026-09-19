@@ -26,12 +26,15 @@ export async function POST(request: Request) {
 
   const supabase = createSupabaseAdminClient();
   if (!supabase) return NextResponse.json({ error: "Persistência não configurada." }, { status: 503 });
+  const { data: organization } = await supabase.from("organizations").select("id").eq("slug", "vertex-target").maybeSingle();
+  if (!organization?.id) return NextResponse.json({ error: "Organização padrão não configurada." }, { status: 503 });
 
   if (["invoice.paid", "invoice.payment_failed", "invoice.finalized"].includes(event.type)) {
     const invoice = event.data.object as Stripe.Invoice;
     const status = event.type === "invoice.paid" ? "paid" : event.type === "invoice.payment_failed" ? "payment_failed" : "open";
     const { error } = await supabase.from("invoices").upsert({
       stripe_invoice_id: invoice.id,
+      organization_id: organization.id,
       amount_cents: invoice.amount_paid || invoice.amount_due || 0,
       currency: invoice.currency,
       status,

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:types": "eslint --config eslint.typed.config.mjs ."
+    "lint:types": "eslint --config eslint.typed.config.mjs .",
+    "test:commercial": "node --experimental-strip-types scripts/validate-commercial.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

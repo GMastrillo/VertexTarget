@@ -10,11 +10,13 @@ export async function GET() {
   const supabase = await createSupabaseServerClient();
   if (!supabase) return NextResponse.json({ runs: [] });
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("ai_runs")
     .select("automation,status,created_at")
     .order("created_at", { ascending: false })
     .limit(6);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { data, error } = await query;
   if (error) return NextResponse.json({ runs: [] });
 
   return NextResponse.json({

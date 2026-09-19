@@ -4,15 +4,18 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Bell, Bot, BriefcaseBusiness, ChevronLeft, ChevronRight,
+  Activity, Bell, Bot, BriefcaseBusiness, ChevronLeft, ChevronRight, MessageSquare,
   CircleDollarSign, LayoutDashboard, LogOut, Menu, Radar, Settings, Users, X,
 } from "lucide-react";
 import type { TeamUser } from "@/lib/auth";
+import { WorkspaceSwitcher } from "@/components/admin/WorkspaceSwitcher";
 
 const links = [
   { href: "/admin", label: "Visão geral", icon: LayoutDashboard },
   { href: "/admin/financeiro", label: "Financeiro", icon: CircleDollarSign },
   { href: "/admin/crm", label: "CRM & Clientes", icon: Users },
+  { href: "/admin/comercial", label: "Pipeline comercial", icon: BriefcaseBusiness },
+  { href: "/admin/inbox", label: "Inbox & suporte", icon: MessageSquare },
   { href: "/admin/prospecting", label: "Prospecção IA", icon: Radar },
   { href: "/admin/projetos", label: "Projetos", icon: BriefcaseBusiness },
   { href: "/admin/ai-logs", label: "AI Lab", icon: Bot },
@@ -89,7 +92,7 @@ export function AdminShell({ children, user }: { children: React.ReactNode; user
         <div className="flex h-20 items-center justify-between border-b border-white/[.07] px-5">
           <Link href="/admin" className="flex items-center gap-3 overflow-hidden">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-violet-500 text-sm font-black text-[#050510]">VT</span>
-            <span className="whitespace-nowrap font-[var(--font-heading)] text-lg font-semibold tracking-tight">Vertex<span className="text-cyan-300">Target</span></span>
+            <span className="min-w-0"><span className="block whitespace-nowrap font-[var(--font-heading)] text-lg font-semibold tracking-tight">Vertex<span className="text-cyan-300">Target</span></span>{user.organizationId && user.organizations.length > 0 && <WorkspaceSwitcher current={user.organizations.find((organization) => organization.id === user.organizationId) ?? user.organizations[0]} organizations={user.organizations} />}</span>
           </Link>
           <button aria-label="Fechar menu" onClick={() => setMobileOpen(false)} className="admin-icon-btn lg:hidden"><X size={18} /></button>
         </div>
@@ -117,7 +120,7 @@ export function AdminShell({ children, user }: { children: React.ReactNode; user
             <div className="hidden h-7 w-px bg-white/[.08] sm:block" />
             <div className="flex items-center gap-2.5">
               <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-cyan-400/80 to-violet-500/80 text-xs font-bold text-white">{initials(user.name)}</span>
-              <div className="hidden leading-tight sm:block"><p className="text-sm font-medium">{user.name}</p><p className="text-[10px] uppercase tracking-widest text-slate-500">{user.role}</p></div>
+              <div className="hidden leading-tight sm:block"><p className="text-sm font-medium">{user.name}</p><p className="text-[10px] uppercase tracking-widest text-slate-500">{user.role} · {user.organizationName ?? "Workspace"}</p></div>
             </div>
           </div>
         </header>

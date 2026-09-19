@@ -51,7 +51,9 @@ export async function GET() {
   const supabase = await createSupabaseServerClient();
   if (!supabase) return NextResponse.json({ error: "Banco não configurado." }, { status: 503 });
 
-  const { data, error } = await supabase.from("clients").select("id,name,service,status,value_cents,billing_type,email,description,created_at").order("updated_at", { ascending: false });
+  let query = supabase.from("clients").select("id,name,service,status,value_cents,billing_type,email,description,created_at").order("updated_at", { ascending: false });
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { data, error } = await query;
   if (error) return NextResponse.json({ error: "Não foi possível carregar os clientes." }, { status: 502 });
   return NextResponse.json({ clients: (data ?? []).map((row) => serialize(row as Record<string, unknown>)) }, { headers: { "Cache-Control": "private, no-store" } });
 }
@@ -83,7 +85,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Dados do cliente inválidos." }, { status: 400 });
   }
 
-  const { data, error } = await supabase.from("clients").insert({ name, service, email, description, value_cents: valueCents, billing_type: billingType, status }).select("id,name,service,status,value_cents,billing_type,email,description,created_at").single();
+  const insert = { name, service, email, description, value_cents: valueCents, billing_type: billingType, status, ...(auth.user.organizationId ? { organization_id: auth.user.organizationId } : {}) };
+  const { data, error } = await supabase.from("clients").insert(insert).select("id,name,service,status,value_cents,billing_type,email,description,created_at").single();
   if (error || !data) return NextResponse.json({ error: "Não foi possível criar o cliente." }, { status: 502 });
   return NextResponse.json({ client: serialize(data as Record<string, unknown>) }, { status: 201 });
 }
@@ -107,7 +110,9 @@ export async function PATCH(request: Request) {
   const status = parseStatus(parsed.value.status);
   if (!/^[0-9a-f-]{36}$/i.test(id) || !status) return NextResponse.json({ error: "Dados inválidos." }, { status: 400 });
 
-  const { error } = await supabase.from("clients").update({ status, updated_at: new Date().toISOString() }).eq("id", id);
+  let query = supabase.from("clients").update({ status, updated_at: new Date().toISOString() }).eq("id", id);
+  if (auth.user.organizationId) query = query.eq("organization_id", auth.user.organizationId);
+  const { error } = await query;
   if (error) return NextResponse.json({ error: "Não foi possível atualizar o status." }, { status: 502 });
   return NextResponse.json({ ok: true });
 }
