@@ -5,50 +5,52 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const LenisContext = createContext<Lenis | null>(null);
 
 export function useLenis() {
   return useContext(LenisContext);
 }
 
-interface SmoothScrollProviderProps {
+interface SmoothScrollProps {
   children: ReactNode;
 }
 
-export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
-  const [lenis, setLenis] = useState<Lenis | null>(null);
+export function SmoothScrollProvider({ children }: SmoothScrollProps) {
+  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
-      infinite: false,
-    });
+    gsap.registerPlugin(ScrollTrigger);
 
-    setLenis(lenis);
-    lenis.on("scroll", ScrollTrigger.update);
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
 
-    const raf = (time: number) => {
-      lenis.raf(time * 1000);
+    const lenis = new Lenis({ autoRaf: false, lerp: 0.1 });
+    setLenisInstance(lenis);
+
+    const onScroll = () => {
+      ScrollTrigger.update();
     };
+    lenis.on("scroll", onScroll);
 
-    gsap.ticker.add(raf);
+    const tick = (time: number): void => {
+      lenis.raf(time * 1000); // GSAP ticker uses seconds, Lenis uses ms
+    };
+    gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
-      gsap.ticker.remove(raf);
-      lenis.off("scroll", ScrollTrigger.update);
+      gsap.ticker.remove(tick);
+      lenis.off("scroll", onScroll);
       lenis.destroy();
-      setLenis(null);
+      setLenisInstance(null);
     };
   }, []);
 
   return (
-    <LenisContext.Provider value={lenis}>
+    <LenisContext.Provider value={lenisInstance}>
       {children}
     </LenisContext.Provider>
   );
 }
+
+export default SmoothScrollProvider;

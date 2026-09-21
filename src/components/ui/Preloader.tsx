@@ -73,15 +73,15 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     });
 
     // Counter animation — shortened: long pre-loaders delay LCP for zero gain
+    const counterState = { value: 0 };
     tl.to(
-      { value: 0 },
+      counterState,
       {
         value: 100,
         duration: 0.8,
         ease: "power2.inOut",
-        onUpdate: function () {
-          const val = Math.round(this.targets()[0].value);
-          setCounter(val);
+        onUpdate: () => {
+          setCounter(Math.round(counterState.value));
         },
       },
       "-=0.3"

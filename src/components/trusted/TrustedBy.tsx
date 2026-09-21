@@ -29,6 +29,9 @@ export default function TrustedBy() {
   useEffect(() => {
     if (!trackRef.current) return;
 
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
     const tween = gsap.to(trackRef.current, {
       xPercent: -50,
       duration: 26,
@@ -38,8 +41,12 @@ export default function TrustedBy() {
 
     // Pause on hover so visitors can read a logo
     const el = trackRef.current;
-    const pause = () => tween.pause();
-    const resume = () => tween.resume();
+    const pause = () => {
+      tween.pause();
+    };
+    const resume = () => {
+      tween.resume();
+    };
     el.addEventListener("mouseenter", pause);
     el.addEventListener("mouseleave", resume);
 

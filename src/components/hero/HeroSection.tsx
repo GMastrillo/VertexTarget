@@ -23,13 +23,16 @@ export default function HeroSection({ canvasReady = true }: { canvasReady?: bool
     if (!canvasReady) return;
     const ric =
       typeof window.requestIdleCallback === "function"
-        ? window.requestIdleCallback
+        ? (cb: IdleRequestCallback) => window.requestIdleCallback(cb)
         : (cb: IdleRequestCallback) =>
             window.setTimeout(() => cb({ didTimeout: false, timeRemaining: () => 0 }), 300);
     const id = ric(() => setShowCanvas(true));
     return () => {
-      if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(id as number);
-      else window.clearTimeout(id as number);
+      if (typeof window.cancelIdleCallback === "function") {
+        window.cancelIdleCallback(id as number);
+      } else {
+        window.clearTimeout(id as number);
+      }
     };
   }, [canvasReady]);
   const sectionRef = useRef<HTMLElement>(null);

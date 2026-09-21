@@ -186,6 +186,21 @@ export default function HeroCanvas() {
       renderer.render(scene, camera);
     };
 
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      renderer.render(scene, camera);
+      return () => {
+        particleGeometry.dispose();
+        particleMaterial.dispose();
+        meshGeometry.dispose();
+        meshMaterial.dispose();
+        innerGeometry.dispose();
+        innerMaterial.dispose();
+        io.disconnect();
+        renderer.dispose();
+      };
+    }
+
     animate();
 
     return () => {

@@ -35,16 +35,25 @@ export default function MetricsBand() {
   const counters = useRef<Map<string, HTMLSpanElement>>(new Map());
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      METRICS.forEach((m, i) => {
+        const el = counters.current.get(`m-${i}`);
+        if (el) el.textContent = formatValue(m.value) + m.suffix;
+      });
+      return;
+    }
+
     const ctx = gsap.context(() => {
+      const tweenObj = { progress: 0 };
       const tween = gsap.to(
-        { progress: 0 },
+        tweenObj,
         {
           progress: 1,
           duration: 1.8,
           ease: "power2.out",
           paused: true,
-          onUpdate: function () {
-            const p = this.progress();
+          onUpdate: () => {
+            const p = tweenObj.progress;
             METRICS.forEach((m, i) => {
               const el = counters.current.get(`m-${i}`);
               if (!el) return;
