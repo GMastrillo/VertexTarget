@@ -23,8 +23,13 @@ A **VertexTarget** é uma empresa de tecnologia e marketing digital de alta perf
 ## 💼 Cases em Produção Integrados
 1. **ClinicFlow** — SaaS de automação odontológica com IA ([clinicflow-dashboard-two.vercel.app](https://clinicflow-dashboard-two.vercel.app/))
 2. **Absoluto Soluções Integradas** — Engenharia de climatização e monitoramento por IA ([cliente-absoluto.vercel.app](https://cliente-absoluto.vercel.app/))
-3. **Ale Rei Jet Ski & Marine** — Showroom náutico e e-commerce de luxo ([jetski-gold.vercel.app](https://jetski-gold.vercel.app/))
-4. **Autobelle Multimarcas** — Plataforma automotiva com laudo cautelar 100% ([autobelle-multimarcas.vercel.app](https://autobelle-multimarcas.vercel.app/))
+3. **Ale Rei Jet Ski & Marine** — Showroom náutico e e-commerce de luxo ([alereijetski.com.br](https://www.alereijetski.com.br/))
+4. **Prime Imports SP** — Showroom privativo de supercarros e blindados ([primeimports-nine.vercel.app](https://primeimports-nine.vercel.app/))
+5. **NewJetCar Premium** — Curadoria pericial de superesportivos e blindados em Vinhedo ([newjetcar-premium.vercel.app](https://newjetcar-premium.vercel.app/))
+6. **Avantgarde** — Multimarcas premium e superesportivos ([avantgarde.com.br](https://avantgarde.com.br/))
+6. **VertexCars** — Especialista Porsche & alta performance ([vertexcars.vercel.app](https://vertexcars.vercel.app/))
+7. **VERTEX JET** — Hiperluxo náutico e engenharia naval ([vertexjet-alpha.vercel.app](https://vertexjet-alpha.vercel.app/))
+8. **Autobelle Multimarcas** — Plataforma automotiva com laudo cautelar 100% ([autobelle-multimarcas.vercel.app](https://autobelle-multimarcas.vercel.app/))
 5. **CACCIA Energia Solar** — Engenharia fotovoltaica e CleanTech ([caccia-energia-solar.vercel.app](https://caccia-energia-solar.vercel.app/))
 
 ---

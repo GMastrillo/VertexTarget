@@ -955,6 +955,581 @@ export const CASE_STUDIES: Record<string, StudyByLocale> = {
       ],
     },
   },
+
+  "prime-imports": {
+    pt: {
+      summary:
+        "Showroom privativo de supercarros e veículos blindados de alto padrão no Tatuapé/Anália Franco, São Paulo. O desafio era traduzir curadoria de exóticos — inspeção de 250+ itens, laudo cautelar 100% e discrição total — em uma experiência web de vitrine nacional para acervos de sete dígitos.",
+      layers: [
+        {
+          title: "Showroom Digital Exclusivo",
+          items: [
+            "Acervo curado com ficha completa: ano, quilometragem, potência e valor por veículo",
+            "Selos de estado por unidade (Série Limitada, Blindado, Full Size VIP, Zero Km)",
+            "Galeria profissional com hierarquia de marca e modelo em primeiro plano",
+          ],
+        },
+        {
+          title: "Concierge & Confiança",
+          items: [
+            "Concierge WhatsApp por veículo: proposta negociada com contexto do anúncio já carregado",
+            "Curadoria cirúrgica documentada: inspeção técnica de 250+ itens e laudo cautelar 100%",
+            "Discrição estruturada para compra, venda e consignação confidenciais",
+          ],
+        },
+        {
+          title: "Sourcing & Logística",
+          items: [
+            "Personal broker com busca ativa em mercados fechados do Brasil, Europa e EUA",
+            "Importação direta com desembaraço completo e procedência verificada",
+            "Entrega nacional em caminhão prancha fechado e segurado",
+          ],
+        },
+      ],
+      features: [
+        "Showroom privativo com atendimento por hora marcada",
+        "Acervo com selos de estado por unidade",
+        "Sourcing internacional com importação e desembaraço",
+        "Concierge WhatsApp por veículo",
+        "Laudo cautelar 100% e inspeção de 250+ itens",
+      ],
+      challenges: [
+        {
+          problem:
+            "Supercarros de sete dígitos não toleram vitrine genérica: o comprador exige prova de procedência antes do primeiro contato.",
+          solution:
+            "Cada unidade exposta com documentação técnica completa, selos de estado e narrativa de curadoria — a confiança é construída na página, não no telefone.",
+        },
+        {
+          problem:
+            "Clientes de alto poder aquisitivo valorizam discrição e não convertem por formulários longos.",
+          solution:
+            "Concierge WhatsApp contextual por anúncio e agendamento de visita privativa: a conversa começa com o veículo já em contexto.",
+        },
+      ],
+      results: [
+        "Ferrari, Porsche, McLaren e Mercedes-AMG no acervo curado",
+        "Inspeção técnica de 250+ itens com laudo cautelar 100% aprovado",
+        "Entrega privativa documentada em todo o território nacional",
+      ],
+    },
+    en: {
+      summary:
+        "Private showroom for supercars and high-end armored vehicles in Tatuapé/Anália Franco, São Paulo. The challenge was translating exotic-car curation — 250+ item inspection, 100% approved inspection reports and total discretion — into a web experience that showcases seven-figure inventories nationwide.",
+      layers: [
+        {
+          title: "Exclusive Digital Showroom",
+          items: [
+            "Curated inventory with complete spec sheets: year, mileage, horsepower and price per vehicle",
+            "Per-unit condition badges (Limited Series, Armored, Full Size VIP, Zero Km)",
+            "Professional gallery with brand and model hierarchy up front",
+          ],
+        },
+        {
+          title: "Concierge & Trust",
+          items: [
+            "Per-vehicle WhatsApp concierge: offers negotiated with the listing context pre-loaded",
+            "Documented surgical curation: 250+ item technical inspection and 100% approved reports",
+            "Discretion built into confidential buying, selling and consignment",
+          ],
+        },
+        {
+          title: "Sourcing & Logistics",
+          items: [
+            "Personal broker with active sourcing across closed markets in Brazil, Europe and the USA",
+            "Direct import with full customs clearance and verified provenance",
+            "Nationwide delivery in insured enclosed car carriers",
+          ],
+        },
+      ],
+      features: [
+        "Private showroom with appointment-only service",
+        "Inventory with per-unit condition badges",
+        "International sourcing with import and customs clearance",
+        "Per-vehicle WhatsApp concierge",
+        "100% approved inspection reports and 250+ item checks",
+      ],
+      challenges: [
+        {
+          problem:
+            "Seven-figure supercars tolerate no generic storefront: buyers demand provenance proof before first contact.",
+          solution:
+            "Every unit listed with complete technical documentation, condition badges and a curation narrative — trust is built on the page, not over the phone.",
+        },
+        {
+          problem:
+            "High-net-worth clients value discretion and never convert through long forms.",
+          solution:
+            "Contextual per-listing WhatsApp concierge and private visit booking: the conversation starts with the vehicle in context.",
+        },
+      ],
+      results: [
+        "Ferrari, Porsche, McLaren and Mercedes-AMG in the curated inventory",
+        "250+ item technical inspection with 100% approved reports",
+        "Documented private delivery across the national territory",
+      ],
+    },
+  },
+
+  newjetcar: {
+    pt: {
+      summary:
+        "Showroom multimarcas premium em Vinhedo/SP, referência no interior paulista em superesportivos, clássicos e blindados com mais de 15 anos de mercado. O desafio era traduzir curadoria pericial — vistoria de 150+ pontos, laudo cautelar 100% e consignação discreta — em uma vitrine digital com estoque diverso e curadoria visível.",
+      layers: [
+        {
+          title: "Curadoria de Estoque",
+          items: [
+            "Inventário diverso em vitrine: Porsche Cayman R, Mustang Mach 1, clássicos (Fusca, BMW E36) e picapes premium",
+            "Ficha técnica com ano, quilometragem e investimento por veículo",
+            "Selos de estado por unidade: Blindado, entre outros",
+          ],
+        },
+        {
+          title: "Perícia & Procedência",
+          items: [
+            "Vistoria de 150+ pontos: estrutura, pintura, histórico de leilões, sinistros e verificação eletrônica com scanners homologados",
+            "Laudo cautelar 100% aprovado como pilar da narrativa",
+            "Quilometragem comprovada e procedência irretocável documentadas por unidade",
+          ],
+        },
+        {
+          title: "Consignação & Bespoke",
+          items: [
+            "Consignação estratégica: posicionamento do veículo perante base selecionada de colecionadores e investidores, com privacidade preservada",
+            "Bespoke Car Hunter: consultoria internacional para exemplares raros e configurações sob encomenda",
+            "Entrega VIP nacional em caminhão plataforma fechado e climatizado",
+          ],
+        },
+      ],
+      features: [
+        "Vistoria pericial de 150+ pontos por veículo",
+        "Laudo cautelar 100% aprovado",
+        "Consignação estratégica com discrição",
+        "Bespoke Car Hunter para encomendas raras",
+        "Entrega VIP nacional em caminhão fechado climatizado",
+      ],
+      challenges: [
+        {
+          problem:
+            "Estoque multimarcas diverso (do Fusca 1974 ao superesportivo) dilui o posicionamento premium quando a vitrine não tem hierarquia.",
+          solution:
+            "Curadoria com narrativa unificada: cada unidade apresentada com perícia documentada e selos de estado — a diversidade vira amplitude de curadoria, não bagunça.",
+        },
+        {
+          problem:
+            "Vendedores e consignantes de alto padrão exigem discrição absoluta na venda de blindados e exóticos.",
+          solution:
+            "Consignação estratégica com base qualificada de colecionadores e bespoke sourcing internacional — a negociação acontece em canal privado, não na vitrine pública.",
+        },
+      ],
+      results: [
+        "100% do estoque com perícia cautelar aprovada",
+        "Mais de 15 anos de mercado e referência no interior paulista",
+        "Entrega VIP documentada em todo o território nacional",
+      ],
+    },
+    en: {
+      summary:
+        "Premium multi-brand showroom in Vinhedo/SP, a reference in inland São Paulo for supercars, classics and armored vehicles with 15+ years in the market. The challenge was translating expert curation — 150+ point inspection, 100% approved reports and discreet consignment — into a digital showcase with diverse inventory and visible curation.",
+      layers: [
+        {
+          title: "Inventory Curation",
+          items: [
+            "Diverse inventory on display: Porsche Cayman R, Mustang Mach 1, classics (Fusca, BMW E36) and premium pickups",
+            "Spec sheets with year, mileage and investment per vehicle",
+            "Per-unit condition badges: Armored, among others",
+          ],
+        },
+        {
+          title: "Inspection & Provenance",
+          items: [
+            "150+ point inspection: structure, paint, auction history, accidents and electronic verification with homologated scanners",
+            "100% approved inspection report as the narrative pillar",
+            "Verified mileage and impeccable provenance documented per unit",
+          ],
+        },
+        {
+          title: "Consignment & Bespoke",
+          items: [
+            "Strategic consignment: positioning the vehicle before a selected base of collectors and investors, preserving privacy",
+            "Bespoke Car Hunter: international consultancy for rare examples and made-to-order configurations",
+            "Nationwide VIP delivery in an enclosed, climate-controlled car carrier",
+          ],
+        },
+      ],
+      features: [
+        "150+ point expert inspection per vehicle",
+        "100% approved inspection reports",
+        "Strategic consignment with discretion",
+        "Bespoke Car Hunter for rare commissions",
+        "Nationwide VIP delivery in a climate-controlled enclosed truck",
+      ],
+      challenges: [
+        {
+          problem:
+            "Diverse multi-brand stock (from a 1974 Fusca to supercars) dilutes premium positioning when the showcase lacks hierarchy.",
+          solution:
+            "Curation with a unified narrative: every unit presented with documented inspection and condition badges — diversity becomes curatorial breadth, not clutter.",
+        },
+        {
+          problem:
+            "High-end sellers and consignors demand absolute discretion when trading armored and exotic vehicles.",
+          solution:
+            "Strategic consignment with a qualified collector base and international bespoke sourcing — the deal happens in a private channel, not the public storefront.",
+        },
+      ],
+      results: [
+        "100% of inventory with approved inspection reports",
+        "15+ years in the market as an inland São Paulo reference",
+        "Documented VIP delivery across the national territory",
+      ],
+    },
+  },
+
+  avantgarde: {
+    pt: {
+      summary:
+        "Plataforma digital da Avantgarde, referência nacional em multimarcas premium e superesportivos com mais de vinte mil clientes. O desafio era sustentar a personalidade da marca, a qualidade do estoque (Porsche, Ferrari, Lamborghini, Brabus) e a experiência imersiva que os diferencia no mercado.",
+      layers: [
+        {
+          title: "Catálogo de Hipercarros",
+          items: [
+            "Vitrine de unidades raras: Porsche 911 GT2 RS, Ferrari 812 GTS Atelier, Lamborghini Sterrato",
+            "Fichas com ano, quilometragem e valor de unidades de sete dígitos",
+            "Estoque de Blindados e modelos sob encomenda em destaque",
+          ],
+        },
+        {
+          title: "Avantgarde Experience",
+          items: [
+            "Seção imersiva dedicada à experiência de marca do cliente",
+            "Narrativa de trajetória: mais de vinte mil clientes conquistados no país",
+            "Posicionamento premium com personalidade própria nos negócios",
+          ],
+        },
+        {
+          title: "Captação de Demanda Sob Encomenda",
+          items: [
+            "Formulário de aviso de chegada: o cliente registra o modelo desejado e é notificado",
+            "Captura de demanda para modelos que nem chegaram ao estoque",
+            "Jornada conectada entre vitrine, wishlist e relacionamento",
+          ],
+        },
+      ],
+      features: [
+        "Catálogo de hipercarros com unidades raras",
+        "Avantgarde Experience imersiva",
+        "Aviso de chegada para modelos sob encomenda",
+        "Narrativa de 20.000+ clientes",
+        "Blindados e séries especiais em destaque",
+      ],
+      challenges: [
+        {
+          problem:
+            "Multimarcas premium competem por estoque raro — a marca precisa justificar por que o melhor carro está com ela, e não no concorrente.",
+          solution:
+            "A plataforma expõe a trajetória, a personalidade e a qualidade do estoque como prova: o hipercarro certo aparece para quem já confia na marca.",
+        },
+        {
+          problem:
+            "Modelos exclusivos raramente estão disponíveis; demanda chega sem estoque para atender.",
+          solution:
+            "Aviso de chegada transforma demanda sem estoque em pipeline: o cliente deixa o contato e é notificado quando o modelo chega.",
+        },
+      ],
+      results: [
+        "Mais de vinte mil clientes em todo o país",
+        "Porsche, Ferrari, Lamborghini e Brabus no catálogo",
+        "Pipeline de demanda ativo via aviso de chegada",
+      ],
+    },
+    en: {
+      summary:
+        "Digital platform for Avantgarde, a national reference in premium multi-brand and supercars with over twenty thousand clients. The challenge was sustaining the brand's personality, inventory quality (Porsche, Ferrari, Lamborghini, Brabus) and the immersive experience that sets them apart.",
+      layers: [
+        {
+          title: "Hypercar Catalog",
+          items: [
+            "Rare-unit showcase: Porsche 911 GT2 RS, Ferrari 812 GTS Atelier, Lamborghini Sterrato",
+            "Spec sheets with year, mileage and value for seven-figure units",
+            "Armored and made-to-order models featured",
+          ],
+        },
+        {
+          title: "Avantgarde Experience",
+          items: [
+            "Immersive section dedicated to the client brand experience",
+            "Trajectory narrative: twenty thousand clients won nationwide",
+            "Premium positioning with its own business personality",
+          ],
+        },
+        {
+          title: "Made-to-Order Demand Capture",
+          items: [
+            "Arrival-alert form: clients register the desired model and get notified",
+            "Captures demand for models that have not even reached stock",
+            "Connected journey between showcase, wishlist and relationship",
+          ],
+        },
+      ],
+      features: [
+        "Hypercar catalog with rare units",
+        "Immersive Avantgarde Experience",
+        "Arrival alerts for made-to-order models",
+        "20,000+ client narrative",
+        "Armored and special series featured",
+      ],
+      challenges: [
+        {
+          problem:
+            "Premium multi-brand dealers compete for rare stock — the brand must justify why the best car is with them, not the competitor.",
+          solution:
+            "The platform exposes trajectory, personality and inventory quality as proof: the right hypercar finds the client who already trusts the brand.",
+        },
+        {
+          problem:
+            "Exclusive models are rarely in stock; demand arrives with nothing to fulfill it.",
+          solution:
+            "Arrival alerts turn unmet demand into pipeline: the client leaves contact details and is notified when the model lands.",
+        },
+      ],
+      results: [
+        "More than twenty thousand clients nationwide",
+        "Porsche, Ferrari, Lamborghini and Brabus in the catalog",
+        "Active demand pipeline via arrival alerts",
+      ],
+    },
+  },
+
+  vertexcars: {
+    pt: {
+      summary:
+        "Plataforma da maior autoridade em veículos de alta performance de Minas Gerais, com 33 anos de tradição e mais de 1.400 veículos entregues. O desafio era unir curadoria Porsche, certificação Approved e um showroom conceito de 2.000m² em uma jornada digital com simulação financeira transparente.",
+      layers: [
+        {
+          title: "Vitrine Porsche de Alta Performance",
+          items: [
+            "Inventário filtrável por categoria, valor e propulsão com 5 unidades em destaque",
+            "Fichas técnicas completas: potência, 0-100 km/h, câmbio e equipamentos Weissach/PCCB",
+            "Selos de disponibilidade: pronta entrega, oportunidade da semana, laudo OK",
+          ],
+        },
+        {
+          title: "Simulador de Financiamento",
+          items: [
+            "Simulação de entrada (20-80%) e prazo com taxa média de private banking",
+            "Estimativa de parcela mensal calculada no navegador antes do contato",
+            "Proposta oficial roteada ao WhatsApp com o cenário já configurado",
+          ],
+        },
+        {
+          title: "Prova Social & Entrega",
+          items: [
+            "Depoimentos assinados por clientes reais com veículo e cidade",
+            "Certificação Porsche Approved: inspeção de 111 itens com ferramental oficial",
+            "Entrega nacional em caminhão prancha fechado e cerimônia VIP",
+          ],
+        },
+      ],
+      features: [
+        "Inventário Porsche filtrável por categoria e valor",
+        "Simulador de financiamento com taxas de private banking",
+        "Certificação Porsche Approved (111 itens)",
+        "Showroom conceito de 2.000m² com lounge VIP",
+        "+1.400 veículos entregues e 4.9★ no Google",
+      ],
+      challenges: [
+        {
+          problem:
+            "Comprador de superesportivo quer simular a parcela antes de expor interesse — formulário puro espanta.",
+          solution:
+            "Simulador transparente embutido: o visitante calcula entrada e parcela sozinho e só então fala com o especialista, já qualificado.",
+        },
+        {
+          problem:
+            "33 anos de tradição precisavam virar prova digital, não apenas uma frase de 'sobre nós'.",
+          solution:
+            "Métricas reais em evidência: +1.400 entregues, 100% laudo cautelar, 4.9★ Google e depoimentos assinados por clientes com modelo e cidade.",
+        },
+      ],
+      results: [
+        "+1.400 veículos entregues em todo o território nacional",
+        "4.9★ de avaliação no Google",
+        "Aprovação de crédito em menos de 2 horas com bancos parceiros",
+      ],
+    },
+    en: {
+      summary:
+        "Platform for the leading high-performance vehicle authority in Minas Gerais, with 33 years of tradition and 1,400+ vehicles delivered. The challenge was uniting Porsche curation, Approved certification and a 2,000m² concept showroom into a digital journey with transparent financial simulation.",
+      layers: [
+        {
+          title: "High-Performance Porsche Showcase",
+          items: [
+            "Inventory filterable by category, value and propulsion with 5 featured units",
+            "Complete spec sheets: horsepower, 0-100 km/h, transmission and Weissach/PCCB equipment",
+            "Availability badges: ready for delivery, deal of the week, inspection OK",
+          ],
+        },
+        {
+          title: "Financing Simulator",
+          items: [
+            "Down payment (20-80%) and term simulation with an average private-banking rate",
+            "Monthly installment estimate computed in the browser before contact",
+            "Official proposal routed to WhatsApp with the scenario pre-configured",
+          ],
+        },
+        {
+          title: "Social Proof & Delivery",
+          items: [
+            "Signed testimonials from real clients with vehicle and city",
+            "Porsche Approved certification: 111-item inspection with official tooling",
+            "Nationwide enclosed-car-carrier delivery and VIP handover ceremony",
+          ],
+        },
+      ],
+      features: [
+        "Porsche inventory filterable by category and value",
+        "Financing simulator with private-banking rates",
+        "Porsche Approved certification (111 items)",
+        "2,000m² concept showroom with VIP lounge",
+        "1,400+ vehicles delivered and 4.9★ on Google",
+      ],
+      challenges: [
+        {
+          problem:
+            "Supercar buyers want to simulate the monthly payment before exposing interest — plain forms scare them off.",
+          solution:
+            "A transparent embedded simulator: visitors compute down payment and installments themselves and only then talk to a specialist, already qualified.",
+        },
+        {
+          problem:
+            "33 years of tradition had to become digital proof, not just an 'about us' sentence.",
+          solution:
+            "Real metrics front and center: 1,400+ delivered, 100% inspection reports, 4.9★ Google and testimonials signed by clients with model and city.",
+        },
+      ],
+      results: [
+        "1,400+ vehicles delivered across the national territory",
+        "4.9★ Google rating",
+        "Credit approval in under 2 hours with partner banks",
+      ],
+    },
+  },
+
+  vertexjet: {
+    pt: {
+      summary:
+        "Landing page de hiperluxo para embarcações pessoais construídas em fibra de carbono aeroespacial T1000 com motor marinho supercharged de 380 HP. O desafio era vender engenharia naval — monocoque, hidrojato em titânio, telemetria VTS — como um produto de desejo com acesso restrito por agendamento.",
+      layers: [
+        {
+          title: "Narrativa de Engenharia",
+          items: [
+            "Especificações de produto como protagonismo: 380 HP, 2.4s de 0-100 na água, redline de 8.850 RPM",
+            "Arquitetura do casco explicada: monocoque T1000 forjado a vácuo com autoclave aeroespacial",
+            "Sistemas proprietários nomeados (CLCS, VTS) para construir linguagem de marca técnica",
+          ],
+        },
+        {
+          title: "Telemetria Marinha Viva",
+        items: [
+            "Painel de telemetria em tempo real: ângulo de trim, pressão da bomba e posição GNSS",
+            "Sensores inerciais simulados a 200 Hz reforçam a percepção de produto ativo",
+            "Cockpit digital com link satelital e leitura de velocidade em nós",
+          ],
+        },
+        {
+          title: "Escassez & Acesso",
+          items: [
+            "Coleção exclusiva 2026 com edição Stealth numerada",
+            "Test ride privado disponível apenas por agendamento para clientes selecionados",
+            "Homologação naval internacional como selo de credibilidade",
+          ],
+        },
+      ],
+      features: [
+        "Motor supercharged de 380 HP com arquitetura CLCS",
+        "Monocoque em fibra de carbono T1000 (310 kg secos)",
+        "Painel de telemetria marinha em tempo real",
+        "Coleção exclusiva 2026 com edição Stealth",
+        "Test ride privativo por agendamento",
+      ],
+      challenges: [
+        {
+          problem:
+            "Produto inexistente no mercado tradicional precisa criar categoria, confiança e desejo do zero.",
+          solution:
+            "Engenharia exposta como argumento: cada número (HP, peso, empuxo, G) é verificável e cada sistema tem nome próprio — a página lê como especificação naval, não como folder.",
+        },
+        {
+          problem:
+            "Hiperluxo não converte por botão de compra: exige acesso restringido e ritural de descoberta.",
+          solution:
+            "Funil de escassez: coleção numerada, test ride por agendamento e disponibilidade restrita a clientes selecionados.",
+        },
+      ],
+      results: [
+        "380 HP com hidrojato duplo em titânio e 138 km/h de velocidade máxima",
+        "Casco 32% mais leve em fibra de carbono T1000",
+        "Funil de test ride privativo para clientes selecionados",
+      ],
+    },
+    en: {
+      summary:
+        "Hyperluxury landing page for personal watercraft built with aerospace-grade T1000 carbon fiber and a 380 HP supercharged marine engine. The challenge was selling naval engineering — monocoque, titanium waterjet, VTS telemetry — as a desirable product with restricted, appointment-only access.",
+      layers: [
+        {
+          title: "Engineering Narrative",
+          items: [
+            "Product specs as protagonists: 380 HP, 2.4s 0-100 on water, 8,850 RPM redline",
+            "Hull architecture explained: T1000 monocoque vacuum-forged in an aerospace autoclave",
+            "Proprietary systems named (CLCS, VTS) to build a technical brand language",
+          ],
+        },
+        {
+          title: "Live Marine Telemetry",
+          items: [
+            "Real-time telemetry panel: trim angle, pump pressure and GNSS position",
+            "Inertial sensors simulated at 200 Hz reinforce the perception of an active product",
+            "Digital cockpit with satellite link and speed readout in knots",
+          ],
+        },
+        {
+          title: "Scarcity & Access",
+          items: [
+            "Exclusive 2026 collection with a numbered Stealth edition",
+            "Private test ride available only by appointment for selected clients",
+            "International naval homologation as a credibility seal",
+          ],
+        },
+      ],
+      features: [
+        "380 HP supercharged engine with CLCS architecture",
+        "T1000 carbon-fiber monocoque (310 kg dry)",
+        "Real-time marine telemetry panel",
+        "Exclusive 2026 collection with Stealth edition",
+        "Private test ride by appointment",
+      ],
+      challenges: [
+        {
+          problem:
+            "A product with no traditional market precedent must create category, trust and desire from scratch.",
+          solution:
+            "Engineering exposed as the argument: every number (HP, weight, thrust, G) is verifiable and every system has a name — the page reads as a naval spec sheet, not a brochure.",
+        },
+        {
+          problem:
+            "Hyperluxury never converts through a buy button: it demands restricted access and a discovery ritual.",
+          solution:
+            "Scarcity funnel: numbered collection, appointment-only test rides and availability restricted to selected clients.",
+        },
+      ],
+      results: [
+        "380 HP with dual titanium waterjet and 138 km/h top speed",
+        "32% lighter T1000 carbon-fiber hull",
+        "Private test-ride funnel for selected clients",
+      ],
+    },
+  },
 };
 
 /** Locale fallback: returns the study in the requested locale, then `pt`. */

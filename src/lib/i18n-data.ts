@@ -117,6 +117,46 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
         metrics: "Economia de até 95% · Payback Médio 2,4 Anos · 25 Anos Garantia Linear",
         tags: ["Next.js", "TailwindCSS", "Simulador Algorítmico", "Agro Solar", "Payback Calc", "Energisa MS"],
       },
+      "prime-imports": {
+        category: "Supercarros & Curadoria de Exóticos",
+        tagline: "O padrão definitivo em supercarros e veículos exclusivos.",
+        description:
+          "Showroom privativo de supercarros e veículos blindados de alto padrão no Tatuapé/Anália Franco, São Paulo. Curadoria cirúrgica com inspeção técnica de mais de 250 itens, laudo cautelar 100% aprovado, sourcing internacional (Brasil, Europa e EUA), discrição total e transporte privativo nacional em caminhão prancha fechado.",
+        metrics: "Ferrari · Porsche · McLaren · Showroom Privativo · Laudo 100%",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Supercarros", "Blindados", "Sourcing Internacional"],
+      },
+      newjetcar: {
+        category: "Multimarcas Premium & Blindados",
+        tagline: "Curadoria pericial de superesportivos e blindados em Vinhedo.",
+        description:
+          "Showroom multimarcas premium em Vinhedo/SP com curadoria pericial de superesportivos, clássicos e blindados. Cada veículo é vistoriado em mais de 150 pontos com laudo cautelar 100% aprovado. Inclui consignação estratégica com discrição, bespoke car hunter internacional, entrega VIP nacional em caminhão fechado climatizado e mais de 15 anos de mercado.",
+        metrics: "Vistoria 150+ Pontos · 100% Perícia Aprovada · +15 Anos de Mercado",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Blindados", "Consignação", "Bespoke Sourcing"],
+      },
+      avantgarde: {
+        category: "Multimarcas Premium & Superesportivos",
+        tagline: "Conduzindo a excelência.",
+        description:
+          "Plataforma digital da Avantgarde, referência nacional em automóveis multimarcas premium e superesportivos. Catálogo de hipercarros (Porsche, Ferrari, Lamborghini, Brabus), Avantgarde Experience imersiva, aviso de chegada para modelos sob encomenda e jornada de compra à altura de mais de vinte mil clientes em todo o país.",
+        metrics: "20.000+ Clientes · Porsche · Ferrari · Lamborghini · Brabus",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Hipercarros", "Avantgarde Experience", "Wishlist"],
+      },
+      vertexcars: {
+        category: "Porsche Specialist & Alta Performance",
+        tagline: "Especialista em superesportivos e alta performance em MG.",
+        description:
+          "Plataforma da maior autoridade em veículos de alta performance de Minas Gerais. Showroom conceito de 2.000m², inventário Porsche com ficha técnica detalhada, simulador de financiamento com taxas de private banking, certificação Porsche Approved, entrega nacional em caminhão prancha fechado e +1.400 veículos entregues com laudo cautelar 100%.",
+        metrics: "+1.400 Veículos Entregues · 4.9★ Google · 33 Anos de Tradição",
+        tags: ["Next.js", "TailwindCSS", "Simulador Financiamento", "Porsche Approved", "Showroom VIP", "SEO Local"],
+      },
+      vertexjet: {
+        category: "Hiperluxo Náutico & Engenharia Naval",
+        tagline: "O ápice da hidrodinâmica pura.",
+        description:
+          "Landing page de hiperluxo para embarcações pessoais construídas em fibra de carbono aeroespacial T1000 com motor marinho supercharged de 380 HP. Telemetria marinha em tempo real, especificações de engenharia naval, coleção exclusiva 2026 e captação de test ride privativo por agendamento para clientes selecionados.",
+        metrics: "380 HP Supercharged · Monocoque T1000 · 138 km/h · Test Ride Privativo",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Telemetria", "Fibra de Carbono", "Test Ride VIP"],
+      },
     },
     testimonials: [
       {
@@ -227,6 +267,46 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
           "Institutional platform and photovoltaic engineering tool for Agribusiness (irrigation pivots, farms, Plano Safra/FCO), industries and high-end residences in Mato Grosso do Sul. Features an algorithmic asset payback simulator based on Ivinhema's solar radiation and Energisa MS homologation.",
         metrics: "Up to 95% Savings · Avg. Payback 2.4 Years · 25-Year Linear Warranty",
         tags: ["Next.js", "TailwindCSS", "Algorithmic Simulator", "Agro Solar", "Payback Calc", "Energisa MS"],
+      },
+      "prime-imports": {
+        category: "Supercars & Exotic Curation",
+        tagline: "The definitive standard in supercars and exclusive vehicles.",
+        description:
+          "Private showroom for supercars and high-end armored vehicles in Tatuapé/Anália Franco, São Paulo. Surgical curation with 250+ item technical inspection, 100% approved inspection reports, international sourcing (Brazil, Europe and USA), total discretion and nationwide enclosed-truck private delivery.",
+        metrics: "Ferrari · Porsche · McLaren · Private Showroom · 100% Inspected",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Supercars", "Armored", "International Sourcing"],
+      },
+      newjetcar: {
+        category: "Premium Multi-Brand & Armored",
+        tagline: "Expert curation of supercars and armored vehicles in Vinhedo.",
+        description:
+          "Premium multi-brand showroom in Vinhedo/SP with expert curation of supercars, classics and armored vehicles. Every vehicle undergoes a 150+ point inspection with a 100% approved report. Includes strategic confidential consignment, international bespoke car hunting, nationwide VIP delivery in a climate-controlled enclosed truck and 15+ years in the market.",
+        metrics: "150+ Point Inspection · 100% Approved · 15+ Years in the Market",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Armored", "Consignment", "Bespoke Sourcing"],
+      },
+      avantgarde: {
+        category: "Premium Multi-Brand & Supercars",
+        tagline: "Driving excellence.",
+        description:
+          "Digital platform for Avantgarde, a national reference in premium multi-brand and supercar automobiles. A hypercar catalog (Porsche, Ferrari, Lamborghini, Brabus), immersive Avantgarde Experience, arrival alerts for made-to-order models and a purchase journey matching twenty thousand clients nationwide.",
+        metrics: "20,000+ Clients · Porsche · Ferrari · Lamborghini · Brabus",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Hypercars", "Avantgarde Experience", "Wishlist"],
+      },
+      vertexcars: {
+        category: "Porsche Specialist & High Performance",
+        tagline: "High-performance supercar specialists in Minas Gerais.",
+        description:
+          "Platform for the leading high-performance vehicle authority in Minas Gerais. A 2,000m² concept showroom, Porsche inventory with detailed spec sheets, a private-banking financing simulator, Porsche Approved certification, nationwide enclosed-truck delivery and 1,400+ vehicles delivered with 100% approved inspection reports.",
+        metrics: "1,400+ Vehicles Delivered · 4.9★ Google · 33 Years of Tradition",
+        tags: ["Next.js", "TailwindCSS", "Financing Simulator", "Porsche Approved", "VIP Showroom", "Local SEO"],
+      },
+      vertexjet: {
+        category: "Nautical Hyperluxury & Naval Engineering",
+        tagline: "The apex of pure hydrodynamics.",
+        description:
+          "Hyperluxury landing page for personal watercraft built with aerospace-grade T1000 carbon fiber and a 380 HP supercharged marine engine. Real-time marine telemetry, naval engineering specifications, the exclusive 2026 collection and private test-ride booking for selected clients.",
+        metrics: "380 HP Supercharged · T1000 Monocoque · 138 km/h · Private Test Ride",
+        tags: ["Next.js", "TailwindCSS", "Luxury UI", "Telemetry", "Carbon Fiber", "VIP Test Ride"],
       },
     },
     testimonials: [
@@ -339,6 +419,46 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
         metrics: "Ahorro de hasta 95% · Payback Medio 2,4 Años · 25 Años de Garantía Lineal",
         tags: ["Next.js", "TailwindCSS", "Simulador Algorítmico", "Agro Solar", "Cálculo Payback", "Energisa MS"],
       },
+      "prime-imports": {
+        category: "Superautos & Curaduría de Exóticos",
+        tagline: "El estándar definitivo en superautos y vehículos exclusivos.",
+        description:
+          "Showroom privado de superautos y vehículos blindados de alto estándar en Tatuapé/Anália Franco, São Paulo. Curaduría quirúrgica con inspección técnica de más de 250 ítems, laudo cautelar 100% aprobado, sourcing internacional (Brasil, Europa y EE. UU.), discreción total y transporte privado nacional en camión plataforma cerrado.",
+        metrics: "Ferrari · Porsche · McLaren · Showroom Privado · Laudo 100%",
+        tags: ["Next.js", "TailwindCSS", "UI de Lujo", "Superautos", "Blindados", "Sourcing Internacional"],
+      },
+      newjetcar: {
+        category: "Multimarcas Premium & Blindados",
+        tagline: "Curaduría pericial de superautos y blindados en Vinhedo.",
+        description:
+          "Showroom multimarcas premium en Vinhedo/SP con curaduría pericial de superautos, clásicos y blindados. Cada vehículo es inspeccionado en más de 150 puntos con laudo cautelar 100% aprobado. Incluye consignación estratégica con discreción, bespoke car hunter internacional, entrega VIP nacional en camión cerrado climatizado y más de 15 años de mercado.",
+        metrics: "Inspección 150+ Puntos · 100% Pericia Aprobada · +15 Años de Mercado",
+        tags: ["Next.js", "TailwindCSS", "UI de Lujo", "Blindados", "Consignación", "Sourcing a Medida"],
+      },
+      avantgarde: {
+        category: "Multimarcas Premium & Superautos",
+        tagline: "Conduciendo la excelencia.",
+        description:
+          "Plataforma digital de Avantgarde, referencia nacional en automóviles multimarcas premium y superautos. Catálogo de hiperautos (Porsche, Ferrari, Lamborghini, Brabus), Avantgarde Experience inmersiva, aviso de llegada para modelos bajo pedido y jornada de compra a la altura de más de veinte mil clientes en todo el país.",
+        metrics: "20.000+ Clientes · Porsche · Ferrari · Lamborghini · Brabus",
+        tags: ["Next.js", "TailwindCSS", "UI de Lujo", "Hiperautos", "Avantgarde Experience", "Lista de Deseos"],
+      },
+      vertexcars: {
+        category: "Especialista Porsche & Alto Rendimiento",
+        tagline: "Especialistas en superautos y alto rendimiento en MG.",
+        description:
+          "Plataforma de la mayor autoridad en vehículos de alto rendimiento de Minas Gerais. Showroom conceptual de 2.000m², inventario Porsche con ficha técnica detallada, simulador de financiamiento con tasas de private banking, certificación Porsche Approved, entrega nacional en camión plataforma cerrado y +1.400 vehículos entregados con laudo cautelar 100%.",
+        metrics: "+1.400 Vehículos Entregados · 4.9★ Google · 33 Años de Tradición",
+        tags: ["Next.js", "TailwindCSS", "Simulador de Financiamiento", "Porsche Approved", "Showroom VIP", "SEO Local"],
+      },
+      vertexjet: {
+        category: "Hiperlujo Náutico & Ingeniería Naval",
+        tagline: "El ápice de la hidrodinámica pura.",
+        description:
+          "Landing page de hiperlujo para embarcaciones personales construidas en fibra de carbono aeroespacial T1000 con motor marino supercharged de 380 HP. Telemetría marina en tiempo real, especificaciones de ingeniería naval, colección exclusiva 2026 y captación de test ride privado con agendamiento para clientes seleccionados.",
+        metrics: "380 HP Supercharged · Monocoque T1000 · 138 km/h · Test Ride Privado",
+        tags: ["Next.js", "TailwindCSS", "UI de Lujo", "Telemetría", "Fibra de Carbono", "Test Ride VIP"],
+      },
     },
     testimonials: [
       {
@@ -450,6 +570,46 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
         metrics: "Jusqu'à 95% d'Économies · Retour Moyen 2,4 Ans · 25 Ans de Garantie Linéaire",
         tags: ["Next.js", "TailwindCSS", "Simulateur Algorithmique", "Agro Solaire", "Calcul Retour", "Energisa MS"],
       },
+      "prime-imports": {
+        category: "Supercars & Curation d'Exotiques",
+        tagline: "Le standard ultime en supercars et véhicules exclusifs.",
+        description:
+          "Showroom privé de supercars et véhicules blindés haut de gamme à Tatuapé/Anália Franco, São Paulo. Curation chirurgicale avec inspection technique de plus de 250 points, rapport cautélaire 100% approuvé, sourcing international (Brésil, Europe et États-Unis), discrétion totale et livraison privée nationale en camion plateau fermé.",
+        metrics: "Ferrari · Porsche · McLaren · Showroom Privé · Rapport 100%",
+        tags: ["Next.js", "TailwindCSS", "UI de Luxe", "Supercars", "Blindés", "Sourcing International"],
+      },
+      newjetcar: {
+        category: "Multimarques Premium & Blindés",
+        tagline: "Curation experte de supercars et blindés à Vinhedo.",
+        description:
+          "Showroom multimarques premium à Vinhedo/SP avec curation experte de supercars, classiques et véhicules blindés. Chaque véhicule est inspecté sur plus de 150 points avec rapport cautélaire 100% approuvé. Inclut consignation stratégique confidentielle, chasse internationale sur mesure, livraison VIP nationale en camion fermé climatisé et plus de 15 ans de marché.",
+        metrics: "Inspection 150+ Points · 100% Expertisés · +15 Ans de Marché",
+        tags: ["Next.js", "TailwindCSS", "UI de Luxe", "Blindés", "Consignation", "Sourcing sur Mesure"],
+      },
+      avantgarde: {
+        category: "Multimarques Premium & Supercars",
+        tagline: "Conduire l'excellence.",
+        description:
+          "Plateforme digitale d'Avantgarde, référence nationale de l'automobile multimarques premium et supercars. Catalogue d'hypercars (Porsche, Ferrari, Lamborghini, Brabus), Avantgarde Experience immersive, alertes d'arrivée pour les modèles sur commande et parcours d'achat à la hauteur de plus de vingt mille clients dans tout le pays.",
+        metrics: "20 000+ Clients · Porsche · Ferrari · Lamborghini · Brabus",
+        tags: ["Next.js", "TailwindCSS", "UI de Luxe", "Hypercars", "Avantgarde Experience", "Liste d'Attente"],
+      },
+      vertexcars: {
+        category: "Spécialiste Porsche & Haute Performance",
+        tagline: "Spécialiste des supercars et de la haute performance au Minas Gerais.",
+        description:
+          "Plateforme de la plus grande autorité en véhicules haute performance du Minas Gerais. Showroom concept de 2 000 m², inventaire Porsche avec fiches techniques détaillées, simulateur de financement aux taux private banking, certification Porsche Approved, livraison nationale en camion plateau fermé et +1 400 véhicules livrés avec rapport cautélaire 100%.",
+        metrics: "+1 400 Véhicules Livrés · 4,9★ Google · 33 Ans de Tradition",
+        tags: ["Next.js", "TailwindCSS", "Simulateur de Financement", "Porsche Approved", "Showroom VIP", "SEO Local"],
+      },
+      vertexjet: {
+        category: "Hyper Luxe Nautique & Ingénierie Navale",
+        tagline: "L'apogée de l'hydrodynamique pure.",
+        description:
+          "Landing page d'hyper luxe pour embarcations personnelles construites en fibre de carbone aérospatiale T1000 avec moteur marin suralimenté de 380 ch. Télémétrie marine en temps réel, spécifications d'ingénierie navale, collection exclusive 2026 et captation de test ride privé sur rendez-vous pour une clientèle sélectionnée.",
+        metrics: "380 ch Suralimenté · Monocoque T1000 · 138 km/h · Test Ride Privé",
+        tags: ["Next.js", "TailwindCSS", "UI de Luxe", "Télémétrie", "Fibre de Carbone", "Test Ride VIP"],
+      },
     },
     testimonials: [
       {
@@ -560,6 +720,46 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
           "Piattaforma istituzionale e strumento di ingegneria fotovoltaica per l'Agribusiness (pivot di irrigazione, aziende agricole, Plano Safra/FCO), industrie e residenze di alto livello nel Mato Grosso do Sul. Simulatore algoritmico di payback patrimoniale basato sulla radiazione solare di Ivinhema e omologazione Energisa MS.",
         metrics: "Risparmio fino al 95% · Payback Medio 2,4 Anni · 25 Anni di Garanzia Lineare",
         tags: ["Next.js", "TailwindCSS", "Simulatore Algoritmico", "Agro Solare", "Calcolo Payback", "Energisa MS"],
+      },
+      "prime-imports": {
+        category: "Supercar & Curatela di Esotiche",
+        tagline: "Lo standard definitivo in supercar e veicoli esclusivi.",
+        description:
+          "Showroom privato di supercar e veicoli blindati di alto livello a Tatuapé/Anália Franco, São Paulo. Curatela chirurgica con ispezione tecnica di oltre 250 punti, perizia cautelare 100% approvata, sourcing internazionale (Brasile, Europa e USA), discrezione totale e consegna privata nazionale con camion pianale chiuso.",
+        metrics: "Ferrari · Porsche · McLaren · Showroom Privato · Perizia 100%",
+        tags: ["Next.js", "TailwindCSS", "UI di Lusso", "Supercar", "Blindati", "Sourcing Internazionale"],
+      },
+      newjetcar: {
+        category: "Multimarca Premium & Blindati",
+        tagline: "Curatela esperta di supercar e blindati a Vinhedo.",
+        description:
+          "Showroom multimarca premium a Vinhedo/SP con curatela esperta di supercar, classiche e veicoli blindati. Ogni veicolo è ispezionato su oltre 150 punti con perizia cautelare 100% approvata. Include consignment strategico riservato, caccia internazionale su misura, consegna VIP nazionale con camion chiuso climatizzato e oltre 15 anni di mercato.",
+        metrics: "Ispezione 150+ Punti · 100% Periziati · +15 Anni di Mercato",
+        tags: ["Next.js", "TailwindCSS", "UI di Lusso", "Blindati", "Consignment", "Sourcing su Misura"],
+      },
+      avantgarde: {
+        category: "Multimarca Premium & Supercar",
+        tagline: "Guidando l'eccellenza.",
+        description:
+          "Piattaforma digitale di Avantgarde, riferimento nazionale per automobili multimarca premium e supercar. Catalogo di hypercar (Porsche, Ferrari, Lamborghini, Brabus), Avantgarde Experience immersiva, avviso di arrivo per modelli su ordinazione e percorso d'acquisto all'altezza di oltre ventimila clienti in tutto il paese.",
+        metrics: "20.000+ Clienti · Porsche · Ferrari · Lamborghini · Brabus",
+        tags: ["Next.js", "TailwindCSS", "UI di Lusso", "Hypercar", "Avantgarde Experience", "Wishlist"],
+      },
+      vertexcars: {
+        category: "Specialista Porsche & Alte Prestazioni",
+        tagline: "Specialisti in supercar e alte prestazioni in Minas Gerais.",
+        description:
+          "Piattaforma della massima autorità in veicoli ad alte prestazioni del Minas Gerais. Showroom concept di 2.000m², inventario Porsche con schede tecniche dettagliate, simulatore di finanziamento con tassi private banking, certificazione Porsche Approved, consegna nazionale con camion pianale chiuso e oltre 1.400 veicoli consegnati con perizia cautelare 100%.",
+        metrics: "+1.400 Veicoli Consegnati · 4.9★ Google · 33 Anni di Tradizione",
+        tags: ["Next.js", "TailwindCSS", "Simulatore Finanziamento", "Porsche Approved", "Showroom VIP", "SEO Locale"],
+      },
+      vertexjet: {
+        category: "Iperlusso Nautico & Ingegneria Navale",
+        tagline: "L'apice della pura idrodinamica.",
+        description:
+          "Landing page di iperlusso per imbarcazioni personali costruite in fibra di carbonio aerospaziale T1000 con motore marino supercharged da 380 CV. Telemetria marina in tempo reale, specifiche di ingegneria navale, collezione esclusiva 2026 e acquisizione di test ride privato su appuntamento per clienti selezionati.",
+        metrics: "380 CV Supercharged · Monoscocca T1000 · 138 km/h · Test Ride Privato",
+        tags: ["Next.js", "TailwindCSS", "UI di Lusso", "Telemetria", "Fibra di Carbonio", "Test Ride VIP"],
       },
     },
     testimonials: [
