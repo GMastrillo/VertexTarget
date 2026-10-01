@@ -8,6 +8,7 @@ import FAQSection from "@/components/faq/FAQSection";
 import TrustedBy from "@/components/trusted/TrustedBy";
 import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 import MetricsBand from "@/components/metrics/MetricsBand";
+import HomePlatformHighlight from "@/components/home/HomePlatformHighlight";
 import ContactSection from "@/components/contact/ContactSection";
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
         <HeroSection />
         <TrustedBy />
         <MetricsBand />
+        <HomePlatformHighlight />
         <ServicesSection />
         <CasesSection />
         <TestimonialsSection />
