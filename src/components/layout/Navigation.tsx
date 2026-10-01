@@ -2,7 +2,9 @@
 /* eslint-disable max-lines-per-function -- desktop/mobile navigation shares scroll and menu state. */
 
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles } from "lucide-react";
 import { useMagneticEffect } from "@/hooks/useMagneticEffect";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -129,6 +131,13 @@ export default function Navigation() {
 
           {/* Right column: language switcher + theme toggle (fixed top-right) */}
           <div className="hidden lg:flex items-center justify-self-end gap-3">
+            <Link
+              href="/plataforma"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-400 border border-cyan-400/30 text-xs font-bold uppercase tracking-wider transition-all hover:scale-105"
+            >
+              <Sparkles className="w-3 h-3" />
+              <span>Plataforma</span>
+            </Link>
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
@@ -204,6 +213,22 @@ export default function Navigation() {
                 {link.label}
               </motion.a>
             ))}
+
+            <motion.div
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.5 }}
+            >
+              <Link
+                href="/plataforma"
+                onClick={() => setIsOpen(false)}
+                className="heading-md text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-2"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                <Sparkles className="w-5 h-5" />
+                <span>Plataforma</span>
+              </Link>
+            </motion.div>
 
             <motion.a
               href="#contact"
