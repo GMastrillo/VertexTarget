@@ -2,7 +2,7 @@
 /* eslint-disable complexity -- pointer, reduced-motion and theme fallbacks are one cursor lifecycle. */
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import { motion, useSpring } from "motion/react";
 import { useTheme } from "next-themes";
 
 export default function CustomCursor() {
@@ -123,7 +123,6 @@ export default function CustomCursor() {
                 : "rgba(255, 255, 255, 0.25)"
               : "rgba(0, 0, 0, 0)",
             backdropFilter: isHovering ? "blur(6px) saturate(160%)" : "blur(0px)",
-            WebkitBackdropFilter: isHovering ? "blur(6px) saturate(160%)" : "blur(0px)",
             boxShadow: isHovering
               ? isDark
                 ? "inset 0 1px 0 rgba(255, 255, 255, 0.25)"

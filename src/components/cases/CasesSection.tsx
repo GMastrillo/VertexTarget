@@ -5,7 +5,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { CASES } from "@/lib/constants";
 import CaseCard from "./CaseCard";
 import { useLanguage } from "@/providers/LanguageProvider";

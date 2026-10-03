@@ -33,7 +33,7 @@ export default function HomePlatformHighlight() {
           className="mt-4 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed"
           style={{ color: "var(--color-vt-text-muted)" }}
         >
-          A mesma infraestrutura de renderização 3D, automação com IA e física de alta fidelidade usada nos nossos maiores cases, agora disponível para criar páginas comerciais completas em menos de 1 minuto.
+          A mesma engenharia de front-end criativo, automação com IA e física de alta fidelidade usada nos nossos maiores cases, agora disponível no Vertex OS com plano gratuito.
         </p>
 
         <div className="mt-6 flex justify-center">

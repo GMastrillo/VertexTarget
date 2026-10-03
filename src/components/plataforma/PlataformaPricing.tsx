@@ -72,33 +72,31 @@ export default function PlataformaPricing() {
             <ul className="mt-6 space-y-3 text-xs sm:text-sm text-white/70">
               <li className="flex items-start gap-2.5">
                 <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span>1 site completo gerado em menos de 1 minuto</span>
+                <span>1 projeto e 1 site publicado simultaneamente</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span>1 busca no Maps: 10 negócios reais com telefone</span>
+                <span>3 gerações de copywriting por IA por mês</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span>Editor visual completo para ajustes</span>
+                <span>1 busca web grounded com 10 fontes verificadas</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span>CRM básico de acompanhamento</span>
+                <span>Pipeline de vendas para até 50 prospects</span>
               </li>
             </ul>
           </div>
 
           <div className="mt-8 pt-4">
             <a
-              href="https://wa.me/5519999999999?text=Ol%C3%A1%2C%20quero%20testar%20a%20plataforma%20de%20cria%C3%A7%C3%A3o%20de%20sites%20no%20plano%20gratuito"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/os/cadastro"
               className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider text-center block transition-all"
             >
               Criar Conta Grátis
             </a>
-            <p className="text-[10px] text-center text-white/40 mt-2">Sem prazo para decidir</p>
+            <p className="text-[10px] text-center text-white/40 mt-2">Sem necessidade de cartão</p>
           </div>
         </div>
 

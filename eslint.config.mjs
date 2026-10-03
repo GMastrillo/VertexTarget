@@ -126,6 +126,8 @@ export default defineConfig([
     },
   },
   globalIgnores([
+    // Vendored agent resources are not application code; retain upstream files.
+    ".agents/skills/**",
     ".claude/**",
     ".github/agents/**",
     ".github/hooks/**",

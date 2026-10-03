@@ -22,26 +22,23 @@ export default function PlataformaFinalCta() {
             </h2>
 
             <p className="mt-6 text-sm sm:text-base text-white/60 max-w-xl mx-auto leading-relaxed">
-              Escolha seu plano, gere a primeira página em 1 minuto e apresente ainda hoje. Um único projeto vendido já paga todo o seu investimento do ano.
+              Crie sua conta gratuitamente, configure seu primeiro projeto e publique com endereço exclusivo ainda hoje.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="#planos"
+                href="/os/cadastro"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-cyan-400 text-black font-extrabold text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(0,240,255,0.5)] hover:bg-cyan-300 hover:scale-105 active:scale-95 transition-all"
               >
-                <span>Escolher Meu Plano</span>
+                <span>Criar Conta Gratuita</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
               <a
-                href="https://wa.me/5519999999999?text=Ol%C3%A1%2C%20gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20a%20plataforma%20de%20sites"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/os/entrar"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white/[0.06] hover:bg-white/12 text-white font-bold text-sm border border-white/10 transition-all"
               >
-                <MessageSquare className="w-4 h-4 text-emerald-400" />
-                <span>Falar com Consultor</span>
+                <span>Acessar Minha Conta →</span>
               </a>
             </div>
 

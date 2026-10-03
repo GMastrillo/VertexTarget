@@ -10,21 +10,20 @@ import PlataformaFaq from "@/components/plataforma/PlataformaFaq";
 import PlataformaFinalCta from "@/components/plataforma/PlataformaFinalCta";
 
 export const metadata: Metadata = {
-  title: "Vertex OS | Crie e venda sites de alta conversão com IA",
+  title: "Vertex OS | Crie e publique sites profissionais com IA",
   description:
-    "Ache negócios sem site no Google Maps, gere páginas profissionais em menos de 1 minuto com inteligência artificial e cobre de R$ 600 a R$ 2.500 por projeto.",
+    "Identifique oportunidades no mercado local com busca grounded, gere landing pages de alta conversão com copywriting por IA e publique com domínio e links seguros.",
   keywords: [
     "criador de sites ia",
-    "vender sites comércio local",
-    "gerador de landing pages",
-    "prospecção google maps",
-    "automação de sites",
-    "software criação de sites",
+    "landing pages profissionais",
+    "prospecção comercial",
+    "sites para empresas locais",
+    "vertex os",
   ],
   openGraph: {
-    title: "Vertex OS | Crie e venda sites de alta conversão com IA",
+    title: "Vertex OS | Crie e publique sites profissionais com IA",
     description:
-      "Ache negócios sem site no Google Maps, gere páginas profissionais em menos de 1 minuto com IA e cobre de R$ 600 a R$ 2.500.",
+      "Identifique oportunidades com busca grounded e gere páginas profissionais com IA e proteção contra perda de dados.",
     url: "https://vertextarget.com/plataforma",
     siteName: "VertexTarget",
     locale: "pt_BR",
@@ -42,8 +41,14 @@ export default function PlataformaPage() {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description:
-          "Encontre comércios no Google Maps, gere sites profissionais com IA em 1 minuto e feche contratos.",
+          "Plataforma completa para criação de sites profissionais e prospecção com copywriting por inteligência artificial.",
         offers: [
+          {
+            "@type": "Offer",
+            name: "Plano Gratuito",
+            price: "0",
+            priceCurrency: "BRL",
+          },
           {
             "@type": "Offer",
             name: "Starter Anual",

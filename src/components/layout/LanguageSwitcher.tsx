@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { LOCALES, LOCALE_LABELS, LOCALE_FLAGS } from "@/lib/i18n";
 import { useLanguage } from "@/providers/LanguageProvider";
 

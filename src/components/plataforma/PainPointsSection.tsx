@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { AlertCircle, ArrowRight, Clock, DollarSign, Search, ShieldAlert, Users, Wrench } from "lucide-react";
 
 const PAIN_POINTS = [
@@ -63,13 +63,13 @@ export default function PainPointsSection() {
               {/* Solution box callout */}
               <div className="mt-8 p-5 rounded-2xl bg-cyan-950/30 border border-cyan-500/20">
                 <p className="text-xs sm:text-sm text-cyan-200 leading-relaxed font-medium">
-                  <strong>Com a nossa plataforma, o site fica pronto em menos de 1 minuto</strong> com layout de estúdio, contrato e preço sugerido. A venda e o lucro continuam 100% seus, mas o trabalho pesado acabou.
+                  <strong>Com o Vertex OS, você estrutura e publica o site com agilidade profissional</strong> com design editorial, proteção contra perda de dados e links seguros. A venda e o lucro continuam 100% seus.
                 </p>
                 <a
-                  href="#planos"
+                  href="/os/cadastro"
                   className="mt-4 inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl bg-cyan-400 text-black hover:bg-cyan-300 transition-all shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:scale-105"
                 >
-                  <span>Quero Começar a Vender</span>
+                  <span>Criar Conta Gratuita</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>

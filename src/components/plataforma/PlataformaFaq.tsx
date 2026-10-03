@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Plus, HelpCircle } from "lucide-react";
 
 interface FaqItem {
@@ -20,11 +20,11 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Quanto eu consigo cobrar por projeto para os comércios?",
-    a: "A média de mercado cobrada pelos usuários varia entre R$ 600 e R$ 2.500 por projeto. Como o site fica pronto em menos de 1 minuto, sua margem de lucro líquido é quase 100%. Nossa ferramenta de precificação te ajuda a chegar no preço ideal por nicho.",
+    a: "A média de mercado praticada por prestadores varia entre R$ 600 e R$ 2.500 por projeto. Como o fluxo guiado e o copywriting inteligente aceleram a produção, sua margem líquida é elevada e você mantém 100% da receita cobrada.",
   },
   {
     q: "Como encontro clientes na minha cidade se não tenho contatos?",
-    a: "A nossa ferramenta de prospecção busca direto no Google Maps todos os negócios do seu bairro ou cidade que ainda não possuem site cadastrado, retornando nome, telefone WhatsApp e endereço para você já abordar com a página pronta.",
+    a: "Nossa ferramenta de busca inteligente consulta a web em tempo real através do Google Search, identificando estabelecimentos ativos e verificando suas fontes reais para você abordar com um diagnóstico seguro.",
   },
   {
     q: "E se o cliente quiser alterar cores, textos ou fotos?",

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import Laptop3DShowcase from "./Laptop3DShowcase";
 
@@ -42,7 +42,7 @@ export default function PlataformaHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-6 text-base sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed"
         >
-          A plataforma acha comércios sem site no Google Maps, monta o roteiro de abordagem e gera a página pronta em menos de 1 minuto. Você cobra de R$ 600 a R$ 2.500 por projeto.
+          O Vertex OS identifica oportunidades no mercado local com busca grounded, estrutura roteiros comerciais e gera landing pages completas com copywriting por IA. Comece gratuitamente.
         </motion.p>
 
         {/* CTAs */}
@@ -53,20 +53,18 @@ export default function PlataformaHero() {
           className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href="#planos"
+            href="/os/cadastro"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-cyan-400 text-black font-extrabold text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(0,240,255,0.4)] hover:bg-cyan-300 hover:scale-105 active:scale-95 transition-all"
           >
-            <span>Ver Planos e Começar a Vender</span>
+            <span>Criar Conta Gratuita</span>
             <ArrowRight className="w-4 h-4" />
           </a>
 
           <a
-            href="https://wa.me/5519999999999?text=Ol%C3%A1%2C%20quero%20testar%20a%20plataforma%20de%20sites"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/os/entrar"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white/[0.06] hover:bg-white/12 text-white font-bold text-sm border border-white/10 transition-all"
           >
-            <span>Prefere testar antes? Fale Conosco</span>
+            <span>Já tenho uma conta →</span>
           </a>
         </motion.div>
 

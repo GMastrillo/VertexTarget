@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
   Activity, Bell, Bot, BriefcaseBusiness, ChevronLeft, ChevronRight, MessageSquare, Smartphone, Trophy,
-  CircleDollarSign, LayoutDashboard, LogOut, Menu, Radar, Settings, Users, X,
+  CircleDollarSign, LayoutDashboard, LogOut, Menu, Radar, Settings, Users, X, FileText,
 } from "lucide-react";
 import type { TeamUser } from "@/lib/auth";
 import { WorkspaceSwitcher } from "@/components/admin/WorkspaceSwitcher";
@@ -76,11 +76,19 @@ function initials(name: string) {
   return name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]?.toUpperCase()).join("");
 }
 
+function getNavLinks(role: string) {
+  if (role === "owner" || role === "sales") {
+    return [...links, { href: "/admin/interesses", label: "Interesses", icon: FileText }];
+  }
+  return links;
+}
+
 export function AdminShell({ children, user }: { children: React.ReactNode; user: TeamUser }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const navLinks = getNavLinks(user.role);
 
   async function logout() {
     await fetch("/api/auth/login", { method: "DELETE" });
@@ -100,7 +108,7 @@ export function AdminShell({ children, user }: { children: React.ReactNode; user
         </div>
         <div className="px-3 pt-8">
           <p className="admin-nav-label">Workspace</p>
-          {links.map(({ href, label, icon: Icon }) => {
+          {navLinks.map(({ href, label, icon: Icon }) => {
             const active = href === "/admin" ? pathname === href : pathname.startsWith(href);
             return <Link key={href} href={href} onClick={() => setMobileOpen(false)} className={`admin-nav-link ${active ? "admin-nav-active" : ""}`}><Icon size={19} /><span>{label}</span></Link>;
           })}

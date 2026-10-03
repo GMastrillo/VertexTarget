@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 import { DEMO_SITES } from "./laptop/laptop-data";
 import LaptopScreenContent from "./laptop/LaptopScreenContent";
 

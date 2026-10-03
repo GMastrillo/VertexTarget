@@ -2,7 +2,7 @@
 /* eslint-disable max-lines-per-function -- keyboard navigation and palette rendering share state. */
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { useT } from "@/providers/LanguageProvider";
 
 interface Command {

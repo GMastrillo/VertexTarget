@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "scope": "project",
+  "hashAlgorithm": "sha256-tree-v1",
+  "hashDefinition": "Files sorted recursively by name.localeCompare(other, 'en'); for each file hash UTF-8 relative POSIX path, NUL, raw bytes, NUL.",
+  "sources": {
+    "superpowers": {
+      "repository": "https://github.com/obra/superpowers",
+      "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+      "license": "MIT",
+      "licensePath": ".agents/licenses/superpowers-LICENSE.txt"
+    },
+    "anthropic": {
+      "repository": "https://github.com/anthropics/skills",
+      "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+      "license": "Apache-2.0",
+      "licensePathTemplate": ".agents/skills/{name}/LICENSE.txt",
+      "noticesPath": ".agents/licenses/anthropic-THIRD_PARTY_NOTICES.md"
+    },
+    "ponytail": {
+      "repository": "https://github.com/DietrichGebert/ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "license": "MIT",
+      "licensePath": ".agents/licenses/ponytail-LICENSE.txt"
+    },
+    "caveman": {
+      "repository": "https://github.com/JuliusBrussee/caveman",
+      "revision": "b39c90862855ad2f0813ce775b8bf07a9d6d2a50",
+      "license": "Apache-2.0",
+      "licensePath": ".agents/licenses/caveman-LICENSE.txt"
+    },
+    "toolkit": {
+      "repository": "https://github.com/soumatheusgomes/vibe-coding-toolkit",
+      "revision": "13add21194467dfd2fc5b408ddb3398d306a4c78",
+      "license": "MIT",
+      "licensePath": ".agents/licenses/toolkit-LICENSE.txt"
+    },
+    "vercel": {
+      "repository": "https://github.com/vercel-labs/web-interface-guidelines",
+      "revision": "e3d624baaf29dc1fc645aff3e38f03e564d2d6b1",
+      "license": "MIT",
+      "licensePath": ".agents/licenses/vercel-LICENSE.txt"
+    }
+  },
+  "skills": [
+    { "name": "brainstorming", "source": "superpowers", "upstreamPath": "skills/brainstorming", "mode": "verbatim", "fileCount": 8, "sha256": "da02ea219e5f32c13914ed1660fad31438dd47e8340f8974d1f5d328bca1206e" },
+    { "name": "diagnosing-superpowers", "source": "superpowers", "upstreamPath": "skills/diagnosing-superpowers", "mode": "verbatim", "fileCount": 20, "sha256": "3b0fca6347bc86648bb759b2ef311c8df2c37e8826d62b68d2e32307be4326c9" },
+    { "name": "dispatching-parallel-agents", "source": "superpowers", "upstreamPath": "skills/dispatching-parallel-agents", "mode": "verbatim", "fileCount": 1, "sha256": "1acb899b23c2bdb5af5961e7b97ba43fb2a5593822db755747ef3d5db9f825a4" },
+    { "name": "executing-plans", "source": "superpowers", "upstreamPath": "skills/executing-plans", "mode": "verbatim", "fileCount": 3, "sha256": "7c8cc042d2017471000ced0a5c28e00e68db86ecdca1d2d98d5a61f926b39c8b" },
+    { "name": "finishing-a-development-branch", "source": "superpowers", "upstreamPath": "skills/finishing-a-development-branch", "mode": "verbatim", "fileCount": 1, "sha256": "1da9182001d887c0fb8c62aeee35c8f65b438b32a30b79104baedcca9e0ebef6" },
+    { "name": "receiving-code-review", "source": "superpowers", "upstreamPath": "skills/receiving-code-review", "mode": "verbatim", "fileCount": 1, "sha256": "e5dd23be2d93f751c8b28d647c4b139754aedfe75648cd8e1100e47f5da0c3c5" },
+    { "name": "requesting-code-review", "source": "superpowers", "upstreamPath": "skills/requesting-code-review", "mode": "verbatim", "fileCount": 2, "sha256": "739406bb0875f27a380d13ae8e574602574f91728b5399954ee1926b25b9caa9" },
+    { "name": "subagent-driven-development", "source": "superpowers", "upstreamPath": "skills/subagent-driven-development", "mode": "verbatim", "fileCount": 7, "sha256": "1b5668c88863ceeb615c5a1e485ddc22a5d39ecb594c30212c3dbaf8af46fb6b" },
+    { "name": "systematic-debugging", "source": "superpowers", "upstreamPath": "skills/systematic-debugging", "mode": "verbatim", "fileCount": 11, "sha256": "a48a1dc15522710b91d9243257367cee0fa45dc893a7a6b051054ff0dd9c4254" },
+    { "name": "test-driven-development", "source": "superpowers", "upstreamPath": "skills/test-driven-development", "mode": "verbatim", "fileCount": 2, "sha256": "8e8772822d25e4dfc9295cf4526c6251a10458c7417ac50c4b42e5d9fc91e0b0" },
+    { "name": "using-git-worktrees", "source": "superpowers", "upstreamPath": "skills/using-git-worktrees", "mode": "verbatim", "fileCount": 1, "sha256": "98dc7da4ead1fe3c523c7ac314082f1f85114ad5e6ec39d4426b4a7f76ed9d0c" },
+    { "name": "using-superpowers", "source": "superpowers", "upstreamPath": "skills/using-superpowers", "mode": "verbatim", "fileCount": 8, "sha256": "5b81d2b16c5c60219f92ce6e011502d390b7fbdbcb4e9aa19ae678ee7bb2166f" },
+    { "name": "verification-before-completion", "source": "superpowers", "upstreamPath": "skills/verification-before-completion", "mode": "verbatim", "fileCount": 1, "sha256": "d8a53168f152b6163bd3447f7d4c20b6b4cddf6bd907f9aa5856b514c032db0e" },
+    { "name": "writing-plans", "source": "superpowers", "upstreamPath": "skills/writing-plans", "mode": "verbatim", "fileCount": 1, "sha256": "b96f84fcdd4fc87bf3264e960e7a423bf6d3612e2b3355b4d6cd5f61ef7fe45d" },
+    { "name": "writing-skills", "source": "superpowers", "upstreamPath": "skills/writing-skills", "mode": "verbatim", "fileCount": 7, "sha256": "39df7502a830c27f26dd24ad484862f640060db2f7fee24e0aef82684e679b0d" },
+    { "name": "frontend-design", "source": "anthropic", "upstreamPath": "skills/frontend-design", "mode": "verbatim", "fileCount": 2, "sha256": "620147db27d0542e5340998858c282276f5374f497fda85626114fdad798d8ee" },
+    { "name": "skill-creator", "source": "anthropic", "upstreamPath": "skills/skill-creator", "mode": "verbatim", "fileCount": 18, "sha256": "9c34dd6bc9789d84af6c183fccb0c21af173eaabb0be6afa97ea03d0b754325c" },
+    { "name": "mcp-builder", "source": "anthropic", "upstreamPath": "skills/mcp-builder", "mode": "verbatim", "fileCount": 10, "sha256": "3edfbf3bc794bd4a979e8293507290c6d61dfc0263da4fa9e73ffca649f89712" },
+    { "name": "web-artifacts-builder", "source": "anthropic", "upstreamPath": "skills/web-artifacts-builder", "mode": "verbatim", "fileCount": 5, "sha256": "728096b201975a5a83c6836b901f5d4e55da00717f7dd8cec9d5ae0c2b256716" },
+    { "name": "webapp-testing", "source": "anthropic", "upstreamPath": "skills/webapp-testing", "mode": "verbatim", "fileCount": 6, "sha256": "ef3e69aa73063ebdc9a0d664d3eda416d5895bd1495290bb85d1ecb820408c3e" },
+    { "name": "ponytail", "source": "ponytail", "upstreamPath": "skills/ponytail", "mode": "verbatim", "fileCount": 1, "sha256": "f5272ebea7b1a622021c26368a9ea4263ea4cc0d11266beeb2d2ef7a33389814" },
+    { "name": "caveman", "source": "caveman", "upstreamPath": "skills/caveman", "mode": "verbatim", "fileCount": 2, "sha256": "632ba16acd5bd64da01812a8425d3897927e3f007b918fb13d113a7a07a9efff" },
+    { "name": "web-interface-guidelines", "source": "vercel", "mode": "local-adapter", "upstreamPaths": ["command.md", "README.md"], "fileCount": 4, "sha256": "723657e1643cf03487eccbe0fba8958eab8604b3a2bd9fabd2439446ddfdc7ac" },
+    { "name": "parallel-subagent-driven-development", "source": "toolkit", "mode": "local-adapter", "upstreamPaths": ["templates/rules/parallel-subagent-driven-development.md"], "fileCount": 3, "sha256": "e131f1b94ec30fbb09612c928aa3cd5c356b4927070ce75f1edf57a419f810ef" },
+    { "name": "eslint-quality-gates", "source": "toolkit", "mode": "local-adapter", "upstreamPaths": ["docs/tools/06-eslint-biome-quality-gates.md"], "fileCount": 3, "sha256": "624c473235ffd665ea4f6d02a170da742b18ff65f147ffb252c9d1247c81e5d3" },
+    { "name": "two-tier-memory", "source": "toolkit", "mode": "local-adapter", "upstreamPaths": ["docs/tools/09-claude-memory-system.md", "docs/tools/08-obsidian-memory.md", "docs/prompts/06-memory-bootstrap.md"], "fileCount": 5, "sha256": "d21fdb44699e797e7e83bd6217dd7fbfe03c808b66c33b3571c863821b82fb22" },
+    { "name": "graphify", "source": "toolkit", "mode": "local-adapter", "upstreamPaths": ["docs/tools/07-graphify.md"], "fileCount": 3, "sha256": "c85731b6b85545bca18ef85f9fc1b35f291912ba0fc3e7a9d95fa7c3985639e6" }
+  ],
+  "notInstalled": [
+    { "names": ["xlsx", "pdf", "docx"], "reason": "Current Anthropic document-skill terms prohibit retention, reproduction and derivatives outside the Services.", "licenseEvidence": "https://github.com/anthropics/skills/blob/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/xlsx/LICENSE.txt" },
+    { "names": ["dev-lp", "dev-imobiliaria"], "reason": "Only private local machine paths supplied; no verified public source or redistribution license." },
+    { "names": ["gsd-*"], "repository": "https://github.com/open-gsd/gsd-core", "revision": "957faa55b6f71c4f96f2fb0861924c5aab6917be", "version": "1.15.0", "license": "MIT", "reason": "Official installer required for runtime transformations; package engines require Node >=24 while workspace runs 22.16.0. No global install or runtime upgrade performed." }
+  ]
+}
