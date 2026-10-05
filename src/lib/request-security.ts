@@ -6,14 +6,20 @@ const rateLimitStores = new Map<string, Map<string, RateLimitEntry>>();
 
 export function isSameOriginRequest(request: Request) {
   const originHeader = request.headers.get("origin");
-  const host = request.headers.get("host");
+  const host = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim() || request.headers.get("host");
   if (!originHeader || !host) return false;
 
   try {
     const origin = new URL(originHeader);
     const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
     const requestProtocol = forwardedProto || new URL(request.url).protocol.replace(":", "");
-    return origin.host === host && origin.protocol === `${requestProtocol}:`;
+    if (origin.host === host && origin.protocol === `${requestProtocol}:`) return true;
+    if (process.env.NODE_ENV !== "production") {
+      if ((origin.hostname === "localhost" || origin.hostname === "127.0.0.1") && (host.startsWith("localhost") || host.startsWith("127.0.0.1"))) {
+        return true;
+      }
+    }
+    return false;
   } catch {
     return false;
   }

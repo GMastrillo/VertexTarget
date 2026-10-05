@@ -1,8 +1,11 @@
-import Link from 'next/link';
-import { requireOsContext } from '@/lib/os/auth';
+import { getConfirmedIdentity } from '@/lib/os/auth';
+import { getWorkspace } from '@/lib/os/workspace-repository';
 import { listProjects } from '@/lib/os/project-repository';
 import { ProjectBriefingForm } from '@/components/os/project-briefing';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import type { OsContext } from '@/lib/os/types';
 
 export const metadata = {
   title: 'Novo Projeto — Vertex OS',
@@ -19,7 +22,17 @@ interface NovoProjetoPageProps {
 }
 
 export default async function NovoProjetoPage({ searchParams }: NovoProjetoPageProps) {
-  const ctx = await requireOsContext();
+  const identity = await getConfirmedIdentity();
+  if (!identity) {
+    redirect('/os/entrar');
+  }
+
+  const workspace = await getWorkspace();
+  if (!workspace || workspace.status !== 'active') {
+    return null;
+  }
+
+  const ctx: OsContext = { ...identity, workspace };
   const [projects, params] = await Promise.all([
     listProjects(ctx),
     searchParams,

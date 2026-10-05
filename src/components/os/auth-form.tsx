@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { HcaptchaWidget } from '@/components/contact/hcaptcha-widget';
 import {
@@ -16,10 +15,11 @@ import {
 interface AuthFormProps {
   mode: 'signup' | 'login' | 'recover' | 'password';
   next?: string;
+  initialEmail?: string;
 }
 
 function getSuccessText(mode: 'signup' | 'login' | 'recover' | 'password'): string {
-  if (mode === 'signup') return 'Conta criada! Enviamos um link de confirmação para o seu e-mail.';
+  if (mode === 'signup') return 'Conta criada com sucesso! Redirecionando para o login...';
   if (mode === 'recover') return 'Se o e-mail estiver cadastrado, você receberá as instruções em instantes.';
   if (mode === 'password') return 'Senha redefinida com sucesso! Redirecionando...';
   return '';
@@ -69,10 +69,9 @@ function AuthFormInputs({
   );
 }
 
-export function AuthForm({ mode, next = '/os' }: AuthFormProps) {
-  const router = useRouter();
+export function AuthForm({ mode, next = '/os', initialEmail = '' }: AuthFormProps) {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -118,11 +117,14 @@ export function AuthForm({ mode, next = '/os' }: AuthFormProps) {
     const msg = getSuccessText(mode);
     if (msg) setSuccessMessage(msg);
 
-    if (mode === 'password') {
-      setTimeout(() => router.push('/os/entrar'), 1500);
+    if (mode === 'signup') {
+      setTimeout(() => {
+        window.location.href = `/os/entrar?email=${encodeURIComponent(email)}`;
+      }, 1200);
+    } else if (mode === 'password') {
+      setTimeout(() => { window.location.href = '/os/entrar'; }, 1500);
     } else if (mode === 'login') {
-      router.push(next);
-      router.refresh();
+      window.location.href = next;
     }
   }
 

@@ -87,7 +87,36 @@ export function requireCanonicalOrigin(request: Request, appUrl: string): void {
   const expectedOrigin = parseOriginUrl(appUrl, 'appUrl');
   const requestOrigin = parseOriginUrl(origin, 'origin');
 
-  if (requestOrigin !== expectedOrigin) {
-    throw new OsError('forbidden', 'Origem da requisição não coincide com a URL canônica');
+  if (requestOrigin === expectedOrigin) {
+    return;
   }
+
+  const host = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim() || request.headers.get('host');
+  if (host) {
+    try {
+      const parsedReq = new URL(requestOrigin);
+      if (parsedReq.host === host) {
+        return;
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  if (process.env.NODE_ENV !== 'production') {
+    try {
+      const parsedReq = new URL(requestOrigin);
+      if (parsedReq.hostname === 'localhost' || parsedReq.hostname === '127.0.0.1' || parsedReq.hostname === '::1') {
+        return;
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  if (process.env.VERCEL_URL && requestOrigin === `https://${process.env.VERCEL_URL}`) {
+    return;
+  }
+
+  throw new OsError('forbidden', 'Origem da requisição não coincide com a URL canônica');
 }

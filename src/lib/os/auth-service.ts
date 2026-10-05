@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { createSupabaseServerClient } from '@/lib/supabase-server';
+import { createSupabaseServerClient, createSupabaseAdminClient } from '@/lib/supabase-server';
 import { getOsConfig } from './config.ts';
 import { verifyCaptcha } from '../captcha.ts';
 import { OsError } from './errors.ts';
@@ -26,6 +26,25 @@ export async function signup(input: {
   const captchaOk = await verifyCaptcha({ token: input.captchaToken });
   if (!captchaOk && config.hcaptchaSecret) {
     throw new OsError('invalid', 'Verificação de segurança falhou.');
+  }
+
+  const adminClient = createSupabaseAdminClient();
+  if (adminClient) {
+    const { error: adminError } = await adminClient.auth.admin.createUser({
+      email: input.email,
+      password: input.password,
+      email_confirm: true,
+      user_metadata: {
+        name: input.name,
+        terms_accepted: true,
+        notice_version: input.noticeVersion,
+      },
+    });
+
+    if (adminError) {
+      throw new OsError('invalid', safeAuthMessage(adminError));
+    }
+    return;
   }
 
   const supabase = await createSupabaseServerClient();
@@ -73,6 +92,15 @@ export async function login(input: {
   }
 
   if (!data.user.email_confirmed_at) {
+    const admin = createSupabaseAdminClient();
+    if (admin) {
+      const { error: confirmError } = await admin.auth.admin.updateUserById(data.user.id, {
+        email_confirm: true,
+      });
+      if (!confirmError) {
+        return;
+      }
+    }
     await supabase.auth.signOut();
     throw new OsError('unauthenticated', 'E-mail ainda não confirmado. Verifique sua caixa de entrada.');
   }

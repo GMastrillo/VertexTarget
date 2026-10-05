@@ -9,6 +9,14 @@ import {
   HEADER_SITE_SLUG_NAME,
 } from "@/lib/i18n/request-context";
 
+function redirectWithCookies(url: URL, source: NextResponse, statusCode = 307): NextResponse {
+  const redirectRes = NextResponse.redirect(url, statusCode);
+  source.cookies.getAll().forEach((c) => {
+    redirectRes.cookies.set(c);
+  });
+  return redirectRes;
+}
+
 async function handleAdminAuth(
   request: NextRequest,
   supabase: SupabaseClient,
@@ -19,7 +27,7 @@ async function handleAdminAuth(
   login.searchParams.set("next", request.nextUrl.pathname);
 
   if (!user?.email || !user.email_confirmed_at) {
-    return NextResponse.redirect(login);
+    return redirectWithCookies(login, response);
   }
 
   const { data: member } = await supabase
@@ -29,7 +37,7 @@ async function handleAdminAuth(
     .maybeSingle();
 
   if (!member?.active) {
-    return NextResponse.redirect(login);
+    return redirectWithCookies(login, response);
   }
 
   const { data: memberships, error: membershipsError } = await supabase
@@ -39,11 +47,11 @@ async function handleAdminAuth(
     .eq("active", true);
 
   if (!membershipsError && !memberships?.length) {
-    return NextResponse.redirect(login);
+    return redirectWithCookies(login, response);
   }
 
   if (user.user_metadata?.password_must_change === true) {
-    return NextResponse.redirect(new URL("/login/trocar-senha", request.url));
+    return redirectWithCookies(new URL("/login/trocar-senha", request.url), response);
   }
 
   return response;
@@ -60,7 +68,7 @@ function handleOsAuth(
 
   if (isPublicAuth) {
     if (user?.email && user.email_confirmed_at && pathname !== "/os/redefinir-senha") {
-      return NextResponse.redirect(new URL("/os", request.url));
+      return redirectWithCookies(new URL("/os", request.url), response);
     }
     return response;
   }
@@ -68,7 +76,7 @@ function handleOsAuth(
   if (!user?.email || !user.email_confirmed_at) {
     const loginUrl = new URL("/os/entrar", request.url);
     loginUrl.searchParams.set("next", pathname);
-    return NextResponse.redirect(loginUrl);
+    return redirectWithCookies(loginUrl, response);
   }
 
   return response;

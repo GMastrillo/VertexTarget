@@ -32,7 +32,7 @@ export default function LoginPage() {
 
       const requestedPath = new URLSearchParams(window.location.search).get("next");
       const destination = requestedPath?.startsWith("/") && !requestedPath.startsWith("//") ? requestedPath : "/admin";
-      router.push(destination);
+      window.location.href = destination;
     } catch {
       setError("Não foi possível conectar ao serviço de autenticação.");
     } finally {

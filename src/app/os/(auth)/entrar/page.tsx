@@ -7,12 +7,13 @@ export const metadata = {
 };
 
 interface EntrarPageProps {
-  searchParams: Promise<{ next?: string; error?: string }>;
+  searchParams: Promise<{ next?: string; error?: string; email?: string }>;
 }
 
 export default async function EntrarPage({ searchParams }: EntrarPageProps) {
   const params = await searchParams;
   const next = params.next || '/os';
+  const initialEmail = params.email || '';
 
   return (
     <div className="space-y-6">
@@ -35,7 +36,7 @@ export default async function EntrarPage({ searchParams }: EntrarPageProps) {
         </div>
       )}
 
-      <AuthForm mode="login" next={next} />
+      <AuthForm mode="login" next={next} initialEmail={initialEmail} />
 
       <div className="text-center text-xs text-muted-foreground pt-2 border-t border-border">
         Ainda não tem conta?{' '}

@@ -1,9 +1,12 @@
 import Link from 'next/link';
-import { requireOsContext } from '@/lib/os/auth';
+import { getConfirmedIdentity } from '@/lib/os/auth';
+import { getWorkspace } from '@/lib/os/workspace-repository';
 import { listProjects } from '@/lib/os/project-repository';
 import { getUsageSummary } from '@/lib/os/usage-repository';
 import { UsageSummary } from '@/components/os/usage-summary';
 import { Button } from '@/components/ui/button';
+import { redirect } from 'next/navigation';
+import type { OsContext } from '@/lib/os/types';
 
 export const metadata = {
   title: 'Workspace — Vertex OS',
@@ -11,7 +14,17 @@ export const metadata = {
 };
 
 export default async function WorkspaceDashboardPage() {
-  const ctx = await requireOsContext();
+  const identity = await getConfirmedIdentity();
+  if (!identity) {
+    redirect('/os/entrar');
+  }
+
+  const workspace = await getWorkspace();
+  if (!workspace || workspace.status !== 'active') {
+    return null;
+  }
+
+  const ctx: OsContext = { ...identity, workspace };
   const [projects, usage] = await Promise.all([
     listProjects(ctx),
     getUsageSummary(ctx),
