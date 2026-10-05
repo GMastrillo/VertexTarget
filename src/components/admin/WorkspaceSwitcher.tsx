@@ -9,7 +9,7 @@ export function WorkspaceSwitcher({ current, organizations }: { current: Workspa
   const [saving, setSaving] = useState(false);
 
   if (organizations.length < 2) {
-    return <p className="truncate text-xs text-slate-400">{current.name}</p>;
+    return <p className="truncate text-xs text-muted-foreground">{current.name}</p>;
   }
 
   async function selectWorkspace(organizationId: string) {
@@ -34,7 +34,7 @@ export function WorkspaceSwitcher({ current, organizations }: { current: Workspa
         value={current.id}
         disabled={saving}
         onChange={(event) => void selectWorkspace(event.target.value)}
-        className="max-w-[190px] truncate rounded-lg border border-white/[.08] bg-[#0a0a1a] px-2 py-1 text-xs text-slate-300 outline-none focus:border-cyan-300/50"
+        className="max-w-[190px] truncate rounded-lg border border-border bg-card px-2 py-1 text-xs text-foreground outline-none focus:border-primary/50"
       >
         {organizations.map((organization) => <option key={organization.id} value={organization.id}>{organization.name}</option>)}
       </select>

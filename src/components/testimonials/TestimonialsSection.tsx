@@ -9,7 +9,7 @@ import { CARD_CONTENT } from "@/lib/i18n-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ACCENTS = ["#00f0ff", "#8b5cf6", "#00f0ff", "#8b5cf6"];
+const ACCENTS = ["var(--primary)", "var(--accent)", "var(--primary)", "var(--accent)"];
 
 /**
  * Testimonials wall — VTEX-style social proof with client quotes.
@@ -23,7 +23,8 @@ export default function TestimonialsSection() {
   const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const ctx = gsap.matchMedia();
+    ctx.add("(prefers-reduced-motion: no-preference)", () => {
       if (titleRef.current) {
         gsap.fromTo(
           titleRef.current.children,
@@ -147,8 +148,8 @@ export default function TestimonialsSection() {
                     className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black flex-shrink-0"
                     style={{
                       fontFamily: "var(--font-heading)",
-                      background: `${accent}18`,
-                      border: `1px solid ${accent}40`,
+                      background: `color-mix(in srgb, ${accent} 8%, transparent)`,
+                      border: "1px solid var(--border)",
                       color: accent,
                     }}
                   >

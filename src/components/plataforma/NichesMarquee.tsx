@@ -72,7 +72,7 @@ export default function NichesMarquee() {
   }, []);
 
   return (
-    <div className="relative w-full py-8 overflow-hidden select-none border-y border-white/[0.06] bg-black/30 backdrop-blur-md">
+    <div className="relative w-full py-8 overflow-hidden select-none border-y border-border bg-muted backdrop-blur-md">
       {/* Edge gradient masks */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 z-10"
@@ -98,15 +98,15 @@ export default function NichesMarquee() {
             return (
               <div
                 key={`a-${niche.name}`}
-                className="group flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:border-cyan-400/50 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer shadow-sm"
+                className="group flex items-center gap-2.5 px-4 py-2 rounded-xl bg-muted border border-border hover:border-primary/50 hover:bg-muted transition-all duration-300 cursor-pointer shadow-sm"
               >
                 <div
-                  className="w-6 h-6 rounded-lg flex items-center justify-center bg-white/[0.06] text-white/80 group-hover:scale-110 transition-transform duration-300"
-                  style={{ color: niche.accent }}
+                  className="w-6 h-6 rounded-lg flex items-center justify-center bg-muted text-foreground group-hover:scale-110 transition-transform duration-300"
+                  style={{ color: "var(--primary)" }}
                 >
                   <Icon className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-xs sm:text-sm font-medium text-white/75 group-hover:text-white transition-colors">
+                <span className="text-xs sm:text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {niche.name}
                 </span>
               </div>
@@ -121,15 +121,15 @@ export default function NichesMarquee() {
             return (
               <div
                 key={`b-${niche.name}`}
-                className="group flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:border-cyan-400/50 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer shadow-sm"
+                className="group flex items-center gap-2.5 px-4 py-2 rounded-xl bg-muted border border-border hover:border-primary/50 hover:bg-muted transition-all duration-300 cursor-pointer shadow-sm"
               >
                 <div
-                  className="w-6 h-6 rounded-lg flex items-center justify-center bg-white/[0.06] text-white/80 group-hover:scale-110 transition-transform duration-300"
-                  style={{ color: niche.accent }}
+                  className="w-6 h-6 rounded-lg flex items-center justify-center bg-muted text-foreground group-hover:scale-110 transition-transform duration-300"
+                  style={{ color: "var(--primary)" }}
                 >
                   <Icon className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-xs sm:text-sm font-medium text-white/75 group-hover:text-white transition-colors">
+                <span className="text-xs sm:text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {niche.name}
                 </span>
               </div>

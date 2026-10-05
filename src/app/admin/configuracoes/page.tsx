@@ -16,9 +16,9 @@ const ROLE_DESCRIPTION: Record<TeamRole, string> = {
 
 function StatusDot({ ok, label }: { ok: boolean; label: string }) {
   return (
-    <div className="flex items-center justify-between rounded-xl border border-white/[.06] bg-white/[.02] px-4 py-3">
-      <span className="text-sm text-slate-300">{label}</span>
-      {ok ? <span className="flex items-center gap-2 text-xs text-emerald-300"><CheckCircle2 size={14} /> Conectado</span> : <span className="flex items-center gap-2 text-xs text-amber-300"><XCircle size={14} /> Não configurado</span>}
+    <div className="flex items-center justify-between rounded-xl border border-border bg-muted px-4 py-3">
+      <span className="text-sm text-foreground">{label}</span>
+      {ok ? <span className="flex items-center gap-2 text-xs text-success"><CheckCircle2 size={14} /> Conectado</span> : <span className="flex items-center gap-2 text-xs text-warning"><XCircle size={14} /> Não configurado</span>}
     </div>
   );
 }
@@ -38,17 +38,17 @@ export default async function ConfiguracoesPage() {
         <div className="admin-card">
           <SectionTitle title="Sua conta" />
           <div className="space-y-3">
-            <div className="flex items-center justify-between rounded-xl border border-white/[.06] bg-white/[.02] px-4 py-3">
-              <div><p className="text-sm text-slate-300">Nome</p><p className="mt-0.5 font-medium">{user?.name}</p></div>
+            <div className="flex items-center justify-between rounded-xl border border-border bg-muted px-4 py-3">
+              <div><p className="text-sm text-foreground">Nome</p><p className="mt-0.5 font-medium">{user?.name}</p></div>
             </div>
-            <div className="flex items-center justify-between rounded-xl border border-white/[.06] bg-white/[.02] px-4 py-3">
-              <div><p className="text-sm text-slate-300">E-mail</p><p className="mt-0.5 font-medium">{user?.email}</p></div>
+            <div className="flex items-center justify-between rounded-xl border border-border bg-muted px-4 py-3">
+              <div><p className="text-sm text-foreground">E-mail</p><p className="mt-0.5 font-medium">{user?.email}</p></div>
             </div>
-            <div className="flex items-center justify-between rounded-xl border border-white/[.06] bg-white/[.02] px-4 py-3">
-              <div><p className="text-sm text-slate-300">Papel na equipe</p><p className="mt-0.5 font-medium capitalize">{user?.role}</p></div>
-              <ShieldCheck size={18} className="text-emerald-300" />
+            <div className="flex items-center justify-between rounded-xl border border-border bg-muted px-4 py-3">
+              <div><p className="text-sm text-foreground">Papel na equipe</p><p className="mt-0.5 font-medium capitalize">{user?.role}</p></div>
+              <ShieldCheck size={18} className="text-success" />
             </div>
-            <p className="px-1 text-xs leading-5 text-slate-500"><KeyRound size={12} className="mr-1 inline" />A senha é gerenciada pelo login seguro (Supabase Auth). Para trocá-la, utilize &quot;Esqueceu minha senha&quot; na tela de login.</p>
+            <p className="px-1 text-xs leading-5 text-muted-foreground"><KeyRound size={12} className="mr-1 inline" />A senha é gerenciada pelo login seguro (Supabase Auth). Para trocá-la, utilize &quot;Esqueceu minha senha&quot; na tela de login.</p>
           </div>
         </div>
         <div className="admin-card">
@@ -61,9 +61,9 @@ export default async function ConfiguracoesPage() {
           <SectionTitle title="Papéis da equipe" meta="Definem o que cada membro acessa" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {(Object.keys(ROLE_DESCRIPTION) as TeamRole[]).map((role) => (
-              <div key={role} className="rounded-xl border border-white/[.06] bg-white/[.02] p-4">
-                <p className="text-sm font-medium capitalize text-cyan-200">{role}</p>
-                <p className="mt-1.5 text-xs leading-5 text-slate-400">{ROLE_DESCRIPTION[role]}</p>
+              <div key={role} className="rounded-xl border border-border bg-muted p-4">
+                <p className="text-sm font-medium capitalize text-primary">{role}</p>
+                <p className="mt-1.5 text-xs leading-5 text-muted-foreground">{ROLE_DESCRIPTION[role]}</p>
               </div>
             ))}
           </div>

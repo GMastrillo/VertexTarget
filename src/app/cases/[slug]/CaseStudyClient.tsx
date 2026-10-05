@@ -38,12 +38,12 @@ function SiteShot({ url, color }: { url: string; color: string }) {
   return (
     <div
       className="relative w-full aspect-[16/9] overflow-hidden rounded-2xl border"
-      style={{ background: "#0a0a1a", borderColor: `${color}30` }}
+      style={{ background: "var(--card)", borderColor: `${color}30` }}
     >
       {!loaded && (
         <div
           className="absolute inset-0 flex items-center justify-center"
-          style={{ background: `radial-gradient(circle at 50% 40%, ${color}14, #0a0a1a 70%)` }}
+          style={{ background: `radial-gradient(circle at 50% 40%, ${color}14, var(--card) 70%)` }}
         >
           <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: `${color}88` }}>
             …
@@ -106,7 +106,7 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
           <div className="flex flex-wrap items-center gap-3 mb-5">
             <span
               className="text-[11px] uppercase font-mono font-semibold tracking-wider px-3 py-1.5 rounded-full border"
-              style={{ color: item.color, borderColor: `${item.color}40`, background: `${item.color}10` }}
+              style={{ color: "var(--primary)", borderColor: "var(--border)", background: "var(--muted)" }}
             >
               {item.category}
             </span>
@@ -125,7 +125,7 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
           >
             {item.title}
           </h1>
-          <p className="text-base font-mono mb-8" style={{ color: `${item.color}cc` }}>
+          <p className="text-base font-mono mb-8" style={{ color: "var(--primary)" }}>
             {item.tagline}
           </p>
 
@@ -199,7 +199,7 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
                 <div className="flex items-center gap-3 mb-4">
                   <span
                     className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black flex-shrink-0"
-                    style={{ background: `${item.color}15`, border: `1px solid ${item.color}35`, color: item.color }}
+                    style={{ background: "var(--muted)", border: "1px solid var(--border)", color: "var(--primary)" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -238,7 +238,7 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
                 className="px-4 py-2 rounded-xl text-sm"
                 style={{
                   background: `${item.color}10`,
-                  color: item.color,
+                  color: "var(--primary)",
                   border: `1px solid ${item.color}30`,
                 }}
               >
@@ -336,8 +336,8 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
             href="/#contact"
             className="inline-flex items-center gap-2 mt-4 px-8 py-3.5 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105"
             style={{
-              background: "linear-gradient(90deg, var(--color-vt-accent-cyan), var(--color-vt-accent-violet))",
-              color: "#050510",
+              background: "var(--primary)",
+              color: "var(--primary-foreground)",
               boxShadow: "0 10px 30px -8px rgba(0, 240, 255, 0.4)",
             }}
           >

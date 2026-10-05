@@ -59,7 +59,7 @@ export function InterestTopicSelector({
         id={`${formId}-interest`}
         value={interest}
         onChange={(e) => setInterest(e.target.value as 'solutions' | 'education' | 'community')}
-        className="w-full rounded-lg border border-border bg-card/40 px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none"
+        className="w-full rounded-lg border border-input bg-card/40 px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none"
       >
         <option value="solutions">Vertex Solutions (Projetos Customizados e Plataforma)</option>
         <option value="education">Vertex Education (Formação e Metodologias)</option>
@@ -100,7 +100,7 @@ export function InterestContactInputs({
             maxLength={120}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-lg border border-border bg-card/40 px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+            className="w-full rounded-lg border border-input bg-card/40 px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
             placeholder="Seu nome"
           />
         </div>
@@ -114,7 +114,7 @@ export function InterestContactInputs({
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-border bg-card/40 px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+            className="w-full rounded-lg border border-input bg-card/40 px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
             placeholder="voce@empresa.com"
           />
         </div>
@@ -122,7 +122,7 @@ export function InterestContactInputs({
 
       <div className="space-y-1.5">
         <label htmlFor={`${formId}-whatsapp`} className="text-xs font-medium text-foreground">
-          WhatsApp com DDD
+          WhatsApp com DDD ou Internacional (+país)
         </label>
         <input
           id={`${formId}-whatsapp`}
@@ -130,8 +130,8 @@ export function InterestContactInputs({
           required
           value={whatsapp}
           onChange={(e) => setWhatsapp(e.target.value)}
-          className="w-full rounded-lg border border-border bg-card/40 px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
-          placeholder="(11) 98765-4321"
+          className="w-full rounded-lg border border-input bg-card/40 px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+          placeholder="(11) 98765-4321 ou +1 202-555-0123"
         />
       </div>
     </>

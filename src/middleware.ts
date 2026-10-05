@@ -2,6 +2,12 @@ import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseConfig } from "@/lib/supabase-config";
 import type { User, SupabaseClient } from "@supabase/supabase-js";
+import {
+  resolveI18nRouting,
+  COOKIE_LOCALE_NAME,
+  HEADER_LOCALE_NAME,
+  HEADER_SITE_SLUG_NAME,
+} from "@/lib/i18n/request-context";
 
 async function handleAdminAuth(
   request: NextRequest,
@@ -68,26 +74,47 @@ function handleOsAuth(
   return response;
 }
 
-export async function middleware(request: NextRequest) {
-  const config = getSupabaseConfig();
-  const pathname = request.nextUrl.pathname;
+function applyRoutingHeaders(request: NextRequest, locale: string): Headers {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set(HEADER_LOCALE_NAME, locale);
 
+  const pathname = request.nextUrl.pathname;
+  if (pathname.startsWith("/sites/")) {
+    const slug = pathname.slice("/sites/".length).split("/")[0];
+    if (slug && /^[a-z0-9-]+$/i.test(slug)) {
+      requestHeaders.set(HEADER_SITE_SLUG_NAME, slug);
+    }
+  }
+
+  return requestHeaders;
+}
+
+async function handleProtectedRoutes(
+  request: NextRequest,
+  requestHeaders: Headers,
+  locale: string,
+): Promise<NextResponse> {
+  const pathname = request.nextUrl.pathname;
+  let response = NextResponse.next({ request: { headers: requestHeaders } });
+  response.headers.set(HEADER_LOCALE_NAME, locale);
+
+  const config = getSupabaseConfig();
   if (!config) {
     if (pathname.startsWith("/admin")) {
       const login = new URL("/login", request.url);
       login.searchParams.set("error", "auth-config");
       return NextResponse.redirect(login);
     }
-    return NextResponse.next();
+    return response;
   }
 
-  let response = NextResponse.next({ request: { headers: request.headers } });
   const supabase = createServerClient(config.url, config.key, {
     cookies: {
       getAll: () => request.cookies.getAll(),
       setAll: (items) => {
         items.forEach(({ name, value }) => request.cookies.set(name, value));
-        response = NextResponse.next({ request: { headers: request.headers } });
+        response = NextResponse.next({ request: { headers: requestHeaders } });
+        response.headers.set(HEADER_LOCALE_NAME, locale);
         items.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
       },
     },
@@ -106,4 +133,24 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
-export const config = { matcher: ["/admin/:path*", "/os/:path*"] };
+export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const search = request.nextUrl.search;
+  const cookieLocale = request.cookies.get(COOKIE_LOCALE_NAME)?.value;
+
+  const decision = resolveI18nRouting({ pathname, search, cookieLocale });
+
+  if (decision.type === "redirect") {
+    const redirectUrl = new URL(decision.destination, request.url);
+    return NextResponse.redirect(redirectUrl, decision.statusCode);
+  }
+
+  const requestHeaders = applyRoutingHeaders(request, decision.locale);
+  return handleProtectedRoutes(request, requestHeaders, decision.locale);
+}
+
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|woff2?|map)$).*)",
+  ],
+};

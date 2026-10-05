@@ -50,7 +50,7 @@ export default function LanguageSwitcher() {
                 className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left transition-colors duration-150 cursor-pointer whitespace-nowrap ${
                   l === locale
                     ? "text-[var(--color-vt-accent-cyan)] font-semibold"
-                    : "text-[var(--color-vt-text)] hover:bg-white/[0.07]"
+                    : "text-[var(--color-vt-text)] hover:bg-muted"
                 }`}
               >
                 <span className="text-base leading-none">{LOCALE_FLAGS[l]}</span>

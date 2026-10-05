@@ -19,7 +19,8 @@ export default function ContactSection() {
   const whatsappNumber = rawPhone ? normalizeBrazilianPhone(rawPhone) : null;
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const ctx = gsap.matchMedia();
+    ctx.add("(prefers-reduced-motion: no-preference)", () => {
       if (titleRef.current) {
         gsap.from(titleRef.current.children, {
           y: 40,
@@ -108,7 +109,7 @@ export default function ContactSection() {
                     className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
                     style={{
                       backgroundColor: "var(--color-vt-success)",
-                      color: "#050510",
+                      color: "var(--primary-foreground)",
                       boxShadow: "0 0 24px rgba(0, 230, 118, 0.35)",
                     }}
                   >

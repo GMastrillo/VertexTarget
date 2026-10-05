@@ -20,7 +20,7 @@ export default function HeroSection({ canvasReady = true }: { canvasReady?: bool
   // complete without it (gradient overlay) and the main thread stays free
   // for first interaction (TBT/TTI win).
   useEffect(() => {
-    if (!canvasReady) return;
+    if (!canvasReady || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ric =
       typeof window.requestIdleCallback === "function"
         ? (cb: IdleRequestCallback) => window.requestIdleCallback(cb)
@@ -43,6 +43,7 @@ export default function HeroSection({ canvasReady = true }: { canvasReady?: bool
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: canvasReady ? 0 : 2.8 });
 

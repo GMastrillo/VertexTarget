@@ -15,6 +15,7 @@ const cspHeader = [
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
+  distDir: process.env.NEXT_BUILD_DIR || ".next",
   async headers() {
     return [
       {

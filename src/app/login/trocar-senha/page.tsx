@@ -2,6 +2,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { ArrowRight, KeyRound, ShieldCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 // The client session guard intentionally reads the browser auth session here.
 // eslint-disable-next-line quality/no-direct-data-access
 import { createSupabaseBrowserClient } from "@/lib/supabase";
@@ -55,26 +56,27 @@ export default function ChangePasswordPage() {
   }
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#050510] px-5 py-10 text-[#e8e8f0]">
-      <div className="pointer-events-none absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-cyan-400/10 blur-[120px]" />
-      <div className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-violet-600/15 blur-[140px]" />
-      <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-white/[.035] p-8 shadow-2xl shadow-violet-950/20 backdrop-blur-2xl sm:p-10">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-5 py-10 text-foreground">
+      <div className="absolute right-5 top-5 z-20"><ThemeToggle /></div>
+      <div className="pointer-events-none absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-accent/15 blur-[140px]" />
+      <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-border bg-muted p-8 shadow-2xl shadow-violet-950/20 backdrop-blur-2xl sm:p-10">
         <div className="mb-8">
           <div className="mb-5 flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-violet-500 text-sm font-black text-[#050510]">VT</span>
-            <span className="text-xl font-semibold">Vertex<span className="text-cyan-300">Target</span></span>
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary text-sm font-black text-primary-foreground">VT</span>
+            <span className="text-xl font-semibold">Vertex<span className="text-primary">Target</span></span>
           </div>
-          <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[.2em] text-violet-300">
+          <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[.2em] text-accent">
             <KeyRound size={14} /> Segurança da conta
           </div>
           <h1 className="text-3xl font-semibold tracking-tight">Defina sua nova senha</h1>
-          <p className="mt-2 text-sm leading-6 text-slate-400">
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
             Por segurança, o acesso temporário precisa ser substituído antes de entrar no painel.
           </p>
         </div>
         <form onSubmit={submit} className="space-y-5">
           <label className="block">
-            <span className="mb-2 block text-xs font-medium text-slate-300">Nova senha</span>
+            <span className="mb-2 block text-xs font-medium text-foreground">Nova senha</span>
             <input
               required
               minLength={10}
@@ -87,7 +89,7 @@ export default function ChangePasswordPage() {
             />
           </label>
           <label className="block">
-            <span className="mb-2 block text-xs font-medium text-slate-300">Confirmar nova senha</span>
+            <span className="mb-2 block text-xs font-medium text-foreground">Confirmar nova senha</span>
             <input
               required
               minLength={10}
@@ -99,15 +101,15 @@ export default function ChangePasswordPage() {
               className="admin-input"
             />
           </label>
-          <p className="text-[11px] leading-5 text-slate-500">Use ao menos 10 caracteres, combinando letras e números.</p>
-          {error && <p className="text-xs text-rose-300">{error}</p>}
+          <p className="text-[11px] leading-5 text-muted-foreground">Use ao menos 10 caracteres, combinando letras e números.</p>
+          {error && <p className="text-xs text-destructive">{error}</p>}
           <button disabled={loading} className="admin-primary-btn mt-2 w-full">
             {loading ? "Atualizando..." : "Salvar e entrar no painel"}
             <ArrowRight size={17} />
           </button>
         </form>
-        <div className="mt-8 flex items-center gap-2 text-[11px] text-slate-600">
-          <ShieldCheck size={14} className="text-emerald-400" /> Sua sessão permanece ativa durante a troca.
+        <div className="mt-8 flex items-center gap-2 text-[11px] text-muted-foreground">
+          <ShieldCheck size={14} className="text-success" /> Sua sessão permanece ativa durante a troca.
         </div>
       </div>
     </main>

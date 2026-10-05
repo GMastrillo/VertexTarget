@@ -134,6 +134,7 @@ export default defineConfig([
     ".github/skills/**",
     "node_modules/**",
     ".next/**",
+    ".next-theme-*/**",
     "out/**",
     "dist/**",
     "build/**",

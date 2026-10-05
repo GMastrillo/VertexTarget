@@ -101,16 +101,16 @@ export function ProspectBoard({ initialProspects, usage }: ProspectBoardProps): 
         limitCount={usage.search.limit}
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[.08] pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Pipeline de Prospects</h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <h1 className="text-2xl font-bold text-foreground tracking-tight">Pipeline de Prospects</h1>
+          <p className="text-xs text-muted-foreground mt-1">
             Organize e converta clientes locais em contratos de desenvolvimento web.
           </p>
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="text-xs font-mono text-slate-400">
+          <span className="text-xs font-mono text-muted-foreground">
             {prospects.length} / 50 cadastrados
           </span>
           <button
@@ -120,7 +120,7 @@ export function ProspectBoard({ initialProspects, usage }: ProspectBoardProps): 
               setEditingProspect(null);
               setModalOpen(true);
             }}
-            className="rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-cyan-300 disabled:opacity-50 transition-all"
+            className="rounded-lg bg-primary px-4 py-2 text-xs font-bold text-primary-foreground hover:bg-primary disabled:opacity-50 transition-all"
           >
             + Novo Prospect
           </button>

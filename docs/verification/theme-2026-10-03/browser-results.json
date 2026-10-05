@@ -1,0 +1,4319 @@
+{
+  "samples": [
+    {
+      "route": "/plataforma",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 10381.28125,
+          "top": 0,
+          "right": 360,
+          "bottom": 10381.28125,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Venda sites para o comércio da sua cidade",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 16,
+          "y": 198,
+          "width": 322,
+          "height": 116.625,
+          "top": 198,
+          "right": 338,
+          "bottom": 314.625,
+          "left": 16
+        }
+      },
+      "inputs": [],
+      "primary": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(17, 24, 39)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 133.859375,
+            "y": 36,
+            "width": 8,
+            "height": 8,
+            "top": 36,
+            "right": 141.859375,
+            "bottom": 44,
+            "left": 133.859375
+          }
+        },
+        {
+          "text": "Criar Conta Gratuita",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 16,
+            "y": 500.625,
+            "width": 322,
+            "height": 52,
+            "top": 500.625,
+            "right": 338,
+            "bottom": 552.625,
+            "left": 16
+          }
+        },
+        {
+          "text": "Criar Conta Gratuita",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 62,
+            "y": 2013.015625,
+            "width": 172.96875,
+            "height": 36,
+            "top": 2013.015625,
+            "right": 234.96875,
+            "bottom": 2049.015625,
+            "left": 62
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": {
+        "text": "Tire suas dúvidas antes de começar",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 16,
+          "y": 7924.59375,
+          "width": 322,
+          "height": 72,
+          "top": 7924.59375,
+          "right": 338,
+          "bottom": 7996.59375,
+          "left": 16
+        }
+      }
+    },
+    {
+      "route": "/",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 18738.90625,
+          "top": 0,
+          "right": 360,
+          "bottom": 18738.90625,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "We engineerdigital gravity.",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 214.5,
+          "width": 306,
+          "height": 106.609375,
+          "top": 214.5,
+          "right": 330,
+          "bottom": 321.109375,
+          "left": 24
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(196, 205, 221)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 15383.34375,
+            "width": 272,
+            "height": 46,
+            "top": 15383.34375,
+            "right": 313,
+            "bottom": 15429.34375,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(17, 24, 39)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 247.25,
+            "y": 17278.71875,
+            "width": 215,
+            "height": 24,
+            "top": 17278.71875,
+            "right": 462.25,
+            "bottom": 17302.71875,
+            "left": 247.25
+          }
+        },
+        {
+          "text": "Vertex Solutions (Projetos Customizados e Plataforma)Vertex Education (Formação e Metodolo",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17413.71875,
+            "width": 256,
+            "height": 41,
+            "top": 17413.71875,
+            "right": 305,
+            "bottom": 17454.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17502.71875,
+            "width": 256,
+            "height": 38,
+            "top": 17502.71875,
+            "right": 305,
+            "bottom": 17540.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17580.71875,
+            "width": 256,
+            "height": 38,
+            "top": 17580.71875,
+            "right": 305,
+            "bottom": 17618.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17666.71875,
+            "width": 256,
+            "height": 38,
+            "top": 17666.71875,
+            "right": 305,
+            "bottom": 17704.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(196, 205, 221)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17776.71875,
+            "width": 256,
+            "height": 78,
+            "top": 17776.71875,
+            "right": 305,
+            "bottom": 17854.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(0, 107, 136)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(0, 107, 136)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17888.71875,
+            "width": 13,
+            "height": 16,
+            "top": 17888.71875,
+            "right": 62,
+            "bottom": 17904.71875,
+            "left": 49
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(17, 24, 39)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 152.75,
+            "y": 32,
+            "width": 8,
+            "height": 8,
+            "top": 32,
+            "right": 160.75,
+            "bottom": 40,
+            "left": 152.75
+          }
+        },
+        {
+          "text": "Explorar todas as soluções",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(0, 107, 136)",
+          "font": "\"JetBrains Mono\", monospace",
+          "opacity": "1",
+          "rect": {
+            "x": 24,
+            "y": 3800.5625,
+            "width": 247.140625,
+            "height": 44,
+            "top": 3800.5625,
+            "right": 271.140625,
+            "bottom": 3844.5625,
+            "left": 24
+          }
+        },
+        {
+          "text": "Registrar Interesse",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 18084.71875,
+            "width": 256,
+            "height": 40,
+            "top": 18084.71875,
+            "right": 305,
+            "bottom": 18124.71875,
+            "left": 49
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": {
+        "text": "Tudo que você precisasaber antes de começar.",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 15761.34375,
+          "width": 306,
+          "height": 96,
+          "top": 15761.34375,
+          "right": 330,
+          "bottom": 15857.34375,
+          "left": 24
+        }
+      }
+    },
+    {
+      "route": "/cases",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 7189.0625,
+          "top": 0,
+          "right": 360,
+          "bottom": 7189.0625,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Projetos que transformam complexidade em impacto.",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 213,
+          "width": 312,
+          "height": 201.5625,
+          "top": 213,
+          "right": 336,
+          "bottom": 414.5625,
+          "left": 24
+        }
+      },
+      "inputs": [
+        {
+          "text": "Todas as categoriasCleanTech & Engenharia FotovoltaicaConcessionária & Plataforma Automoti",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 691.5625,
+            "width": 278,
+            "height": 44,
+            "top": 691.5625,
+            "right": 319,
+            "bottom": 735.5625,
+            "left": 41
+          }
+        },
+        {
+          "text": "Todas as tecnologiasAgro SolarAutomação CRMAvantgarde ExperienceBespoke SourcingBlindadosC",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 771.5625,
+            "width": 278,
+            "height": 44,
+            "top": 771.5625,
+            "right": 319,
+            "bottom": 815.5625,
+            "left": 41
+          }
+        },
+        {
+          "text": "Todos os anos20262025",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 851.5625,
+            "width": 278,
+            "height": 44,
+            "top": 851.5625,
+            "right": 319,
+            "bottom": 895.5625,
+            "left": 41
+          }
+        }
+      ],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/privacidade",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 1738.5,
+          "top": 0,
+          "right": 360,
+          "bottom": 1738.5,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Política de Privacidade",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 141,
+          "width": 312,
+          "height": 72,
+          "top": 141,
+          "right": 336,
+          "bottom": 213,
+          "left": 24
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/termos",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 2140,
+          "top": 0,
+          "right": 360,
+          "bottom": 2140,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Termos de Serviço",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 141,
+          "width": 312,
+          "height": 36,
+          "top": 141,
+          "right": 336,
+          "bottom": 177,
+          "left": 24
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/entrar",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Acessar Workspace",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 41,
+          "y": 206.5,
+          "width": 278,
+          "height": 28,
+          "top": 206.5,
+          "right": 319,
+          "bottom": 234.5,
+          "left": 41
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 318.5,
+            "width": 278,
+            "height": 38,
+            "top": 318.5,
+            "right": 319,
+            "bottom": 356.5,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 392.5,
+            "width": 278,
+            "height": 38,
+            "top": 392.5,
+            "right": 319,
+            "bottom": 430.5,
+            "left": 41
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Entrar",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 520.5,
+            "width": 278,
+            "height": 40,
+            "top": 520.5,
+            "right": 319,
+            "bottom": 560.5,
+            "left": 41
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/cadastro",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Criar Conta Gratuita",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 41,
+          "y": 138,
+          "width": 278,
+          "height": 28,
+          "top": 138,
+          "right": 319,
+          "bottom": 166,
+          "left": 41
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 250,
+            "width": 278,
+            "height": 38,
+            "top": 250,
+            "right": 319,
+            "bottom": 288,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 328,
+            "width": 278,
+            "height": 38,
+            "top": 328,
+            "right": 319,
+            "bottom": 366,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 402,
+            "width": 278,
+            "height": 38,
+            "top": 402,
+            "right": 319,
+            "bottom": 440,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(0, 107, 136)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(0, 107, 136)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 464,
+            "width": 13,
+            "height": 16,
+            "top": 464,
+            "right": 54,
+            "bottom": 480,
+            "left": 41
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Criar Conta",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 589,
+            "width": 278,
+            "height": 40,
+            "top": 589,
+            "right": 319,
+            "bottom": 629,
+            "left": 41
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/recuperar",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Recuperar Senha",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 41,
+          "y": 243.5,
+          "width": 278,
+          "height": 28,
+          "top": 243.5,
+          "right": 319,
+          "bottom": 271.5,
+          "left": 41
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 355.5,
+            "width": 278,
+            "height": 38,
+            "top": 355.5,
+            "right": 319,
+            "bottom": 393.5,
+            "left": 41
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Recuperar Senha",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 483.5,
+            "width": 278,
+            "height": 40,
+            "top": 483.5,
+            "right": 319,
+            "bottom": 523.5,
+            "left": 41
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/redefinir-senha",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Sessão Expirada",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 41,
+          "y": 342,
+          "width": 278,
+          "height": 28,
+          "top": 342,
+          "right": 319,
+          "bottom": 370,
+          "left": 41
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/login",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "A engenharia por trás do impacto.",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 373,
+            "width": 262,
+            "height": 44,
+            "top": 373,
+            "right": 311,
+            "bottom": 417,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 461,
+            "width": 262,
+            "height": 44,
+            "top": 461,
+            "right": 311,
+            "bottom": 505,
+            "left": 49
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Acessar painel",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 537,
+            "width": 262,
+            "height": 38,
+            "top": 537,
+            "right": 311,
+            "bottom": 575,
+            "left": 49
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/plataforma",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 10381.28125,
+          "top": 0,
+          "right": 360,
+          "bottom": 10381.28125,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Venda sites para o comércio da sua cidade",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 16,
+          "y": 198,
+          "width": 322,
+          "height": 116.625,
+          "top": 198,
+          "right": 338,
+          "bottom": 314.625,
+          "left": 16
+        }
+      },
+      "inputs": [],
+      "primary": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(232, 232, 240)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 133.859375,
+            "y": 36,
+            "width": 8,
+            "height": 8,
+            "top": 36,
+            "right": 141.859375,
+            "bottom": 44,
+            "left": 133.859375
+          }
+        },
+        {
+          "text": "Criar Conta Gratuita",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 16,
+            "y": 500.625,
+            "width": 322,
+            "height": 52,
+            "top": 500.625,
+            "right": 338,
+            "bottom": 552.625,
+            "left": 16
+          }
+        },
+        {
+          "text": "Criar Conta Gratuita",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 62,
+            "y": 2013.015625,
+            "width": 172.96875,
+            "height": 36,
+            "top": 2013.015625,
+            "right": 234.96875,
+            "bottom": 2049.015625,
+            "left": 62
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": {
+        "text": "Tire suas dúvidas antes de começar",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 16,
+          "y": 7924.59375,
+          "width": 322,
+          "height": 72,
+          "top": 7924.59375,
+          "right": 338,
+          "bottom": 7996.59375,
+          "left": 16
+        }
+      }
+    },
+    {
+      "route": "/",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 18738.90625,
+          "top": 0,
+          "right": 360,
+          "bottom": 18738.90625,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "We engineerdigital gravity.",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 214.5,
+          "width": 306,
+          "height": 106.609375,
+          "top": 214.5,
+          "right": 330,
+          "bottom": 321.109375,
+          "left": 24
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(52, 52, 81)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 15383.34375,
+            "width": 272,
+            "height": 46,
+            "top": 15383.34375,
+            "right": 313,
+            "bottom": 15429.34375,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(232, 232, 240)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 247.25,
+            "y": 17278.71875,
+            "width": 215,
+            "height": 24,
+            "top": 17278.71875,
+            "right": 462.25,
+            "bottom": 17302.71875,
+            "left": 247.25
+          }
+        },
+        {
+          "text": "Vertex Solutions (Projetos Customizados e Plataforma)Vertex Education (Formação e Metodolo",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17413.71875,
+            "width": 256,
+            "height": 41,
+            "top": 17413.71875,
+            "right": 305,
+            "bottom": 17454.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17502.71875,
+            "width": 256,
+            "height": 38,
+            "top": 17502.71875,
+            "right": 305,
+            "bottom": 17540.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17580.71875,
+            "width": 256,
+            "height": 38,
+            "top": 17580.71875,
+            "right": 305,
+            "bottom": 17618.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17666.71875,
+            "width": 256,
+            "height": 38,
+            "top": 17666.71875,
+            "right": 305,
+            "bottom": 17704.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(52, 52, 81)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17776.71875,
+            "width": 256,
+            "height": 78,
+            "top": 17776.71875,
+            "right": 305,
+            "bottom": 17854.71875,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(0, 240, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(0, 240, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 17888.71875,
+            "width": 13,
+            "height": 16,
+            "top": 17888.71875,
+            "right": 62,
+            "bottom": 17904.71875,
+            "left": 49
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(232, 232, 240)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 152.75,
+            "y": 32,
+            "width": 8,
+            "height": 8,
+            "top": 32,
+            "right": 160.75,
+            "bottom": 40,
+            "left": 152.75
+          }
+        },
+        {
+          "text": "Explorar todas as soluções",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(0, 240, 255)",
+          "font": "\"JetBrains Mono\", monospace",
+          "opacity": "1",
+          "rect": {
+            "x": 24,
+            "y": 3800.5625,
+            "width": 247.140625,
+            "height": 44,
+            "top": 3800.5625,
+            "right": 271.140625,
+            "bottom": 3844.5625,
+            "left": 24
+          }
+        },
+        {
+          "text": "Registrar Interesse",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 18084.71875,
+            "width": 256,
+            "height": 40,
+            "top": 18084.71875,
+            "right": 305,
+            "bottom": 18124.71875,
+            "left": 49
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": {
+        "text": "Tudo que você precisasaber antes de começar.",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 15761.34375,
+          "width": 306,
+          "height": 96,
+          "top": 15761.34375,
+          "right": 330,
+          "bottom": 15857.34375,
+          "left": 24
+        }
+      }
+    },
+    {
+      "route": "/cases",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 7189.0625,
+          "top": 0,
+          "right": 360,
+          "bottom": 7189.0625,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Projetos que transformam complexidade em impacto.",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 213,
+          "width": 312,
+          "height": 201.5625,
+          "top": 213,
+          "right": 336,
+          "bottom": 414.5625,
+          "left": 24
+        }
+      },
+      "inputs": [
+        {
+          "text": "Todas as categoriasCleanTech & Engenharia FotovoltaicaConcessionária & Plataforma Automoti",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 691.5625,
+            "width": 278,
+            "height": 44,
+            "top": 691.5625,
+            "right": 319,
+            "bottom": 735.5625,
+            "left": 41
+          }
+        },
+        {
+          "text": "Todas as tecnologiasAgro SolarAutomação CRMAvantgarde ExperienceBespoke SourcingBlindadosC",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 771.5625,
+            "width": 278,
+            "height": 44,
+            "top": 771.5625,
+            "right": 319,
+            "bottom": 815.5625,
+            "left": 41
+          }
+        },
+        {
+          "text": "Todos os anos20262025",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 851.5625,
+            "width": 278,
+            "height": 44,
+            "top": 851.5625,
+            "right": 319,
+            "bottom": 895.5625,
+            "left": 41
+          }
+        }
+      ],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/privacidade",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 1738.5,
+          "top": 0,
+          "right": 360,
+          "bottom": 1738.5,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Política de Privacidade",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 141,
+          "width": 312,
+          "height": 72,
+          "top": 141,
+          "right": 336,
+          "bottom": 213,
+          "left": 24
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/termos",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 2140,
+          "top": 0,
+          "right": 360,
+          "bottom": 2140,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Termos de Serviço",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 24,
+          "y": 141,
+          "width": 312,
+          "height": 36,
+          "top": 141,
+          "right": 336,
+          "bottom": 177,
+          "left": 24
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/entrar",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Acessar Workspace",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 41,
+          "y": 206.5,
+          "width": 278,
+          "height": 28,
+          "top": 206.5,
+          "right": 319,
+          "bottom": 234.5,
+          "left": 41
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 318.5,
+            "width": 278,
+            "height": 38,
+            "top": 318.5,
+            "right": 319,
+            "bottom": 356.5,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 392.5,
+            "width": 278,
+            "height": 38,
+            "top": 392.5,
+            "right": 319,
+            "bottom": 430.5,
+            "left": 41
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Entrar",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 520.5,
+            "width": 278,
+            "height": 40,
+            "top": 520.5,
+            "right": 319,
+            "bottom": 560.5,
+            "left": 41
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/cadastro",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Criar Conta Gratuita",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 41,
+          "y": 138,
+          "width": 278,
+          "height": 28,
+          "top": 138,
+          "right": 319,
+          "bottom": 166,
+          "left": 41
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 250,
+            "width": 278,
+            "height": 38,
+            "top": 250,
+            "right": 319,
+            "bottom": 288,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 328,
+            "width": 278,
+            "height": 38,
+            "top": 328,
+            "right": 319,
+            "bottom": 366,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 402,
+            "width": 278,
+            "height": 38,
+            "top": 402,
+            "right": 319,
+            "bottom": 440,
+            "left": 41
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(0, 240, 255)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(0, 240, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 464,
+            "width": 13,
+            "height": 16,
+            "top": 464,
+            "right": 54,
+            "bottom": 480,
+            "left": 41
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Criar Conta",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 589,
+            "width": 278,
+            "height": 40,
+            "top": 589,
+            "right": 319,
+            "bottom": 629,
+            "left": 41
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/recuperar",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Recuperar Senha",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 41,
+          "y": 243.5,
+          "width": 278,
+          "height": 28,
+          "top": 243.5,
+          "right": 319,
+          "bottom": 271.5,
+          "left": 41
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 355.5,
+            "width": 278,
+            "height": 38,
+            "top": 355.5,
+            "right": 319,
+            "bottom": 393.5,
+            "left": 41
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Recuperar Senha",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 41,
+            "y": 483.5,
+            "width": 278,
+            "height": 40,
+            "top": 483.5,
+            "right": 319,
+            "bottom": 523.5,
+            "left": 41
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/redefinir-senha",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Sessão Expirada",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 41,
+          "y": 342,
+          "width": 278,
+          "height": 28,
+          "top": 342,
+          "right": 319,
+          "bottom": 370,
+          "left": 41
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/login",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 360,
+      "scrollWidth": 360,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "A engenharia por trás do impacto.",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 373,
+            "width": 262,
+            "height": 44,
+            "top": 373,
+            "right": 311,
+            "bottom": 417,
+            "left": 49
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 461,
+            "width": 262,
+            "height": 44,
+            "top": 461,
+            "right": 311,
+            "bottom": 505,
+            "left": 49
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Acessar painel",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 49,
+            "y": 537,
+            "width": 262,
+            "height": 38,
+            "top": 537,
+            "right": 311,
+            "bottom": 575,
+            "left": 49
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/plataforma",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 7771.125,
+          "top": 0,
+          "right": 1274,
+          "bottom": 7771.125,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Venda sites para o comércio da sua cidade",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 186,
+          "y": 186,
+          "width": 896,
+          "height": 155.5,
+          "top": 186,
+          "right": 1082,
+          "bottom": 341.5,
+          "left": 186
+        }
+      },
+      "inputs": [],
+      "primary": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(17, 24, 39)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 141.859375,
+            "y": 38,
+            "width": 8,
+            "height": 8,
+            "top": 38,
+            "right": 149.859375,
+            "bottom": 46,
+            "left": 141.859375
+          }
+        },
+        {
+          "text": "Começar Agora",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 1092.8125,
+            "y": 24,
+            "width": 157.1875,
+            "height": 36,
+            "top": 24,
+            "right": 1250,
+            "bottom": 60,
+            "left": 1092.8125
+          }
+        },
+        {
+          "text": "Criar Conta Gratuita",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 387.421875,
+            "y": 496,
+            "width": 274.734375,
+            "height": 52,
+            "top": 496,
+            "right": 662.15625,
+            "bottom": 548,
+            "left": 387.421875
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": {
+        "text": "Tire suas dúvidas antes de começar",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 186,
+          "y": 5464.4375,
+          "width": 896,
+          "height": 40,
+          "top": 5464.4375,
+          "right": 1082,
+          "bottom": 5504.4375,
+          "left": 186
+        }
+      }
+    },
+    {
+      "route": "/",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 13752.25,
+          "top": 0,
+          "right": 1274,
+          "bottom": 13752.25,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "We engineerdigital gravity.",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 146,
+          "y": 209.171875,
+          "width": 976,
+          "height": 228.453125,
+          "top": 209.171875,
+          "right": 1122,
+          "bottom": 437.625,
+          "left": 146
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(196, 205, 221)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 267,
+            "y": 11180.0625,
+            "width": 632.40625,
+            "height": 46,
+            "top": 11180.0625,
+            "right": 899.40625,
+            "bottom": 11226.0625,
+            "left": 267
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(17, 24, 39)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 913.25,
+            "y": 12429.0625,
+            "width": 215,
+            "height": 24,
+            "top": 12429.0625,
+            "right": 1128.25,
+            "bottom": 12453.0625,
+            "left": 913.25
+          }
+        },
+        {
+          "text": "Vertex Solutions (Projetos Customizados e Plataforma)Vertex Education (Formação e Metodolo",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12544.0625,
+            "width": 456,
+            "height": 41,
+            "top": 12544.0625,
+            "right": 1171,
+            "bottom": 12585.0625,
+            "left": 715
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12633.0625,
+            "width": 220,
+            "height": 38,
+            "top": 12633.0625,
+            "right": 935,
+            "bottom": 12671.0625,
+            "left": 715
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 951,
+            "y": 12633.0625,
+            "width": 220,
+            "height": 38,
+            "top": 12633.0625,
+            "right": 1171,
+            "bottom": 12671.0625,
+            "left": 951
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12719.0625,
+            "width": 456,
+            "height": 38,
+            "top": 12719.0625,
+            "right": 1171,
+            "bottom": 12757.0625,
+            "left": 715
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+          "border": "rgb(196, 205, 221)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12805.0625,
+            "width": 456,
+            "height": 78,
+            "top": 12805.0625,
+            "right": 1171,
+            "bottom": 12883.0625,
+            "left": 715
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(0, 107, 136)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(0, 107, 136)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12917.0625,
+            "width": 13,
+            "height": 16,
+            "top": 12917.0625,
+            "right": 728,
+            "bottom": 12933.0625,
+            "left": 715
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(17, 24, 39)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 337.5,
+            "y": 48,
+            "width": 12,
+            "height": 12,
+            "top": 48,
+            "right": 349.5,
+            "bottom": 60,
+            "left": 337.5
+          }
+        },
+        {
+          "text": "Explorar todas as soluções",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(0, 107, 136)",
+          "font": "\"JetBrains Mono\", monospace",
+          "opacity": "1",
+          "rect": {
+            "x": 64,
+            "y": 3917.5,
+            "width": 247.140625,
+            "height": 44,
+            "top": 3917.5,
+            "right": 311.140625,
+            "bottom": 3961.5,
+            "left": 64
+          }
+        },
+        {
+          "text": "Registrar Interesse",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 13058.0625,
+            "width": 456,
+            "height": 40,
+            "top": 13058.0625,
+            "right": 1171,
+            "bottom": 13098.0625,
+            "left": 715
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": {
+        "text": "Tudo que você precisasaber antes de começar.",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 64,
+          "y": 11502.0625,
+          "width": 1140,
+          "height": 128,
+          "top": 11502.0625,
+          "right": 1204,
+          "bottom": 11630.0625,
+          "left": 64
+        }
+      }
+    },
+    {
+      "route": "/cases",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 4346.875,
+          "top": 0,
+          "right": 1274,
+          "bottom": 4346.875,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Projetos que transformam complexidade em impacto.",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 64,
+          "y": 225,
+          "width": 768,
+          "height": 302.375,
+          "top": 225,
+          "right": 832,
+          "bottom": 527.375,
+          "left": 64
+        }
+      },
+      "inputs": [
+        {
+          "text": "Todas as categoriasCleanTech & Engenharia FotovoltaicaConcessionária & Plataforma Automoti",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 85,
+            "y": 776.375,
+            "width": 360,
+            "height": 44,
+            "top": 776.375,
+            "right": 445,
+            "bottom": 820.375,
+            "left": 85
+          }
+        },
+        {
+          "text": "Todas as tecnologiasAgro SolarAutomação CRMAvantgarde ExperienceBespoke SourcingBlindadosC",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 457,
+            "y": 776.375,
+            "width": 360,
+            "height": 44,
+            "top": 776.375,
+            "right": 817,
+            "bottom": 820.375,
+            "left": 457
+          }
+        },
+        {
+          "text": "Todos os anos20262025",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 829,
+            "y": 776.375,
+            "width": 360,
+            "height": 44,
+            "top": 776.375,
+            "right": 1189,
+            "bottom": 820.375,
+            "left": 829
+          }
+        }
+      ],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/privacidade",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 1170,
+          "top": 0,
+          "right": 1274,
+          "bottom": 1170,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Política de Privacidade",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 213,
+          "y": 141,
+          "width": 848,
+          "height": 40,
+          "top": 141,
+          "right": 1061,
+          "bottom": 181,
+          "left": 213
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/termos",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 1401.25,
+          "top": 0,
+          "right": 1274,
+          "bottom": 1401.25,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Termos de Serviço",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 213,
+          "y": 141,
+          "width": 848,
+          "height": 40,
+          "top": 141,
+          "right": 1061,
+          "bottom": 181,
+          "left": 213
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/entrar",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Acessar Workspace",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 449,
+          "y": 206.5,
+          "width": 382,
+          "height": 28,
+          "top": 206.5,
+          "right": 831,
+          "bottom": 234.5,
+          "left": 449
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 318.5,
+            "width": 382,
+            "height": 38,
+            "top": 318.5,
+            "right": 831,
+            "bottom": 356.5,
+            "left": 449
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 392.5,
+            "width": 382,
+            "height": 38,
+            "top": 392.5,
+            "right": 831,
+            "bottom": 430.5,
+            "left": 449
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Entrar",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 520.5,
+            "width": 382,
+            "height": 40,
+            "top": 520.5,
+            "right": 831,
+            "bottom": 560.5,
+            "left": 449
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/cadastro",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Criar Conta Gratuita",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 449,
+          "y": 147.5,
+          "width": 382,
+          "height": 28,
+          "top": 147.5,
+          "right": 831,
+          "bottom": 175.5,
+          "left": 449
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 259.5,
+            "width": 382,
+            "height": 38,
+            "top": 259.5,
+            "right": 831,
+            "bottom": 297.5,
+            "left": 449
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 337.5,
+            "width": 382,
+            "height": 38,
+            "top": 337.5,
+            "right": 831,
+            "bottom": 375.5,
+            "left": 449
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 411.5,
+            "width": 382,
+            "height": 38,
+            "top": 411.5,
+            "right": 831,
+            "bottom": 449.5,
+            "left": 449
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(0, 107, 136)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(0, 107, 136)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 473.5,
+            "width": 16,
+            "height": 16,
+            "top": 473.5,
+            "right": 465,
+            "bottom": 489.5,
+            "left": 449
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Criar Conta",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 579.5,
+            "width": 382,
+            "height": 40,
+            "top": 579.5,
+            "right": 831,
+            "bottom": 619.5,
+            "left": 449
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/recuperar",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Recuperar Senha",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 449,
+          "y": 243.5,
+          "width": 382,
+          "height": 28,
+          "top": 243.5,
+          "right": 831,
+          "bottom": 271.5,
+          "left": 449
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(232, 237, 244)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 355.5,
+            "width": 382,
+            "height": 38,
+            "top": 355.5,
+            "right": 831,
+            "bottom": 393.5,
+            "left": 449
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Recuperar Senha",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgb(0, 107, 136)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 483.5,
+            "width": 382,
+            "height": 40,
+            "top": 483.5,
+            "right": 831,
+            "bottom": 523.5,
+            "left": 449
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/redefinir-senha",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Sessão Expirada",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 449,
+          "y": 342,
+          "width": 382,
+          "height": 28,
+          "top": 342,
+          "right": 831,
+          "bottom": 370,
+          "left": 449
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/login",
+      "theme": "light",
+      "stored": "light",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgb(244, 246, 250)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "A engenharia por trás do impacto.",
+        "foreground": "rgb(17, 24, 39)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(17, 24, 39)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 177,
+          "y": 331,
+          "width": 440.890625,
+          "height": 100.78125,
+          "top": 331,
+          "right": 617.890625,
+          "bottom": 431.78125,
+          "left": 177
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 714.890625,
+            "y": 331,
+            "width": 388.09375,
+            "height": 44,
+            "top": 331,
+            "right": 1102.984375,
+            "bottom": 375,
+            "left": 714.890625
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(17, 24, 39)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 137, 158)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 714.890625,
+            "y": 419,
+            "width": 388.09375,
+            "height": 44,
+            "top": 419,
+            "right": 1102.984375,
+            "bottom": 463,
+            "left": 714.890625
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Acessar painel",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(255, 255, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 714.890625,
+            "y": 495,
+            "width": 388.09375,
+            "height": 38,
+            "top": 495,
+            "right": 1102.984375,
+            "bottom": 533,
+            "left": 714.890625
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/plataforma",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 7771.125,
+          "top": 0,
+          "right": 1274,
+          "bottom": 7771.125,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Venda sites para o comércio da sua cidade",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 186,
+          "y": 186,
+          "width": 896,
+          "height": 155.5,
+          "top": 186,
+          "right": 1082,
+          "bottom": 341.5,
+          "left": 186
+        }
+      },
+      "inputs": [],
+      "primary": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(232, 232, 240)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 141.859375,
+            "y": 38,
+            "width": 8,
+            "height": 8,
+            "top": 38,
+            "right": 149.859375,
+            "bottom": 46,
+            "left": 141.859375
+          }
+        },
+        {
+          "text": "Começar Agora",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 1092.8125,
+            "y": 24,
+            "width": 157.1875,
+            "height": 36,
+            "top": 24,
+            "right": 1250,
+            "bottom": 60,
+            "left": 1092.8125
+          }
+        },
+        {
+          "text": "Criar Conta Gratuita",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 387.421875,
+            "y": 496,
+            "width": 274.734375,
+            "height": 52,
+            "top": 496,
+            "right": 662.15625,
+            "bottom": 548,
+            "left": 387.421875
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": {
+        "text": "Tire suas dúvidas antes de começar",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 186,
+          "y": 5464.4375,
+          "width": 896,
+          "height": 40,
+          "top": 5464.4375,
+          "right": 1082,
+          "bottom": 5504.4375,
+          "left": 186
+        }
+      }
+    },
+    {
+      "route": "/",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 13752.25,
+          "top": 0,
+          "right": 1274,
+          "bottom": 13752.25,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "We engineerdigital gravity.",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 146,
+          "y": 209.171875,
+          "width": 976,
+          "height": 228.453125,
+          "top": 209.171875,
+          "right": 1122,
+          "bottom": 437.625,
+          "left": 146
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(52, 52, 81)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 267,
+            "y": 11180.0625,
+            "width": 632.40625,
+            "height": 46,
+            "top": 11180.0625,
+            "right": 899.40625,
+            "bottom": 11226.0625,
+            "left": 267
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(232, 232, 240)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 913.25,
+            "y": 12429.0625,
+            "width": 215,
+            "height": 24,
+            "top": 12429.0625,
+            "right": 1128.25,
+            "bottom": 12453.0625,
+            "left": 913.25
+          }
+        },
+        {
+          "text": "Vertex Solutions (Projetos Customizados e Plataforma)Vertex Education (Formação e Metodolo",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12544.0625,
+            "width": 456,
+            "height": 41,
+            "top": 12544.0625,
+            "right": 1171,
+            "bottom": 12585.0625,
+            "left": 715
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12633.0625,
+            "width": 220,
+            "height": 38,
+            "top": 12633.0625,
+            "right": 935,
+            "bottom": 12671.0625,
+            "left": 715
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 951,
+            "y": 12633.0625,
+            "width": 220,
+            "height": 38,
+            "top": 12633.0625,
+            "right": 1171,
+            "bottom": 12671.0625,
+            "left": 951
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12719.0625,
+            "width": 456,
+            "height": 38,
+            "top": 12719.0625,
+            "right": 1171,
+            "bottom": 12757.0625,
+            "left": 715
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "oklab(0.181511 0.00832684 -0.04153 / 0.4)",
+          "border": "rgb(52, 52, 81)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12805.0625,
+            "width": 456,
+            "height": 78,
+            "top": 12805.0625,
+            "right": 1171,
+            "bottom": 12883.0625,
+            "left": 715
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(0, 240, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(0, 240, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 12917.0625,
+            "width": 13,
+            "height": 16,
+            "top": 12917.0625,
+            "right": 728,
+            "bottom": 12933.0625,
+            "left": 715
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(232, 232, 240)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 337.5,
+            "y": 48,
+            "width": 12,
+            "height": 12,
+            "top": 48,
+            "right": 349.5,
+            "bottom": 60,
+            "left": 337.5
+          }
+        },
+        {
+          "text": "Explorar todas as soluções",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(0, 240, 255)",
+          "font": "\"JetBrains Mono\", monospace",
+          "opacity": "1",
+          "rect": {
+            "x": 64,
+            "y": 3917.5,
+            "width": 247.140625,
+            "height": 44,
+            "top": 3917.5,
+            "right": 311.140625,
+            "bottom": 3961.5,
+            "left": 64
+          }
+        },
+        {
+          "text": "Registrar Interesse",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 715,
+            "y": 13058.0625,
+            "width": 456,
+            "height": 40,
+            "top": 13058.0625,
+            "right": 1171,
+            "bottom": 13098.0625,
+            "left": 715
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": {
+        "text": "Tudo que você precisasaber antes de começar.",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 64,
+          "y": 11502.0625,
+          "width": 1140,
+          "height": 128,
+          "top": 11502.0625,
+          "right": 1204,
+          "bottom": 11630.0625,
+          "left": 64
+        }
+      }
+    },
+    {
+      "route": "/cases",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 4346.875,
+          "top": 0,
+          "right": 1274,
+          "bottom": 4346.875,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Projetos que transformam complexidade em impacto.",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 64,
+          "y": 225,
+          "width": 768,
+          "height": 302.375,
+          "top": 225,
+          "right": 832,
+          "bottom": 527.375,
+          "left": 64
+        }
+      },
+      "inputs": [
+        {
+          "text": "Todas as categoriasCleanTech & Engenharia FotovoltaicaConcessionária & Plataforma Automoti",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 85,
+            "y": 776.375,
+            "width": 360,
+            "height": 44,
+            "top": 776.375,
+            "right": 445,
+            "bottom": 820.375,
+            "left": 85
+          }
+        },
+        {
+          "text": "Todas as tecnologiasAgro SolarAutomação CRMAvantgarde ExperienceBespoke SourcingBlindadosC",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 457,
+            "y": 776.375,
+            "width": 360,
+            "height": 44,
+            "top": 776.375,
+            "right": 817,
+            "bottom": 820.375,
+            "left": 457
+          }
+        },
+        {
+          "text": "Todos os anos20262025",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 829,
+            "y": 776.375,
+            "width": 360,
+            "height": 44,
+            "top": 776.375,
+            "right": 1189,
+            "bottom": 820.375,
+            "left": 829
+          }
+        }
+      ],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/privacidade",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 1170,
+          "top": 0,
+          "right": 1274,
+          "bottom": 1170,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Política de Privacidade",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 213,
+          "y": 141,
+          "width": 848,
+          "height": 40,
+          "top": 141,
+          "right": 1061,
+          "bottom": 181,
+          "left": 213
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/termos",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1274,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1274,
+          "height": 1401.25,
+          "top": 0,
+          "right": 1274,
+          "bottom": 1401.25,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Termos de Serviço",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 213,
+          "y": 141,
+          "width": 848,
+          "height": 40,
+          "top": 141,
+          "right": 1061,
+          "bottom": 181,
+          "left": 213
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/entrar",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Acessar Workspace",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 449,
+          "y": 206.5,
+          "width": 382,
+          "height": 28,
+          "top": 206.5,
+          "right": 831,
+          "bottom": 234.5,
+          "left": 449
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 318.5,
+            "width": 382,
+            "height": 38,
+            "top": 318.5,
+            "right": 831,
+            "bottom": 356.5,
+            "left": 449
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 392.5,
+            "width": 382,
+            "height": 38,
+            "top": 392.5,
+            "right": 831,
+            "bottom": 430.5,
+            "left": 449
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Entrar",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 520.5,
+            "width": 382,
+            "height": 40,
+            "top": 520.5,
+            "right": 831,
+            "bottom": 560.5,
+            "left": 449
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/cadastro",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Criar Conta Gratuita",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 449,
+          "y": 147.5,
+          "width": 382,
+          "height": 28,
+          "top": 147.5,
+          "right": 831,
+          "bottom": 175.5,
+          "left": 449
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 259.5,
+            "width": 382,
+            "height": 38,
+            "top": 259.5,
+            "right": 831,
+            "bottom": 297.5,
+            "left": 449
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 337.5,
+            "width": 382,
+            "height": 38,
+            "top": 337.5,
+            "right": 831,
+            "bottom": 375.5,
+            "left": 449
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 411.5,
+            "width": 382,
+            "height": 38,
+            "top": 411.5,
+            "right": 831,
+            "bottom": 449.5,
+            "left": 449
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(0, 240, 255)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(0, 240, 255)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 473.5,
+            "width": 16,
+            "height": 16,
+            "top": 473.5,
+            "right": 465,
+            "bottom": 489.5,
+            "left": 449
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Criar Conta",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 579.5,
+            "width": 382,
+            "height": 40,
+            "top": 579.5,
+            "right": 831,
+            "bottom": 619.5,
+            "left": 449
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/recuperar",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Recuperar Senha",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 449,
+          "y": 243.5,
+          "width": 382,
+          "height": 28,
+          "top": 243.5,
+          "right": 831,
+          "bottom": 271.5,
+          "left": 449
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(20, 20, 43)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 355.5,
+            "width": 382,
+            "height": 38,
+            "top": 355.5,
+            "right": 831,
+            "bottom": 393.5,
+            "left": 449
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Recuperar Senha",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgb(0, 240, 255)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 449,
+            "y": 483.5,
+            "width": 382,
+            "height": 40,
+            "top": 483.5,
+            "right": 831,
+            "bottom": 523.5,
+            "left": 449
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/os/redefinir-senha",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "Sessão Expirada",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 449,
+          "y": 342,
+          "width": 382,
+          "height": 28,
+          "top": 342,
+          "right": 831,
+          "bottom": 370,
+          "left": 449
+        }
+      },
+      "inputs": [],
+      "primary": [],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    },
+    {
+      "route": "/login",
+      "theme": "dark",
+      "stored": "dark",
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "body": {
+        "text": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgb(5, 5, 16)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 800,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "left": 0
+        }
+      },
+      "heading": {
+        "text": "A engenharia por trás do impacto.",
+        "foreground": "rgb(232, 232, 240)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(232, 232, 240)",
+        "font": "Outfit, \"Outfit Fallback\", system-ui, sans-serif",
+        "opacity": "1",
+        "rect": {
+          "x": 177,
+          "y": 331,
+          "width": 440.890625,
+          "height": 100.78125,
+          "top": 331,
+          "right": 617.890625,
+          "bottom": 431.78125,
+          "left": 177
+        }
+      },
+      "inputs": [
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 714.890625,
+            "y": 331,
+            "width": 388.09375,
+            "height": 44,
+            "top": 331,
+            "right": 1102.984375,
+            "bottom": 375,
+            "left": 714.890625
+          }
+        },
+        {
+          "text": "",
+          "foreground": "rgb(232, 232, 240)",
+          "background": "rgb(15, 15, 36)",
+          "border": "rgb(101, 101, 135)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 714.890625,
+            "y": 419,
+            "width": 388.09375,
+            "height": 44,
+            "top": 419,
+            "right": 1102.984375,
+            "bottom": 463,
+            "left": 714.890625
+          }
+        }
+      ],
+      "primary": [
+        {
+          "text": "Acessar painel",
+          "foreground": "rgb(5, 5, 16)",
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgb(5, 5, 16)",
+          "font": "Inter, \"Inter Fallback\", system-ui, sans-serif",
+          "opacity": "1",
+          "rect": {
+            "x": 714.890625,
+            "y": 495,
+            "width": 388.09375,
+            "height": 38,
+            "top": 495,
+            "right": 1102.984375,
+            "bottom": 533,
+            "left": 714.890625
+          }
+        }
+      ],
+      "reduced": true,
+      "lenis": false,
+      "pinSpacers": 0,
+      "faq": null
+    }
+  ],
+  "interactions": [
+    {
+      "test": "real toggle and reload persistence",
+      "pass": true
+    },
+    {
+      "test": "mobile menu Escape",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

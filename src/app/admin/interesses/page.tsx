@@ -15,8 +15,8 @@ export default async function AdminInteressesPage() {
 
   if (user.role !== 'owner' && user.role !== 'sales') {
     return (
-      <div className="p-8 text-center text-slate-400">
-        <p className="text-lg font-medium text-white mb-2">Acesso Restrito</p>
+      <div className="p-8 text-center text-muted-foreground">
+        <p className="text-lg font-medium text-foreground mb-2">Acesso Restrito</p>
         <p className="text-sm">Esta seção é reservada exclusivamente para gestores comerciais e proprietários.</p>
       </div>
     );

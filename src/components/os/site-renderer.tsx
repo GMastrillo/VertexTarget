@@ -158,7 +158,10 @@ function PreviewBanner(): React.JSX.Element {
 
 export function SiteRenderer({ document, preview = false }: SiteRendererProps): React.JSX.Element {
   const theme = THEME_STYLES[document.themeId] || THEME_STYLES['cyan-dark'];
-  const waLink = contactHref({ whatsapp: document.whatsapp });
+  const waLink = contactHref({
+    whatsapp: document.whatsapp,
+    phoneFormat: document.schemaVersion === 2 ? 'e164' : 'legacy-br',
+  });
   const mailLink = contactHref({ email: document.email });
   const primaryHref = waLink || mailLink || '#contato';
 

@@ -49,13 +49,13 @@ function ModalPreview({ url, color }: { url: string; color: string }) {
   return (
     <div
       className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border"
-      style={{ background: "#0a0a1a", borderColor: `${color}25` }}
+      style={{ background: "var(--card)", borderColor: `${color}25` }}
     >
       {!loaded && (
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{
-            background: `radial-gradient(circle at 50% 40%, ${color}12, #0a0a1a 70%)`,
+            background: `radial-gradient(circle at 50% 40%, ${color}12, var(--card) 70%)`,
           }}
         >
           {!failed && (
@@ -125,7 +125,8 @@ export default function CasesSection() {
   }, [activeCase]);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const ctx = gsap.matchMedia();
+    ctx.add("(prefers-reduced-motion: no-preference)", () => {
       if (titleRef.current) {
         gsap.from(titleRef.current.children, {
           y: 50,
@@ -160,7 +161,7 @@ export default function CasesSection() {
           <p className="body-lg max-w-2xl">{t.cases.subtitle}</p>
           <Link
             href="/cases"
-            className="mt-6 inline-flex min-h-11 items-center gap-3 rounded-xl border border-cyan-300/40 bg-gradient-to-r from-cyan-300 to-violet-400 px-4 py-2.5 text-xs font-mono font-semibold uppercase tracking-wider text-slate-950 shadow-[0_10px_30px_-12px_rgba(0,240,255,.8)] transition-all duration-300 hover:-translate-y-0.5 hover:gap-4 hover:shadow-[0_14px_34px_-12px_rgba(139,92,246,.9)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+            className="mt-6 inline-flex min-h-11 items-center gap-3 rounded-xl border border-primary bg-primary px-4 py-2.5 text-xs font-mono font-semibold uppercase tracking-wider text-primary-foreground shadow-[0_10px_30px_-12px_rgba(0,240,255,.8)] transition-all duration-300 hover:-translate-y-0.5 hover:gap-4 hover:shadow-[0_14px_34px_-12px_rgba(139,92,246,.9)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {t.cases.exploreAll}
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -192,7 +193,7 @@ export default function CasesSection() {
               role="dialog"
               aria-modal="true"
               aria-label={c.title}
-              style={{ background: "rgba(5, 5, 16, 0.88)", backdropFilter: "blur(14px)" }}
+              style={{ background: "var(--overlay)", backdropFilter: "blur(14px)" }}
               onClick={() => setActiveCase(null)}
             >
               <motion.div
@@ -204,7 +205,7 @@ export default function CasesSection() {
                 className="w-full max-w-4xl rounded-2xl border shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto"
                 style={{
                   background: "var(--color-vt-bg-card)",
-                  borderColor: "rgba(255,255,255,0.10)",
+                  borderColor: "var(--border)",
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -270,7 +271,7 @@ export default function CasesSection() {
                       <span
                         className="text-[11px] uppercase font-mono font-semibold tracking-wider px-3 py-1.5 rounded-full border"
                         style={{
-                          color: c.color,
+                          color: "var(--primary)",
                           borderColor: `${c.color}40`,
                           background: `${c.color}10`,
                         }}
@@ -281,7 +282,7 @@ export default function CasesSection() {
                         className="text-xs font-mono px-3 py-1.5 rounded-full border"
                         style={{
                           color: "var(--color-vt-text-dim)",
-                          borderColor: "rgba(255,255,255,0.10)",
+                          borderColor: "var(--border)",
                         }}
                       >
                         {c.year}
@@ -297,7 +298,7 @@ export default function CasesSection() {
                     >
                       {c.title}
                     </h3>
-                    <p className="text-sm sm:text-base font-mono" style={{ color: `${c.color}cc` }}>
+                    <p className="text-sm sm:text-base font-mono" style={{ color: "var(--primary)" }}>
                       {c.tagline}
                     </p>
                   </div>
@@ -315,7 +316,7 @@ export default function CasesSection() {
                         className="w-2.5 h-2.5 rounded-full animate-pulse flex-shrink-0"
                         style={{ background: c.color }}
                       />
-                      <span className="text-sm font-mono font-medium text-white">{c.metrics}</span>
+                      <span className="text-sm font-mono font-medium text-foreground">{c.metrics}</span>
                     </div>
                     <span
                       className="text-[10px] font-mono px-2.5 py-1 rounded-full whitespace-nowrap"
@@ -360,7 +361,7 @@ export default function CasesSection() {
                           className="px-3 py-1.5 rounded-lg text-xs font-medium"
                           style={{
                             background: `${c.color}12`,
-                            color: c.color,
+                            color: "var(--primary)",
                             border: `1px solid ${c.color}30`,
                           }}
                         >
@@ -372,7 +373,7 @@ export default function CasesSection() {
 
                   {/* Footer note + study CTA */}
                   <div
-                    className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                    className="pt-6 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                   >
                     <span className="text-xs font-mono" style={{ color: "var(--color-vt-text-dim)" }}>
                       {t.cases.deployNote}
@@ -383,7 +384,7 @@ export default function CasesSection() {
                       style={{
                         background: `${c.color}12`,
                         border: `1px solid ${c.color}40`,
-                        color: c.color,
+                        color: "var(--primary)",
                       }}
                     >
                       {t.cases.viewStudy}

@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useT } from "@/providers/LanguageProvider";
+import { preferredScrollBehavior } from "@/lib/motion";
 
 interface Command {
   id: string;
@@ -43,7 +44,7 @@ export default function CommandPalette() {
   const navigate = useCallback((href: string) => {
     setOpen(false);
     const target = document.querySelector(href);
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+    if (target) target.scrollIntoView({ behavior: preferredScrollBehavior() });
   }, []);
 
   // Global shortcut: ⌘K / Ctrl+K
@@ -104,7 +105,7 @@ export default function CommandPalette() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
             className="fixed inset-0 z-[210] flex items-start justify-center pt-[18vh] px-4"
-            style={{ background: "rgba(5, 5, 16, 0.72)", backdropFilter: "blur(10px)" }}
+            style={{ background: "var(--overlay)", backdropFilter: "blur(10px)" }}
             onClick={() => setOpen(false)}
           >
             <motion.div

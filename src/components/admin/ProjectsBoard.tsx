@@ -6,8 +6,8 @@ import type { Project, ProjectStage } from "@/lib/admin-data";
 
 const columns: ProjectStage[] = ["Backlog", "Design", "Desenvolvimento", "QA", "Entregue"];
 const stageToApi: Record<ProjectStage, string> = { Backlog: "backlog", Design: "design", Desenvolvimento: "development", QA: "qa", Entregue: "delivered" };
-const colors: Record<ProjectStage, string> = { Backlog: "bg-slate-400", Design: "bg-violet-400", Desenvolvimento: "bg-cyan-300", QA: "bg-orange-300", Entregue: "bg-emerald-400" };
-const priorityTone: Record<string, string> = { Alta: "text-rose-300", Média: "text-orange-300", Baixa: "text-slate-500" };
+const colors: Record<ProjectStage, string> = { Backlog: "bg-muted", Design: "bg-accent", Desenvolvimento: "bg-primary", QA: "bg-warm", Entregue: "bg-success" };
+const priorityTone: Record<string, string> = { Alta: "text-destructive", Média: "text-warm", Baixa: "text-muted-foreground" };
 
 export function ProjectsBoard({ initialProjects, clients }: { initialProjects: Project[]; clients: { id: string; name: string }[] }) {
   const [projects, setProjects] = useState(initialProjects);
@@ -71,34 +71,34 @@ export function ProjectsBoard({ initialProjects, clients }: { initialProjects: P
   return (
     <div>
       <div className="flex items-center justify-between gap-3">
-        <p className="text-xs text-slate-500">{projects.length} projetos no pipeline</p>
+        <p className="text-xs text-muted-foreground">{projects.length} projetos no pipeline</p>
         <button onClick={() => setOpen((v) => !v)} className="admin-primary-btn"><Plus size={15} /> Novo projeto</button>
       </div>
       {open && (
-        <form onSubmit={createProject} className="mt-4 grid gap-3 rounded-xl border border-white/[.08] bg-white/[.02] p-4 sm:grid-cols-2 lg:grid-cols-5">
-          <label className="text-xs text-slate-400 sm:col-span-2">Título
+        <form onSubmit={createProject} className="mt-4 grid gap-3 rounded-xl border border-border bg-muted p-4 sm:grid-cols-2 lg:grid-cols-5">
+          <label className="text-xs text-muted-foreground sm:col-span-2">Título
             <input required value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ex: Landing Page + Agendamento" className="admin-input mt-1" />
           </label>
-          <label className="text-xs text-slate-400">Cliente
+          <label className="text-xs text-muted-foreground">Cliente
             <select value={clientId} onChange={(e) => setClientId(e.target.value)} className="admin-input mt-1">
               <option value="">Sem cliente</option>
               {clients.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </label>
-          <label className="text-xs text-slate-400">Tipo
+          <label className="text-xs text-muted-foreground">Tipo
             <input value={type} onChange={(e) => setType(e.target.value)} placeholder="Next.js / IA" className="admin-input mt-1" />
           </label>
-          <label className="text-xs text-slate-400">Prazo
+          <label className="text-xs text-muted-foreground">Prazo
             <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="admin-input mt-1" />
           </label>
-          <label className="text-xs text-slate-400">Prioridade
+          <label className="text-xs text-muted-foreground">Prioridade
             <select value={priority} onChange={(e) => setPriority(e.target.value)} className="admin-input mt-1">
               <option value="high">Alta</option>
               <option value="medium">Média</option>
               <option value="low">Baixa</option>
             </select>
           </label>
-          {error && <p className="text-xs text-rose-300 sm:col-span-2 lg:col-span-5">{error}</p>}
+          {error && <p className="text-xs text-destructive sm:col-span-2 lg:col-span-5">{error}</p>}
           <div className="flex gap-2 sm:col-span-2 lg:col-span-5">
             <button disabled={saving} className="admin-primary-btn">{saving ? "Criando..." : "Criar projeto"}</button>
             <button type="button" onClick={() => setOpen(false)} className="admin-secondary-btn">Cancelar</button>
@@ -112,29 +112,29 @@ export function ProjectsBoard({ initialProjects, clients }: { initialProjects: P
               <div className="flex items-center gap-2">
                 <i className={`h-2 w-2 rounded-full ${colors[column]}`} />
                 <h2 className="text-sm font-medium">{column}</h2>
-                <span className="rounded-md bg-white/[.07] px-1.5 py-0.5 text-[10px] text-slate-400">{projects.filter((p) => p.stage === column).length}</span>
+                <span className="rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">{projects.filter((p) => p.stage === column).length}</span>
               </div>
             </div>
             <div className="space-y-3">
               {projects.filter((p) => p.stage === column).map((project) => (
                 <article key={project.id} className="kanban-card">
                   <div className="mb-3 flex justify-between gap-2">
-                    <span className="rounded-md border border-white/[.08] px-2 py-1 text-[10px] text-slate-400">{project.type}</span>
-                    <span className={`text-[10px] ${priorityTone[project.priority] ?? "text-slate-500"}`}>{project.priority}</span>
+                    <span className="rounded-md border border-border px-2 py-1 text-[10px] text-muted-foreground">{project.type}</span>
+                    <span className={`text-[10px] ${priorityTone[project.priority] ?? "text-muted-foreground"}`}>{project.priority}</span>
                   </div>
                   <h3 className="text-sm font-medium leading-5">{project.title}</h3>
-                  <p className="mt-1 text-xs text-slate-500">{project.client}</p>
-                  <div className="mt-4 flex items-center justify-between border-t border-white/[.06] pt-3">
-                    <span className="text-[10px] text-slate-500">Prazo {project.due}</span>
+                  <p className="mt-1 text-xs text-muted-foreground">{project.client}</p>
+                  <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+                    <span className="text-[10px] text-muted-foreground">Prazo {project.due}</span>
                     <select
                       aria-label="Mover projeto de etapa"
                       value={project.stage}
                       onChange={(e) => move(project.id, e.target.value as ProjectStage)}
-                      className="rounded-md border border-white/[.08] bg-[#0a0a1a] px-1.5 py-1 text-[10px] text-slate-300"
+                      className="rounded-md border border-border bg-card px-1.5 py-1 text-[10px] text-foreground"
                     >
                       {columns.map((c) => <option key={c} value={c}>{c}</option>)}
                     </select>
-                    <button onClick={() => remove(project.id)} aria-label="Remover projeto" className="admin-icon-btn"><Trash2 size={13} className="text-rose-300/70" /></button>
+                    <button onClick={() => remove(project.id)} aria-label="Remover projeto" className="admin-icon-btn"><Trash2 size={13} className="text-destructive" /></button>
                   </div>
                 </article>
               ))}

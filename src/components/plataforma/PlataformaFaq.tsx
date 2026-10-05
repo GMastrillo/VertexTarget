@@ -47,16 +47,16 @@ export default function PlataformaFaq() {
     <section className="relative py-24 px-4 scroll-mt-20" id="faq">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-cyan-400 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-border text-xs font-mono text-primary mb-4">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Perguntas Frequentes</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
             Tire suas dúvidas antes de começar
           </h2>
 
-          <p className="mt-3 text-sm text-white/60">
+          <p className="mt-3 text-sm text-muted-foreground">
             Transparência total sobre a operação, tecnologia e retorno do seu investimento.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function PlataformaFaq() {
             return (
               <div
                 key={index}
-                className="rounded-2xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all overflow-hidden"
+                className="rounded-2xl bg-muted border border-border hover:border-border transition-all overflow-hidden"
               >
                 <button
                   type="button"
@@ -75,12 +75,12 @@ export default function PlataformaFaq() {
                   className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm sm:text-base font-bold text-white tracking-tight">
+                  <span className="text-sm sm:text-base font-bold text-foreground tracking-tight">
                     {item.q}
                   </span>
                   <div
-                    className={`w-7 h-7 rounded-full flex items-center justify-center bg-white/[0.06] text-white shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-45 text-cyan-400" : ""
+                    className={`w-7 h-7 rounded-full flex items-center justify-center bg-muted text-foreground shrink-0 transition-transform duration-300 ${
+                      isOpen ? "rotate-45 text-primary" : ""
                     }`}
                   >
                     <Plus className="w-4 h-4" />
@@ -95,7 +95,7 @@ export default function PlataformaFaq() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-white/60 leading-relaxed border-t border-white/[0.04]">
+                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border">
                         {item.a}
                       </div>
                     </motion.div>

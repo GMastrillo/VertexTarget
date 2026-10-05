@@ -37,14 +37,15 @@ export function AuthNameInput({
 }) {
   return (
     <div className="space-y-1">
-      <label className="text-xs font-medium text-slate-300">Nome Completo</label>
+      <label htmlFor="auth-name" className="text-xs font-medium text-foreground">Nome Completo</label>
       <input
+        id="auth-name"
         type="text"
         required
         autoComplete="name"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
+        className="w-full rounded-lg border border-input bg-muted px-3.5 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
         placeholder="Seu nome"
       />
     </div>
@@ -60,14 +61,15 @@ export function AuthEmailInput({
 }) {
   return (
     <div className="space-y-1">
-      <label className="text-xs font-medium text-slate-300">E-mail</label>
+      <label htmlFor="auth-email" className="text-xs font-medium text-foreground">E-mail</label>
       <input
+        id="auth-email"
         type="email"
         required
         autoComplete="email"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
+        className="w-full rounded-lg border border-input bg-muted px-3.5 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
         placeholder="seu@email.com"
       />
     </div>
@@ -90,20 +92,21 @@ export function AuthPasswordInput({
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between">
-        <label className="text-xs font-medium text-slate-300">{label}</label>
+        <label htmlFor="auth-password" className="text-xs font-medium text-foreground">{label}</label>
         {mode === 'login' && (
-          <Link href="/os/recuperar" className="text-xs text-cyan-400 hover:underline">
+          <Link href="/os/recuperar" className="text-xs text-primary hover:underline">
             Esqueceu?
           </Link>
         )}
       </div>
       <input
+        id="auth-password"
         type="password"
         required
         autoComplete={autoComp}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
+        className="w-full rounded-lg border border-input bg-muted px-3.5 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
         placeholder="••••••••••••"
       />
     </div>
@@ -119,14 +122,15 @@ export function AuthConfirmPasswordInput({
 }) {
   return (
     <div className="space-y-1">
-      <label className="text-xs font-medium text-slate-300">Confirmar Nova Senha</label>
+      <label htmlFor="auth-confirm-password" className="text-xs font-medium text-foreground">Confirmar Nova Senha</label>
       <input
+        id="auth-confirm-password"
         type="password"
         required
         autoComplete="new-password"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
+        className="w-full rounded-lg border border-input bg-muted px-3.5 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
         placeholder="••••••••••••"
       />
     </div>
@@ -147,15 +151,15 @@ export function AuthTermsCheckbox({
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-1 h-4 w-4 rounded border-white/[.2] bg-white/[.04] text-cyan-400 focus:ring-cyan-400"
+        className="mt-1 h-4 w-4 rounded border-input bg-muted text-primary focus:ring-ring"
       />
-      <label htmlFor="terms" className="text-xs text-slate-400 leading-relaxed">
+      <label htmlFor="terms" className="text-xs text-muted-foreground leading-relaxed">
         Concordo com os{' '}
-        <Link href="/termos" className="text-cyan-400 hover:underline" target="_blank">
+        <Link href="/termos" className="text-primary hover:underline" target="_blank">
           Termos de Uso
         </Link>{' '}
         e a{' '}
-        <Link href="/privacidade" className="text-cyan-400 hover:underline" target="_blank">
+        <Link href="/privacidade" className="text-primary hover:underline" target="_blank">
           Política de Privacidade
         </Link>.
       </label>

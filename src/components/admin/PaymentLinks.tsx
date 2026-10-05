@@ -32,7 +32,7 @@ export function PaymentLinks({ initialLinks, initialError = "", clients, deals, 
       });
       const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error ?? "Não foi possível criar o link.");
-      setLinks((previous) => [body.link, ...previous]);
+      setLinks((previous) => [body.link, ...previous.filter((l) => l.id !== body.link.id)]);
       setSuccess("Payment Link criado com sucesso.");
       setOpen(false);
     } catch (cause) {
@@ -46,13 +46,13 @@ export function PaymentLinks({ initialLinks, initialError = "", clients, deals, 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="admin-eyebrow">Stripe / cobrança</p>
-          <h2 className="font-[var(--font-heading)] text-lg">Payment Links</h2>
-          <p className="mt-1 text-xs text-slate-500">Crie links avulsos ou recorrentes com preço definido no servidor.</p>
+          <h2 className="font-heading text-lg">Payment Links</h2>
+          <p className="mt-1 text-xs text-muted-foreground">Crie links avulsos ou recorrentes com preço definido no servidor.</p>
         </div>
         {canManage && !blocked && <button onClick={() => { setOpen((value) => !value); setError(""); }} className="admin-primary-btn"><Plus size={15}/> Criar link</button>}
       </div>
-      {blocked && <p role="alert" className="mt-4 rounded-lg border border-amber-300/20 bg-amber-300/[.05] p-3 text-xs text-amber-200">{error || initialError}</p>}
-      {success && <p className="mt-4 rounded-lg border border-emerald-300/20 bg-emerald-300/[.05] p-3 text-xs text-emerald-200">{success}</p>}
+      {blocked && <p role="alert" className="mt-4 rounded-lg border border-warning/20 bg-warning/5 p-3 text-xs text-warning">{error || initialError}</p>}
+      {success && <p className="mt-4 rounded-lg border border-success/20 bg-success/5 p-3 text-xs text-success">{success}</p>}
       {!blocked && open && <PaymentLinkForm clients={clients} deals={deals} onSubmit={create} onCancel={() => setOpen(false)} />}
       <PaymentLinkList links={links}/>
     </div>

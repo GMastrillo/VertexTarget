@@ -1,0 +1,11 @@
+{
+  "checks": [
+    {
+      "test": "Tab/Enter theme toggle and focus",
+      "label": "Ativar modo claro",
+      "ring": "rgb(0, 240, 255)",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

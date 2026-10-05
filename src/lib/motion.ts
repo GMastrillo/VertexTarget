@@ -31,3 +31,8 @@ export const motionTokens = {
 } as const;
 
 export type MotionTokens = typeof motionTokens;
+
+/** Called from browser events/effects, never during server rendering. */
+export function preferredScrollBehavior(): ScrollBehavior {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+}

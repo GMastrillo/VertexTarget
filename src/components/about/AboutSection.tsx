@@ -28,8 +28,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* Visual accents per CEO (colors don't translate; copy comes from i18n) */
 const CEO_ACCENTS = [
-  { accent: "#00f0ff", accentRgb: "0, 240, 255" },
-  { accent: "#8b5cf6", accentRgb: "139, 92, 246" },
+  { accent: "var(--primary)", accentRgb: "0, 240, 255" },
+  { accent: "var(--accent)", accentRgb: "139, 92, 246" },
 ];
 
 export default function AboutSection() {
@@ -40,7 +40,8 @@ export default function AboutSection() {
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const ctx = gsap.matchMedia();
+    ctx.add("(prefers-reduced-motion: no-preference)", () => {
       if (titleRef.current) {
         gsap.fromTo(
           titleRef.current.children,
@@ -225,14 +226,14 @@ export default function AboutSection() {
               </p>
 
               {/* Tags */}
-              <div className="pt-6 border-t border-white/[0.06]">
+              <div className="pt-6 border-t border-border">
                 <div className="flex flex-wrap gap-2">
                   {ceo.tags.map((tag) => (
                     <span
                       key={tag}
                       className="px-2.5 py-1 rounded-md text-[11px] font-mono"
                       style={{
-                        color: `${accent}dd`,
+                        color: accent,
                         border: `1px solid rgba(${accentRgb}, 0.20)`,
                         background: `rgba(${accentRgb}, 0.05)`,
                       }}

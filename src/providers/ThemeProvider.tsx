@@ -2,6 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ReactNode } from "react";
+import { MotionConfig } from "motion/react";
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -15,7 +16,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
       enableSystem={false}
       disableTransitionOnChange
     >
-      {children}
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
     </NextThemesProvider>
   );
 }

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import ThemeToggle from '@/components/layout/ThemeToggle';
 import type { OsWorkspace } from '@/lib/os/types';
 
 interface OsShellProps {
@@ -28,17 +29,17 @@ export function OsShell({ workspace, userEmail, children }: OsShellProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#050510] text-[#e8e8f0]">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Top Navbar */}
-      <header className="border-b border-white/[.08] bg-[#070716]/90 backdrop-blur-md sticky top-0 z-30">
+      <header className="border-b border-border bg-popover backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <Link href="/os" className="flex items-center gap-2.5">
-              <span className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-violet-500 text-xs font-black text-[#050510]">
+              <span className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary text-xs font-black text-primary-foreground">
                 VT
               </span>
-              <span className="font-[var(--font-heading)] text-lg font-bold tracking-tight">
-                Vertex<span className="text-cyan-300">OS</span>
+              <span className="font-heading text-lg font-bold tracking-tight">
+                Vertex<span className="text-primary">OS</span>
               </span>
             </Link>
 
@@ -49,8 +50,8 @@ export function OsShell({ workspace, userEmail, children }: OsShellProps) {
                   href={item.href}
                   className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                     item.active
-                      ? 'bg-white/[.08] text-white'
-                      : 'text-slate-400 hover:text-white hover:bg-white/[.04]'
+                      ? 'bg-muted text-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                   }`}
                 >
                   {item.label}
@@ -60,21 +61,29 @@ export function OsShell({ workspace, userEmail, children }: OsShellProps) {
           </div>
 
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <div className="hidden md:block text-right text-xs">
-              <p className="font-medium text-white truncate max-w-[160px]">{workspace.name}</p>
-              <p className="text-[11px] text-slate-500">{userEmail}</p>
+              <p className="font-medium text-foreground truncate max-w-[160px]">{workspace.name}</p>
+              <p className="text-[11px] text-muted-foreground">{userEmail}</p>
             </div>
 
             <Button
               variant="outline"
               size="sm"
               onClick={handleLogout}
-              className="text-xs border-white/[.1] hover:bg-white/[.04] text-slate-300"
+              className="text-xs border-border hover:bg-muted text-foreground"
             >
               Sair
             </Button>
           </div>
         </div>
+        <nav className="flex gap-1 overflow-x-auto border-t border-border px-4 py-2 sm:hidden" aria-label="Navegação do workspace no celular">
+          {navItems.map((item) => (
+            <Link key={item.href} href={item.href} aria-current={item.active ? 'page' : undefined} className={`shrink-0 rounded-lg px-3 py-2 text-xs ${item.active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted'}`}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
       </header>
 
       {/* Main Content Area */}

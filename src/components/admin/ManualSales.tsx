@@ -87,7 +87,7 @@ export function ManualSales({ initialSales, canManage }: { initialSales: ManualS
       <div className="flex items-center justify-between gap-3">
         <div>
           <h2 className="text-sm font-medium">Vendas manuais (fora do Stripe)</h2>
-          <p className="mt-1 text-xs text-slate-500">PIX, dinheiro e transferências registrados fora do Stripe · total {brl(total)}</p>
+          <p className="mt-1 text-xs text-muted-foreground">PIX, dinheiro e transferências registrados fora do Stripe · total {brl(total)}</p>
         </div>
         {canManage && (
           <button onClick={() => setOpen((v) => !v)} className="admin-primary-btn">
@@ -96,14 +96,14 @@ export function ManualSales({ initialSales, canManage }: { initialSales: ManualS
         )}
       </div>
       {open && (
-        <form onSubmit={submit} className="mt-4 grid gap-3 rounded-xl border border-white/[.08] bg-white/[.02] p-4 sm:grid-cols-2 lg:grid-cols-5">
-          <label className="text-xs text-slate-400">Cliente
+        <form onSubmit={submit} className="mt-4 grid gap-3 rounded-xl border border-border bg-muted p-4 sm:grid-cols-2 lg:grid-cols-5">
+          <label className="text-xs text-muted-foreground">Cliente
             <input required value={clientName} onChange={(e) => setClientName(e.target.value)} placeholder="Nome do cliente" className="admin-input mt-1" />
           </label>
-          <label className="text-xs text-slate-400">Valor
+          <label className="text-xs text-muted-foreground">Valor
             <input required value={value} onChange={(e) => setValue(e.target.value)} placeholder="R$ 1.500,00" className="admin-input mt-1" />
           </label>
-          <label className="text-xs text-slate-400">Forma
+          <label className="text-xs text-muted-foreground">Forma
             <select value={method} onChange={(e) => setMethod(e.target.value)} className="admin-input mt-1">
               <option value="pix">PIX</option>
               <option value="cash">Dinheiro</option>
@@ -111,13 +111,13 @@ export function ManualSales({ initialSales, canManage }: { initialSales: ManualS
               <option value="other">Outro</option>
             </select>
           </label>
-          <label className="text-xs text-slate-400">Data
+          <label className="text-xs text-muted-foreground">Data
             <input type="date" value={soldAt} onChange={(e) => setSoldAt(e.target.value)} className="admin-input mt-1" />
           </label>
-          <label className="text-xs text-slate-400">Descrição
+          <label className="text-xs text-muted-foreground">Descrição
             <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Opcional" className="admin-input mt-1" />
           </label>
-          {error && <p className="text-xs text-rose-300 sm:col-span-2 lg:col-span-5">{error}</p>}
+          {error && <p className="text-xs text-destructive sm:col-span-2 lg:col-span-5">{error}</p>}
           <div className="flex gap-2 sm:col-span-2 lg:col-span-5">
             <button disabled={saving} className="admin-primary-btn">{saving ? "Salvando..." : "Salvar venda"}</button>
             <button type="button" onClick={() => setOpen(false)} className="admin-secondary-btn">Cancelar</button>
@@ -131,21 +131,21 @@ export function ManualSales({ initialSales, canManage }: { initialSales: ManualS
             <tbody>
               {sales.map((s) => (
                 <tr key={s.id}>
-                  <td className="font-medium text-slate-200">{s.clientName}</td>
-                  <td className="text-slate-400">{s.description || "—"}</td>
-                  <td className="text-slate-400">{new Date(s.soldAt + "T00:00:00").toLocaleDateString("pt-BR")}</td>
+                  <td className="font-medium text-foreground">{s.clientName}</td>
+                  <td className="text-muted-foreground">{s.description || "—"}</td>
+                  <td className="text-muted-foreground">{new Date(s.soldAt + "T00:00:00").toLocaleDateString("pt-BR")}</td>
                   <td>{METHOD_LABEL[s.method] ?? s.method}</td>
-                  <td className="text-right font-medium text-slate-200">{brl(s.amountCents)}</td>
+                  <td className="text-right font-medium text-foreground">{brl(s.amountCents)}</td>
                   {canManage && (
                     <td className="text-right">
-                      <button onClick={() => remove(s.id)} aria-label="Remover venda" className="admin-icon-btn"><Trash2 size={14} className="text-rose-300" /></button>
+                      <button onClick={() => remove(s.id)} aria-label="Remover venda" className="admin-icon-btn"><Trash2 size={14} className="text-destructive" /></button>
                     </td>
                   )}
                 </tr>
               ))}
               <tr>
-                <td colSpan={4} className="text-right text-xs uppercase tracking-wider text-slate-500">Total manual</td>
-                <td className="text-right font-semibold text-emerald-300">{brl(total)}</td>
+                <td colSpan={4} className="text-right text-xs uppercase tracking-wider text-muted-foreground">Total manual</td>
+                <td className="text-right font-semibold text-success">{brl(total)}</td>
                 {canManage && <td />}
               </tr>
             </tbody>

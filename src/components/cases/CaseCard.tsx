@@ -96,7 +96,8 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
   useEffect(() => {
     if (!cardRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const ctx = gsap.matchMedia();
+    ctx.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.from(cardRef.current, {
         y: 60,
         opacity: 0,
@@ -108,7 +109,7 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
           start: "top 85%",
         },
       });
-    });
+    }, cardRef);
 
     return () => ctx.revert();
   }, [index]);
@@ -170,7 +171,7 @@ export default function CaseCard({ caseStudy, index, onExpand }: CaseCardProps) 
               className="text-xs font-mono px-2.5 py-1.5 rounded-full border"
               style={{
                 borderColor: "rgba(255,255,255,0.12)",
-                color: "var(--color-vt-text-muted)",
+                color: "rgba(255,255,255,0.75)",
                 background: "rgba(5, 5, 16, 0.65)",
                 backdropFilter: "blur(8px)",
               }}

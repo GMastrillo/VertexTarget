@@ -28,7 +28,7 @@ export default function PlataformaClientShell({ children }: PlataformaClientShel
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Abrir conversa no WhatsApp"
-          className="w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black flex items-center justify-center shadow-[0_10px_30px_rgba(16,185,129,0.5)] transition-all hover:scale-110 active:scale-95"
+          className="w-14 h-14 rounded-full bg-success hover:brightness-110 text-primary-foreground flex items-center justify-center shadow-[0_10px_30px_rgba(16,185,129,0.5)] transition-all hover:scale-110 active:scale-95"
         >
           <MessageCircle className="w-7 h-7 fill-current" />
         </a>

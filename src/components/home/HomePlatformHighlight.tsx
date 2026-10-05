@@ -19,12 +19,12 @@ export default function HomePlatformHighlight() {
       />
 
       <div className="section-inner max-w-6xl mx-auto px-4 text-center relative z-10 mb-8">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-xs font-mono text-cyan-400 mb-4">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-mono text-primary mb-4">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Vertex OS · Engine de Alta Conversão</span>
         </div>
 
-        <h2 className="heading-lg text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h2 className="heading-lg text-3xl sm:text-5xl font-black text-foreground tracking-tight">
           Tecnologia de estúdio para{" "}
           <span className="gradient-text">qualquer ramo ou escala</span>
         </h2>
@@ -39,7 +39,7 @@ export default function HomePlatformHighlight() {
         <div className="mt-6 flex justify-center">
           <Link
             href="/plataforma"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/[0.08] hover:bg-cyan-400 hover:text-black text-white border border-cyan-400/40 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.25)] hover:scale-105"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground text-foreground border border-primary/40 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.25)] hover:scale-105"
           >
             <span>Conhecer a Plataforma Completa</span>
             <ArrowRight className="w-4 h-4" />

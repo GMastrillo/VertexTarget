@@ -1,4 +1,31 @@
-export function parseCurrencyToCents(value: string): number {
+import type { Locale } from "./i18n/routing.ts";
+import type { BaseCurrency, Money } from "./finance/types.ts";
+import { formatMoney, parseBaseAmount } from "./finance/money.ts";
+
+export { formatMoney, parseBaseAmount };
+
+export function formatMoneyAmount(
+  amountCents: number,
+  currency: string,
+  locale: Locale = "pt-BR"
+): string {
+  const money: Money = {
+    amountMinor: amountCents,
+    currency: currency.toLowerCase(),
+  };
+  return formatMoney(money, locale);
+}
+
+export function parseCurrencyToCents(
+  value: string,
+  locale: Locale = "pt-BR",
+  currency: BaseCurrency = "brl"
+): number {
+  const result = parseBaseAmount(value, locale, currency);
+  if (result.ok) {
+    return result.amountMinor;
+  }
+  // Fallback for legacy input only if it parses cleanly as numbers
   const cleaned = value.trim().replace(/[^0-9,.-]/g, "");
   if (!cleaned) return 0;
   const lastComma = cleaned.lastIndexOf(",");

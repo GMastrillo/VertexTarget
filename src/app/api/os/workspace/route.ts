@@ -7,28 +7,28 @@ import {
   updateWorkspace,
   deleteWorkspaceAfterReauthentication,
 } from '@/lib/os/workspace-repository';
-import type { Journey } from '@/lib/os/types';
+import { parseWorkspaceInput } from '@/lib/os/workspace-validation';
 
 export async function POST(request: Request): Promise<NextResponse> {
   const config = getOsConfig();
   try {
     requireCanonicalOrigin(request, config.appUrl);
-    const body = (await readLimitedJson(request, 8192)) as {
-      name: string;
-      journey: Journey;
-      noticeVersion?: string;
-      termsAccepted?: boolean;
-    };
+    const rawBody = await readLimitedJson(request, 8192);
+    const parsed = parseWorkspaceInput(rawBody, 'create');
 
-    if (!body?.name || !body?.journey || body.termsAccepted !== true) {
-      return NextResponse.json({ error: 'Dados de workspace incompletos' }, { status: 400 });
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { error: 'Dados de workspace inválidos', code: parsed.code },
+        { status: 400 }
+      );
     }
 
     const workspace = await ensureWorkspace({
-      name: body.name,
-      journey: body.journey,
-      noticeVersion: body.noticeVersion || '2026-10-02',
+      name: parsed.value.name,
+      journey: parsed.value.journey,
+      noticeVersion: parsed.value.noticeVersion || '2026-10-02',
       termsAccepted: true,
+      regionalPreferences: parsed.value.regionalPreferences,
     });
 
     return NextResponse.json({ ok: true, workspace }, { status: 201 });
@@ -45,18 +45,20 @@ export async function PUT(request: Request): Promise<NextResponse> {
   const config = getOsConfig();
   try {
     requireCanonicalOrigin(request, config.appUrl);
-    const body = (await readLimitedJson(request, 8192)) as {
-      name: string;
-      journey: Journey;
-    };
+    const rawBody = await readLimitedJson(request, 8192);
+    const parsed = parseWorkspaceInput(rawBody, 'update');
 
-    if (!body?.name || !body?.journey) {
-      return NextResponse.json({ error: 'Dados para atualização incompletos' }, { status: 400 });
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { error: 'Dados para atualização inválidos', code: parsed.code },
+        { status: 400 }
+      );
     }
 
     const workspace = await updateWorkspace({
-      name: body.name,
-      journey: body.journey,
+      name: parsed.value.name,
+      journey: parsed.value.journey,
+      regionalPreferences: parsed.value.regionalPreferences,
     });
 
     return NextResponse.json({ ok: true, workspace }, { status: 200 });

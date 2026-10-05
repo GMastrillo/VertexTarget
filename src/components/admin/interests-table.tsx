@@ -20,12 +20,12 @@ export function InterestsTable({ initialInterests }: InterestsTableProps) {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="text-xs uppercase tracking-wider text-slate-400">Filtrar por jornada:</span>
-          <div className="flex rounded-lg border border-white/[.08] bg-white/[.02] p-1">
+          <span className="text-xs uppercase tracking-wider text-muted-foreground">Filtrar por jornada:</span>
+          <div className="flex rounded-lg border border-border bg-muted p-1">
             <button
               onClick={() => setFilter('all')}
               className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
-                filter === 'all' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-400 hover:text-white'
+                filter === 'all' ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               Todos ({interests.length})
@@ -33,7 +33,7 @@ export function InterestsTable({ initialInterests }: InterestsTableProps) {
             <button
               onClick={() => setFilter('business')}
               className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
-                filter === 'business' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-400 hover:text-white'
+                filter === 'business' ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               Empresas
@@ -41,7 +41,7 @@ export function InterestsTable({ initialInterests }: InterestsTableProps) {
             <button
               onClick={() => setFilter('professional')}
               className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
-                filter === 'professional' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-400 hover:text-white'
+                filter === 'professional' ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               Profissionais
@@ -50,9 +50,9 @@ export function InterestsTable({ initialInterests }: InterestsTableProps) {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-white/[.08] bg-[#0a0a1a]">
-        <table className="w-full text-left text-sm text-slate-300" aria-label="Lista de manifestações de interesse">
-          <thead className="border-b border-white/[.08] bg-white/[.02] text-xs uppercase tracking-wider text-slate-400">
+      <div className="overflow-x-auto rounded-xl border border-border bg-card">
+        <table className="w-full text-left text-sm text-foreground" aria-label="Lista de manifestações de interesse">
+          <thead className="border-b border-border bg-muted text-xs uppercase tracking-wider text-muted-foreground">
             <tr>
               <th scope="col" className="px-4 py-3 font-medium">Data</th>
               <th scope="col" className="px-4 py-3 font-medium">Nome / Contato</th>
@@ -63,10 +63,10 @@ export function InterestsTable({ initialInterests }: InterestsTableProps) {
               <th scope="col" className="px-4 py-3 font-medium">Consentimento</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/[.04]">
+          <tbody className="divide-y divide-border">
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-sm text-slate-500">
+                <td colSpan={7} className="px-4 py-8 text-center text-sm text-muted-foreground">
                   Nenhuma manifestação de interesse encontrada.
                 </td>
               </tr>
@@ -81,12 +81,12 @@ export function InterestsTable({ initialInterests }: InterestsTableProps) {
                 });
 
                 return (
-                  <tr key={item.id} className="hover:bg-white/[.02]">
-                    <td className="whitespace-nowrap px-4 py-3 text-xs text-slate-400">{dateStr}</td>
+                  <tr key={item.id} className="hover:bg-muted">
+                    <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">{dateStr}</td>
                     <td className="px-4 py-3">
-                      <p className="font-medium text-white">{item.name}</p>
-                      <p className="text-xs text-slate-400">{item.email}</p>
-                      <p className="text-xs text-cyan-400">{item.whatsapp}</p>
+                      <p className="font-medium text-foreground">{item.name}</p>
+                      <p className="text-xs text-muted-foreground">{item.email}</p>
+                      <p className="text-xs text-primary">{item.whatsapp}</p>
                     </td>
                     <td className="whitespace-nowrap px-4 py-3">
                       <span className={`inline-flex rounded-full px-2 py-0.5 text-[11px] font-medium ${
@@ -100,21 +100,21 @@ export function InterestsTable({ initialInterests }: InterestsTableProps) {
                     <td className="whitespace-nowrap px-4 py-3 text-xs">
                       <span className="capitalize">{item.interest}</span>
                     </td>
-                    <td className="max-w-xs px-4 py-3 text-xs text-slate-300">
+                    <td className="max-w-xs px-4 py-3 text-xs text-foreground">
                       {item.message ? (
                         <p className="truncate" title={item.message}>{item.message}</p>
                       ) : (
-                        <span className="text-slate-600">—</span>
+                        <span className="text-muted-foreground">—</span>
                       )}
                     </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-xs text-slate-400">
+                    <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">
                       {item.source}
                     </td>
                     <td className="whitespace-nowrap px-4 py-3 text-xs">
                       {item.marketingConsent ? (
-                        <span className="text-emerald-400">Sim ({item.noticeVersion})</span>
+                        <span className="text-success">Sim ({item.noticeVersion})</span>
                       ) : (
-                        <span className="text-slate-500">Não</span>
+                        <span className="text-muted-foreground">Não</span>
                       )}
                     </td>
                   </tr>

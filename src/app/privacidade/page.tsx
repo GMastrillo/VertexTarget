@@ -9,13 +9,13 @@ export const metadata: Metadata = {
 
 export default function PrivacidadePage(): React.JSX.Element {
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-200 selection:bg-cyan-500 selection:text-black">
-      <header className="border-b border-white/[.08] px-6 py-6">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
+      <header className="border-b border-border px-6 py-6">
         <div className="mx-auto flex max-w-4xl items-center justify-between">
-          <Link href="/" className="text-xl font-bold tracking-tight text-white hover:text-cyan-400 transition-colors">
+          <Link href="/" className="text-xl font-bold tracking-tight text-foreground hover:text-primary transition-colors">
             VertexTarget
           </Link>
-          <Link href="/os/entrar" className="text-xs font-semibold text-cyan-400 hover:underline">
+          <Link href="/os/entrar" className="text-xs font-semibold text-primary hover:underline">
             Acessar Vertex OS →
           </Link>
         </div>
@@ -23,16 +23,16 @@ export default function PrivacidadePage(): React.JSX.Element {
 
       <main className="mx-auto max-w-4xl px-6 py-16 space-y-10">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
             Política de Privacidade
           </h1>
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-xs text-muted-foreground">
             Última atualização: Outubro de 2026 · Em conformidade com a Lei Geral de Proteção de Dados (LGPD).
           </p>
         </div>
 
-        <section className="space-y-4 text-sm leading-relaxed text-slate-300">
-          <h2 className="text-xl font-bold text-white">1. Informações que Coletamos</h2>
+        <section className="space-y-4 text-sm leading-relaxed text-foreground">
+          <h2 className="text-xl font-bold text-foreground">1. Informações que Coletamos</h2>
           <p>
             Coletamos apenas as informações estritamente necessárias para a prestação dos nossos serviços de
             desenvolvimento sob medida e para a operação do sistema Vertex OS:
@@ -57,8 +57,8 @@ export default function PrivacidadePage(): React.JSX.Element {
           </ul>
         </section>
 
-        <section className="space-y-4 text-sm leading-relaxed text-slate-300">
-          <h2 className="text-xl font-bold text-white">2. Provedores e Infraestrutura</h2>
+        <section className="space-y-4 text-sm leading-relaxed text-foreground">
+          <h2 className="text-xl font-bold text-foreground">2. Provedores e Infraestrutura</h2>
           <p>
             Para garantir segurança, confiabilidade e proteção dos dados, utilizamos infraestrutura de ponta:
           </p>
@@ -78,8 +78,8 @@ export default function PrivacidadePage(): React.JSX.Element {
           </ul>
         </section>
 
-        <section className="space-y-4 text-sm leading-relaxed text-slate-300">
-          <h2 className="text-xl font-bold text-white">3. Seus Direitos (LGPD)</h2>
+        <section className="space-y-4 text-sm leading-relaxed text-foreground">
+          <h2 className="text-xl font-bold text-foreground">3. Seus Direitos (LGPD)</h2>
           <p>
             Como titular dos dados, você possui total controle sobre suas informações pessoais:
           </p>
@@ -95,8 +95,8 @@ export default function PrivacidadePage(): React.JSX.Element {
           </ul>
         </section>
 
-        <section className="space-y-4 text-sm leading-relaxed text-slate-300 border-t border-white/[.08] pt-8">
-          <h2 className="text-xl font-bold text-white">4. Contato</h2>
+        <section className="space-y-4 text-sm leading-relaxed text-foreground border-t border-border pt-8">
+          <h2 className="text-xl font-bold text-foreground">4. Contato</h2>
           <p className="text-xs">
             Para dúvidas sobre o tratamento de dados pessoais ou exercer seus direitos de titular, entre em contato
             conosco através da seção de contato em nossa página principal.
@@ -104,7 +104,7 @@ export default function PrivacidadePage(): React.JSX.Element {
         </section>
       </main>
 
-      <footer className="border-t border-white/[.08] px-6 py-8 text-center text-xs text-slate-500">
+      <footer className="border-t border-border px-6 py-8 text-center text-xs text-muted-foreground">
         <p>© {new Date().getFullYear()} VertexTarget. Todos os direitos reservados.</p>
       </footer>
     </div>

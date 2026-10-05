@@ -32,13 +32,13 @@ export function ProspectColumns({
         return (
           <div
             key={col.id}
-            className="flex flex-col rounded-2xl border border-white/[.08] bg-[#0a0a1a] p-3 min-h-[420px]"
+            className="flex flex-col rounded-2xl border border-border bg-card p-3 min-h-[420px]"
           >
-            <div className="flex items-center justify-between border-b border-white/[.08] pb-2 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+            <div className="flex items-center justify-between border-b border-border pb-2 mb-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-foreground">
                 {col.title}
               </span>
-              <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] font-mono text-slate-400">
+              <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-mono text-muted-foreground">
                 {columnProspects.length}
               </span>
             </div>

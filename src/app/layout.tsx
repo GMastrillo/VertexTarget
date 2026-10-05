@@ -7,13 +7,13 @@ import "./globals.css";
 
 const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-outfit",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-inter",
   display: "swap",
 });
 

@@ -34,7 +34,7 @@ export default function MagneticButton({
       hover:shadow-[0_0_35px_rgba(0,240,255,0.7),0_0_70px_rgba(139,92,246,0.4)]
       hover:scale-[1.03] active:scale-[0.98]
       transition-all duration-300
-      overflow-hidden group cursor-pointer
+      overflow-hidden group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
       ${className}
     `,
     secondary: `
@@ -43,20 +43,20 @@ export default function MagneticButton({
       rounded-full
       font-semibold text-xs sm:text-sm tracking-wider uppercase
       backdrop-blur-xl
-      border border-white/20
-      hover:border-cyan-400/80
+      border border-border
+      hover:border-primary/80
       shadow-[0_4px_20px_rgba(0,0,0,0.5)]
       hover:shadow-[0_0_30px_rgba(0,240,255,0.3)]
       hover:scale-[1.03] active:scale-[0.98]
       transition-all duration-300
-      overflow-hidden group cursor-pointer
+      overflow-hidden group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
       ${className}
     `,
     ghost: `
       relative inline-flex items-center justify-center gap-2.5
       px-7 py-3.5 rounded-full
       font-semibold text-sm tracking-wide
-      hover:bg-white/[0.08]
+      hover:bg-muted
       transition-all duration-300 cursor-pointer
       ${className}
     `,
@@ -73,7 +73,7 @@ export default function MagneticButton({
             className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-105"
             style={{
               background:
-                "linear-gradient(135deg, #00f0ff 0%, #8b5cf6 60%, #e040fb 100%)",
+                "var(--primary)",
             }}
           />
           {/* Shimmer sweep effect */}

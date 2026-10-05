@@ -2,61 +2,38 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { Moon, Sun } from "lucide-react";
+import { motionTokens } from "@/lib/motion";
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => setMounted(true), []);
 
   const isDark = mounted ? resolvedTheme !== "light" : true;
+  const Icon = isDark ? Sun : Moon;
 
   return (
     <button
+      type="button"
+      disabled={!mounted}
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
-      className="liquid-glass relative w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer flex-shrink-0"
+      className="liquid-glass relative flex size-10 shrink-0 items-center justify-center rounded-full text-primary transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:size-11"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={isDark ? "sun" : "moon"}
-          initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
-          animate={{ rotate: 0, opacity: 1, scale: 1 }}
-          exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
+          initial={{ opacity: 0, rotate: reducedMotion ? 0 : -90 }}
+          animate={{ opacity: 1, rotate: 0 }}
+          exit={{ opacity: 0, rotate: reducedMotion ? 0 : 90 }}
+          transition={{ duration: reducedMotion ? 0 : motionTokens.duration.fast, ease: motionTokens.ease.out }}
           className="flex items-center justify-center"
         >
-          {isDark ? (
-            /* Sun — shown in dark mode (click to go light) */
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--color-vt-accent-cyan)"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-            </svg>
-          ) : (
-            /* Moon — shown in light mode (click to go dark) */
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--color-vt-accent-violet)"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-          )}
+          <Icon size={18} aria-hidden="true" />
         </motion.span>
       </AnimatePresence>
     </button>

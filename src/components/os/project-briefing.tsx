@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { TemplateSelector, ServicesEditor } from './project-briefing-fields';
+import { TemplateSelector, ServicesEditor, BriefingBasicFields } from './project-briefing-fields';
 import type { TemplateId, SiteService } from '@/lib/os/types';
 
 interface ProjectBriefingProps {
@@ -33,6 +33,33 @@ export function ProjectBriefingForm({
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (initialBusinessName) return;
+    try {
+      const raw = sessionStorage.getItem('vertex_sandbox_draft');
+      if (raw) {
+        const draft = JSON.parse(raw);
+        if (draft.businessName && typeof draft.businessName === 'string') {
+          setBusinessName(draft.businessName);
+        }
+        if (draft.sector && typeof draft.sector === 'string') {
+          setSector(draft.sector);
+        }
+        if (draft.city && typeof draft.city === 'string') {
+          setCity(draft.city);
+        }
+        if (draft.templateId && ['services', 'commerce', 'consulting'].includes(draft.templateId)) {
+          setTemplateId(draft.templateId as TemplateId);
+        }
+        if (Array.isArray(draft.services) && draft.services.length > 0) {
+          setServices(draft.services);
+        }
+      }
+    } catch {
+      // sessionStorage indisponível ou formato inválido
+    }
+  }, [initialBusinessName]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -81,84 +108,20 @@ export function ProjectBriefingForm({
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <label className="text-xs font-medium text-slate-300">Nome do Negócio</label>
-          <input
-            type="text"
-            required
-            maxLength={120}
-            value={businessName}
-            onChange={(e) => setBusinessName(e.target.value)}
-            className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
-            placeholder="Ex.: Studio Lumina"
-          />
-        </div>
-
-        <div className="space-y-1.5">
-          <label className="text-xs font-medium text-slate-300">Setor de Atuação</label>
-          <input
-            type="text"
-            required
-            maxLength={120}
-            value={sector}
-            onChange={(e) => setSector(e.target.value)}
-            className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
-            placeholder="Ex.: Odontologia Estética"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="space-y-1.5">
-          <label className="text-xs font-medium text-slate-300">Cidade / Região</label>
-          <input
-            type="text"
-            required
-            maxLength={120}
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
-            placeholder="Ex.: Curitiba, PR"
-          />
-        </div>
-
-        <div className="space-y-1.5">
-          <label className="text-xs font-medium text-slate-300">E-mail de Contato</label>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
-            placeholder="contato@negocio.com"
-          />
-        </div>
-
-        <div className="space-y-1.5">
-          <label className="text-xs font-medium text-slate-300">WhatsApp Comercial</label>
-          <input
-            type="tel"
-            required
-            value={whatsapp}
-            onChange={(e) => setWhatsapp(e.target.value)}
-            className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none"
-            placeholder="(41) 99999-8888"
-          />
-        </div>
-      </div>
-
-      <div className="space-y-1.5">
-        <label className="text-xs font-medium text-slate-300">Objetivo Principal do Site</label>
-        <textarea
-          rows={2}
-          maxLength={280}
-          value={objective}
-          onChange={(e) => setObjective(e.target.value)}
-          className="w-full rounded-lg border border-white/[.1] bg-white/[.04] px-3.5 py-2 text-sm text-white focus:border-cyan-400 focus:outline-none resize-none"
-          placeholder="Ex.: Apresentar diferenciais de atendimento e captar novos pacientes residenciais..."
-        />
-      </div>
+      <BriefingBasicFields
+        businessName={businessName}
+        setBusinessName={setBusinessName}
+        sector={sector}
+        setSector={setSector}
+        city={city}
+        setCity={setCity}
+        email={email}
+        setEmail={setEmail}
+        whatsapp={whatsapp}
+        setWhatsapp={setWhatsapp}
+        objective={objective}
+        setObjective={setObjective}
+      />
 
       <TemplateSelector templateId={templateId} onChange={setTemplateId} />
 

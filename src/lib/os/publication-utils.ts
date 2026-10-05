@@ -1,8 +1,7 @@
 import type { SiteDocument } from './types.ts';
 
 export function publicDocument(input: SiteDocument): SiteDocument {
-  return {
-    schemaVersion: 1,
+  const base = {
     templateId: input.templateId,
     themeId: input.themeId,
     businessName: input.businessName,
@@ -17,6 +16,21 @@ export function publicDocument(input: SiteDocument): SiteDocument {
     email: input.email,
     whatsapp: input.whatsapp,
     city: input.city,
+  };
+
+  if (input.schemaVersion === 2) {
+    return {
+      schemaVersion: 2,
+      ...base,
+      locale: input.locale,
+      country: input.country,
+      timeZone: input.timeZone,
+    };
+  }
+
+  return {
+    schemaVersion: 1,
+    ...base,
   };
 }
 

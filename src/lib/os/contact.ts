@@ -1,12 +1,14 @@
+import { normalizeInternationalPhone } from "../region/validation.ts";
+
 export function normalizeBrazilianPhone(input: string): string | null {
-  if (!input || typeof input !== 'string') {
+  if (!input || typeof input !== "string") {
     return null;
   }
 
-  const digits = input.replace(/\D/g, '');
+  const digits = input.replace(/\D/g, "");
 
   // Case with 55 prefix already: 55 + 10 digits or 55 + 11 digits
-  if (digits.startsWith('55')) {
+  if (digits.startsWith("55")) {
     const local = digits.slice(2);
     if (local.length === 10 || local.length === 11) {
       return digits;
@@ -22,7 +24,7 @@ export function normalizeBrazilianPhone(input: string): string | null {
 }
 
 export function isSafeHttpUrl(input: string): boolean {
-  if (!input || typeof input !== 'string') {
+  if (!input || typeof input !== "string") {
     return false;
   }
 
@@ -34,7 +36,7 @@ export function isSafeHttpUrl(input: string): boolean {
 
   try {
     const url = new URL(input);
-    return url.protocol === 'http:' || url.protocol === 'https:';
+    return url.protocol === "http:" || url.protocol === "https:";
   } catch {
     return false;
   }
@@ -42,11 +44,24 @@ export function isSafeHttpUrl(input: string): boolean {
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-export function contactHref(input: { email?: string; whatsapp?: string }): string | null {
+export interface ContactHrefInput {
+  email?: string;
+  whatsapp?: string;
+  phoneFormat?: "e164" | "legacy-br";
+}
+
+export function contactHref(input: ContactHrefInput): string | null {
   if (input.whatsapp) {
-    const normalized = normalizeBrazilianPhone(input.whatsapp);
-    if (normalized) {
-      return `https://wa.me/${normalized}`;
+    if (input.phoneFormat === "e164") {
+      const normalized = normalizeInternationalPhone(input.whatsapp);
+      if (normalized) {
+        return `https://wa.me/${normalized.replace(/^\+/, "")}`;
+      }
+    } else {
+      const normalized = normalizeBrazilianPhone(input.whatsapp);
+      if (normalized) {
+        return `https://wa.me/${normalized}`;
+      }
     }
   }
   if (input.email && EMAIL_REGEX.test(input.email.trim())) {

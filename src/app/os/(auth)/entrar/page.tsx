@@ -17,8 +17,8 @@ export default async function EntrarPage({ searchParams }: EntrarPageProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h1 className="text-xl font-semibold text-white">Acessar Workspace</h1>
-        <p className="text-xs text-slate-400">
+        <h1 className="text-xl font-semibold text-foreground">Acessar Workspace</h1>
+        <p className="text-xs text-muted-foreground">
           Entre com suas credenciais para gerenciar seus projetos e publicações.
         </p>
       </div>
@@ -37,9 +37,9 @@ export default async function EntrarPage({ searchParams }: EntrarPageProps) {
 
       <AuthForm mode="login" next={next} />
 
-      <div className="text-center text-xs text-slate-400 pt-2 border-t border-white/[.06]">
+      <div className="text-center text-xs text-muted-foreground pt-2 border-t border-border">
         Ainda não tem conta?{' '}
-        <Link href="/os/cadastro" className="text-cyan-400 hover:underline font-medium">
+        <Link href="/os/cadastro" className="text-primary hover:underline font-medium">
           Criar conta gratuita
         </Link>
       </div>

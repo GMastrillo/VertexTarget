@@ -4,9 +4,9 @@ import type {
   ProjectBriefing,
   ProspectInput,
   TemplateId,
-  ThemeId,
 } from './types.ts';
 import { normalizeBrazilianPhone, isSafeHttpUrl } from './contact.ts';
+import { normalizeInternationalPhone, parseRegionalPreferences } from '../region/validation.ts';
 import {
   isRecord,
   hasOnlyAllowedKeys,
@@ -14,145 +14,9 @@ import {
   parseServices,
 } from './validation-utils.ts';
 
+export { parseSiteDocument } from './document-validation.ts';
+
 const VALID_TEMPLATES = new Set<TemplateId>(['local-services', 'commerce', 'consulting']);
-const VALID_THEMES = new Set<ThemeId>(['cyan-dark', 'warm-light', 'forest-light']);
-
-const DOCUMENT_ALLOWED_KEYS = new Set([
-  'schemaVersion',
-  'templateId',
-  'themeId',
-  'businessName',
-  'title',
-  'subtitle',
-  'description',
-  'services',
-  'ctaLabel',
-  'email',
-  'whatsapp',
-  'city',
-]);
-
-function parseDocumentMeta(input: Record<string, unknown>): ParseResult<{
-  templateId: TemplateId;
-  themeId: ThemeId;
-}> {
-  if (input.schemaVersion !== 1) {
-    return { ok: false, reason: 'schemaVersion inválido (deve ser 1)' };
-  }
-  if (typeof input.templateId !== 'string' || !VALID_TEMPLATES.has(input.templateId as TemplateId)) {
-    return { ok: false, reason: 'Template desconhecido' };
-  }
-  if (typeof input.themeId !== 'string' || !VALID_THEMES.has(input.themeId as ThemeId)) {
-    return { ok: false, reason: 'Tema desconhecido' };
-  }
-  return {
-    ok: true,
-    value: {
-      templateId: input.templateId as TemplateId,
-      themeId: input.themeId as ThemeId,
-    },
-  };
-}
-
-function parseDocumentHeadings(input: Record<string, unknown>): ParseResult<{
-  businessName: string;
-  title: string;
-  subtitle: string;
-}> {
-  const nameRes = validateLength(input.businessName, 2, 120, 'Nome do negócio');
-  if (!nameRes.ok) return nameRes;
-
-  const titleRes = validateLength(input.title, 1, 120, 'Título');
-  if (!titleRes.ok) return titleRes;
-
-  const subtitleRes = validateLength(input.subtitle, 0, 280, 'Subtítulo');
-  if (!subtitleRes.ok) return subtitleRes;
-
-  return {
-    ok: true,
-    value: {
-      businessName: nameRes.value,
-      title: titleRes.value,
-      subtitle: subtitleRes.value,
-    },
-  };
-}
-
-function parseDocumentDetails(input: Record<string, unknown>): ParseResult<{
-  description: string;
-  ctaLabel: string;
-  city: string;
-}> {
-  const descRes = validateLength(input.description, 0, 1200, 'Descrição');
-  if (!descRes.ok) return descRes;
-
-  const ctaRes = validateLength(input.ctaLabel, 1, 40, 'Rótulo do CTA');
-  if (!ctaRes.ok) return ctaRes;
-
-  const cityRes = validateLength(input.city, 1, 120, 'Cidade');
-  if (!cityRes.ok) return cityRes;
-
-  return {
-    ok: true,
-    value: {
-      description: descRes.value,
-      ctaLabel: ctaRes.value,
-      city: cityRes.value,
-    },
-  };
-}
-
-function parseDocumentContact(input: Record<string, unknown>): ParseResult<{
-  email: string;
-  whatsapp: string;
-}> {
-  const email = typeof input.email === 'string' ? input.email.trim() : '';
-  if (!email || email.length > 254 || !email.includes('@')) {
-    return { ok: false, reason: 'E-mail inválido' };
-  }
-  const whatsappRaw = typeof input.whatsapp === 'string' ? input.whatsapp.trim() : '';
-  const normalizedWhatsapp = normalizeBrazilianPhone(whatsappRaw);
-  if (!normalizedWhatsapp) {
-    return { ok: false, reason: 'WhatsApp inválido' };
-  }
-  return { ok: true, value: { email, whatsapp: normalizedWhatsapp } };
-}
-
-export function parseSiteDocument(input: unknown): ParseResult<SiteDocument> {
-  if (!isRecord(input)) {
-    return { ok: false, reason: 'Documento deve ser um objeto' };
-  }
-  if (!hasOnlyAllowedKeys(input, DOCUMENT_ALLOWED_KEYS)) {
-    return { ok: false, reason: 'Propriedade não permitida presente no documento' };
-  }
-
-  const meta = parseDocumentMeta(input);
-  if (!meta.ok) return meta;
-
-  const headings = parseDocumentHeadings(input);
-  if (!headings.ok) return headings;
-
-  const details = parseDocumentDetails(input);
-  if (!details.ok) return details;
-
-  const contact = parseDocumentContact(input);
-  if (!contact.ok) return contact;
-
-  const services = parseServices(input.services);
-  if (!services.ok) return services;
-
-  return {
-    ok: true,
-    value: {
-      schemaVersion: 1,
-      ...meta.value,
-      ...headings.value,
-      ...details.value,
-      ...contact.value,
-      services: services.value,
-    },
-  };
-}
 
 const BRIEFING_ALLOWED_KEYS = new Set([
   'businessName',
@@ -164,6 +28,7 @@ const BRIEFING_ALLOWED_KEYS = new Set([
   'email',
   'whatsapp',
   'templateId',
+  'regionalPreferences',
 ]);
 
 function parseBriefingInfo(input: Record<string, unknown>): ParseResult<{
@@ -218,6 +83,10 @@ function parseBriefingContact(input: Record<string, unknown>): ParseResult<{
     return { ok: false, reason: 'E-mail inválido' };
   }
   const whatsappRaw = typeof input.whatsapp === 'string' ? input.whatsapp.trim() : '';
+  if (whatsappRaw.startsWith('+')) {
+    const intl = normalizeInternationalPhone(whatsappRaw);
+    return { ok: true, value: { email, whatsapp: intl ?? '' } };
+  }
   const normalizedWhatsapp = normalizeBrazilianPhone(whatsappRaw) ?? '';
   return { ok: true, value: { email, whatsapp: normalizedWhatsapp } };
 }
@@ -249,6 +118,15 @@ export function parseProjectBriefing(input: unknown): ParseResult<ProjectBriefin
   const services = parseServices(input.services);
   if (!services.ok) return services;
 
+  let regionalPreferences;
+  if ('regionalPreferences' in input && input.regionalPreferences !== undefined) {
+    const regResult = parseRegionalPreferences(input.regionalPreferences);
+    if (!regResult.ok) {
+      return { ok: false, reason: 'Preferências regionais inválidas no briefing' };
+    }
+    regionalPreferences = regResult.value;
+  }
+
   return {
     ok: true,
     value: {
@@ -257,15 +135,15 @@ export function parseProjectBriefing(input: unknown): ParseResult<ProjectBriefin
       ...contact.value,
       services: services.value,
       templateId: template.value,
+      ...(regionalPreferences ? { regionalPreferences } : {}),
     },
   };
 }
 
 export function documentFromBriefing(briefing: ProjectBriefing): SiteDocument {
-  return {
-    schemaVersion: 1,
+  const base = {
     templateId: briefing.templateId,
-    themeId: 'cyan-dark',
+    themeId: 'cyan-dark' as const,
     businessName: briefing.businessName,
     title: `${briefing.businessName} — ${briefing.sector}`,
     subtitle: briefing.objective || `Soluções em ${briefing.sector} com atendimento em ${briefing.city}.`,
@@ -273,8 +151,34 @@ export function documentFromBriefing(briefing: ProjectBriefing): SiteDocument {
     services: briefing.services,
     ctaLabel: 'Solicitar proposta',
     email: briefing.email,
-    whatsapp: briefing.whatsapp,
     city: briefing.city,
+  };
+
+  if (briefing.regionalPreferences) {
+    const rawWa = briefing.whatsapp.trim();
+    let normalizedWa = '';
+    if (rawWa) {
+      if (rawWa.startsWith('+')) {
+        normalizedWa = normalizeInternationalPhone(rawWa) || '';
+      } else {
+        const br = normalizeBrazilianPhone(rawWa);
+        normalizedWa = br ? `+${br}` : '';
+      }
+    }
+    return {
+      schemaVersion: 2,
+      ...base,
+      whatsapp: normalizedWa,
+      locale: briefing.regionalPreferences.locale,
+      country: briefing.regionalPreferences.country,
+      timeZone: briefing.regionalPreferences.timeZone,
+    };
+  }
+
+  return {
+    schemaVersion: 1,
+    ...base,
+    whatsapp: briefing.whatsapp,
   };
 }
 
@@ -342,4 +246,3 @@ export function parseProspectInput(input: unknown): ParseResult<ProspectInput> {
 }
 
 export { parseAuthInput, type AuthInput } from './auth-validation.ts';
-

@@ -9,6 +9,7 @@
 
 # next.js
 /.next/
+/.next-theme-*/
 /out/
 
 # production
@@ -35,3 +36,4 @@ yarn-error.log*
 
 # agent / scratch
 .freebuff/
+graphify-out/cache/

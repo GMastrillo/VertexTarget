@@ -3,14 +3,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { useReducedMotion } from "motion/react";
 import { SKILLS_DATA } from "@/lib/constants";
 
 export default function SkillsOrbit() {
+  const reducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [activeSkill, setActiveSkill] = useState<(typeof SKILLS_DATA)[0] | null>(null);
 
   useEffect(() => {
+    if (reducedMotion) return;
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
@@ -263,21 +266,21 @@ export default function SkillsOrbit() {
       renderer.renderLists.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[380px] sm:h-[460px] md:h-[550px] rounded-2xl overflow-hidden border border-white/[0.08] bg-[#050510]/80 my-12 md:my-16 shadow-2xl cursor-grab active:cursor-grabbing touch-pan-y"
+      className="relative w-full h-[380px] sm:h-[460px] md:h-[550px] rounded-2xl overflow-hidden border border-border bg-card my-12 md:my-16 shadow-2xl cursor-grab active:cursor-grabbing touch-pan-y"
     >
       {/* Header Info */}
       <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 pointer-events-none">
-        <div className="label text-[10px] sm:text-xs uppercase tracking-wider mb-1" style={{ color: "#00f0ff" }}>
+        <div className="label text-[10px] sm:text-xs uppercase tracking-wider mb-1" style={{ color: "var(--primary)" }}>
           Constelação Técnica
         </div>
-        <h4 className="text-lg sm:text-2xl font-bold text-white tracking-tight">Skills Orbit 3D</h4>
-        <p className="text-[11px] sm:text-xs font-mono text-zinc-400 mt-0.5">
-          Arraste com o dedo ou mouse para explorar a constelação
+        <h4 className="text-lg sm:text-2xl font-bold text-foreground tracking-tight">Skills Orbit 3D</h4>
+        <p className="text-[11px] sm:text-xs font-mono text-muted-foreground mt-0.5">
+          {reducedMotion ? "Explore as habilidades nos botões abaixo" : "Arraste com o dedo ou mouse para explorar a constelação"}
         </p>
       </div>
 
@@ -290,8 +293,8 @@ export default function SkillsOrbit() {
               onClick={() => setActiveSkill(activeSkill?.name === skill.name ? null : skill)}
               className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all duration-200 backdrop-blur-md border ${
                 activeSkill?.name === skill.name
-                  ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/50 scale-105"
-                  : "bg-black/50 text-zinc-300 border-white/10 hover:border-cyan-500/40 hover:text-white"
+                  ? "bg-primary/10 text-primary border-primary scale-105"
+                  : "bg-card text-muted-foreground border-border hover:border-primary hover:text-foreground"
               }`}
             >
               <span>{skill.name}</span>
@@ -304,9 +307,9 @@ export default function SkillsOrbit() {
       {/* Active Skill Floating Pill */}
       {activeSkill && (
         <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 pointer-events-none">
-          <div className="px-3 py-2 rounded-xl bg-black/80 border border-cyan-400/40 backdrop-blur-md shadow-xl text-right">
-            <div className="text-xs font-bold text-white font-mono">{activeSkill.name}</div>
-            <div className="text-[10px] text-cyan-400 font-mono">
+          <div className="px-3 py-2 rounded-xl bg-popover border border-primary/40 backdrop-blur-md shadow-xl text-right">
+            <div className="text-xs font-bold text-foreground font-mono">{activeSkill.name}</div>
+            <div className="text-[10px] text-primary font-mono">
               Nível: {activeSkill.level}% • {activeSkill.category.toUpperCase()}
             </div>
           </div>
@@ -314,7 +317,7 @@ export default function SkillsOrbit() {
       )}
 
       {/* 3D Canvas */}
-      <canvas ref={canvasRef} className="w-full h-full block" />
+      <canvas ref={canvasRef} aria-hidden="true" className="w-full h-full block" />
     </div>
   );
 }

@@ -16,8 +16,8 @@ export default async function RecuperarPage({ searchParams }: RecuperarPageProps
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h1 className="text-xl font-semibold text-white">Recuperar Senha</h1>
-        <p className="text-xs text-slate-400">
+        <h1 className="text-xl font-semibold text-foreground">Recuperar Senha</h1>
+        <p className="text-xs text-muted-foreground">
           Informe seu e-mail para enviarmos as instruções de redefinição com segurança.
         </p>
       </div>
@@ -30,9 +30,9 @@ export default async function RecuperarPage({ searchParams }: RecuperarPageProps
 
       <AuthForm mode="recover" />
 
-      <div className="text-center text-xs text-slate-400 pt-2 border-t border-white/[.06]">
+      <div className="text-center text-xs text-muted-foreground pt-2 border-t border-border">
         Lembrou a senha?{' '}
-        <Link href="/os/entrar" className="text-cyan-400 hover:underline font-medium">
+        <Link href="/os/entrar" className="text-primary hover:underline font-medium">
           Voltar para login
         </Link>
       </div>

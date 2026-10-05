@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix",
     "lint:types": "eslint --config eslint.typed.config.mjs .",
     "test:commercial": "node --experimental-strip-types scripts/validate-commercial.mjs",
-    "test:os": "node --experimental-strip-types --test scripts/tests/os-*.test.mjs"
+    "test:os": "node --experimental-strip-types --test scripts/tests/os-*.test.mjs",
+    "check:env": "node scripts/validate-prelaunch-env.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.27.0",

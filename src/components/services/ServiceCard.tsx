@@ -121,7 +121,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
             className="text-5xl font-black leading-none"
             style={{
               fontFamily: "var(--font-heading)",
-              color: "rgba(255, 255, 255, 0.10)",
+              color: "var(--muted-foreground)",
             }}
           >
             {service.number}
@@ -159,7 +159,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
         </p>
 
         {/* Bottom: tags pinned at card bottom */}
-        <div className="pt-5 border-t border-white/[0.06]">
+        <div className="pt-5 border-t border-border">
           <div className="flex flex-wrap gap-2">
             {service.tags.map((tag) => (
               <span

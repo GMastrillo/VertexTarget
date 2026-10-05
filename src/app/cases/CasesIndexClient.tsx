@@ -41,31 +41,31 @@ export default function CasesIndexClient() {
 
   return <main className="min-h-screen bg-[var(--color-vt-bg)] px-6 py-8 text-[var(--color-vt-text)] sm:px-10 lg:px-16">
     <div className="mx-auto max-w-7xl">
-      <header className="flex items-center justify-between gap-4 border-b border-white/[.08] pb-6">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-cyan-300"><ArrowLeft size={15} /> {copy.backHome}</Link>
-        <span className="text-xs uppercase tracking-[.25em] text-cyan-300">VertexTarget / Cases</span>
+      <header className="flex items-center justify-between gap-4 border-b border-border pb-6">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"><ArrowLeft size={15} /> {copy.backHome}</Link>
+        <span className="text-xs uppercase tracking-[.25em] text-primary">VertexTarget / Cases</span>
       </header>
 
       <section className="max-w-3xl py-20 sm:py-28">
-        <p className="mb-5 text-xs uppercase tracking-[.3em] text-cyan-300">{copy.eyebrow}</p>
-        <h1 className="font-[var(--font-heading)] text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl">{copy.title1} <span className="gradient-text">{copy.title2}</span></h1>
-        <p className="mt-7 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">{copy.description}</p>
+        <p className="mb-5 text-xs uppercase tracking-[.3em] text-primary">{copy.eyebrow}</p>
+        <h1 className="font-heading text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl">{copy.title1} <span className="gradient-text">{copy.title2}</span></h1>
+        <p className="mt-7 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">{copy.description}</p>
       </section>
 
-      <section aria-label={copy.all} className="mb-10 rounded-2xl border border-white/[.08] bg-white/[.025] p-4 sm:p-5">
+      <section aria-label={copy.all} className="mb-10 rounded-2xl border border-border bg-muted p-4 sm:p-5">
         <div className="grid gap-3 md:grid-cols-3">
           <FilterSelect label={copy.category} value={category} onChange={setCategory} options={categories} allLabel={copy.allCategories} />
           <FilterSelect label={copy.technology} value={technology} onChange={setTechnology} options={technologies} allLabel={copy.allTechnologies} />
           <FilterSelect label={copy.year} value={year} onChange={setYear} options={years} allLabel={copy.allYears} />
         </div>
-        {hasFilters && <button type="button" onClick={resetFilters} className="mt-4 inline-flex items-center gap-2 text-xs text-cyan-300 transition-colors hover:text-cyan-200"><RotateCcw size={13} /> {copy.reset}</button>}
+        {hasFilters && <button type="button" onClick={resetFilters} className="mt-4 inline-flex items-center gap-2 text-xs text-primary transition-colors hover:text-primary"><RotateCcw size={13} /> {copy.reset}</button>}
       </section>
 
-      {filteredCases.length ? <section className="grid gap-5 pb-24 md:grid-cols-2">{filteredCases.map((item, index) => <CaseCard key={item.id} caseStudy={item} index={index} onExpand={() => router.push(`/cases/${item.id}`)} />)}</section> : <div className="rounded-2xl border border-dashed border-white/[.12] py-20 text-center"><p className="text-sm text-slate-400">{copy.noResults}</p><button type="button" onClick={resetFilters} className="mt-4 text-xs text-cyan-300 hover:text-cyan-200">{copy.reset}</button></div>}
+      {filteredCases.length ? <section className="grid gap-5 pb-24 md:grid-cols-2">{filteredCases.map((item, index) => <CaseCard key={item.id} caseStudy={item} index={index} onExpand={() => router.push(`/cases/${item.id}`)} />)}</section> : <div className="rounded-2xl border border-dashed border-border py-20 text-center"><p className="text-sm text-muted-foreground">{copy.noResults}</p><button type="button" onClick={resetFilters} className="mt-4 text-xs text-primary hover:text-primary">{copy.reset}</button></div>}
     </div>
   </main>;
 }
 
 function FilterSelect({ label, value, onChange, options, allLabel }: { label: string; value: string; onChange: (value: string) => void; options: string[]; allLabel: string }) {
-  return <label className="block text-xs text-slate-400"><span className="mb-2 block uppercase tracking-wider">{label}</span><select value={value} onChange={(event) => onChange(event.target.value)} className="admin-input h-11 w-full text-sm"><option value="all">{allLabel}</option>{options.map((option) => <option key={option} value={option}>{option}</option>)}</select></label>;
+  return <label className="block text-xs text-muted-foreground"><span className="mb-2 block uppercase tracking-wider">{label}</span><select value={value} onChange={(event) => onChange(event.target.value)} className="admin-input h-11 w-full text-sm"><option value="all">{allLabel}</option>{options.map((option) => <option key={option} value={option}>{option}</option>)}</select></label>;
 }

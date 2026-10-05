@@ -28,7 +28,7 @@ export default function ServicesSection() {
     // Desktop/tablet only: pinned horizontal scroll driven by vertical scroll.
     // Mobile uses native swipe (overflow-x + snap) — a pinned 480px card stack
     // cannot fit a phone viewport.
-    mm.add("(min-width: 768px)", () => {
+    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
       if (!trackRef.current || !scrollContainerRef.current) return;
 
       const totalWidth = () =>
@@ -49,7 +49,7 @@ export default function ServicesSection() {
           invalidateOnRefresh: true,
         },
       });
-    });
+    }, sectionRef);
 
     return () => mm.revert();
   }, []);
@@ -81,7 +81,7 @@ export default function ServicesSection() {
         {/* Horizontal Cards Track — native swipe on mobile, GSAP-pinned on desktop */}
         <div
           ref={trackRef}
-          className="flex items-stretch gap-4 sm:gap-8 px-5 sm:px-8 md:px-12 pb-16 md:pb-20 w-full md:w-fit overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-hide"
+          className="flex items-stretch gap-4 sm:gap-8 px-5 sm:px-8 md:px-12 pb-16 md:pb-20 w-full md:w-fit overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none motion-reduce:overflow-x-auto motion-reduce:w-full motion-reduce:snap-mandatory scrollbar-hide"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
           {localizedServices.map((service, index) => (

@@ -5,22 +5,26 @@
  * Dictionary-based translations, no runtime dependency.
  */
 
-export const LOCALES = ["pt", "en", "es", "fr", "it"] as const;
-export type Locale = (typeof LOCALES)[number];
+export const LOCALES = ["pt-BR", "en", "es", "fr", "de", "it"] as const;
+export type Locale = (typeof LOCALES)[number] | "pt";
 
-export const LOCALE_LABELS: Record<Locale, string> = {
+export const LOCALE_LABELS: Record<string, string> = {
   pt: "Português",
+  "pt-BR": "Português",
   en: "English",
   es: "Español",
   fr: "Français",
+  de: "Deutsch",
   it: "Italiano",
 };
 
-export const LOCALE_FLAGS: Record<Locale, string> = {
+export const LOCALE_FLAGS: Record<string, string> = {
   pt: "🇧🇷",
+  "pt-BR": "🇧🇷",
   en: "🇺🇸",
   es: "🇪🇸",
   fr: "🇫🇷",
+  de: "🇩🇪",
   it: "🇮🇹",
 };
 
@@ -976,8 +980,61 @@ const it: Dict = {
   },
 };
 
-const dictionaries: Record<Locale, Dict> = { pt, en, es, fr, it };
+const de: Dict = {
+  ...en,
+  nav: {
+    hero: "Start",
+    services: "Leistungen",
+    cases: "Referenzen",
+    about: "Über uns",
+    aiLab: "AI Lab",
+    contact: "Kontakt",
+  },
+  hero: {
+    label: "VertexTarget Studio",
+    title1: "Wir schaffen",
+    title2: "digitale Gravitation.",
+    subtitle:
+      "Digitales Marketing, KI-Automatisierung und immersive Weberlebnisse. Wir machen Marken zu Anziehungspunkten im Digitalen.",
+    ctaPrimary: "Projekt starten",
+    ctaSecondary: "Referenzen",
+    scroll: "Scrollen",
+  },
+  services: {
+    label: "Leistungen",
+    title1: "Lösungen, die",
+    title2: "Ihr Digitalgeschäft bewegen.",
+    subtitle:
+      "Von der Strategie bis zur Ausführung: Wir verbinden Marketing, Softwaretechnik und KI für messbare Resultate.",
+    swipeHint: "Wischen",
+  },
+  cases: {
+    ...en.cases,
+    label: "Portfolio & Engineering",
+    title1: "Projekte, die",
+    title2: "Märkte definieren.",
+    subtitle:
+      "Jede Anwendung ist ein hochpräzises Werk. Wir vereinen Full-Stack-Architektur, immersives Design, intelligente Automatisierung und Spitzenperformance.",
+    viewStudy: "Fallstudie",
+  },
+  ui: {
+    language: "Sprache",
+    theme: "Design",
+    loadingPreview: "Vorschau wird geladen",
+  },
+};
 
-export function getDict(locale: Locale): Dict {
-  return dictionaries[locale] ?? dictionaries.pt;
+const dictionaries: Record<string, Dict> = {
+  pt,
+  "pt-BR": pt,
+  en,
+  es,
+  fr,
+  de,
+  it,
+};
+
+export function getDict(locale: string): Dict {
+  const norm = locale === "pt" ? "pt-BR" : locale;
+  return dictionaries[norm] ?? dictionaries["pt-BR"] ?? dictionaries.pt;
 }

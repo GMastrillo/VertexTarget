@@ -1,51 +1,24 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { motionTokens } from "@/lib/motion";
 import { useT } from "@/providers/LanguageProvider";
 
 /**
  * FAQ accordion — VTEX-style objection handling before the contact section.
- * One item open at a time; smooth height animation; reduced-motion safe
- * (framer-motion respects the OS setting when `useReducedMotion` is honored
- * by the user — here transitions are short enough to be unobtrusive).
+ * One item open at a time; reduced motion uses a short fade without layout travel.
  */
 export default function FAQSection() {
   const t = useT();
+  const reducedMotion = useReducedMotion();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Title reveal via CSS-friendly IntersectionObserver (avoids extra GSAP
-    // ScrollTriggers that go stale after locale switches)
-    const el = titleRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.style.opacity = "1";
-            el.style.transform = "translateY(0)";
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <section ref={sectionRef} id="faq" className="section">
+    <section id="faq" className="section">
       <div className="section-inner max-w-3xl">
         {/* Header */}
-        <div
-          ref={titleRef}
-          className="text-center mb-12 transition-all duration-700"
-          style={{ opacity: 0, transform: "translateY(24px)" }}
-        >
+        <div className="text-center mb-12">
           <div className="label mb-4">{t.faq.label}</div>
           <h2 className="heading-lg">
             {t.faq.title1}
@@ -111,10 +84,10 @@ export default function FAQSection() {
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
+                      initial={reducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      exit={reducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                      transition={{ duration: reducedMotion ? motionTokens.duration.fast : motionTokens.duration.base, ease: motionTokens.ease.out }}
                       style={{ overflow: "hidden" }}
                     >
                       <p

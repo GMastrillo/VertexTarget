@@ -4,20 +4,20 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils.ts';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer',
   {
     variants: {
       variant: {
         default:
-          'bg-[var(--color-vt-accent-cyan)] text-[#050510] font-semibold hover:brightness-110 shadow-lg shadow-cyan-500/20 active:scale-[0.98]',
+          'bg-primary text-primary-foreground font-semibold hover:brightness-110 shadow-lg shadow-cyan-500/20 active:scale-[0.98]',
         secondary:
           'bg-[var(--color-vt-surface)] text-[var(--color-vt-text)] border border-[var(--color-vt-border)] hover:bg-[var(--color-vt-bg-card)] active:scale-[0.98]',
         outline:
-          'border border-[var(--color-vt-border)] bg-transparent text-[var(--color-vt-text)] hover:bg-[var(--color-vt-surface)] hover:text-white',
+          'border border-[var(--color-vt-border)] bg-transparent text-[var(--color-vt-text)] hover:bg-[var(--color-vt-surface)] hover:text-foreground',
         ghost:
           'text-[var(--color-vt-text-muted)] hover:text-[var(--color-vt-text)] hover:bg-[var(--color-vt-surface)]',
         destructive:
-          'bg-[var(--color-vt-error)] text-white hover:brightness-110 shadow-md shadow-red-500/20',
+          'bg-destructive text-destructive-foreground hover:brightness-110 shadow-md shadow-red-500/20',
       },
       size: {
         default: 'h-10 px-4 py-2',

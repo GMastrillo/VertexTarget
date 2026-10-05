@@ -105,17 +105,17 @@ export default function TemplatesCoverflow() {
   return (
     <section className="relative py-20 px-4 overflow-hidden select-none" id="modelos">
       <div className="max-w-6xl mx-auto text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-cyan-400 mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-border text-xs font-mono text-primary mb-4">
           <Sparkles className="w-3.5 h-3.5" />
           <span>O que você entrega para os clientes</span>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h2 className="text-3xl sm:text-5xl font-black text-foreground tracking-tight">
           Modelos de alta conversão{" "}
           <span className="gradient-text">feitos à mão por designers</span>
         </h2>
 
-        <p className="mt-4 text-sm sm:text-base text-white/60 max-w-2xl mx-auto">
+        <p className="mt-4 text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
           Cada ramo tem um layout próprio, tipografia autoral, responsividade perfeita para celular e gatilhos de WhatsApp já resolvidos.
         </p>
       </div>
@@ -163,24 +163,24 @@ export default function TemplatesCoverflow() {
                 zIndex,
                 transformStyle: "preserve-3d",
               }}
-              className="absolute w-[300px] sm:w-[380px] md:w-[420px] rounded-2xl cursor-pointer p-4 sm:p-6 bg-gradient-to-b from-[#141426] via-[#0d0d1b] to-[#070712] border border-white/12 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] hover:border-cyan-400/40 transition-colors"
+              className="absolute w-[300px] sm:w-[380px] md:w-[420px] rounded-2xl cursor-pointer p-4 sm:p-6 bg-gradient-to-b from-card via-card to-card border border-border shadow-[var(--glass-outer-shadow)] hover:border-primary/40 transition-colors"
             >
               {/* Card Browser Chrome */}
-              <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+              <div className="flex items-center justify-between pb-3 border-b border-border">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-destructive/70" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-warning/70" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-success/70" />
                 </div>
-                <span className="text-[10px] font-mono text-white/40 tracking-wider uppercase">
+                <span className="text-[10px] font-mono text-muted-foreground tracking-wider uppercase">
                   {item.category}
                 </span>
                 <span
                   className="text-[10px] font-bold px-2 py-0.5 rounded-full"
                   style={{
-                    backgroundColor: `${item.accent}20`,
-                    color: item.accent,
-                    border: `1px solid ${item.accent}40`,
+                    backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)",
+                    color: "var(--primary)",
+                    border: "1px solid var(--border)",
                   }}
                 >
                   {item.conversionStat}
@@ -189,28 +189,28 @@ export default function TemplatesCoverflow() {
 
               {/* Template Preview Area */}
               <div
-                className={`mt-4 rounded-xl p-4 sm:p-5 bg-gradient-to-br ${item.bgGrad} border border-white/[0.08] relative overflow-hidden`}
+                className={`mt-4 rounded-xl p-4 sm:p-5 bg-muted border border-border relative overflow-hidden`}
               >
                 <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center text-black font-black text-sm mb-3 shadow-md"
-                  style={{ background: item.accent }}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-primary-foreground font-black text-sm mb-3 shadow-md"
+                  style={{ background: "var(--primary)" }}
                 >
                   {item.title[0]}
                 </div>
 
-                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight">
                   {item.title}
                 </h3>
 
-                <p className="mt-2 text-xs text-white/70 leading-relaxed line-clamp-3">
+                <p className="mt-2 text-xs text-muted-foreground leading-relaxed line-clamp-3">
                   {item.description}
                 </p>
 
                 {/* Highlights List */}
-                <div className="mt-4 space-y-1.5 pt-3 border-t border-white/[0.08]">
+                <div className="mt-4 space-y-1.5 pt-3 border-t border-border">
                   {item.highlights.map((hl) => (
-                    <div key={hl} className="flex items-center gap-2 text-[11px] text-white/80">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <div key={hl} className="flex items-center gap-2 text-[11px] text-foreground">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-success shrink-0" />
                       <span className="truncate">{hl}</span>
                     </div>
                   ))}
@@ -219,14 +219,14 @@ export default function TemplatesCoverflow() {
 
               {/* Card Footer */}
               <div className="mt-4 flex items-center justify-between pt-2">
-                <span className="flex items-center gap-1 text-[11px] text-white/50">
-                  <Smartphone className="w-3.5 h-3.5 text-cyan-400" /> 100% Responsivo
+                <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
+                  <Smartphone className="w-3.5 h-3.5 text-primary" /> 100% Responsivo
                 </span>
 
                 <a
                   href="#planos"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-white px-3 py-1.5 rounded-lg bg-white/10 hover:bg-cyan-500 hover:text-black transition-all duration-300"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground px-3 py-1.5 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 >
                   <span>Ver Modelo</span>
                   <ExternalLink className="w-3 h-3" />
@@ -240,14 +240,14 @@ export default function TemplatesCoverflow() {
         <button
           onClick={prev}
           aria-label="Modelo anterior"
-          className="absolute left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center backdrop-blur-md hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer"
+          className="absolute left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-overlay border border-border text-foreground flex items-center justify-center backdrop-blur-md hover:bg-muted hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={next}
           aria-label="Próximo modelo"
-          className="absolute right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center backdrop-blur-md hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer"
+          className="absolute right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-overlay border border-border text-foreground flex items-center justify-center backdrop-blur-md hover:bg-muted hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -262,8 +262,8 @@ export default function TemplatesCoverflow() {
             aria-label={`Ir para modelo ${i + 1}`}
             className={`transition-all duration-300 rounded-full cursor-pointer ${
               i === currentIndex
-                ? "w-8 h-2 bg-cyan-400 shadow-[0_0_10px_#00f0ff]"
-                : "w-2 h-2 bg-white/20 hover:bg-white/40"
+                ? "w-8 h-2 bg-primary shadow-[0_0_10px_#00f0ff]"
+                : "w-2 h-2 bg-muted hover:bg-muted"
             }`}
           />
         ))}

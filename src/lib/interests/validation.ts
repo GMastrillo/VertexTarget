@@ -1,5 +1,6 @@
 import type { ParseResult, Journey } from '../os/types.ts';
 import { normalizeBrazilianPhone } from '../os/contact.ts';
+import { normalizeInternationalPhone } from '../region/validation.ts';
 import type { InterestInput, InterestKind, InterestSource } from './types.ts';
 
 const VALID_JOURNEYS = new Set<Journey>(['business', 'professional']);
@@ -39,6 +40,24 @@ function validateInterestKeys(input: Record<string, unknown>): ParseResult<true>
   return { ok: true, value: true };
 }
 
+function parseInterestWhatsApp(whatsappRaw: string): ParseResult<string> {
+  if (!whatsappRaw) {
+    return { ok: true, value: '' };
+  }
+  if (whatsappRaw.startsWith('+')) {
+    const normalizedIntl = normalizeInternationalPhone(whatsappRaw);
+    if (!normalizedIntl) {
+      return { ok: false, reason: 'Número de WhatsApp internacional inválido' };
+    }
+    return { ok: true, value: normalizedIntl.replace(/^\+/, '') };
+  }
+  const normalized = normalizeBrazilianPhone(whatsappRaw);
+  if (!normalized) {
+    return { ok: false, reason: 'Número de WhatsApp inválido' };
+  }
+  return { ok: true, value: normalized };
+}
+
 function parseContactFields(input: Record<string, unknown>): ParseResult<{
   name: string;
   email: string;
@@ -55,16 +74,12 @@ function parseContactFields(input: Record<string, unknown>): ParseResult<{
   }
 
   const whatsappRaw = typeof input.whatsapp === 'string' ? input.whatsapp.trim() : '';
-  let whatsapp = '';
-  if (whatsappRaw) {
-    const normalized = normalizeBrazilianPhone(whatsappRaw);
-    if (!normalized) {
-      return { ok: false, reason: 'Número de WhatsApp inválido' };
-    }
-    whatsapp = normalized;
+  const waResult = parseInterestWhatsApp(whatsappRaw);
+  if (!waResult.ok) {
+    return waResult;
   }
 
-  return { ok: true, value: { name, email, whatsapp } };
+  return { ok: true, value: { name, email, whatsapp: waResult.value } };
 }
 
 function parseCategoricalFields(input: Record<string, unknown>): ParseResult<{

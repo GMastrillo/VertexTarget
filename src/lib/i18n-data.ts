@@ -1,4 +1,3 @@
-import type { Locale } from "./i18n";
 import type { SERVICES, CASES } from "./constants";
 
 type ServiceId = (typeof SERVICES)[number]["id"];
@@ -34,7 +33,7 @@ interface LocaleCardContent {
  * Card content translations. Titles/clients of cases are proper nouns and
  * stay in constants.ts; everything the visitor reads per card lives here.
  */
-export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
+export const CARD_CONTENT: Record<string, LocaleCardContent> = {
   pt: {
     services: {
       "ai-automation": {
@@ -790,3 +789,6 @@ export const CARD_CONTENT: Record<Locale, LocaleCardContent> = {
     ],
   },
 };
+
+(CARD_CONTENT as Record<string, LocaleCardContent>)['pt-BR'] = CARD_CONTENT.pt;
+(CARD_CONTENT as Record<string, LocaleCardContent>)['de'] = CARD_CONTENT.en;

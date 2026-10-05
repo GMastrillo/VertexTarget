@@ -9,6 +9,8 @@ import { useMagneticEffect } from "@/hooks/useMagneticEffect";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useT } from "@/providers/LanguageProvider";
+import { useEscapeDismiss } from "@/hooks/useEscapeDismiss";
+import { preferredScrollBehavior } from "@/lib/motion";
 
 export default function Navigation() {
   const t = useT();
@@ -25,7 +27,7 @@ export default function Navigation() {
     const DIRECTION_THRESHOLD = 12;
     const update = () => {
       const y = Math.max(window.scrollY, 0);
-      setScrolled((current) => (current === (y > 60) ? current : y > 60));
+      setScrolled(y > 60);
 
       const delta = y - lastDirectionY.current;
       if (y <= TOP_THRESHOLD) {
@@ -52,11 +54,15 @@ export default function Navigation() {
     };
   }, []);
 
+  useEscapeDismiss(isOpen, () => setIsOpen(false));
+
   const handleNavClick = (href: string) => {
     setIsOpen(false);
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+      target.scrollIntoView({
+        behavior: preferredScrollBehavior(),
+      });
     }
   };
 
@@ -67,7 +73,7 @@ export default function Navigation() {
         initial={{ y: -80, opacity: 0 }}
         animate={{
           y: hidden ? -120 : 0,
-          opacity: hidden ? 0 : 1,
+          opacity: Number(!hidden),
         }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-[100] px-5 sm:px-14 lg:px-20 py-4 sm:py-8 transition-[padding] duration-500"
@@ -105,7 +111,7 @@ export default function Navigation() {
             >
               Target
             </span>
-            <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-cyan-400 shadow-[0_0_14px_#00f0ff] animate-pulse ml-0.5 sm:ml-1 flex-shrink-0" />
+            <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-primary shadow-[0_0_14px_#00f0ff] animate-pulse ml-0.5 sm:ml-1 flex-shrink-0" />
           </a>
 
           {/* Links — dead-center of the viewport (middle grid column) */}
@@ -133,7 +139,7 @@ export default function Navigation() {
           <div className="hidden lg:flex items-center justify-self-end gap-3">
             <Link
               href="/plataforma"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-400 border border-cyan-400/30 text-xs font-bold uppercase tracking-wider transition-all hover:scale-105"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 text-xs font-bold uppercase tracking-wider transition-all hover:scale-105"
             >
               <Sparkles className="w-3 h-3" />
               <span>Plataforma</span>
@@ -147,9 +153,12 @@ export default function Navigation() {
             <LanguageSwitcher />
             <ThemeToggle />
             <button
-              className="relative z-[110] w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] border border-white/15 hover:border-cyan-400/60 flex flex-col items-center justify-center gap-1.5 transition-colors flex-shrink-0"
+              className="relative z-[110] w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-muted border border-border hover:border-primary/60 flex flex-col items-center justify-center gap-1.5 transition-colors flex-shrink-0"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="Menu"
+              type="button"
+              aria-expanded={isOpen}
+              aria-controls="site-mobile-menu"
+              aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
             >
               <motion.span
                 animate={{
@@ -181,6 +190,7 @@ export default function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="site-mobile-menu"
             initial={{ clipPath: "circle(0% at calc(100% - 40px) 40px)" }}
             animate={{ clipPath: "circle(150% at calc(100% - 40px) 40px)" }}
             exit={{ clipPath: "circle(0% at calc(100% - 40px) 40px)" }}
@@ -203,7 +213,7 @@ export default function Navigation() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -20, opacity: 0 }}
                 transition={{ delay: i * 0.08 + 0.2, duration: 0.5 }}
-                className="heading-md hover:text-cyan-400 transition-colors"
+                className="heading-md hover:text-primary transition-colors"
                 style={{ fontFamily: "var(--font-heading)" }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -222,7 +232,7 @@ export default function Navigation() {
               <Link
                 href="/plataforma"
                 onClick={() => setIsOpen(false)}
-                className="heading-md text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-2"
+                className="heading-md text-primary hover:text-primary transition-colors flex items-center gap-2"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 <Sparkles className="w-5 h-5" />
@@ -239,7 +249,7 @@ export default function Navigation() {
                 e.preventDefault();
                 handleNavClick("#contact");
               }}
-              className="mt-6 px-8 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-white/[0.08] border border-cyan-400/50 shadow-[0_0_25px_rgba(0,240,255,0.3)]"
+              className="mt-6 px-8 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-muted border border-primary/50 shadow-[0_0_25px_rgba(0,240,255,0.3)]"
               style={{ color: "var(--color-vt-text)" }}
             >
               {t.hero.ctaPrimary}

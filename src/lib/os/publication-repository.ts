@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { createSupabaseServerClient, createSupabaseAdminClient } from '@/lib/supabase-server';
 import { OsError } from './errors.ts';
 import { generateSlug, publicDocument } from './publication-utils.ts';
@@ -64,7 +65,7 @@ export async function unpublishProject(ctx: OsContext, id: string): Promise<void
   }
 }
 
-export async function getPublishedSite(slug: string): Promise<PublishedSite | null> {
+export const getPublishedSite = cache(async (slug: string): Promise<PublishedSite | null> => {
   const admin = createSupabaseAdminClient();
   if (!admin) throw new OsError('unavailable', 'Serviço indisponível.');
 
@@ -83,7 +84,7 @@ export async function getPublishedSite(slug: string): Promise<PublishedSite | nu
     document: publicDocument(parsed.value),
     publishedAt: String(record.publishedAt),
   };
-}
+});
 
 export async function getWorkspacePublication(ctx: OsContext): Promise<PublishedSite | null> {
   const supabase = await createSupabaseServerClient();

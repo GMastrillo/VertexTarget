@@ -31,7 +31,7 @@ export function ProjectServicesFields({ services, onChange, disabled = false }: 
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+        <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Serviços / Ofertas ({services.length}/6)
         </label>
         {services.length < 6 && (
@@ -39,7 +39,7 @@ export function ProjectServicesFields({ services, onChange, disabled = false }: 
             type="button"
             disabled={disabled}
             onClick={addService}
-            className="rounded bg-slate-800 px-2.5 py-1 text-xs font-medium text-cyan-400 hover:bg-slate-700"
+            className="rounded bg-muted px-2.5 py-1 text-xs font-medium text-primary hover:bg-muted"
           >
             + Adicionar
           </button>
@@ -48,14 +48,14 @@ export function ProjectServicesFields({ services, onChange, disabled = false }: 
 
       <div className="space-y-3">
         {services.map((service, index) => (
-          <div key={index} className="rounded-lg border border-slate-800 bg-slate-900/60 p-3.5 space-y-2">
+          <div key={index} className="rounded-lg border border-border bg-card p-3.5 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-500">Serviço 0{index + 1}</span>
+              <span className="text-xs text-muted-foreground">Serviço 0{index + 1}</span>
               <button
                 type="button"
                 disabled={disabled}
                 onClick={() => removeService(index)}
-                className="text-xs text-rose-400 hover:underline"
+                className="text-xs text-destructive hover:underline"
               >
                 Remover
               </button>
@@ -67,7 +67,7 @@ export function ProjectServicesFields({ services, onChange, disabled = false }: 
               disabled={disabled}
               maxLength={60}
               onChange={(e) => updateService(index, 'title', e.target.value)}
-              className="w-full rounded border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs text-white"
+              className="w-full rounded border border-input bg-card px-2.5 py-1.5 text-xs text-foreground"
             />
             <textarea
               rows={2}
@@ -76,7 +76,7 @@ export function ProjectServicesFields({ services, onChange, disabled = false }: 
               disabled={disabled}
               maxLength={200}
               onChange={(e) => updateService(index, 'description', e.target.value)}
-              className="w-full rounded border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs text-white"
+              className="w-full rounded border border-input bg-card px-2.5 py-1.5 text-xs text-foreground"
             />
           </div>
         ))}
@@ -93,9 +93,9 @@ interface ContactProps {
 
 export function ProjectContactFields({ document, onChange, disabled = false }: ContactProps): React.JSX.Element {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 pt-2 border-t border-slate-800">
+    <div className="grid gap-4 sm:grid-cols-2 pt-2 border-t border-border">
       <div>
-        <label htmlFor="field-cta" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+        <label htmlFor="field-cta" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
           Texto do Botão (CTA)
         </label>
         <input
@@ -105,11 +105,11 @@ export function ProjectContactFields({ document, onChange, disabled = false }: C
           disabled={disabled}
           maxLength={40}
           onChange={(e) => onChange('ctaLabel', e.target.value)}
-          className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white"
+          className="w-full rounded-lg border border-input bg-card px-3 py-2 text-sm text-foreground"
         />
       </div>
       <div>
-        <label htmlFor="field-city" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+        <label htmlFor="field-city" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
           Cidade / Região
         </label>
         <input
@@ -119,11 +119,11 @@ export function ProjectContactFields({ document, onChange, disabled = false }: C
           disabled={disabled}
           maxLength={60}
           onChange={(e) => onChange('city', e.target.value)}
-          className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white"
+          className="w-full rounded-lg border border-input bg-card px-3 py-2 text-sm text-foreground"
         />
       </div>
       <div>
-        <label htmlFor="field-whatsapp" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+        <label htmlFor="field-whatsapp" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
           WhatsApp para Contato
         </label>
         <input
@@ -132,11 +132,11 @@ export function ProjectContactFields({ document, onChange, disabled = false }: C
           value={document.whatsapp}
           disabled={disabled}
           onChange={(e) => onChange('whatsapp', e.target.value)}
-          className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white"
+          className="w-full rounded-lg border border-input bg-card px-3 py-2 text-sm text-foreground"
         />
       </div>
       <div>
-        <label htmlFor="field-email" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+        <label htmlFor="field-email" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
           E-mail
         </label>
         <input
@@ -145,7 +145,7 @@ export function ProjectContactFields({ document, onChange, disabled = false }: C
           value={document.email}
           disabled={disabled}
           onChange={(e) => onChange('email', e.target.value)}
-          className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-white"
+          className="w-full rounded-lg border border-input bg-card px-3 py-2 text-sm text-foreground"
         />
       </div>
     </div>

@@ -27,7 +27,8 @@ for (const attempt of [() => moveDeal(ids.orgB, ids.stageA), () => editDeal(ids.
 
 const paymentCases = [
   ["recurring payment link accepted", { action: "payment-link.create", kind: "recurring", amountCents: 150000, currency: "brl", description: "Mensalidade", recurringInterval: "month", installments: 1 }, true],
-  ["one-time installments accepted", { action: "payment-link.create", kind: "one_time", amountCents: 500000, currency: "brl", description: "Projeto", installments: 6 }, true],
+  ["one-time payment link accepted", { action: "payment-link.create", kind: "one_time", amountCents: 500000, currency: "brl", description: "Projeto", installments: 1 }, true],
+  ["one-time installments > 1 rejected per global capability safety", { action: "payment-link.create", kind: "one_time", amountCents: 500000, currency: "brl", description: "Projeto", installments: 6 }, false],
   ["payment link organization_id rejected", { action: "payment-link.create", kind: "one_time", amountCents: 1000, currency: "brl", description: "Projeto", organization_id: ids.orgB }, false],
   ["zero amount rejected", { action: "payment-link.create", kind: "one_time", amountCents: 0, currency: "brl", description: "Projeto" }, false],
   ["recurring installments rejected", { action: "payment-link.create", kind: "recurring", amountCents: 1000, currency: "brl", description: "Plano", recurringInterval: "month", installments: 3 }, false],

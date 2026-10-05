@@ -1,3 +1,6 @@
+import type { RegionalPreferences } from '../region/types.ts';
+import type { Locale } from '../i18n/types.ts';
+
 export type Journey = 'business' | 'professional';
 export type TemplateId = 'local-services' | 'commerce' | 'consulting';
 export type ThemeId = 'cyan-dark' | 'warm-light' | 'forest-light';
@@ -11,8 +14,7 @@ export interface SiteService {
   description: string;
 }
 
-export interface SiteDocument {
-  schemaVersion: 1;
+export interface SiteDocumentBase {
   templateId: TemplateId;
   themeId: ThemeId;
   businessName: string;
@@ -26,6 +28,19 @@ export interface SiteDocument {
   city: string;
 }
 
+export interface SiteDocumentV1 extends SiteDocumentBase {
+  schemaVersion: 1;
+}
+
+export interface SiteDocumentV2 extends SiteDocumentBase {
+  schemaVersion: 2;
+  locale: Locale;
+  country: string;
+  timeZone: string;
+}
+
+export type SiteDocument = SiteDocumentV1 | SiteDocumentV2;
+
 export interface ProjectBriefing {
   businessName: string;
   sector: string;
@@ -36,6 +51,7 @@ export interface ProjectBriefing {
   email: string;
   whatsapp: string;
   templateId: TemplateId;
+  regionalPreferences?: RegionalPreferences;
 }
 
 export interface ConfirmedIdentity {
@@ -49,6 +65,7 @@ export interface OsWorkspace {
   journey: Journey;
   status: 'active' | 'suspended' | 'deleted';
   plan: 'free';
+  regionalPreferences: RegionalPreferences;
 }
 
 export interface OsContext extends ConfirmedIdentity {

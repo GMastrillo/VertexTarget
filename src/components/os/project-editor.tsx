@@ -136,12 +136,12 @@ export function ProjectEditor({
       />
 
       {draft.status === 'conflict' && (
-        <div className="border-b border-amber-500/30 bg-amber-500/10 px-6 py-2.5 text-xs text-amber-400">
+        <div className="border-b border-warning/30 bg-warning/10 px-6 py-2.5 text-xs text-warning">
           <strong>Atenção:</strong> {draft.errorMessage} Salve novamente ou recarregue a página para sincronizar.
         </div>
       )}
       {draft.status === 'error' && (
-        <div className="border-b border-rose-500/30 bg-rose-500/10 px-6 py-2.5 text-xs text-rose-400">
+        <div className="border-b border-destructive/30 bg-destructive/10 px-6 py-2.5 text-xs text-destructive">
           <strong>Erro:</strong> {draft.errorMessage}
         </div>
       )}

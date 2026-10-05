@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "motion/react";
 import { useT } from "@/providers/LanguageProvider";
+import { preferredScrollBehavior } from "@/lib/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,7 +25,8 @@ export default function AILabSection() {
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const ctx = gsap.matchMedia();
+    ctx.add("(prefers-reduced-motion: no-preference)", () => {
       if (titleRef.current) {
         gsap.from(titleRef.current.children, {
           y: 40,
@@ -44,7 +46,9 @@ export default function AILabSection() {
   }, []);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    chatEndRef.current?.scrollIntoView({
+      behavior: preferredScrollBehavior(),
+    });
   }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
