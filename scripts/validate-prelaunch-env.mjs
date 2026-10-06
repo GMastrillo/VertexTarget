@@ -13,14 +13,20 @@
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-// Carrega .env se suportado nativamente pelo Node.js
+// Carrega arquivos .env em cascata compativel com Next.js (.env seguido por .env.local)
 if (typeof process.loadEnvFile === 'function') {
-  const envPath = resolve(process.cwd(), '.env');
-  if (existsSync(envPath)) {
-    try {
-      process.loadEnvFile(envPath);
-    } catch {
-      // Ignora erro de parsing e usa o ambiente atual
+  const envFiles = [
+    resolve(process.cwd(), '.env'),
+    resolve(process.cwd(), '.env.local'),
+  ];
+
+  for (const envPath of envFiles) {
+    if (existsSync(envPath)) {
+      try {
+        process.loadEnvFile(envPath);
+      } catch {
+        // Ignora erros de parsing pontuais e continua
+      }
     }
   }
 }

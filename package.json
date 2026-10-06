@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:types": "eslint --config eslint.typed.config.mjs .",
+    "test": "node --experimental-strip-types --test scripts/tests/*.test.mjs && npm run test:commercial",
+    "test:all": "npm test",
     "test:commercial": "node --experimental-strip-types scripts/validate-commercial.mjs",
     "test:os": "node --experimental-strip-types --test scripts/tests/os-*.test.mjs",
     "check:env": "node scripts/validate-prelaunch-env.mjs"

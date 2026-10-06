@@ -6,6 +6,100 @@ import { Button } from '@/components/ui/button';
 import type { Journey } from '@/lib/os/types';
 import type { Locale } from '@/lib/i18n/types';
 
+interface JourneySelectorProps {
+  journey: Journey;
+  onSelect: (journey: Journey) => void;
+}
+
+function JourneySelector({ journey, onSelect }: JourneySelectorProps) {
+  return (
+    <div className="space-y-2">
+      <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+        Perfil de Uso
+      </label>
+      <div className="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          className={`rounded-lg border px-3.5 py-2 text-xs font-medium transition-colors ${
+            journey === 'business'
+              ? 'border-primary bg-primary/10 text-primary'
+              : 'border-border bg-muted text-muted-foreground hover:text-foreground'
+          }`}
+          onClick={() => onSelect('business')}
+        >
+          Líder / Empresa
+        </button>
+        <button
+          type="button"
+          className={`rounded-lg border px-3.5 py-2 text-xs font-medium transition-colors ${
+            journey === 'professional'
+              ? 'border-primary bg-primary/10 text-primary'
+              : 'border-border bg-muted text-muted-foreground hover:text-foreground'
+          }`}
+          onClick={() => onSelect('professional')}
+        >
+          Profissional / Agência
+        </button>
+      </div>
+    </div>
+  );
+}
+
+interface RegionFieldsProps {
+  locale: Locale;
+  country: string;
+  onLocaleChange: (locale: Locale) => void;
+  onCountryChange: (country: string) => void;
+}
+
+function RegionFields({ locale, country, onLocaleChange, onCountryChange }: RegionFieldsProps) {
+  return (
+    <div className="grid grid-cols-2 gap-3 pt-1">
+      <div>
+        <label htmlFor="ws-onboarding-locale" className="block text-xs font-medium text-foreground mb-1">
+          Idioma
+        </label>
+        <select
+          id="ws-onboarding-locale"
+          value={locale}
+          onChange={(e) => onLocaleChange(e.target.value as Locale)}
+          className="w-full rounded-lg border border-input bg-muted px-3 py-1.5 text-xs text-foreground focus:border-primary focus:outline-none"
+        >
+          <option value="pt-BR">Português (BR)</option>
+          <option value="en">English (US)</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="it">Italiano</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="ws-onboarding-country" className="block text-xs font-medium text-foreground mb-1">
+          País
+        </label>
+        <select
+          id="ws-onboarding-country"
+          value={country}
+          onChange={(e) => onCountryChange(e.target.value.toUpperCase())}
+          className="w-full rounded-lg border border-input bg-muted px-3 py-1.5 text-xs text-foreground focus:border-primary focus:outline-none"
+        >
+          <option value="BR">Brasil</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="GB">United Kingdom</option>
+          <option value="PT">Portugal</option>
+          <option value="ES">España</option>
+          <option value="FR">France</option>
+          <option value="DE">Deutschland</option>
+          <option value="IT">Italia</option>
+          <option value="MX">México</option>
+        </select>
+      </div>
+    </div>
+  );
+}
+
 export function OnboardingForm() {
   const router = useRouter();
   const [name, setName] = useState('');
@@ -89,79 +183,13 @@ export function OnboardingForm() {
           />
         </div>
 
-        <div className="space-y-2">
-          <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            Perfil de Uso
-          </label>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              className={`rounded-lg border px-3.5 py-2 text-xs font-medium transition-colors ${
-                journey === 'business'
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-border bg-muted text-muted-foreground hover:text-foreground'
-              }`}
-              onClick={() => setJourney('business')}
-            >
-              Líder / Empresa
-            </button>
-            <button
-              type="button"
-              className={`rounded-lg border px-3.5 py-2 text-xs font-medium transition-colors ${
-                journey === 'professional'
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-border bg-muted text-muted-foreground hover:text-foreground'
-              }`}
-              onClick={() => setJourney('professional')}
-            >
-              Profissional / Agência
-            </button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3 pt-1">
-          <div>
-            <label htmlFor="ws-onboarding-locale" className="block text-xs font-medium text-foreground mb-1">
-              Idioma
-            </label>
-            <select
-              id="ws-onboarding-locale"
-              value={locale}
-              onChange={(e) => setLocale(e.target.value as Locale)}
-              className="w-full rounded-lg border border-input bg-muted px-3 py-1.5 text-xs text-foreground focus:border-primary focus:outline-none"
-            >
-              <option value="pt-BR">Português (BR)</option>
-              <option value="en">English (US)</option>
-              <option value="es">Español</option>
-              <option value="fr">Français</option>
-              <option value="de">Deutsch</option>
-              <option value="it">Italiano</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="ws-onboarding-country" className="block text-xs font-medium text-foreground mb-1">
-              País
-            </label>
-            <select
-              id="ws-onboarding-country"
-              value={country}
-              onChange={(e) => setCountry(e.target.value.toUpperCase())}
-              className="w-full rounded-lg border border-input bg-muted px-3 py-1.5 text-xs text-foreground focus:border-primary focus:outline-none"
-            >
-              <option value="BR">Brasil</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="GB">United Kingdom</option>
-              <option value="PT">Portugal</option>
-              <option value="ES">España</option>
-              <option value="FR">France</option>
-              <option value="DE">Deutschland</option>
-              <option value="IT">Italia</option>
-              <option value="MX">México</option>
-            </select>
-          </div>
-        </div>
+        <JourneySelector journey={journey} onSelect={setJourney} />
+        <RegionFields
+          locale={locale}
+          country={country}
+          onLocaleChange={setLocale}
+          onCountryChange={setCountry}
+        />
 
         <div className="flex items-start gap-2.5 pt-2">
           <input

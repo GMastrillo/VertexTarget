@@ -78,6 +78,30 @@ function parseOriginUrl(urlStr: string, fieldName: string): string {
   }
 }
 
+function matchesHostHeader(originUrl: string, request: Request): boolean {
+  const host = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim() || request.headers.get('host');
+  if (!host) return false;
+  try {
+    return new URL(originUrl).host === host;
+  } catch {
+    return false;
+  }
+}
+
+function isAllowedDevOrigin(originUrl: string): boolean {
+  if (process.env.NODE_ENV === 'production') return false;
+  try {
+    const { hostname } = new URL(originUrl);
+    return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+  } catch {
+    return false;
+  }
+}
+
+function isAllowedVercelOrigin(originUrl: string): boolean {
+  return Boolean(process.env.VERCEL_URL && originUrl === `https://${process.env.VERCEL_URL}`);
+}
+
 export function requireCanonicalOrigin(request: Request, appUrl: string): void {
   const origin = request.headers.get('origin') || request.headers.get('referer');
   if (!origin) {
@@ -87,36 +111,13 @@ export function requireCanonicalOrigin(request: Request, appUrl: string): void {
   const expectedOrigin = parseOriginUrl(appUrl, 'appUrl');
   const requestOrigin = parseOriginUrl(origin, 'origin');
 
-  if (requestOrigin === expectedOrigin) {
-    return;
-  }
+  const isAllowed =
+    requestOrigin === expectedOrigin ||
+    matchesHostHeader(requestOrigin, request) ||
+    isAllowedDevOrigin(requestOrigin) ||
+    isAllowedVercelOrigin(requestOrigin);
 
-  const host = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim() || request.headers.get('host');
-  if (host) {
-    try {
-      const parsedReq = new URL(requestOrigin);
-      if (parsedReq.host === host) {
-        return;
-      }
-    } catch {
-      // ignore
-    }
+  if (!isAllowed) {
+    throw new OsError('forbidden', 'Origem da requisição não coincide com a URL canônica');
   }
-
-  if (process.env.NODE_ENV !== 'production') {
-    try {
-      const parsedReq = new URL(requestOrigin);
-      if (parsedReq.hostname === 'localhost' || parsedReq.hostname === '127.0.0.1' || parsedReq.hostname === '::1') {
-        return;
-      }
-    } catch {
-      // ignore
-    }
-  }
-
-  if (process.env.VERCEL_URL && requestOrigin === `https://${process.env.VERCEL_URL}`) {
-    return;
-  }
-
-  throw new OsError('forbidden', 'Origem da requisição não coincide com a URL canônica');
 }
